@@ -130,7 +130,7 @@ const today=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOff
 const fmtD=iso=>{try{return new Date(iso+'T12:00:00').toLocaleDateString('ar-EG',{weekday:'short',day:'numeric',month:'short'})}catch(e){return iso}};
 const daysAgo=iso=>Math.round((new Date(today()+'T12:00:00')-new Date(iso+'T12:00:00'))/864e5);
 const fw=w=>(w===''||w==null||isNaN(+w)||+w===0)?'—':(+w)+' k';
-function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2200)}
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),t.length>40?5000:2200)}
 
 /* ========== البيانات ========== */
 function E(name,w,sets,reps,o={}){return{id:uid(),name,w,sets,reps,goal:o.goal??(o.unit?reps:Math.max(12,reps)),unit:o.unit||'',core:!!o.core,note:o.note||''}}
@@ -368,10 +368,17 @@ async function backupNow(){
   download(`gym-backup-${today()}.json`,backupJSON(),'application/json');markBackup();toast('النسخة نزلت في Downloads ✓');refresh();
 }
 async function shareBackup(){
-  const t=backupJSON();let f=new File([t],`gym-backup-${today()}.json`,{type:'application/json'});
-  if(!(navigator.canShare&&navigator.canShare({files:[f]})))f=new File([t],`gym-backup-${today()}.txt`,{type:'text/plain'});
-  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:'نسخة سجل الجيم'});markBackup();refresh()}catch(e){if(e.name!=='AbortError')toast('المشاركة ماتمتش')}}
-  else{download(f.name,t,f.type);markBackup();toast('المشاركة مش متاحة، النسخة نزلت في Downloads');refresh()}
+  const t=backupJSON(),name=`gym-backup-${today()}.txt`;
+  let err='';
+  // محاولة ١: ملف نصي (.txt) — النوع ده مسموح بيه في مشاركة أندرويد، وواتساب بيبعته كمستند
+  try{const f=new File([t],name,{type:'text/plain'});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});markBackup();toast('اتبعتت ✓');refresh();return}
+  }catch(e){if(e.name==='AbortError')return;err=e.name}
+  // محاولة ٢: النسخة كنص في رسالة (لو مش طويلة)
+  if(navigator.share&&t.length<60000){try{await navigator.share({text:t});markBackup();toast('اتبعتت كرسالة ✓');refresh();return}catch(e){if(e.name==='AbortError')return;err=err||e.name}}
+  // محاولة ٣: تنزيل الملف، وتبعته من واتساب كمستند من Downloads
+  download(name,t,'text/plain');markBackup();refresh();
+  toast('المشاركة مش شغالة هنا'+(err?' ('+err+')':'')+'. الملف نزل في Downloads: ابعته من واتساب ← مستند');
 }
 async function linkFile(){
   try{const h=await showSaveFilePicker({suggestedName:'gym-log.json',types:[{description:'Gym log',accept:{'application/json':['.json']}}]});
