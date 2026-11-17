@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="الليفياثان">
-<title>لروفيدا الليفياثان — إعادة كتابة وتحليل</title>
+<title>الليفياثان — إعادة كتابة وتحليل</title>
 <script>(function(){try{var u=JSON.parse(localStorage.getItem('leviathan-ui')||'{}');var h=document.documentElement;if(u.style&&u.style!=='copper')h.setAttribute('data-style',u.style);}catch(e){}})();</script>
 <style>:root{--bg:#0f0d0b;--ink:#ece4d8;--mute:#9a8f80;--line:#2a241e;--line2:#4a3a2a;--card:#171410;--edge:#7a4a22;--acc:#d9893a;--acc2:#f1c27d;--qink:#f6ecdd;--egbg:#14161a;--egline:#2b3340;--eglbl:#9cc3e6;--egink:#dfe6ee;--mapbg:#1a1510;--cbg:#251a0f;--opbg:#1b1611;--brkbg:#221311;--brkline:#5a2e22;--brklbl:#f0a48a;--barbg:rgba(15,13,11,.94);--onacc:#0f0d0b}
 html[data-style="midnight"]{--bg:#0b1020;--ink:#e3e8f4;--mute:#8a95b0;--line:#1d2640;--line2:#2f3b5e;--card:#111a30;--edge:#3c4f86;--acc:#e2b84a;--acc2:#f3d98b;--qink:#eef2fb;--egbg:#0f1b22;--egline:#24414b;--eglbl:#7fd1c7;--egink:#d6ece9;--mapbg:#0f1730;--cbg:#1d2440;--opbg:#121b34;--brkbg:#25141a;--brkline:#5b2a36;--brklbl:#f29aa8;--barbg:rgba(11,16,32,.94);--onacc:#0b1020}
@@ -134,12 +134,12 @@ html.ps #scrim{display:block}
 <body>
 <div id="dimmer"></div>
 <div id="bar"></div>
-<div class="top-tools"><a href="#home" aria-label="الغلاف والفهرس">☰</a><span class="t" id="ttl">لروفيدا - الليفياثان</span><button type="button" data-fs="-1" aria-label="تصغير الخط">أ−</button><button type="button" data-fs="1" aria-label="تكبير الخط">أ+</button><button type="button" id="gear" aria-label="إعدادات القراءة">⚙</button></div>
+<div class="top-tools"><a href="#home" aria-label="الغلاف والفهرس">☰</a><span class="t" id="ttl">الليفياثان</span><button type="button" data-fs="-1" aria-label="تصغير الخط">أ−</button><button type="button" data-fs="1" aria-label="تكبير الخط">أ+</button><button type="button" id="gear" aria-label="إعدادات القراءة">⚙</button></div>
 <section id="home">
  <div class="cover">
   <div class="glyph">L</div>
   <div class="k">توماس هوبز · ١٦٥١</div>
-  <h1>الليفياثان<small>لروفيدا - إعادة كتابة وتحليل في أربع عشرة مقالة</small></h1>
+  <h1>الليفياثان<small>إعادة كتابة وتحليل في أربع عشرة مقالة</small></h1>
   <p>الحجة بترتيبها، من الإنسان الآلة إلى موت الدولة، بعيون محلل السلطة والحرب والنظام الدولي. كل مقالة فيها الاقتباسات مترجمة مع موضعها، وشرح بالمصري، وخريطة للحجة ونقاط كسرها، ورأيي في الآخر. زرار ⚙ فوق بيفتح إعدادات الشكل والخط والمحتوى.</p>
   <button id="resume" type="button"></button>
   <button id="install" type="button" hidden>📲 ثبّت الكتاب على الموبايل</button>
@@ -2246,7 +2246,7 @@ function toAr(n){return String(n).replace(/[0-9]/g,function(d){return '٠١٢٣�
 function show(id){
  if(cur&&cur!=='home')st.pos[cur]=scrollY;
  var a=id&&document.getElementById(id);
- if(!a||a.tagName!=='ARTICLE'){home.hidden=false;arts.forEach(function(x){x.hidden=true;});cur='home';ttl.textContent='لروفيدا - الليفياثان';document.title='لروفيدا الليفياثان — إعادة كتابة وتحليل';scrollTo(0,0);bar.style.width='0';paint();save();return;}
+ if(!a||a.tagName!=='ARTICLE'){home.hidden=false;arts.forEach(function(x){x.hidden=true;});cur='home';ttl.textContent='الليفياثان';document.title='الليفياثان — إعادة كتابة وتحليل';scrollTo(0,0);bar.style.width='0';paint();save();return;}
  home.hidden=true;arts.forEach(function(x){x.hidden=(x!==a);});cur=id;st.last=id;
  ttl.textContent=a.querySelector('.anav .no').textContent+' · '+a.dataset.title;document.title=a.dataset.title+' — الليفياثان';
  var y=U.restore?(st.pos[id]||0):0;requestAnimationFrame(function(){scrollTo(0,y);prog();});save();
