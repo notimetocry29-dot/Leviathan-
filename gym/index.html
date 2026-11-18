@@ -111,6 +111,9 @@ pre.cardtxt{white-space:pre-wrap;background:var(--bg);border:1px solid var(--bd)
 table.h{width:100%;border-collapse:collapse;font-size:14px}
 table.h td{padding:8px 4px;border-bottom:1px solid var(--bd)}
 select.inp{appearance:auto}
+.btn.rec{border:2px solid var(--ok);color:var(--oktx);background:var(--okbg)}
+.btn.rec{white-space:nowrap}
+.btn.rec::after{content:' ✓';color:var(--ok)}
 .thm{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .thm button{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:1px solid var(--bd);border-radius:12px;padding:8px 2px;font-size:12px;color:var(--mu)}
 .thm button.on{border-color:var(--ac);color:var(--tx)}
@@ -217,7 +220,7 @@ setTimeout(function(){I.focus()},100)})()</script>
 
 <script>
 'use strict';
-const VER='13';
+const VER='14';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -526,7 +529,7 @@ function renderHome(){
     <div class="xl">${d.ex.map((t,i)=>{const l=exHist(t.id)[0];return `<div class="xr${t.core?' c':''}"><span class="xn en">${esc(t.name)}</span>${t.core?'<i class="xs">★</i>':''}<span class="xw en">${t.unit?'':fw(l?l.w:t.w)+' · '}${t.sets}×${t.reps}${t.unit?' '+esc(unitTxt(t.unit)):''}</span></div>`}).join('')}</div>
     <div class="coreline">★ ${L.coreL}: <span class="en">${esc(coreNames(d).join(' + '))}</span></div>
     ${dr?`<button class="btn pri w mt big2" data-a="resume">${L.resume}</button>`:`<button class="btn pri w mt big2" data-a="start" data-d="${d.id}">${L.start} <bdi>${esc(d.name)}</bdi></button>`}
-    <details class="alt"><summary>${dr?L.newInstead:L.otherDay}</summary><div class="grid3 mt">${days.filter(x=>dr||x.id!==nd).map(x=>`<button class="btn" data-a="start" data-d="${x.id}"><bdi>${esc(x.name)}</bdi></button>`).join('')}</div></details>
+    <details class="alt"${dr?' open':''}><summary>${dr?L.newInstead:L.otherDay}</summary><div class="grid3 mt">${days.filter(x=>dr||x.id!==nd).map(x=>`<button class="btn${x.id===nextDayId()?' rec':''}" data-a="start" data-d="${x.id}"><bdi>${esc(x.name)}</bdi></button>`).join('')}</div></details>
   </div>`;
   /* ٢) الأسبوع في سطر واحد */
   h+=`<div class="card wkc"><div class="dots">${[0,1,2,3].map(k=>`<i class="${k<wk?'on':''}${k===2?' goal':''}"></i>`).join('')}</div><div class="sp"><div class="wkt">${L.weekOf(wk)}</div><div class="mu">${ds[0]?`${L.lastSess}: <bdi>${esc(ds[0].dayName)}</bdi> · ${fmtD(ds[0].date)}`:L.noData}</div></div></div>`;
