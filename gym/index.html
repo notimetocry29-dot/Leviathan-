@@ -412,7 +412,7 @@ html[data-th=book] #sess{background-image:none!important}
 #sess .nrow .mini{flex:none;white-space:nowrap}
 #sess .tnote{background:#0c0c0c;margin-top:6px;line-height:1.6}
 #sess .tnote .pmsg{margin-top:5px}
-.srow{display:flex;gap:8px;margin-bottom:8px}.srow .inp{flex:1;min-width:0}.srow .icb{width:44px;height:auto;font-size:20px;flex:none}
+.srow{display:flex;gap:8px;margin-bottom:8px}.srow .inp{flex:1;min-width:0}.srow .btn{flex:none;white-space:nowrap;font-size:13px;padding:0 12px}
 #sess .wrow{padding:3px 10px 3px 4px;gap:4px}#sess .wrow .wi{width:84px}
 </style>
 </head>
@@ -436,7 +436,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='39';
+const VER='40';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -998,7 +998,7 @@ function libRows(){
     <div class="row mt"><button class="btn sm sp" data-a="lbAdd" data-n="${esc(x[0])}">${tr('ضيف لبرنامجي…','Add to my program…')}</button>${x[9]?`<button class="btn sm" data-a="cuEdit" data-n="${esc(x[0])}">${tr('تعديل','Edit')}</button>`:''}</div></details>`).join('')||`<div class="empty">—</div>`;
 }
 function renderLib(){
-  $('#view').innerHTML=`<div class="srow"><input class="inp en" id="lbS" placeholder="${tr('ابحث عن تمرين…','Search exercises…')}" value="${esc(lbQ)}" style="text-align:left"><button class="icb" data-a="cuNew" aria-label="${tr('تمرين جديد','New exercise')}">+</button></div>
+  $('#view').innerHTML=`<div class="srow"><input class="inp en" id="lbS" placeholder="${tr('ابحث عن تمرين…','Search exercises…')}" value="${esc(lbQ)}" style="text-align:left"><button class="btn sm" data-a="cuNew">Add ex</button></div>
   <div class="chips" id="lbC">${lbChips()}</div>
   <div class="mu" style="margin:2px 4px 8px">${tr('دوس على أي تمرين يظهر شرحه الكامل.','Tap an exercise for the full guide.')} · ${allLib().length}</div>
   <div class="card" id="lbL">${libRows()}</div>`;
