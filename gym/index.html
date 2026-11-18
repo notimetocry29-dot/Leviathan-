@@ -217,7 +217,7 @@ setTimeout(function(){I.focus()},100)})()</script>
 
 <script>
 'use strict';
-const VER='12';
+const VER='13';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -419,6 +419,12 @@ async function boot(){
   if(!S.settings.lang)S.settings.lang='en';
   LANG=S.settings.lang;
   migrate();
+  /* مسودة قديمة: لو اليوم ده اتحفظ فعلًا بنفس التاريخ، أو المسودة فاضية وقديمة، تتشال */
+  if(S.draft&&!S.draft.editing){
+    const dr=S.draft,filled=(dr.ex||[]).some(e=>(e.sets||[]).some(v=>String(v).trim()!==''));
+    const saved=S.sessions.some(x=>x.date===dr.date&&(x.day===dr.day||x.dayName===dr.dayName));
+    if(saved||(!filled&&dr.date<today()))S.draft=null;
+  }
   await loadSync();
   save();await sq;
   try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
