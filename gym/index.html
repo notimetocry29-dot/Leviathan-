@@ -412,6 +412,7 @@ html[data-th=book] #sess{background-image:none!important}
 #sess .nrow .mini{flex:none;white-space:nowrap}
 #sess .tnote{background:#0c0c0c;margin-top:6px;line-height:1.6}
 #sess .tnote .pmsg{margin-top:5px}
+.srow{display:flex;gap:8px;margin-bottom:8px}.srow .inp{flex:1;min-width:0}.srow .icb{width:44px;height:auto;font-size:20px;flex:none}
 </style>
 </head>
 <body>
@@ -434,7 +435,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='37';
+const VER='38';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -993,11 +994,10 @@ function libRows(){
   const r=allLib().filter(x=>(lbG==='all'||x[1]===lbG)&&(!q||x[0].toLowerCase().includes(q)));
   return r.map(x=>`<details class="lbx"><summary><span class="nm en">${esc(x[0])}</span>${x[9]?`<span class="tag">${tr('تمريني','Mine')}</span>`:''}${inP.has(x[0])?`<span class="tag">${tr('في برنامجك','In program')}</span>`:''}<span class="mu en">${x[3]}×${x[4]}${x[5]?' '+esc(unitTxt(x[5])):''}</span></summary>
     <div class="mu" style="margin-bottom:8px">${(GRP[x[1]]||GRP.core)[LANG==='ar'?0:1]}</div><div class="howto">${detHtml(x)||`<span class="mu">${tr('مفيش شرح. اضغط تعديل واكتب شرحك.','No guide yet. Tap Edit and write yours.')}</span>`}</div>
-    <div class="row mt"><button class="btn sm pri sp" data-a="lbAdd" data-n="${esc(x[0])}">+ ${tr('ضيف لـ ','Add to ')}<bdi>${esc(dd.name)}</bdi></button>${x[9]?`<button class="btn sm" data-a="cuEdit" data-n="${esc(x[0])}">${tr('تعديل','Edit')}</button>`:''}</div></details>`).join('')||`<div class="empty">—</div>`;
+    <div class="row mt"><button class="btn sm sp" data-a="lbAdd" data-n="${esc(x[0])}">${tr('ضيف لبرنامجي…','Add to my program…')}</button>${x[9]?`<button class="btn sm" data-a="cuEdit" data-n="${esc(x[0])}">${tr('تعديل','Edit')}</button>`:''}</div></details>`).join('')||`<div class="empty">—</div>`;
 }
 function renderLib(){
-  $('#view').innerHTML=`<div class="row" style="margin-bottom:8px"><button class="btn pri sp" data-a="cuNew">+ ${tr('تمرين جديد','New exercise')}</button><label class="lbd mu">${tr('الإضافة إلى','Add to')} <select class="inp" id="lbD">${S.program.days.map(x=>`<option value="${x.id}"${x.id===pDay?' selected':''}>${esc(x.name)}</option>`).join('')}</select></label></div>
-  <input class="inp en" id="lbS" placeholder="${tr('ابحث عن تمرين…','Search exercises…')}" value="${esc(lbQ)}" style="text-align:left;margin-bottom:8px">
+  $('#view').innerHTML=`<div class="srow"><input class="inp en" id="lbS" placeholder="${tr('ابحث عن تمرين…','Search exercises…')}" value="${esc(lbQ)}" style="text-align:left"><button class="icb" data-a="cuNew" aria-label="${tr('تمرين جديد','New exercise')}">+</button></div>
   <div class="chips" id="lbC">${lbChips()}</div>
   <div class="mu" style="margin:2px 4px 8px">${tr('دوس على أي تمرين يظهر شرحه الكامل.','Tap an exercise for the full guide.')} · ${allLib().length}</div>
   <div class="card" id="lbL">${libRows()}</div>`;
@@ -1310,7 +1310,7 @@ async function renderData(){
 }
 
 /* ================= الأحداث ================= */
-document.addEventListener('input',ev=>{if(ev.target.id==='libS'){libQ=ev.target.value;libModal()}else if(ev.target.id==='lbD'){pDay=ev.target.value;lbRefresh()}else if(ev.target.id==='lbS'){lbQ=ev.target.value;const l=$('#lbL');if(l)l.innerHTML=libRows()}});
+document.addEventListener('input',ev=>{if(ev.target.id==='libS'){libQ=ev.target.value;libModal()}else if(ev.target.id==='lbS'){lbQ=ev.target.value;const l=$('#lbL');if(l)l.innerHTML=libRows()}});
 document.addEventListener('click',ev=>{
   if(ev.target.closest('.brand .lg')){hardRefresh();return}
   const tb=ev.target.closest('.tabs button');if(tb){navTab(tb.dataset.tab);return}
@@ -1348,7 +1348,8 @@ document.addEventListener('click',ev=>{
     case 'cuSave':cuSave(b.dataset.n);break;
     case 'cuDel':if(confirm(tr('تحذف التمرين ده من مكتبتك؟ برنامجك وسجلك مش هيتأثروا.','Delete this exercise from your library? Your program and log are not affected.'))){S.custom=(S.custom||[]).filter(x=>x.name!==b.dataset.n);save();queueBackup();closeModal();renderLib()}break;
     case 'lbG':lbG=b.dataset.g;{const c=$('#lbC'),l=$('#lbL');if(c)c.innerHTML=lbChips();if(l)l.innerHTML=libRows()}break;
-    case 'lbAdd':{const dd=day(pDay)||S.program.days[0];dd.ex.push(mk(b.dataset.n));save();queueBackup();toast(tr('اتضاف لـ ','Added to ')+dd.name+' ✓');lbRefresh();break}
+    case 'lbAdd':modal(`<h3>${tr('تضيفه لأنهي يوم؟','Add to which day?')}</h3><div class="mu en" style="margin-bottom:10px;text-align:start">${esc(b.dataset.n)}</div>${S.program.days.map(x=>`<button class="btn w" style="margin-bottom:8px" data-a="lbPick" data-d="${x.id}" data-n="${esc(b.dataset.n)}"><bdi>${esc(x.name)}</bdi></button>`).join('')}<button class="btn ghost w" data-a="closeM">${L_close()}</button>`);break
+    case 'lbPick':{const dd=day(b.dataset.d);if(dd){dd.ex.push(mk(b.dataset.n));save();queueBackup();closeModal();lbRefresh();toast(tr('اتضاف لـ ','Added to ')+dd.name+' ✓')}break}
     case 'libAdd':{const t=mk(b.dataset.n);day(pDay).ex.push(t);save();queueBackup();closeModal();renderProgram();toast(tr('اتضاف ✓','Added ✓'));break}
     case 'dayAdd':{const nd={id:'D'+uid(),name:tr('يوم جديد','New day'),ex:[]};S.program.days.push(nd);pDay=nd.id;save();queueBackup();renderProgram();dayModal();break}
     case 'dayEdit':dayModal();break;
