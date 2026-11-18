@@ -112,7 +112,7 @@ select.inp{appearance:auto}
 #sess .shead{padding-bottom:10px}
 .pbar{height:3px;background:var(--s2);position:sticky;top:calc(52px + env(safe-area-inset-top));z-index:2}
 .pbar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
-.sbody{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+.sbody{padding-bottom:calc(28px + env(safe-area-inset-bottom))!important}
 .meta2{display:flex;gap:8px;margin-bottom:10px}
 .meta2 label{flex:1;display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--mu)}
 .meta2 label.cy{flex:.45}
@@ -140,7 +140,7 @@ select.inp{appearance:auto}
 .sadd .sb{width:40px;height:26px;font-size:16px;line-height:1}
 .cl.big{padding:9px 16px 9px 12px;font-size:14.5px;min-height:44px}
 .cl.big input{width:22px;height:22px}
-.sfoot{position:fixed;bottom:0;left:0;right:0;z-index:3;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(14,14,15,0),var(--bg) 28%);max-width:640px;margin:0 auto}
+.sfoot{position:static;display:flex;gap:8px;padding:6px 10px calc(28px + env(safe-area-inset-bottom));max-width:640px;margin:0 auto}
 .sfoot .btn{min-height:52px;font-size:16px}
 .sfoot .sp{flex:1}
 .hero{border-color:var(--ac);background:linear-gradient(180deg,var(--hero) 0,var(--s1) 60%);padding:14px 14px 12px}
@@ -274,7 +274,6 @@ html[data-th=x] .inp:focus{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)
 html[data-th=x] .pbar{background:var(--bd)}
 html[data-th=x] .pbar i{background:var(--ac)}
 html[data-th=x] .mbox{background:#000;border:1px solid var(--bd);border-radius:20px 20px 0 0}
-html[data-th=x] .sfoot{background:linear-gradient(180deg,rgba(0,0,0,0),#000 28%)}
 html[data-th="granite"]{--bg:#101317;--s1:#171b21;--s2:#20262e;--bd:#2c343e;--tx:#e9edf1;--mu:#8b96a3;--ac:#b9c6d4;--ac2:#dbe5ef;--ok:#7fc79a;--mid:#d9bd7a;--bad:#e07c72;--onac:#10161c;--hero:#1b2129;--tx2:#c3ccd6;--ph:#4c5662;--okbd:#2f5a41;--okbg:#14261c;--midbd:#5a4d2a;--midbg:#262013;--badbg:#2a1816;--acbd:#4a5766;--acbg:#1d242c;--oktx:#a9e2bc;--midtx:#ecd698;--badtx:#f2aaa2;--font:system-ui,"Noto Sans Arabic","Segoe UI",sans-serif;--fnum:inherit;--rad:12px;--radb:10px;--radp:99px;--bw:1px;--sh:0 8px 22px rgba(0,0,0,.35);--ttl:none;--ls:.01em}
 html[data-th="sand"]{--bg:#ede4d3;--s1:#f8f2e6;--s2:#e6dac4;--bd:#cdbd9f;--tx:#2b211a;--mu:#7a6a58;--ac:#a4622d;--ac2:#7b4519;--ok:#46763a;--mid:#98701a;--bad:#a8402c;--onac:#fff7ea;--hero:#f3e8d2;--tx2:#463629;--ph:#b3a487;--okbd:#a7c79c;--okbg:#e4efdb;--midbd:#dcc486;--midbg:#f6ebc8;--badbg:#f5dcd2;--acbd:#d9b48d;--acbg:#f2e2cd;--oktx:#2d5a24;--midtx:#6b4f0c;--badtx:#86301f;--font:system-ui,"Noto Sans Arabic","Segoe UI",sans-serif;--fnum:inherit;--rad:14px;--radb:12px;--radp:99px;--bw:1px;--sh:0 3px 14px rgba(90,60,25,.12);--ttl:none;--ls:0}
 html[data-th="cedar"]{--bg:#0a110e;--s1:#101a16;--s2:#17251f;--bd:#27382f;--tx:#ebe7d6;--mu:#8da093;--ac:#c9a24b;--ac2:#e3c97c;--ok:#7fc08a;--mid:#d9b25a;--bad:#d6735f;--onac:#1a1405;--hero:#13211a;--tx2:#cfd0bf;--ph:#475a4e;--okbd:#2f5a3b;--okbg:#112218;--midbd:#5f4d1e;--midbg:#241d0c;--badbg:#2a1913;--acbd:#5f5028;--acbg:#1d1c10;--oktx:#a8e0b0;--midtx:#efd48e;--badtx:#f0b0a0;--font:system-ui,"Noto Naskh Arabic","Segoe UI",sans-serif;--fnum:Georgia,serif;--rad:8px;--radb:6px;--radp:6px;--bw:1px;--sh:none;--ttl:none;--ls:.02em}
@@ -360,7 +359,7 @@ html[data-th=obsidian] .brand .wm b{color:var(--ac2)}
 
 <script>
 'use strict';
-const VER='19';
+const VER='20';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -853,7 +852,7 @@ async function deriveKey(pass,salt,iter){
 }
 async function sealBytes(key,bytes){const iv=crypto.getRandomValues(new Uint8Array(12));return{iv,ct:new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,bytes))}}
 async function packBackup(){
-  const payload=enc.encode(JSON.stringify({app:'gymlog',v:1,at:Date.now(),data:{program:S.program,sessions:S.sessions,settings:S.settings,draft:null}}));
+  const payload=enc.encode(JSON.stringify({app:'gymlog',v:1,at:Date.now(),data:{program:S.program,sessions:S.sessions,settings:S.settings,draft:S.draft||null}}));
   let z=null;try{z=await pipe(payload,new CompressionStream('gzip'))}catch(e){}
   const {iv,ct}=await sealBytes(BKEY,z||payload);
   return JSON.stringify({app:'gymlog-enc',v:1,kdf:'PBKDF2-SHA256',iter:SYNC.iter,salt:SYNC.salt,iv:b64(iv),z:z?1:0,ct:b64(ct)});
@@ -945,7 +944,7 @@ async function restoreRemote(){
     const o=await openBackup(await readRemote(tok),p1),d=o.data;
     if(!d||!d.program||!Array.isArray(d.sessions))throw new Error('fmt');
     if(!confirm(T().confRestore(d.sessions.length)))return;
-    S={v:1,program:d.program,sessions:d.sessions,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:null,mig:2};save();toast(T().restored);go('home');
+    S={v:1,program:d.program,sessions:d.sessions,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:d.draft||null,mig:2};save();toast(T().restored);go('home');
   }catch(e){toast(T().syncErr(syncMsg(String(e.message||e))))}
 }
 window.addEventListener('online',()=>{if(SYNC.dirty)runBackup()});
@@ -1059,7 +1058,7 @@ document.addEventListener('click',ev=>{
     case 'lang':LANG=LANG==='en'?'ar':'en';S.settings.lang=LANG;save();applyLang();if(!$('#sess').hidden)renderSession();if(!$('#modal').hidden)closeModal();go(tab);break;
     case 'start':startSession(b.dataset.d);break;
     case 'resume':openSession();break;
-    case 'closeS':closeSession();break;
+    case 'closeS':closeSession();if(S.draft)queueBackup();break;
     case 'commit':commit();break;
     case 'shareDraft':shareDraft();break;
     case 'discard':if(confirm(d.editing?L.confCancelEdit:L.confDiscard)){S.draft=null;openTips.clear();save();closeSession()}break;
@@ -1118,7 +1117,7 @@ function restoreUI(u){try{if(!u||Date.now()-u.at>12*36e5)return;
   if(u.t&&u.t!=='home')go(u.t);
   if(u.s&&S.draft)openSession();else if(u.y)setTimeout(()=>window.scrollTo(0,u.y),50)}catch(e){}}
 window.addEventListener('scroll',()=>{clearTimeout(window.__st);window.__st=setTimeout(saveUI,250)},{passive:true});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)saveUI()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){saveUI();if(S.draft&&SYNC.on)queueBackup()}});
 const UI0=readUI();
 boot().then(()=>{applyLang();if(S.impN){const k=S.impN;S.impN=0;save();setTimeout(()=>toast(T().histNote(k)),600)}go('home');restoreUI(UI0);if(pendMig){toast(T().migNote);pendMig=false}});
 </script>
