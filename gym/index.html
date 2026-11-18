@@ -413,6 +413,7 @@ html[data-th=book] #sess{background-image:none!important}
 #sess .tnote{background:#0c0c0c;margin-top:6px;line-height:1.6}
 #sess .tnote .pmsg{margin-top:5px}
 .srow{display:flex;gap:8px;margin-bottom:8px}.srow .inp{flex:1;min-width:0}.srow .icb{width:44px;height:auto;font-size:20px;flex:none}
+#sess .wrow{padding:3px 10px 3px 4px;gap:4px}#sess .wrow .wi{width:84px}
 </style>
 </head>
 <body>
@@ -435,7 +436,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='38';
+const VER='39';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -819,7 +820,7 @@ function exBlock(e,i){
   return `<div class="card ex cx${e.core?' core':''}${stCls(e)}" data-i="${i}">
   <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?'<span class="cstar">★</span>':''}<span class="chk" id="ok${i}">${stMark(e)}</span></div>
   <div class="r2"><div class="tgt"><b class="en">${e.tsets}×${e.treps}${u}</b></div>
-    <div class="wrow"><button class="sb2" data-a="wstep" data-i="${i}" data-s="-1" aria-label="−">−</button><input class="inp wi" data-f="w" inputmode="decimal" enterkeyhint="next" value="${wv}" placeholder="—"><span class="un">${L.wt}</span><button class="sb2" data-a="wstep" data-i="${i}" data-s="1" aria-label="+">+</button></div></div>
+    <div class="wrow"><input class="inp wi" data-f="w" inputmode="decimal" enterkeyhint="next" value="${wv}" placeholder="—"><span class="un">${L.wt}</span></div></div>
   <div class="sets">${e.sets.map((r,j)=>`<div class="scell"><input class="inp" data-f="s" data-j="${j}" inputmode="numeric" enterkeyhint="next" value="${esc(r)}" placeholder="${l&&l.sets[j]!=null?l.sets[j]:e.treps}" aria-label="${j+1}"></div>`).join('')}
     <div class="sadd"><button class="sb" data-a="addset" data-i="${i}" aria-label="+">+</button><button class="sb" data-a="rmset" data-i="${i}" aria-label="−">−</button></div></div>
   <div class="nrow"><input class="inp noteI" data-f="n" value="${esc(e.note)}" placeholder="${L.notePh}"><button class="mini${showL?' on':''}" data-a="tgl" data-k="l${i}" aria-label="last">↺ ${tr('آخر أداء','Last')}</button></div>
