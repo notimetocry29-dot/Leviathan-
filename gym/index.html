@@ -420,6 +420,7 @@ html .brand .wm{align-items:center;gap:6px}
 html .brand .wm i,html[data-th] .brand .wm i{font-size:15px;font-weight:300;letter-spacing:.16em;margin:0;color:var(--tx);opacity:1}
 html .brand .wm b,html[data-th] .brand .wm b{font-size:15px;font-weight:800;letter-spacing:.16em;color:var(--ac2);opacity:1}
 .brand .wm .vn{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--mu);border:1px solid var(--bd);border-radius:99px;padding:1px 7px;margin-inline-start:4px;line-height:1.5}
+.lhist{margin-top:12px}.lht{font-size:13px;color:var(--mu);margin-bottom:4px}.lht b{color:var(--tx)}.tag.cnt{background:var(--s2);color:var(--tx2)}
 </style>
 </head>
 <body>
@@ -442,7 +443,7 @@ html .brand .wm b,html[data-th] .brand .wm b{font-size:15px;font-weight:800;lett
 
 <script>
 'use strict';
-const VER='42';
+const VER='43';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -665,10 +666,12 @@ const done=()=>S.sessions.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.ts
 function dayIdx(s){const o=S.program.days;let i=o.findIndex(d=>d.id===s.day);if(i<0)i=o.findIndex(d=>d.name===s.dayName);return i}
 function nextDayId(){const l=done()[0];const o=S.program.days.map(d=>d.id);if(!l)return o[0];const i=dayIdx(l);return i<0?o[0]:o[(i+1)%o.length]}
 function calcCycle(dayId){const l=done()[0];if(!l)return S.settings.cycle||1;const o=S.program.days.map(d=>d.id),i=dayIdx(l);return i<0?l.cycle:(o.indexOf(dayId)<=i?l.cycle+1:l.cycle)}
+const nk=n=>String(n||'').trim().toLowerCase();
+/* تاريخ التمرين: بالاسم من كل الجلسات (مش مربوط بيوم معين) */
 function exHist(exId,skip){const out=[];
-  let nm=null;const all=S.program.days.flatMap(d=>d.ex),me=all.find(x=>x.id===exId);
-  if(me&&all.filter(x=>x.name===me.name).length===1)nm=me.name;
-  for(const s of done()){if(s.id===skip)continue;const e=s.ex.find(x=>x.exId===exId)||(nm&&s.ex.find(x=>x.name===nm));if(e)out.push(Object.assign({date:s.date,cycle:s.cycle},e))}return out}
+  const me=S.program.days.flatMap(d=>d.ex).find(x=>x.id===exId),nm=me?nk(me.name):null;
+  for(const s of done()){if(s.id===skip)continue;const e=s.ex.find(x=>x.exId===exId)||(nm&&s.ex.find(x=>nk(x.name)===nm));if(e)out.push(Object.assign({date:s.date,cycle:s.cycle},e))}return out}
+function histMap(){const m={};for(const s of done())for(const e of s.ex){const k=nk(e.name);(m[k]||(m[k]=[])).push(Object.assign({date:s.date,cycle:s.cycle},e))}return m}
 function setsStr(e){const a=e.sets;const u=e.unit?' '+unitTxt(e.unit):'';if(!a.length)return '';return a.every(r=>r===a[0])?`${a.length}×${a[0]}${u}`:a.join('/')+u}
 
 /* قاعدة الزيادة: الهدف كامل نضيف في يومين منفصلين على نفس الوزن */
@@ -996,11 +999,18 @@ const DETL=['العضلات','التجهيز','التنفيذ','أخطاء شا�
 function detHtml(x){const d=DET[x[0]];if(d)return d.map((t,k)=>`<div class="dsec k${k}"><b>${DETL[k]}</b><div>${esc(t)}</div></div>`).join('');return x[6]?`<div class="dsec" style="white-space:pre-wrap">${esc(x[6])}</div>`:''}
 let lbQ='',lbG='all';
 function lbRefresh(){const l=$('#lbL');if(!l)return;const o=[...l.querySelectorAll('details')].map(x=>x.open);l.innerHTML=libRows();l.querySelectorAll('details').forEach((x,k)=>x.open=o[k])}
+function histBlock(h){
+  if(!h.length)return `<div class="mu" style="margin-top:10px">${tr('لسه ماتسجلش في أي جلسة.','Not logged in any session yet.')}</div>`;
+  const best=Math.max(...h.map(x=>+x.w||0));
+  return `<div class="lhist"><div class="lht"><b>${tr('سجلّك','Your log')}</b> · ${tr(h.length+' جلسة','' +h.length+' session(s)')}${best>0?` · ${tr('أعلى وزن','Best')} <span class="en">${fw(best)}</span>`:''}</div>
+  <table class="h">${h.slice(0,10).map(x=>`<tr><td>${fmtD(x.date)}</td><td class="en">${fw(x.w)}</td><td class="en">${esc(setsStr(x))}</td></tr>`).join('')}</table>${h.length>10?`<div class="mu">+${h.length-10}</div>`:''}</div>`;
+}
 function libRows(){
-  const q=lbQ.trim().toLowerCase(),inP=new Set(S.program.days.flatMap(d=>d.ex.map(t=>t.name))),dd=day(pDay)||S.program.days[0];
+  const q=lbQ.trim().toLowerCase(),inP=new Set(S.program.days.flatMap(d=>d.ex.map(t=>t.name))),hm=histMap();
   const r=allLib().filter(x=>(lbG==='all'||x[1]===lbG)&&(!q||x[0].toLowerCase().includes(q)));
-  return r.map(x=>`<details class="lbx"><summary><span class="nm en">${esc(x[0])}</span>${x[9]?`<span class="tag">${tr('تمريني','Mine')}</span>`:''}${inP.has(x[0])?`<span class="tag">${tr('في برنامجك','In program')}</span>`:''}<span class="mu en">${x[3]}×${x[4]}${x[5]?' '+esc(unitTxt(x[5])):''}</span></summary>
+  return r.map(x=>`<details class="lbx"><summary><span class="nm en">${esc(x[0])}</span>${x[9]?`<span class="tag">${tr('تمريني','Mine')}</span>`:''}${inP.has(x[0])?`<span class="tag">${tr('في برنامجك','In program')}</span>`:''}${(hm[nk(x[0])]||[]).length?`<span class="tag cnt">${(hm[nk(x[0])]).length}×</span>`:''}<span class="mu en">${x[3]}×${x[4]}${x[5]?' '+esc(unitTxt(x[5])):''}</span></summary>
     <div class="mu" style="margin-bottom:8px">${(GRP[x[1]]||GRP.core)[LANG==='ar'?0:1]}</div><div class="howto">${detHtml(x)||`<span class="mu">${tr('مفيش شرح. اضغط تعديل واكتب شرحك.','No guide yet. Tap Edit and write yours.')}</span>`}</div>
+    ${histBlock(hm[nk(x[0])]||[])}
     <div class="row mt"><button class="btn sm sp" data-a="lbAdd" data-n="${esc(x[0])}">${tr('ضيف لبرنامجي…','Add to my program…')}</button>${x[9]?`<button class="btn sm" data-a="cuEdit" data-n="${esc(x[0])}">${tr('تعديل','Edit')}</button>`:''}</div></details>`).join('')||`<div class="empty">—</div>`;
 }
 function renderLib(){
@@ -1044,7 +1054,7 @@ function renderProgram(){
     <button class="icb" data-a="up" data-i="${i}" aria-label="up">▲</button><button class="icb" data-a="down" data-i="${i}" aria-label="down">▼</button><button class="icb" data-a="editT" data-i="${i}" aria-label="edit">✎</button></div>`}).join('')||`<div class="empty">${tr('اليوم فاضي. ضيف تمارين من المكتبة.','Empty day. Add exercises from the library.')}</div>`}</div>
   <button class="btn pri w" data-a="libOpen">+ ${tr('ضيف تمرين من المكتبة','Add from library')}</button>
   <div class="row mt"><button class="btn sp" data-a="dayEdit">${tr('تعديل اليوم','Edit day')}</button><button class="btn sp" data-a="copyT">${L.copyTpl}</button></div>
-  <div class="mu mt" style="padding:0 4px">${tr('دوس على أي تمرين تشوف بيتلعب إزاي. التمرين المتكرر في يومين رقمه منفصل في كل يوم. الوزن المعروض هو آخر وزن اتسجل.','Tap any exercise to see how it is performed. An exercise repeated on two days is tracked separately on each. The weight shown is the last one logged.')}</div>`;
+  <div class="mu mt" style="padding:0 4px">${tr('دوس على أي تمرين تشوف بيتلعب إزاي. الوزن المعروض هو آخر وزن اتسجل للتمرين ده في أي يوم.','Tap any exercise to see how it is performed. The weight shown is the last one logged for this exercise on any day.')}</div>`;
 }
 function infoModal(i){
   const d=day(pDay),t=d.ex[i];if(!t)return;const lb=libGet(t.name),how=libHow(t.name),l=exHist(t.id)[0];
