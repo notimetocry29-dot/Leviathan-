@@ -443,7 +443,7 @@ html[data-th=granite] #sess .ex.wn{background:linear-gradient(180deg,#221e14,#1a
 
 <script>
 'use strict';
-const VER='53';
+const VER='54';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -488,11 +488,11 @@ en:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor"
  mdCols:['#','Exercise','Weight','Target','Core','Notes'],mdSCols:['Exercise','Weight','Sets','Clean','Note'],mdData:'Data used by “Restore” in the app — do not edit',yes:'✓',
  csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core',themeT:'Theme',histNote:n=>`${n} past session(s) from your earlier log were added.`,todayL:'Today',otherDay:'Start a different day',newInstead:'Start a new session instead',weekOf:n=>`${n} session(s) in the last 7 days · goal 3`,
  syncT:'Encrypted auto-backup (GitHub)',syncHint:'After every session the whole log is encrypted on this phone and uploaded to your repo. Without the passphrase the file is unreadable.',
- syncRepo:'Repository (owner/name)',syncTok:'GitHub token (contents: write, this repo only)',syncP1:'Backup passphrase (12+ characters)',syncP2:'Repeat the passphrase',
+ syncRepo:'Repository (owner/name)',syncTok:'GitHub token (contents: write, this repo only)',syncP1:'Backup passphrase (6+ characters)',syncP2:'Repeat the passphrase',
  syncWarn:'Lose the passphrase and the backup cannot be opened. There is no recovery. Never send it to anyone.',
  syncEnable:'Enable and test now',syncNow:'Back up now',syncOffB:'Turn off',syncRestore:'Restore from GitHub',syncRestoreHint:'On a new phone: fill the repo, token and passphrase above, then tap Restore.',
  syncBusy:'Working… (encrypting takes a moment)',syncOK:'Backed up and verified ✓',syncOnL:'On',syncLast:'Last upload',syncNever:'Not yet',syncWait:n=>`${n} change(s) waiting for upload`,
- syncErr:e=>`Backup failed: ${e}`,syncBadIn:'Fill the token, a matching passphrase (12+ chars) and a valid repo name',
+ syncErr:e=>`Backup failed: ${e}`,syncBadIn:'Fill the token, a matching passphrase (6+ chars) and a valid repo name',
  syncPass:'Wrong passphrase',syncNoFile:'No backup found in the repo',syncConfOff:'Turn off auto-backup? The token is removed from this phone.',
  syncMiss:'Auto-backup has not reached GitHub for 3+ sessions. Open File and check.',storeMiss:'Storage',idbOn:'Stored in the browser database',
  migNote:'Program fixed: Shoulder Press is no longer core, Plank moved to the end of both Lower days.',
@@ -540,11 +540,11 @@ ar:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor"
  mdCols:['#','التمرين','الوزن','الهدف','أساسي','تعليمات'],mdSCols:['التمرين','الوزن','المجموعات','نضيف','ملاحظة'],mdData:'بيانات بيستخدمها زرار «استرجاع» في التطبيق — ماتعدّلهاش',yes:'✓',
  csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',themeT:'الشكل',histNote:n=>`اتضاف ${n} جلسة من سجلك القديم.`,todayL:'النهارده',otherDay:'ابدأ يوم تاني',newInstead:'ابدأ جلسة جديدة بدلها',weekOf:n=>`${n} جلسة في آخر ٧ أيام · الهدف ٣`,
  syncT:'نسخة أوتوماتيك مشفّرة (GitHub)',syncHint:'بعد كل جلسة السجل كله بيتشفّر على الموبايل وبيترفع للريبو بتاعك. من غير العبارة السرية الملف مش بيتفتح.',
- syncRepo:'الريبو (صاحب/اسم)',syncTok:'توكن GitHub (صلاحية contents: write على الريبو ده بس)',syncP1:'العبارة السرية للنسخة (١٢ حرف أو أكتر)',syncP2:'أعد كتابة العبارة',
+ syncRepo:'الريبو (صاحب/اسم)',syncTok:'توكن GitHub (صلاحية contents: write على الريبو ده بس)',syncP1:'العبارة السرية للنسخة (٦ حروف أو أكتر)',syncP2:'أعد كتابة العبارة',
  syncWarn:'لو ضيّعت العبارة، النسخة مش هتتفتح تاني ومفيش استرجاع. وماتبعتهاش لأي حد.',
  syncEnable:'فعّل وجرّب دلوقتي',syncNow:'خد نسخة دلوقتي',syncOffB:'إيقاف',syncRestore:'استرجاع من GitHub',syncRestoreHint:'على موبايل جديد: اكتب الريبو والتوكن والعبارة فوق، وبعدين دوس استرجاع.',
  syncBusy:'جاري الشغل… (التشفير بياخد ثواني)',syncOK:'النسخة اترفعت واتحققنا منها ✓',syncOnL:'شغّال',syncLast:'آخر رفع',syncNever:'لسه',syncWait:n=>`${n} تغيير مستني الرفع`,
- syncErr:e=>`النسخة فشلت: ${e}`,syncBadIn:'اكتب التوكن وعبارة سرية متطابقة (١٢ حرف+) واسم ريبو صحيح',
+ syncErr:e=>`النسخة فشلت: ${e}`,syncBadIn:'اكتب التوكن وعبارة سرية متطابقة (٦ حروف+) واسم ريبو صحيح',
  syncPass:'العبارة غلط',syncNoFile:'مفيش نسخة في الريبو',syncConfOff:'توقف النسخ الأوتوماتيك؟ التوكن هيتشال من الموبايل ده.',
  syncMiss:'النسخ الأوتوماتيك ماوصلش GitHub من ٣ جلسات أو أكتر. افتح «الملف» وراجع.',storeMiss:'التخزين',idbOn:'متخزّن في قاعدة بيانات المتصفح',
  migNote:'البرنامج اتصلّح: Shoulder Press خرج من الأساسي، والبلانك راح آخر يومين الرجل.',
@@ -1219,7 +1219,7 @@ const syncPublic=()=>SYNC.on&&String(SYNC.repo).toLowerCase()===PUB_REPO;
 const syncMsg=e=>({token:tr('التوكن مرفوض أو منتهي','Token rejected or expired'),repo:tr('الريبو مش موجود أو التوكن ملوش صلاحية عليه','Repo not found or the token has no access to it'),conflict:tr('تعارض في الرفع، هيعيد المحاولة','Upload conflict, will retry'),verify:tr('الملف اترفع بس التحقق فشل','Uploaded but verification failed'),pass:tr('العبارة غلط','Wrong passphrase'),nofile:tr('مفيش نسخة في الريبو','No backup in the repo')}[e]||e);
 async function enableSync(){
   const tok=$('#gTok').value.trim(),p1=$('#gP1').value,p2=$('#gP2').value,repo=$('#gRepo').value.trim();
-  if(!tok||p1.length<12||p1!==p2||!/^[\w.-]+\/[\w.-]+$/.test(repo)){toast(T().syncBadIn);return}
+  if(!tok||p1.length<6||p1!==p2||!/^[\w.-]+\/[\w.-]+$/.test(repo)){toast(T().syncBadIn);return}
   return enableSyncWith(tok,p1,repo);
 }
 async function enableSyncWith(tok,p1,repo){
