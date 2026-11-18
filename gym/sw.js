@@ -1,5 +1,5 @@
 // غيّر الرقم ده كل ما تعدّل أي ملف
-const C='gym-v8';
+const C='gym-v9';
 const FILES=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 // النسخة الجديدة بتشتغل فورًا من غير ما تستنى
 self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));

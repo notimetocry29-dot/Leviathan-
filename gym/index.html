@@ -107,6 +107,40 @@ pre.cardtxt{white-space:pre-wrap;background:var(--bg);border:1px solid var(--bd)
 table.h{width:100%;border-collapse:collapse;font-size:14px}
 table.h td{padding:8px 4px;border-bottom:1px solid var(--bd)}
 select.inp{appearance:auto}
+#sess .shead{padding-bottom:10px}
+.pbar{height:3px;background:var(--s2);position:sticky;top:calc(52px + env(safe-area-inset-top));z-index:2}
+.pbar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+.sbody{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+.meta2{display:flex;gap:8px;margin-bottom:10px}
+.meta2 label{flex:1;display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--mu)}
+.meta2 label.cy{flex:.45}
+.meta2 .inp{min-height:40px;padding:6px 9px}
+.ex{padding:12px 12px 12px;margin-bottom:12px;border-radius:14px;border-inline-start-width:1px}
+.ex.core{border-inline-start:4px solid var(--ac)}
+.ex.dn{border-color:#3b5a37;background:#141a13}
+.ex.dn.core{border-inline-start-color:var(--ok)}
+.exno{flex:none;width:24px;height:24px;border-radius:50%;background:var(--s2);color:var(--mu);font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.ex.dn .exno{background:var(--ok);color:#0e150d}
+.exname{font-size:18px;font-weight:800;flex:1;min-width:0}
+.tgt{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;margin:6px 0 0;font-size:13px;color:var(--mu)}
+.tgt b{color:var(--tx);font-size:14px}
+.wrow{display:flex;align-items:center;gap:8px;margin-top:12px;background:var(--bg);border:1px solid #4a3a28;border-radius:12px;padding:6px 8px}
+.wrow .lb2{font-size:12px;color:var(--mu);width:44px;flex:none}
+.wrow .wi{flex:1;min-width:0;text-align:center;font-size:24px;font-weight:800;min-height:48px;border:0;background:none;padding:0}
+.wrow .un{font-size:13px;color:var(--mu);width:14px}
+.sb2{width:48px;height:48px;flex:none;border-radius:12px;border:1px solid var(--bd);background:var(--s2);font-size:26px;line-height:1;padding:0}
+.sb2:active{background:var(--ac);color:#160e05}
+.sets{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:flex-end}
+.scell{flex:1;min-width:58px;display:flex;flex-direction:column;gap:2px;align-items:stretch}
+.scell .lb{font-size:11px;color:var(--mu);text-align:center}
+.scell .inp{height:56px;text-align:center;font-size:24px;font-weight:800;padding:0}
+.sadd{display:flex;flex-direction:column;gap:4px}
+.sadd .sb{width:40px;height:26px;font-size:16px;line-height:1}
+.cl.big{padding:9px 16px 9px 12px;font-size:14.5px;min-height:44px}
+.cl.big input{width:22px;height:22px}
+.sfoot{position:fixed;bottom:0;left:0;right:0;z-index:3;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(14,14,15,0),var(--bg) 28%);max-width:640px;margin:0 auto}
+.sfoot .btn{min-height:52px;font-size:16px}
+.sfoot .sp{flex:1}
 .hero{border-color:var(--ac);background:linear-gradient(180deg,#1d1810 0,var(--s1) 60%);padding:14px 14px 12px}
 .hero.dim{opacity:.75}
 .rot{display:flex;justify-content:center;gap:5px;margin-bottom:12px}
@@ -164,7 +198,7 @@ select.inp{appearance:auto}
 
 <script>
 'use strict';
-const VER='8';
+const VER='9';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -490,17 +524,19 @@ function exBlock(e,i){
   const lt=l?`${L.last}: <span class="en">${fw(l.w)} | ${esc(setsStr(l))}</span>${l.clean?' · '+L.clean:''}`:L.first;
   const showNote=e.note||openTips.has('n'+i),showTip=openTips.has('t'+i);
   const wv=(e.w===''||e.w==null||(noW(e.w)&&e.unit))?'':esc(e.w);
-  return `<div class="card ex${e.core?' core':''}" data-i="${i}">
-  <div class="exh"><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?`<span class="tag">${L.coreL}</span>`:''}<span class="chk" id="ok${i}"></span></div>
-  <div class="lastl">${L.target} <span class="en">${e.tsets}×${e.treps}${u}</span> · ${lt}</div>
+  const dn=logged(e);
+  return `<div class="card ex${e.core?' core':''}${dn?' dn':''}" data-i="${i}">
+  <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?`<span class="tag">★ ${L.coreL}</span>`:''}<span class="chk" id="ok${i}">${dn?'✓':''}</span></div>
+  <div class="tgt"><b class="en">${e.tsets}×${e.treps}${u}</b><span>${lt}</span></div>
   ${p?`<div class="pmsg ${p.c}">${p.t}</div>`:''}
-  <div class="erow">
-    <div class="cell wc"><span class="lb">${L.wt}</span><input class="inp" data-f="w" inputmode="decimal" enterkeyhint="next" value="${wv}" placeholder="—"></div>
-    ${e.sets.map((r,j)=>`<div class="cell"><span class="lb">${j+1}</span><input class="inp" data-f="s" data-j="${j}" inputmode="numeric" enterkeyhint="next" value="${esc(r)}" placeholder="${l&&l.sets[j]!=null?l.sets[j]:e.treps}"></div>`).join('')}
-    <button class="sb" data-a="addset" data-i="${i}" aria-label="+">+</button><button class="sb" data-a="rmset" data-i="${i}" aria-label="−">−</button>
-  </div>
+  <div class="wrow"><span class="lb2">${L.wt==='k'?'الوزن':'Weight'}</span>
+    <button class="sb2" data-a="wstep" data-i="${i}" data-s="-1" aria-label="−">−</button>
+    <input class="inp wi" data-f="w" inputmode="decimal" enterkeyhint="next" value="${wv}" placeholder="—"><span class="un">${L.wt}</span>
+    <button class="sb2" data-a="wstep" data-i="${i}" data-s="1" aria-label="+">+</button></div>
+  <div class="sets">${e.sets.map((r,j)=>`<div class="scell"><span class="lb">${j+1}</span><input class="inp" data-f="s" data-j="${j}" inputmode="numeric" enterkeyhint="next" value="${esc(r)}" placeholder="${l&&l.sets[j]!=null?l.sets[j]:e.treps}"></div>`).join('')}
+    <div class="sadd"><button class="sb" data-a="addset" data-i="${i}" aria-label="+">+</button><button class="sb" data-a="rmset" data-i="${i}" aria-label="−">−</button></div></div>
   <div class="eopt">
-    <label class="cl${e.clean?' on':''}"><input type="checkbox" data-f="c" ${e.clean?'checked':''}>${L.clean}</label>
+    <label class="cl big${e.clean?' on':''}"><input type="checkbox" data-f="c" ${e.clean?'checked':''}>${L.clean}</label>
     <button class="mini${showNote?' on':''}" data-a="tgl" data-k="n${i}">✎ ${L.note}</button>
     ${e.note0?`<button class="mini${showTip?' on':''}" data-a="tgl" data-k="t${i}">ⓘ ${L.tips}</button>`:''}
   </div>
@@ -512,12 +548,13 @@ function renderSession(){
   const d=S.draft,L=T();
   const st=$('#sess').scrollTop;
   $('#sess').innerHTML=`<div class="shead"><button class="btn sm" data-a="closeS">${L.back}</button><div class="stitle"><bdi>${esc(d.dayName)}</bdi></div><div class="corec" id="corec"></div></div>
+  <div class="pbar"><i id="pfill"></i></div>
   <div class="sbody">
-    <div class="card meta"><label>${L.date}<input class="inp" type="date" id="sDate" value="${esc(d.date)}"></label><label style="flex:.55"><span class="en">Cycle</span><input class="inp" id="sCyc" inputmode="numeric" value="${esc(d.cycle)}"></label></div>
+    <div class="meta2"><label>${L.date}<input class="inp" type="date" id="sDate" value="${esc(d.date)}"></label><label class="cy"><span class="en">Cycle</span><input class="inp" id="sCyc" inputmode="numeric" value="${esc(d.cycle)}"></label></div>
     ${d.ex.map(exBlock).join('')}
-    <div class="endbar"><button class="btn pri" data-a="commit">${d.editing?L.saveEdit:L.save}</button><button class="btn" data-a="shareDraft">${L.shareW}</button></div>
     <button class="btn w dan ghost mt" data-a="discard">${d.editing?L.discardEdit:L.discard}</button>
-  </div>`;
+  </div>
+  <div class="sfoot"><button class="btn" data-a="shareDraft">${L.shareW}</button><button class="btn pri sp" data-a="commit">${d.editing?L.saveEdit:L.save}</button></div>`;
   $('#sess').scrollTop=st;
   updCore();
 }
@@ -525,7 +562,8 @@ const logged=e=>e.sets.some(r=>num(r)>0);
 function updCore(){
   const d=S.draft;if(!d)return;const c=d.ex.filter(e=>e.core),k=c.filter(logged).length;
   const el=$('#corec');if(el){el.textContent=k===c.length&&c.length?T().coreDone:T().coreN(k,c.length);el.classList.toggle('done',k===c.length&&c.length>0)}
-  d.ex.forEach((e,i)=>{const o=$('#ok'+i);if(o)o.textContent=logged(e)?'✓':''});
+  d.ex.forEach((e,i)=>{const o=$('#ok'+i);if(o){o.textContent=logged(e)?'✓':'';const c=o.closest('.ex');c&&c.classList.toggle('dn',logged(e))}});
+  const pf=$('#pfill');if(pf)pf.style.width=(d.ex.length?Math.round(d.ex.filter(logged).length/d.ex.length*100):0)+'%';
 }
 /* تحويل المسودة لجلسة (من غير حفظ) */
 function buildFromDraft(){
@@ -829,6 +867,7 @@ document.addEventListener('click',ev=>{
     case 'commit':commit();break;
     case 'shareDraft':shareDraft();break;
     case 'discard':if(confirm(d.editing?L.confCancelEdit:L.confDiscard)){S.draft=null;openTips.clear();save();closeSession()}break;
+    case 'wstep':{const e=d.ex[i],v=num(e.w),st=(+b.dataset.s)*2.5,n=Math.max(0,(isNaN(v)?0:v)+st);e.w=String(Math.round(n*100)/100);const inp=document.querySelector(`.ex[data-i="${i}"] .wi`);if(inp)inp.value=e.w;save();break}
     case 'addset':d.ex[i].sets.push('');save();renderSession();break;
     case 'rmset':if(d.ex[i].sets.length>1){d.ex[i].sets.pop();save();renderSession()}break;
     case 'tgl':{const k=b.dataset.k;openTips.has(k)?openTips.delete(k):openTips.add(k);renderSession();if(k[0]==='n'){const inp=document.querySelector(`.ex[data-i="${k.slice(1)}"] .noteI`);inp&&inp.focus()}break}
