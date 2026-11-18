@@ -210,7 +210,7 @@ select.inp{appearance:auto}
 
 <script>
 'use strict';
-const VER='15';
+const VER='16';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -724,7 +724,13 @@ async function ensureBranch(tok){
   if(r.ok)return;if(r.status!==404)throw ghErr(r);
   const rr=await gh('GET',`/repos/${R}`,null,null,tok);if(!rr.ok)throw ghErr(rr);
   const def=(await rr.json()).default_branch;
-  const br=await gh('GET',`/repos/${R}/git/ref/heads/${def}`,null,null,tok);if(!br.ok)throw ghErr(br);
+  let br=await gh('GET',`/repos/${R}/git/ref/heads/${def}`,null,null,tok);
+  if(!br.ok&&(br.status===404||br.status===409)){
+    const init=await gh('PUT',`/repos/${R}/contents/README.md`,{message:'init',content:btoa('Gym Log backup\n'),branch:def},null,tok);
+    if(!init.ok)throw ghErr(init);
+    br=await gh('GET',`/repos/${R}/git/ref/heads/${def}`,null,null,tok);
+  }
+  if(!br.ok)throw ghErr(br);
   const sha=(await br.json()).object.sha;
   r=await gh('POST',`/repos/${R}/git/refs`,{ref:'refs/heads/'+SYNC.branch,sha},null,tok);
   if(!r.ok&&r.status!==422)throw ghErr(r);
