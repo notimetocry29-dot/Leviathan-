@@ -189,6 +189,16 @@ select.inp{appearance:auto}
 </style>
 </head>
 <body>
+<div id="lock" style="position:fixed;inset:0;z-index:99;background:var(--bg,#0e0e0f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px" hidden>
+<div style="font-size:28px;font-weight:800;color:var(--tx,#ece8e1)">Gym <span style="color:var(--ac,#c38d4f)">Log</span></div>
+<input id="lpin" type="password" inputmode="numeric" autocomplete="off" maxlength="12" placeholder="••••" style="width:200px;text-align:center;font-size:28px;letter-spacing:8px;padding:12px;border-radius:14px;border:1px solid var(--bd,#2d2d33);background:var(--s1,#17171a);color:var(--tx,#ece8e1)">
+<div id="lerr" style="color:#d06c57;min-height:20px;font-size:14px"></div></div>
+<script>(function(){var L=document.getElementById('lock'),I=document.getElementById('lpin'),E=document.getElementById('lerr');
+try{if(sessionStorage.getItem('gl.ok')==='1')return}catch(e){}
+L.hidden=false;document.body.style.overflow='hidden';
+async function hx(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('gymlog'+t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')}
+I.addEventListener('input',async function(){if(I.value.length<4)return;if(await hx(I.value)==='c0cae9ad83d58cb6d202644a8bd5a28c69f4c0c183241339462c9d80069a5dbc'){try{sessionStorage.setItem('gl.ok','1')}catch(e){}L.hidden=true;document.body.style.overflow=''}else if(I.value.length>=4){E.textContent='✕';I.value='';setTimeout(function(){E.textContent=''},1200)}});
+setTimeout(function(){I.focus()},100)})()</script>
 <header class="top">
   <div class="brand" id="brand"></div>
   <button class="btn sm pri" id="updBtn" hidden></button>
@@ -207,7 +217,7 @@ select.inp{appearance:auto}
 
 <script>
 'use strict';
-const VER='11';
+const VER='12';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -261,7 +271,7 @@ en:{brand:'Gym <b>Log</b>',title:'Gym Log',langBtn:'عربي',tabs:['Home','Log'
  syncMiss:'Auto-backup has not reached GitHub for 3+ sessions. Open File and check.',storeMiss:'Storage',idbOn:'Stored in the browser database',
  migNote:'Program fixed: Shoulder Press is no longer core, Plank moved to the end of both Lower days.'
 },
-ar:{brand:'سجل <b>الجيم</b>',title:'سجل الجيم',langBtn:'EN',tabs:['الرئيسية','السجل','البرنامج','الملف'],update:'فيه تحديث — اضغط',
+ar:{brand:'Gym <b>Log</b>',title:'Gym Log',langBtn:'EN',tabs:['الرئيسية','السجل','البرنامج','الملف'],update:'فيه تحديث — اضغط',
  next:'الجلسة الجاية',coreL:'الأساسي',start:'ابدأ',draftOpen:'جلسة مفتوحة لسه ماتحفظتش',draftEdit:'تعديل جلسة',resume:'كمّل',
  last7:'آخر ٧ أيام',sessions:'جلسات',lastSess:'آخر جلسة',min3:'الحد الأدنى في الأسبوع ٣ جلسات.',
  bkNone:'لسه ماعملتش ولا نسخة احتياطية.',bkAgo:n=>`آخر نسخة احتياطية من ${n} يوم.`,bkWarn:' لو بيانات Chrome اتمسحت، السجل هيضيع معاها.',bkNowBtn:'احفظ نسخة في ملف دلوقتي',
@@ -298,7 +308,7 @@ ar:{brand:'سجل <b>الجيم</b>',title:'سجل الجيم',langBtn:'EN',tabs
  aiTarget:'الهدف',aiWeight:'الوزن',aiSets:'المجموعات',aiForm:'الأداء',aiClean:'نضيف (من غير مرجحة وبتحكّم كامل)',aiNotClean:'مش متعلّم نضيف',
  aiLast:'المرة اللي فاتت',aiStatus:'الحالة',aiNote:'ملاحظة',aiNotDone:'ماتلعبش',aiCoreTag:'[أساسي]',bw:'وزن الجسم',
  st2:{q1:'مؤهل ١ من ٢',up:'استحق زيادة',stuck:n=>`${n} جلسات على نفس الوزن من غير زيادة`},
- mdTitle:'سجل الجيم — نسخة احتياطية',mdExported:'اتعملت',mdSessions:'الجلسات',mdProgram:'البرنامج',mdLog:'السجل (الأحدث الأول)',
+ mdTitle:'Gym Log — نسخة احتياطية',mdExported:'اتعملت',mdSessions:'الجلسات',mdProgram:'البرنامج',mdLog:'السجل (الأحدث الأول)',
  mdCols:['#','التمرين','الوزن','الهدف','أساسي','تعليمات'],mdSCols:['التمرين','الوزن','المجموعات','نضيف','ملاحظة'],mdData:'بيانات بيستخدمها زرار «استرجاع» في التطبيق — ماتعدّلهاش',yes:'✓',
  csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',themeT:'الشكل',histNote:n=>`اتضاف ${n} جلسة من سجلك القديم.`,todayL:'النهارده',otherDay:'ابدأ يوم تاني',newInstead:'ابدأ جلسة جديدة بدلها',weekOf:n=>`${n} جلسة في آخر ٧ أيام · الهدف ٣`,
  syncT:'نسخة أوتوماتيك مشفّرة (GitHub)',syncHint:'بعد كل جلسة السجل كله بيتشفّر على الموبايل وبيترفع للريبو بتاعك. من غير العبارة السرية الملف مش بيتفتح.',
