@@ -192,16 +192,6 @@ select.inp{appearance:auto}
 </style>
 </head>
 <body>
-<div id="lock" style="position:fixed;inset:0;z-index:99;background:var(--bg,#0e0e0f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px" hidden>
-<div style="font-size:28px;font-weight:800;color:var(--tx,#ece8e1)">Gym <span style="color:var(--ac,#c38d4f)">Log</span></div>
-<input id="lpin" type="password" inputmode="numeric" autocomplete="off" maxlength="12" placeholder="••••" style="width:200px;text-align:center;font-size:28px;letter-spacing:8px;padding:12px;border-radius:14px;border:1px solid var(--bd,#2d2d33);background:var(--s1,#17171a);color:var(--tx,#ece8e1)">
-<div id="lerr" style="color:#d06c57;min-height:20px;font-size:14px"></div></div>
-<script>(function(){var L=document.getElementById('lock'),I=document.getElementById('lpin'),E=document.getElementById('lerr');
-try{if(sessionStorage.getItem('gl.ok')==='1')return}catch(e){}
-L.hidden=false;document.body.style.overflow='hidden';
-async function hx(t){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('gymlog'+t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')}
-I.addEventListener('input',async function(){if(I.value.length<4)return;if(await hx(I.value)==='c0cae9ad83d58cb6d202644a8bd5a28c69f4c0c183241339462c9d80069a5dbc'){try{sessionStorage.setItem('gl.ok','1')}catch(e){}L.hidden=true;document.body.style.overflow=''}else if(I.value.length>=4){E.textContent='✕';I.value='';setTimeout(function(){E.textContent=''},1200)}});
-setTimeout(function(){I.focus()},100)})()</script>
 <header class="top">
   <div class="brand" id="brand"></div>
   <button class="btn sm pri" id="updBtn" hidden></button>
@@ -220,7 +210,7 @@ setTimeout(function(){I.focus()},100)})()</script>
 
 <script>
 'use strict';
-const VER='14';
+const VER='15';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
