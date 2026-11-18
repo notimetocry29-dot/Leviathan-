@@ -443,7 +443,7 @@ html[data-th=granite] #sess .ex.wn{background:linear-gradient(180deg,#221e14,#1a
 
 <script>
 'use strict';
-const VER='52';
+const VER='53';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -1170,7 +1170,7 @@ async function gh(method,url,body,accept,tok){
 const ghErr=r=>new Error(r.status===401||r.status===403?'token':r.status===404?'repo':'http'+r.status);
 async function ensureBranch(tok){
   const R=SYNC.repo;let r=await gh('GET',`/repos/${R}/git/ref/heads/${SYNC.branch}`,null,null,tok);
-  if(r.ok)return;if(r.status!==404)throw ghErr(r);
+  if(r.ok)return;if(r.status!==404&&r.status!==409)throw ghErr(r);
   const rr=await gh('GET',`/repos/${R}`,null,null,tok);if(!rr.ok)throw ghErr(rr);
   const def=(await rr.json()).default_branch;
   let br=await gh('GET',`/repos/${R}/git/ref/heads/${def}`,null,null,tok);
