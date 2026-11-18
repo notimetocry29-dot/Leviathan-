@@ -401,6 +401,17 @@ html[data-th=book] #sess{background-image:none!important}
 #sess .cl.big input{width:18px;height:18px}
 #sess .meta2{gap:8px;margin-bottom:8px}
 #sess .meta2 .inp{min-height:38px;font-size:14px}
+
+/* ===== v37: تدوين خفيف: خلفية سوداء، من غير زخرفة ===== */
+#sess .ex,html[data-th] #sess .ex{background:#000!important;border:1px solid var(--bd)!important;border-inline-start-width:3px!important}
+#sess .ex.dn{border-color:var(--okbd)!important}
+#sess .ex.wn{border-color:var(--midbd)!important}
+#sess .ex .inp,#sess .ex .wrow{background:#0c0c0c!important;border-color:var(--bd)}
+#sess .nrow{display:flex;gap:6px;margin-top:7px;align-items:center}
+#sess .nrow .noteI{flex:1;min-width:0;height:36px;font-size:13.5px;padding:0 10px;margin:0}
+#sess .nrow .mini{flex:none;white-space:nowrap}
+#sess .tnote{background:#0c0c0c;margin-top:6px;line-height:1.6}
+#sess .tnote .pmsg{margin-top:5px}
 </style>
 </head>
 <body>
@@ -423,7 +434,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='36';
+const VER='37';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -801,25 +812,17 @@ const openTips=new Set();
 function exBlock(e,i){
   const L=T(),h=exHist(e.exId,S.draft.editing),l=h[0],p=progMsg({sets:e.tsets,goal:e.goal},h,e.unit);
   const u=e.unit?' '+esc(unitTxt(e.unit)):'';
-  const lt=l?`${L.last}: <span class="en">${fw(l.w)} | ${esc(setsStr(l))}</span>${l.clean?' · '+L.clean:''}`:L.first;
-  const showNote=e.note||openTips.has('n'+i),showTip=openTips.has('t'+i);
+  const showL=openTips.has('l'+i);
   const wv=(e.w===''||e.w==null||(noW(e.w)&&e.unit))?'':esc(e.w);
-  const dn=exSt(e)==='ok';
+  const lastP=h.length?h.slice(0,3).map(x=>`<div class="en">${fmtD(x.date)} · ${fw(x.w)} | ${esc(setsStr(x))}</div>`).join(''):`<div>${L.first}</div>`;
   return `<div class="card ex cx${e.core?' core':''}${stCls(e)}" data-i="${i}">
-  <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?'<span class="cstar" title="Core">★</span>':''}<span class="chk" id="ok${i}">${stMark(e)}</span></div>
-  <div class="r2"><div class="tgt"><b class="en">${e.tsets}×${e.treps}${u}</b><span>${lt}</span></div>
+  <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?'<span class="cstar">★</span>':''}<span class="chk" id="ok${i}">${stMark(e)}</span></div>
+  <div class="r2"><div class="tgt"><b class="en">${e.tsets}×${e.treps}${u}</b></div>
     <div class="wrow"><button class="sb2" data-a="wstep" data-i="${i}" data-s="-1" aria-label="−">−</button><input class="inp wi" data-f="w" inputmode="decimal" enterkeyhint="next" value="${wv}" placeholder="—"><span class="un">${L.wt}</span><button class="sb2" data-a="wstep" data-i="${i}" data-s="1" aria-label="+">+</button></div></div>
-  ${p?`<div class="pmsg ${p.c}">${p.t}</div>`:''}
   <div class="sets">${e.sets.map((r,j)=>`<div class="scell"><input class="inp" data-f="s" data-j="${j}" inputmode="numeric" enterkeyhint="next" value="${esc(r)}" placeholder="${l&&l.sets[j]!=null?l.sets[j]:e.treps}" aria-label="${j+1}"></div>`).join('')}
     <div class="sadd"><button class="sb" data-a="addset" data-i="${i}" aria-label="+">+</button><button class="sb" data-a="rmset" data-i="${i}" aria-label="−">−</button></div></div>
-  <div class="eopt">
-    <button class="mini fill" data-a="fill" data-i="${i}">⚡ ${l?tr('زي آخر مرة','Same as last'):tr('زي الهدف','As target')}</button>
-    <label class="cl big${e.clean?' on':''}"><input type="checkbox" data-f="c" ${e.clean?'checked':''}>${L.clean}</label>
-    <button class="mini${showNote?' on':''}" data-a="tgl" data-k="n${i}">✎</button>
-    ${e.note0?`<button class="mini${showTip?' on':''}" data-a="tgl" data-k="t${i}">ⓘ</button>`:''}
-  </div>
-  ${showTip&&e.note0?`<div class="tnote">${esc(e.note0)}</div>`:''}
-  ${showNote?`<input class="inp noteI" data-f="n" value="${esc(e.note)}" placeholder="${L.notePh}">`:''}
+  <div class="nrow"><input class="inp noteI" data-f="n" value="${esc(e.note)}" placeholder="${L.notePh}"><button class="mini${showL?' on':''}" data-a="tgl" data-k="l${i}" aria-label="last">↺ ${tr('آخر أداء','Last')}</button></div>
+  ${showL?`<div class="tnote">${lastP}${p?`<div class="pmsg ${p.c}">${p.t}</div>`:''}</div>`:''}
   </div>`;
 }
 function renderSession(){
