@@ -359,7 +359,16 @@ html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
 .prl .prow{cursor:pointer}
 .prl .prow:active{background:var(--s2)}
 .prow .exno{margin-inline-end:2px}
-.hb{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.cyb{font-size:14px;font-weight:800;letter-spacing:0;text-transform:none;padding:3px 11px;border-radius:99px;background:var(--ac);color:var(--onac);white-space:nowrap}
+.hb{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.cyb{--cy:#a99bff;font-size:14px;font-weight:800;letter-spacing:0;text-transform:none;padding:3px 12px;border-radius:99px;color:var(--cy);border:1px solid var(--cy);background:rgba(160,150,255,.14);background:color-mix(in srgb,var(--cy) 16%,transparent);border-color:color-mix(in srgb,var(--cy) 55%,transparent);white-space:nowrap}
+html[data-th=plate] .cyb{--cy:#b69cff}
+html[data-th=book] .cyb{--cy:#6b2d7c}
+html[data-th=pulse] .cyb{--cy:#ff7ad9}
+html[data-th=dawn] .cyb{--cy:#8fe0ff}
+html[data-th=x] .cyb{--cy:#a78bfa}
+html[data-th=granite] .cyb{--cy:#c3a6ff}
+html[data-th=sand] .cyb{--cy:#5a46a0}
+html[data-th=cedar] .cyb{--cy:#b28cf0}
+html[data-th=obsidian] .cyb{--cy:#8fb4ff}
 .lbx{border-bottom:1px solid var(--bd)}.lbx:last-child{border-bottom:0}.lbx summary{list-style:none;display:flex;align-items:center;gap:8px;padding:12px 0;cursor:pointer}.lbx summary::-webkit-details-marker{display:none}.lbx summary .nm{font-weight:700;flex:1}.lbx .howto{margin:0 0 12px}.lbx .row{margin-bottom:12px}.lbx summary::after{content:'▾';color:var(--mu)}.lbx[open] summary::after{content:'▴'}
 .howto{font-size:16px;line-height:1.8;background:var(--s2);border-radius:var(--rad);padding:12px 14px}
 /* ---- أداء شاشة التمرين: من غير blur ولا ظلال، ورسم الكروت اللي ظاهرة بس ---- */
@@ -395,7 +404,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='28';
+const VER='29';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
