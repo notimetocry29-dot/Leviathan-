@@ -353,6 +353,24 @@ html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
 .brand .lg{cursor:pointer;padding:9px 8px;box-sizing:content-box;margin:-9px -8px;-webkit-tap-highlight-color:transparent}
 .brand .lg.spin{animation:lgspin .7s linear infinite}
 @keyframes lgspin{to{transform:rotate(360deg)}}
+.sysopt{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--bd);border-radius:var(--rad);margin-bottom:8px;background:var(--s1)}
+.sysopt.on{border-color:var(--ac);background:var(--acbg)}
+.sysc .big{margin-bottom:2px}
+.prl .prow{cursor:pointer}
+.prl .prow:active{background:var(--s2)}
+.prow .exno{margin-inline-end:2px}
+.howto{font-size:16px;line-height:1.8;background:var(--s2);border-radius:var(--rad);padding:12px 14px}
+/* ---- أداء شاشة التمرين: من غير blur ولا ظلال، ورسم الكروت اللي ظاهرة بس ---- */
+#sess .card,#sess .shead,#sess .btn,#sess .inp,#sess .wrow{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:none!important;text-shadow:none!important}
+#sess .ex{content-visibility:auto;contain-intrinsic-size:auto 330px}
+#sess,html[data-th=dawn] #sess,html[data-th=pulse] #sess,html[data-th=book] #sess{background-attachment:scroll!important}
+html[data-th=dawn] #sess{background:linear-gradient(180deg,#1b1640,#3a2352 60%,#5b2f45)!important}
+html[data-th=dawn] #sess .ex,html[data-th=dawn] #sess .shead{background:rgba(255,255,255,.08)}
+html[data-th=dawn] #sess .shead{background:#1d1844}
+html[data-th=pulse] #sess{background-image:none!important}
+html[data-th=book] #sess{background-image:none!important}
+#sess *{transition:none!important}
+#sess .ex{will-change:auto}
 </style>
 </head>
 <body>
@@ -374,7 +392,7 @@ html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
 
 <script>
 'use strict';
-const VER='25';
+const VER='27';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -535,7 +553,11 @@ function seed(){
 function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.program&&Array.isArray(o.sessions))return o}}catch(e){}return null}
 /* التخزين: IndexedDB هو الأصل، وlocalStorage نسخة مرآة بنقرأ منها لو الأحدث (والرئيسية بتقرأ منها) */
 let S=null,sq=Promise.resolve(),pendMig=false;
+let svT=null;
+function saveSoon(){clearTimeout(svT);svT=setTimeout(()=>{svT=null;save()},700)}
+function flushSave(){if(svT){clearTimeout(svT);svT=null;save()}}
 function save(){
+  if(svT){clearTimeout(svT);svT=null}
   S.at=Date.now();
   let snap;try{snap=structuredClone(S)}catch(e){snap=JSON.parse(JSON.stringify(S))}
   let lsOK=true;try{localStorage.setItem(KEY,JSON.stringify(snap))}catch(e){lsOK=false}
@@ -593,7 +615,10 @@ const done=()=>S.sessions.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.ts
 function dayIdx(s){const o=S.program.days;let i=o.findIndex(d=>d.id===s.day);if(i<0)i=o.findIndex(d=>d.name===s.dayName);return i}
 function nextDayId(){const l=done()[0];const o=S.program.days.map(d=>d.id);if(!l)return o[0];const i=dayIdx(l);return i<0?o[0]:o[(i+1)%o.length]}
 function calcCycle(dayId){const l=done()[0];if(!l)return S.settings.cycle||1;const o=S.program.days.map(d=>d.id),i=dayIdx(l);return i<0?l.cycle:(o.indexOf(dayId)<=i?l.cycle+1:l.cycle)}
-function exHist(exId,skip){const out=[];for(const s of done()){if(s.id===skip)continue;const e=s.ex.find(x=>x.exId===exId);if(e)out.push(Object.assign({date:s.date,cycle:s.cycle},e))}return out}
+function exHist(exId,skip){const out=[];
+  let nm=null;const all=S.program.days.flatMap(d=>d.ex),me=all.find(x=>x.id===exId);
+  if(me&&all.filter(x=>x.name===me.name).length===1)nm=me.name;
+  for(const s of done()){if(s.id===skip)continue;const e=s.ex.find(x=>x.exId===exId)||(nm&&s.ex.find(x=>x.name===nm));if(e)out.push(Object.assign({date:s.date,cycle:s.cycle},e))}return out}
 function setsStr(e){const a=e.sets;const u=e.unit?' '+unitTxt(e.unit):'';if(!a.length)return '';return a.every(r=>r===a[0])?`${a.length}×${a[0]}${u}`:a.join('/')+u}
 
 /* قاعدة الزيادة: الهدف كامل نضيف في يومين منفصلين على نفس الوزن */
@@ -722,7 +747,7 @@ function renderHome(){
 }
 
 /* ================= الجلسة ================= */
-function draftEx(t,src){const h=exHist(t.id,S.draft&&S.draft.editing)[0];return{exId:t.id,name:t.name,unit:t.unit||'',core:!!t.core,goal:t.goal,tsets:t.sets,treps:t.reps,note0:t.note||'',w:src?src.w:(h?h.w:t.w),sets:src?src.sets.map(String):Array(t.sets).fill(''),clean:src?!!src.clean:false,note:src?src.note||'':''}}
+function draftEx(t,src){const h=exHist(t.id,S.draft&&S.draft.editing)[0];return{exId:t.id,name:t.name,unit:t.unit||'',core:!!t.core,goal:t.goal,tsets:t.sets,treps:t.reps,note0:t.note||libHow(t.name),w:src?src.w:(h?h.w:t.w),sets:src?src.sets.map(String):Array(t.sets).fill(''),clean:src?!!src.clean:false,note:src?src.note||'':''}}
 function startSession(id){
   if(S.draft&&!confirm(T().confNew))return;
   const d=day(id);
@@ -740,7 +765,7 @@ function editSession(id){
   S.draft.ex=ex;openTips.clear();save();closeModal(true);openSession();
 }
 function openSession(){renderSession();$('#sess').hidden=false;$('#sess').scrollTop=0;document.body.style.overflow='hidden';if(!hs().sess){const n=Object.assign({tab:tab},hs(),{sess:1});delete n.modal;if(hs().modal)history.replaceState(n,'');else history.pushState(n,'')}saveUI()}
-function closeSession(){$('#sess').hidden=true;document.body.style.overflow='';if(tab==='home')renderHome();saveUI();if(hs().sess)history.back()}
+function closeSession(){flushSave();$('#sess').hidden=true;document.body.style.overflow='';if(tab==='home')renderHome();saveUI();if(hs().sess)history.back()}
 const openTips=new Set();
 function exBlock(e,i){
   const L=T(),h=exHist(e.exId,S.draft.editing),l=h[0],p=progMsg({sets:e.tsets,goal:e.goal},h,e.unit);
@@ -843,22 +868,139 @@ function sessModal(id){
 }
 
 /* ================= البرنامج ================= */
+/* ================= مكتبة التمارين + الأنظمة ================= */
+const tr=(a,e)=>LANG==='ar'?a:e;
+const GRP={chest:['صدر','Chest'],back:['ضهر','Back'],shoulders:['كتف','Shoulders'],arms:['دراعين','Arms'],legs:['رجل','Legs'],core:['جذع وقبضة','Core & grip']};
+/* [الاسم، المجموعة، وزن مبدئي، مجموعات، عدّات، وحدة، شرح عربي، شرح إنجليزي] */
+const LIB=[
+['Flat Dumbbell Press','chest',12.5,3,12,'','نايم على بنش مسطح، دمبل في كل إيد وكفوفك مايلة لجوه. انزل ببطء لحد ما الكوع يوصل لمستوى جسمك مش أعمق، وادفع لفوق من غير ما تخبّط الدمبلين. المعصم مستقيم.','Lie flat, dumbbells with palms slightly inward. Lower slowly until elbows reach body level, press up without clashing the weights. Keep wrists straight.'],
+['Incline Dumbbell Press','chest',15,3,12,'','البنش مايل ٣٠ لـ ٤٥ درجة. انزل ببطء لحد أعلى الصدر وادفع لفوق من غير ما تقفل الكوع بقوة. ركّز على أعلى الصدر.','Bench at 30–45°. Lower slowly to upper chest, press up without hard-locking the elbows. Feel the upper chest.'],
+['Chest Press Machine','chest',25,3,12,'','اظبط الكرسي بحيث المقابض في مستوى منتصف الصدر. ادفع لقدام وارجع ببطء، والكوع ماينزلش تحت الكتف. ضهرك لازق في المسند.','Set the seat so handles are mid-chest. Press forward and return slowly; elbows stay level with the shoulders. Back flat on the pad.'],
+['Floor Press','chest',10,3,12,'','نايم على الأرض، الركب مثنية. انزل بالدمبل لحد ما الكوع يلمس الأرض ووقف لحظة وادفع لفوق. الأرض بتحميلك من النزول الزايد.','Lie on the floor, knees bent. Lower until elbows touch the floor, pause, press up. The floor protects the shoulders from going too deep.'],
+['Push-Up','chest',0,3,12,'','إيدك أعرض من كتفك شوية وجسمك خط مستقيم. انزل بصدرك لحد ما يقرّب من الأرض وارجع. لو صعب، اعملها من على ركبتك.','Hands slightly wider than shoulders, body in a straight line. Lower the chest near the floor and push back. Use knees if too hard.'],
+['Cable Fly','chest',10,3,12,'','كابل من الجنبين وإيدك على مستوى الصدر. قرّب إيدك قدامك كأنك بتحضن شجرة، والكوع مثني شوية وثابت. ارجع ببطء.','Cables on both sides, hands at chest height. Bring hands together like hugging a tree, elbows slightly bent and fixed. Return slowly.'],
+['Pec Deck','chest',25,3,12,'','اقعد وضهرك لازق، والكوع في مستوى الكتف. قرّب الذراعين قدامك واعصر الصدر ثانية وارجع ببطء من غير ما تسيب الوزن يخبط.','Sit with your back flat, elbows at shoulder level. Bring the arms together, squeeze the chest for a second, return under control.'],
+['Lat Pulldown','back',39,3,10,'','ابدأ بشدّاد القبضة. اسحب البار لأعلى الصدر وكوعك ينزل ناحية جنبك، وصدرك طالع قدّام. ارجع ببطء من غير ما كتفك يتشد لفوق.','Use grip straps. Pull the bar to upper chest, elbows down toward your sides, chest up. Return slowly without shrugging.'],
+['Seated Row','back',30,3,10,'','اقعد وصدرك طالع وضهرك مستقيم. اسحب المقبض ناحية بطنك وكوعك قريّب من جسمك، واعصر لوح الكتف ثانية. ارجع ببطء من غير ما تميل لقدام.','Sit tall, chest up. Pull the handle to your belly with elbows close, squeeze the shoulder blades for a second. Return without leaning forward.'],
+['T-Bar Row','back',20,3,10,'','المسند على أعلى صدرك. اسحب ناحية بطنك، والكوع لورا، واعصر لوح الكتف. ارجع ببطء. استخدم الشدّاد، وماتستخدمش مرجحة.','Chest on the pad. Pull toward the belly, elbows back, squeeze the shoulder blades. Return slowly; use straps, no swinging.'],
+['Chest-Supported Row','back',15,3,10,'','نايم بصدرك على بنش مايل، دمبل في كل إيد. اسحب الكوعين لورا ناحية جنبك واعصر لوح الكتف. الصدر لازق في البنش يمنع المرجحة.','Chest on an incline bench, dumbbells hanging. Row the elbows back toward your sides and squeeze. The pad stops you from swinging.'],
+['One-Arm DB Row','back',15,3,10,'','إيد وركبة على بنش، والضهر مستقيم. اسحب الدمبل ناحية وسطك والكوع لورا، وانزل ببطء. اتأكد إن كتفك مش بيلف.','One hand and knee on a bench, back flat. Row the dumbbell to your waist, elbow back, lower slowly without twisting the shoulder.'],
+['Straight-Arm Pulldown','back',15,3,12,'','واقف قدام الكابل، دراعاتك مفرودة تقريبًا. انزل بالبار لفخادك بقوة من الضهر مش من التراي، وارجع ببطء.','Stand facing the cable, arms nearly straight. Sweep the bar to your thighs using the lats, not the triceps. Return slowly.'],
+['Pull-Up','back',0,3,6,'','قبضة أعرض من الكتف شوية. اطلع لحد ما دقنك تعدّي البار، وانزل بتحكم لآخر الحركة. لو مش قادر، استخدم الجهاز المساعد.','Grip a bit wider than shoulders. Pull until the chin clears the bar, lower under control to full extension. Use the assisted machine if needed.'],
+['Back Extension','back',10,3,12,'','على الجهاز المائل، الحوض على المسند. انزل ببطء لحد ما جسمك يبقى عمودي وارجع للخط المستقيم بعضلات الضهر والمؤخرة، من غير ما تقوّس ضهرك لفوق زيادة.','On the 45° bench, hips on the pad. Lower slowly, then rise to a straight line using the back and glutes; do not over-arch at the top.'],
+['Shoulder Press','shoulders',18,3,10,'','سخّن الكتف الأول. اقعد بضهر لازق، ادفع المقابض لفوق في مسار دائري قدّام وشك، ونزّل لحد مستوى الأذن. أي نغز حاد في الكتف = وقّف.','Warm up the shoulders first. Back against the pad, press handles up in a slight arc, lower to ear level. Any sharp pinch = stop.'],
+['DB Shoulder Press','shoulders',10,3,10,'','اقعد بضهر مسنود، دمبل عند الأذن. ادفع لفوق من غير ما تقفل الكوع وتحكّم في النزول. ماتقوّسش ضهرك.','Seated with back support, dumbbells at ear level. Press up without hard lockout and lower under control. Do not arch the back.'],
+['Lateral Raises','shoulders',5,3,15,'','واقف، دمبل في كل إيد. ارفع دراعك للجنب لحد مستوى الكتف والكوع مثني شوية، والرسغ مستقيم. نزّل ببطء. الوزن الخفيف أحسن من المرجحة.','Standing, dumbbells at sides. Raise arms out to shoulder height, elbows slightly bent, wrists straight. Lower slowly. Light and strict beats heavy and swingy.'],
+['Face Pull','shoulders',35,3,15,'','كابل على مستوى الوش بحبل. اسحب ناحية وشك والكوع عالي وبره، واعصر لوح الكتف ثانيتين. ده تمرين صحة الكتف الخلفي.','Rope at face height. Pull toward your face with elbows high and out, squeeze the shoulder blades for two seconds. Great for shoulder health.'],
+['Rear Delt Fly','shoulders',5,3,15,'','مايل لقدام بضهر مستقيم. ارفع الدمبلات للجنب بكوع مثني شوية وعضلة الكتف الخلفية هي اللي بتشتغل. ماتسحبش بالضهر.','Hinge forward, back flat. Raise dumbbells out to the sides with slightly bent elbows, feeling the rear delts. Do not heave with the back.'],
+['Front Raise','shoulders',5,3,12,'','واقف، ارفع الدمبل لقدام لحد مستوى الكتف بدراع شبه مفرود ونزّل ببطء. من غير ميل لورا.','Standing, raise the dumbbell forward to shoulder height with a nearly straight arm and lower slowly. Do not lean back.'],
+['DB Shrugs','shoulders',20,3,15,'','دمبل في كل إيد، ارفع كتفك ناحية ودانك واثبت ثانية ونزّل ببطء. رفع ونزول مستقيم من غير دواير.','Dumbbell in each hand, lift shoulders toward ears, hold a second, lower slowly. Straight up and down, no circles.'],
+['Triceps Pushdown','arms',25,3,12,'','واقف قدام الكابل، كوعك ثابت على جنبك. ادفع لتحت لحد ما دراعك يتفرد، والحركة من الساعد بس. ارجع ببطء.','Stand at the cable, elbows pinned to your sides. Push down until the arms are straight, moving only the forearms. Return slowly.'],
+['Cable Overhead Extension','arms',15,3,12,'','ضهرك للجهاز والحبل من ورا راسك. افرد الكوع لقدام وفوق وكوعك ثابت قريّب من ودنك. ارجع ببطء.','Face away from the machine, rope behind your head. Extend the elbows forward and up, elbows fixed close to your ears. Return slowly.'],
+['Overhead Triceps Extension (DB)','arms',15,3,12,'','دمبل واحد بإيديك الاتنين فوق راسك. نزّله ورا راسك بالكوع الثابت وارفع. حكم القبضة كويس قبل ما تبدأ.','One dumbbell held with both hands overhead. Lower behind the head with fixed elbows and press up. Secure your grip first.'],
+['Bench Dips','arms',0,3,12,'','إيدك على حرف البنش ورجلك قدامك. انزل لحد ما الكوع يبقى ٩٠ درجة بس وارفع. لو الكتف بيوجعك، سيبها.','Hands on a bench edge, feet in front. Lower until elbows reach 90° only, then press up. Skip it if the shoulder complains.'],
+['Biceps Curl','arms',7.5,3,10,'','دمبل في كل إيد، الكوع ثابت جنبك. اطلع بالدمبل ونزّل ببطء من غير مرجحة ولا ميل بالضهر.','Dumbbell in each hand, elbows fixed at your sides. Curl up and lower slowly with no swinging or leaning back.'],
+['Hammer Curl','arms',7.5,3,10,'','كفوفك باصين لبعض (زي المطرقة). اطلع بالدمبل والكوع ثابت ونزّل ببطء. بيشتغل الساعد مع الباي.','Palms facing each other like a hammer. Curl up with fixed elbows and lower slowly. Works the forearm along with the biceps.'],
+['EZ Bar Curl','arms',15,3,10,'','امسك البار المتعرّج بقبضة مريحة. اطلع بالبار والكوع ثابت ونزّل ببطء. القبضة دي أريح للمعصم.','Grip the EZ bar comfortably. Curl up with fixed elbows and lower slowly. The angled grip is easier on the wrists.'],
+['Cable Curl','arms',15,3,12,'','واقف قدام الكابل التحتاني، الكوع ثابت. اطلع بالبار ونزّل ببطء، والكابل بيدّي شد طول الحركة.','Face the low cable, elbows fixed. Curl up and lower slowly; the cable keeps constant tension.'],
+['Preacher Curl','arms',10,3,10,'','دراعك على المسند المايل. نزّل لحد ما الدراع يتفرد تقريبًا بتحكم واطلع من غير ما ترفع كتفك.','Arms on the angled pad. Lower until nearly straight under control and curl up without lifting the shoulders.'],
+['Wrist Curl + Reverse','arms',20,2,15,'','ساعدك على فخذك والرسغ بره الركبة. الكف لفوق: ارفع الرسغ لفوق، وبعدين الكف لتحت: ارفع ضهر الإيد لفوق. الساعد ثابت، والرسغ بس هو اللي بيتحرك. حركة بطيئة.','Forearms on thighs, wrists past the knees. Palms up: curl the wrist up. Then palms down: raise the back of the hand. Only the wrist moves; go slowly.'],
+['Leg Press','legs',60,3,10,'','ضهرك ومؤخرتك لازقين في الكرسي طول الحركة. انزل لحد زاوية ٩٠ درجة تقريبًا ومتنزلش أعمق من نقطة ما المؤخرة تتحرك. ادفع من الكعب وماتقفلش الركبة فوق.','Back and hips flat on the seat throughout. Lower to about 90° and not deeper than where the hips lift. Push through the heels; do not lock the knees.'],
+['Hack Squat','legs',40,3,10,'','ضهرك على المسند وقدمك قدّام شوية. انزل ٣ ثواني ببطء وادفع من كعبك لفوق، والركبة في خط الصوابع مش جوّه.','Back on the pad, feet slightly forward. Lower for three seconds and drive up through the heels; knees track over the toes, not inward.'],
+['Goblet Squat','legs',12,3,12,'','دمبل قدّام صدرك. انزل بالقرفصاء لحد ما فخادك توازي الأرض وضهرك مستقيم والكعب على الأرض، وقوم.','Dumbbell at the chest. Squat until thighs are parallel, back straight, heels down, then stand.'],
+['Romanian Deadlift','legs',20,3,10,'','دمبلات قدام فخادك، ركبتك مثنية شوية. ادفع الحوض لورا وانزل بالدمبلات على رجلك وضهرك مستقيم لحد ما تحس بشد ورا الفخذ، وارجع بالحوض.','Dumbbells in front of the thighs, knees slightly bent. Push the hips back, slide the weights down the legs with a flat back until you feel the hamstrings, drive hips forward.'],
+['Leg Extension','legs',25,3,12,'','اقعد وضهرك لازق. افرد رجلك لقدّام واعصر فوق ثانية ونزّل ببطء. راقب الركبة، ولو وجعت وقّف.','Sit with back flat. Extend the legs, squeeze at the top for a second, lower slowly. Watch the knees; stop if they hurt.'],
+['Leg Curl','legs',25,3,12,'','الوسادة فوق الكعب. اسحب بخلفية الفخذ من غير مرجحة ولا رفع للحوض، ونزّل ببطء.','Pad just above the heels. Curl with the hamstrings, no swinging or hip lift, lower slowly.'],
+['Calf Raises','legs',25,3,15,'','اطلع على أطراف صوابعك لأعلى نقطة واثبت ثانية، ونزّل لآخر مدى. مدى كامل أهم من الوزن.','Rise onto the toes, hold a second at the top, lower to a full stretch. Full range matters more than weight.'],
+['Seated Calf Raise','legs',25,3,15,'','اقعد والوسادة على فخادك. ارفع كعبك لفوق واثبت ثانية ونزّل لآخر مدى. بيشتغل السمانة التحتانية.','Seated with the pad on your thighs. Raise the heels, hold a second, lower fully. Targets the deeper calf muscle.'],
+['Walking Lunges','legs',8,3,12,'','دمبل في كل إيد. خطوة كبيرة لقدام وانزل بالركبة الخلفية لقرب الأرض وجذعك مستقيم، وقوم وبدّل. الركبة الأمامية ماتعدّيش صوابعك.','Dumbbells in hand. Step long, lower the back knee near the floor with an upright torso, push up and switch. Front knee stays behind the toes.'],
+['Hip Thrust','legs',20,3,12,'','ضهرك العلوي على بنش ودمبل على حوضك. ادفع بحوضك لفوق لحد ما جسمك خط مستقيم واعصر المؤخرة ثانية، ونزّل ببطء.','Upper back on a bench, dumbbell on the hips. Drive the hips up to a straight line and squeeze the glutes for a second, lower slowly.'],
+['Plank','core',0,3,45,'ث','على كوعك وأصابع رجلك، جسمك خط مستقيم من الراس للكعب وبطنك مشدودة. ماتسيبش وسطك ينزل ولا المؤخرة ترتفع. اتنفس عادي.','On forearms and toes, body in a straight line from head to heels, abs tight. Do not let the hips sag or rise. Keep breathing.'],
+['Side Plank','core',0,2,30,'ث','على كوعك وجنب رجلك، ارفع حوضك لخط مستقيم. اثبت المدة واعمل الناحيتين.','On one forearm and the side of the foot, lift the hips into a straight line. Hold, then switch sides.'],
+['Dead Bug','core',0,3,10,'','نايم على ضهرك، إيدك ورجلك لفوق. نزّل إيد ورجل عكس بعض ببطء وضهرك لازق في الأرض، وبدّل.','On your back, arms and legs up. Lower opposite arm and leg slowly while keeping the lower back on the floor, then switch.'],
+['Hanging Knee Raise','core',0,3,10,'','متعلّق في البار، اطلع بركبتك لصدرك ببطء من غير مرجحة ونزّل بتحكم.','Hang from the bar, raise knees to the chest slowly without swinging, lower under control.'],
+['Cable Crunch','core',20,3,12,'','راكع قدام الكابل بحبل عند راسك. اطلع بنفسك لتحت بتقوّس بطنك والحوض ثابت، وارجع ببطء.','Kneel facing the cable with the rope at the head. Crunch down by curling the abs while the hips stay fixed; return slowly.'],
+["Farmer's Walk",'core',20,3,25,'خطوة','دمبل تقيل في كل إيد. امشي بخطوات ثابتة وكتفك لورا وجذعك مشدود. القبضة هي أول نقطة تلامس، وماتسيبش الوزن لحد ما تخلّص الخطوات.','A heavy dumbbell in each hand. Walk with steady steps, shoulders back, torso tight. Grip is the limiter; do not drop the weights until the steps are done.']
+];
+const libGet=n=>LIB.find(x=>x[0]===n);
+const libHow=n=>{const x=libGet(n);return x?(LANG==='ar'?x[6]:x[7]):''};
+const lastW=n=>{for(const s of done()){const e=s.ex.find(x=>x.name===n&&+x.w>0);if(e)return +e.w}return null};
+const mk=(n,sets,reps,core)=>{const L=libGet(n)||[n,'',0,3,12,''];const lw=lastW(n);return{id:uid(),name:n,w:lw!=null?lw:L[2],sets:sets||L[3],reps:reps||L[4],goal:reps||L[4],unit:L[5]||'',core:!!core,note:''}};
+const SYSTEMS=[
+{id:'ul4',ar:['أبر / لوور (٤ أيام)','دورتك الحالية: كل نمط مرتين، من زاويتين'],en:['Upper / Lower (4 days)','Your current cycle: each pattern twice from two angles'],mine:1},
+{id:'ul2',ar:['أبر / لوور (يومين)','للأسابيع المزحومة: جزء علوي وجزء سفلي'],en:['Upper / Lower (2 days)','For busy weeks: one upper, one lower'],
+ days:[['Upper',[['Flat Dumbbell Press',3,12,1],['Lat Pulldown',3,10,1],['Shoulder Press',3,10,1],['Seated Row',3,10],['Triceps Pushdown',3,12],['Biceps Curl',3,10]]],['Lower',[['Leg Press',3,10,1],['Romanian Deadlift',3,10,1],['Leg Curl',3,12,1],['Leg Extension',3,12],['Calf Raises',3,15],['Plank',3,45]]]]},
+{id:'fb3',ar:['فول بودي (٣ أيام)','جسمك كله في كل جلسة. مناسب لو بتتغيب كتير'],en:['Full Body (3 days)','Whole body each session. Good if you miss days often'],
+ days:[['Full Body A',[['Leg Press',3,10,1],['Flat Dumbbell Press',3,10,1],['Lat Pulldown',3,10,1],['Shoulder Press',2,10],['Biceps Curl',2,12],['Plank',2,40]]],['Full Body B',[['Hack Squat',3,10,1],['Incline Dumbbell Press',3,10,1],['Seated Row',3,10,1],['Leg Curl',3,12],['Triceps Pushdown',2,12],['Lateral Raises',2,15]]],['Full Body C',[['Romanian Deadlift',3,10,1],['Chest Press Machine',3,10,1],['Chest-Supported Row',3,10,1],['Leg Extension',2,12],['Hammer Curl',2,12],["Farmer's Walk",3,25]]]]},
+{id:'ppl3',ar:['دفع / سحب / رجل (٣ أيام)','الكلاسيكي: دفع، سحب، رجل، وبتكرره'],en:['Push / Pull / Legs (3 days)','The classic: push, pull, legs, repeat'],
+ days:[['Push',[['Incline Dumbbell Press',3,10,1],['Flat Dumbbell Press',3,12,1],['Shoulder Press',3,10,1],['Lateral Raises',3,15],['Triceps Pushdown',3,12],['Cable Overhead Extension',3,12]]],['Pull',[['Lat Pulldown',3,10,1],['Seated Row',3,10,1],['Face Pull',3,15,1],['Biceps Curl',3,10],['Hammer Curl',3,10],['DB Shrugs',3,15]]],['Legs',[['Plank',3,45,1],['Leg Press',3,10,1],['Leg Curl',3,12,1],['Leg Extension',3,12],['Calf Raises',3,15],['Back Extension',3,12]]]]},
+{id:'ulppl5',ar:['دفع / سحب / رجل + أبر / لوور (٥ أيام)','دورة الـ ٥ أيام اللي لعبتها قبل كده'],en:['Push / Pull / Legs + Upper / Lower (5 days)','The five-day cycle you ran before'],
+ days:[['Push',[['Incline Dumbbell Press',3,10,1],['Chest Press Machine',3,12,1],['Shoulder Press',3,10,1],['Lateral Raises',3,15],['Triceps Pushdown',3,12]]],['Pull',[['Lat Pulldown',3,10,1],['T-Bar Row',3,10,1],['Face Pull',3,15,1],['Biceps Curl',3,10],['Hammer Curl',3,10]]],['Legs',[['Leg Press',3,12,1],['Hack Squat',3,10,1],['Back Extension',3,12],['Leg Curl',3,10,1],['Calf Raises',4,15]]],['Upper',[['Chest Press Machine',3,12,1],['Lat Pulldown',3,10,1],['Shoulder Press',3,10,1],['Triceps Pushdown',3,12],['Hammer Curl',3,10]]],['Lower',[['Leg Press',3,12,1],['Leg Extension',3,12],['Leg Curl',3,10,1],['Calf Raises',4,15]]]]},
+{id:'bro5',ar:['تقسيم عضلات (٥ أيام)','يوم لكل عضلة: صدر، ضهر، كتف، دراعين، رجل'],en:['Body-part split (5 days)','One muscle group a day: chest, back, shoulders, arms, legs'],
+ days:[['Chest',[['Flat Dumbbell Press',4,10,1],['Incline Dumbbell Press',3,12,1],['Pec Deck',3,12],['Push-Up',2,15]]],['Back',[['Lat Pulldown',4,10,1],['T-Bar Row',3,10,1],['Seated Row',3,12],['Back Extension',3,12]]],['Shoulders',[['Shoulder Press',4,10,1],['Lateral Raises',4,15],['Rear Delt Fly',3,15],['DB Shrugs',3,15]]],['Arms',[['Biceps Curl',3,10,1],['Hammer Curl',3,10],['Triceps Pushdown',3,12,1],['Cable Overhead Extension',3,12],['Wrist Curl + Reverse',2,15]]],['Legs',[['Leg Press',4,10,1],['Hack Squat',3,10,1],['Leg Curl',3,12,1],['Leg Extension',3,12],['Calf Raises',4,15]]]]}
+];
+const sysName=s=>(LANG==='ar'?s.ar:s.en)[0],sysDesc=s=>(LANG==='ar'?s.ar:s.en)[1];
+function sysInit(){if(!S.sys)S.sys={cur:'ul4',saved:{}}}
+function switchSys(id){
+  sysInit();const sp=SYSTEMS.find(x=>x.id===id);if(!sp||id===S.sys.cur)return;
+  S.sys.saved[S.sys.cur]={days:S.program.days};
+  let days=S.sys.saved[id]&&S.sys.saved[id].days;
+  if(!days)days=sp.days.map((d,k)=>({id:'D'+uid()+k,name:d[0],ex:d[1].map(x=>mk(x[0],x[1],x[2],x[3]))}));
+  delete S.sys.saved[id];S.program.days=days;S.sys.cur=id;pDay=days[0].id;save();queueBackup();
+}
+/* ================= شاشة البرنامج ================= */
 let pDay='U1';
 function renderProgram(){
-  const L=T();
-  if(!S.program.days.some(d=>d.id===pDay))pDay=S.program.days[0].id;
+  sysInit();const L=T(),days=S.program.days;
+  if(!days.some(d=>d.id===pDay))pDay=days[0].id;
+  const d=day(pDay),sp=SYSTEMS.find(x=>x.id===S.sys.cur)||SYSTEMS[0];
+  $('#view').innerHTML=`<div class="card sysc"><div class="mu">${tr('النظام الحالي','Current system')}</div><div class="big">${esc(sysName(sp))}</div><div class="mu">${esc(sysDesc(sp))}</div>
+    <button class="btn w mt" data-a="sysOpen">${tr('غيّر النظام','Change system')}</button></div>
+  <div class="chips">${days.map((x,k)=>`<button class="en${x.id===pDay?' on':''}" data-a="pday" data-d="${x.id}">${k+1}. ${esc(x.name)}</button>`).join('')}<button data-a="dayAdd">+</button></div>
+  <div class="card prl">${d.ex.map((t,i)=>{const l=exHist(t.id)[0],lb=libGet(t.name);return `<div class="prow" data-a="exInfo" data-i="${i}"><span class="exno">${i+1}</span><div class="sp"><div class="nm"><span class="en">${esc(t.name)}</span> ${t.core?`<span class="tag">★ ${L.coreL}</span>`:''}</div><div class="mu"><span class="en">${fw(l?l.w:t.w)} | ${t.sets}×${t.reps}${t.unit?' '+esc(unitTxt(t.unit)):''}</span>${lb?` · ${GRP[lb[1]][LANG==='ar'?0:1]}`:''}</div></div>
+    <button class="icb" data-a="up" data-i="${i}" aria-label="up">▲</button><button class="icb" data-a="down" data-i="${i}" aria-label="down">▼</button><button class="icb" data-a="editT" data-i="${i}" aria-label="edit">✎</button></div>`}).join('')||`<div class="empty">${tr('اليوم فاضي. ضيف تمارين من المكتبة.','Empty day. Add exercises from the library.')}</div>`}</div>
+  <button class="btn pri w" data-a="libOpen">+ ${tr('ضيف تمرين من المكتبة','Add from library')}</button>
+  <div class="row mt"><button class="btn sp" data-a="dayEdit">${tr('تعديل اليوم','Edit day')}</button><button class="btn sp" data-a="copyT">${L.copyTpl}</button></div>
+  <div class="mu mt" style="padding:0 4px">${tr('دوس على أي تمرين تشوف بيتلعب إزاي. التمرين المتكرر في يومين رقمه منفصل في كل يوم. الوزن المعروض هو آخر وزن اتسجل.','Tap any exercise to see how it is performed. An exercise repeated on two days is tracked separately on each. The weight shown is the last one logged.')}</div>`;
+}
+function infoModal(i){
+  const d=day(pDay),t=d.ex[i];if(!t)return;const lb=libGet(t.name),how=libHow(t.name),l=exHist(t.id)[0];
+  modal(`<h3 class="en" style="text-align:start">${esc(t.name)}</h3>
+  <div class="mu" style="margin-bottom:10px">${lb?GRP[lb[1]][LANG==='ar'?0:1]+' · ':''}<span class="en">${fw(l?l.w:t.w)} | ${t.sets}×${t.reps}${t.unit?' '+esc(unitTxt(t.unit)):''}</span></div>
+  <div class="howto">${how?esc(how):`<span class="mu">${tr('مفيش شرح جاهز للتمرين ده. اكتب تعليماتك الخاصة في التعديل.','No built-in guide for this exercise. Add your own instructions in Edit.')}</span>`}</div>
+  ${t.note&&t.note!==how?`<div class="tnote" style="margin-top:10px"><b>${tr('ملاحظتك','Your note')}:</b> ${esc(t.note)}</div>`:''}
+  <div class="row mt"><button class="btn pri sp" data-a="editT" data-i="${i}">${tr('تعديل التمرين','Edit exercise')}</button><button class="btn ghost" data-a="closeM">${L_close()}</button></div>`);
+}
+const L_close=()=>tr('إغلاق','Close');
+let libQ='',libG='all';
+function libModal(){
+  const q=libQ.trim().toLowerCase();
+  const rows=LIB.filter(x=>(libG==='all'||x[1]===libG)&&(!q||x[0].toLowerCase().includes(q))).map(x=>`<div class="prow" data-a="libAdd" data-n="${esc(x[0])}"><div class="sp"><div class="nm en">${esc(x[0])}</div><div class="mu">${GRP[x[1]][LANG==='ar'?0:1]} · <span class="en">${x[3]}×${x[4]}</span></div></div><span class="icb">+</span></div>`).join('');
+  modal(`<h3>${tr('مكتبة التمارين','Exercise library')}</h3>
+  <input class="inp en" id="libS" placeholder="${tr('ابحث…','Search…')}" value="${esc(libQ)}" style="text-align:left;margin-bottom:8px">
+  <div class="chips"><button class="${libG==='all'?'on':''}" data-a="libG" data-g="all">${tr('الكل','All')}</button>${Object.keys(GRP).map(g=>`<button class="${libG===g?'on':''}" data-a="libG" data-g="${g}">${GRP[g][LANG==='ar'?0:1]}</button>`).join('')}</div>
+  <div style="max-height:44vh;overflow-y:auto">${rows||`<div class="empty">—</div>`}</div>
+  <div class="row mt"><button class="btn sp" data-a="addT">${tr('تمرين مخصص','Custom exercise')}</button><button class="btn ghost" data-a="closeM">${L_close()}</button></div>`);
+  const s=$('#libS');if(s&&document.activeElement!==s&&libQ){s.focus();s.setSelectionRange(libQ.length,libQ.length)}
+}
+function sysModal(){
+  sysInit();
+  modal(`<h3>${tr('اختار النظام','Choose a system')}</h3>
+  <div class="mu" style="margin-bottom:10px">${tr('تمارينك في النظام الحالي بتتحفظ وترجعلها لو رجعت له. الأوزان بتتاخد من آخر مرة لعبت فيها نفس التمرين.','Your exercises in the current system are kept if you return. Weights come from the last time you did the same exercise.')}</div>
+  ${SYSTEMS.map(s=>{const cur=S.sys.cur===s.id;const dn=s.mine?(cur?S.program.days:(S.sys.saved[s.id]?S.sys.saved[s.id].days.map(x=>x.name):['Upper 1','Lower 1','Upper 2','Lower 2'])).map?.(x=>x.name||x):[];const names=s.days?s.days.map(x=>x[0]):dn;
+   return `<div class="sysopt${cur?' on':''}"><div class="sp"><div class="nm">${esc(sysName(s))}${cur?` <span class="tag">${tr('الحالي','Current')}</span>`:''}</div><div class="mu">${esc(sysDesc(s))}</div><div class="mu en" style="margin-top:3px">${names.map(esc).join(' · ')}</div></div>${cur?'':`<button class="btn sm pri" data-a="sysPick" data-id="${s.id}">${tr('استخدم','Use')}</button>`}</div>`}).join('')}
+  <div class="row mt"><button class="btn ghost sp" data-a="closeM">${L_close()}</button></div>`);
+}
+function dayModal(){
   const d=day(pDay);
-  $('#view').innerHTML=`<div class="chips">${S.program.days.map(x=>`<button class="en${x.id===pDay?' on':''}" data-a="pday" data-d="${x.id}">${esc(x.name)}</button>`).join('')}</div>
-  <div class="card">${d.ex.map((t,i)=>{const l=exHist(t.id)[0];return `<div class="prow"><div class="sp"><div class="nm"><span class="en">${esc(t.name)}</span> ${t.core?`<span class="tag">${L.coreL}</span>`:''}</div><div class="mu"><span class="en">${fw(l?l.w:t.w)} | ${t.sets}×${t.reps}</span>${t.unit?' '+esc(unitTxt(t.unit)):''}</div></div>
-    <button class="icb" data-a="up" data-i="${i}" aria-label="up">▲</button><button class="icb" data-a="down" data-i="${i}" aria-label="down">▼</button><button class="icb" data-a="editT" data-i="${i}" aria-label="edit">✎</button></div>`}).join('')||`<div class="empty">—</div>`}</div>
-  <button class="btn w" data-a="addT">${L.addEx}</button>
-  <button class="btn w mt" data-a="copyT">${L.copyTpl} <bdi>${esc(d.name)}</bdi></button>
-  <div class="mu mt" style="padding:0 4px">${L.progHint}</div>`;
+  modal(`<h3>${tr('تعديل اليوم','Edit day')}</h3>
+  <label class="fld">${tr('اسم اليوم','Day name')}<input class="inp en" id="dName" value="${esc(d.name)}" style="text-align:left"></label>
+  <div class="row"><button class="btn pri sp" data-a="daySave">${T().saveB}</button>${S.program.days.length>1?`<button class="btn dan" data-a="dayDel">${tr('احذف اليوم','Delete day')}</button>`:''}<button class="btn ghost" data-a="closeM">${T().cancel}</button></div>`);
 }
 function tplModal(i){
   const L=T(),d=day(pDay),t=i>-1?d.ex[i]:{name:'',w:'',sets:3,reps:12,goal:12,unit:'',core:false,note:''};
   modal(`<h3>${i>-1?L.editEx:L.newEx}</h3>
-  <label class="fld">${L.name}<input class="inp en" id="tName" value="${esc(t.name)}" style="text-align:left"></label>
+  <label class="fld">${L.name}<input class="inp en" id="tName" list="libdl" value="${esc(t.name)}" style="text-align:left"><datalist id="libdl">${LIB.map(x=>`<option value="${esc(x[0])}">`).join('')}</datalist></label>
   <div class="fgrid"><label class="fld">${L.weight}<input class="inp" id="tW" inputmode="decimal" value="${esc(t.w)}"></label><label class="fld">${L.sets}<input class="inp" id="tS" inputmode="numeric" value="${esc(t.sets)}"></label><label class="fld">${L.reps}<input class="inp" id="tR" inputmode="numeric" value="${esc(t.reps)}"></label></div>
   <div class="fgrid"><label class="fld">${L.goal}<input class="inp" id="tG" inputmode="numeric" value="${esc(t.goal)}"></label><label class="fld" style="grid-column:span 2">${L.unit}<select class="inp" id="tU">${['','ث','خطوة'].map(u=>`<option value="${u}" ${t.unit===u?'selected':''}>${L.units[u]}</option>`).join('')}</select></label></div>
   <label class="cl" style="margin:4px 0 12px"><input type="checkbox" id="tC" ${t.core?'checked':''}>${L.coreEx}</label>
@@ -1092,6 +1234,7 @@ async function renderData(){
 }
 
 /* ================= الأحداث ================= */
+document.addEventListener('input',ev=>{if(ev.target.id==='libS'){libQ=ev.target.value;libModal()}});
 document.addEventListener('click',ev=>{
   if(ev.target.closest('.brand .lg')){hardRefresh();return}
   const tb=ev.target.closest('.tabs button');if(tb){navTab(tb.dataset.tab);return}
@@ -1102,7 +1245,7 @@ document.addEventListener('click',ev=>{
     case 'lang':LANG=LANG==='en'?'ar':'en';S.settings.lang=LANG;save();applyLang();if(!$('#sess').hidden)renderSession();if(!$('#modal').hidden)closeModal();go(tab);break;
     case 'start':startSession(b.dataset.d);break;
     case 'resume':openSession();break;
-    case 'closeS':closeSession();if(S.draft)queueBackup();break;
+    case 'closeS':flushSave();closeSession();if(S.draft)queueBackup();break;
     case 'commit':commit();break;
     case 'shareDraft':shareDraft();break;
     case 'discard':if(confirm(d.editing?L.confCancelEdit:L.confDiscard)){S.draft=null;openTips.clear();save();closeSession()}break;
@@ -1118,6 +1261,16 @@ document.addEventListener('click',ev=>{
     case 'delS':if(confirm(L.confDel)){S.sessions=S.sessions.filter(x=>x.id!==b.dataset.id);save();queueBackup();closeModal();go(tab)}break;
     case 'closeM':closeModal();break;
     case 'pday':pDay=b.dataset.d;renderProgram();break;
+    case 'exInfo':infoModal(i);break;
+    case 'sysOpen':sysModal();break;
+    case 'sysPick':if(confirm(tr('هتبدّل النظام. تمارينك الحالية محفوظة وترجعلها. تكمّل؟','Switch system? Your current exercises are kept. Continue?'))){switchSys(b.dataset.id);closeModal();renderProgram();toast(tr('النظام اتغيّر ✓','System changed ✓'))}break;
+    case 'libOpen':libQ='';libG='all';libModal();break;
+    case 'libG':libG=b.dataset.g;libModal();break;
+    case 'libAdd':{const t=mk(b.dataset.n);day(pDay).ex.push(t);save();queueBackup();closeModal();renderProgram();toast(tr('اتضاف ✓','Added ✓'));break}
+    case 'dayAdd':{const nd={id:'D'+uid(),name:tr('يوم جديد','New day'),ex:[]};S.program.days.push(nd);pDay=nd.id;save();queueBackup();renderProgram();dayModal();break}
+    case 'dayEdit':dayModal();break;
+    case 'daySave':{const v=$('#dName').value.trim();if(v){day(pDay).name=v;save();queueBackup()}closeModal();renderProgram();break}
+    case 'dayDel':if(confirm(tr('تحذف اليوم ده بتمارينه؟ السجل القديم مش هيتأثر.','Delete this day and its exercises? Your log is not affected.'))){S.program.days=S.program.days.filter(x=>x.id!==pDay);pDay=S.program.days[0].id;save();queueBackup();closeModal();renderProgram()}break;
     case 'up':case 'down':{const ex=day(pDay).ex,j=a==='up'?i-1:i+1;if(j>=0&&j<ex.length){[ex[i],ex[j]]=[ex[j],ex[i]];save();queueBackup();renderProgram()}break}
     case 'editT':tplModal(i);break;
     case 'addT':tplModal(-1);break;
@@ -1139,11 +1292,11 @@ document.addEventListener('click',ev=>{
 const sess=$('#sess');
 function onField(ev){
   const t=ev.target,d=S.draft;if(!d)return;
-  if(t.id==='sDate'){d.date=t.value;save();return}
+  if(t.id==='sDate'){d.date=t.value;saveSoon();return}
   if(t.id==='sCyc'){const n=num(t.value);if(n>0)d.cycle=n;save();return}
   const c=t.closest('.ex');if(!c)return;const e=d.ex[+c.dataset.i],f=t.dataset.f;
   if(f==='w')e.w=t.value;else if(f==='s')e.sets[+t.dataset.j]=t.value;else if(f==='c'){e.clean=t.checked;t.closest('.cl').classList.toggle('on',t.checked)}else if(f==='n')e.note=t.value;else return;
-  save();updCore();
+  saveSoon();updCore();
 }
 sess.addEventListener('input',onField);sess.addEventListener('change',onField);
 sess.addEventListener('keydown',ev=>{if(ev.key!=='Enter'||ev.target.tagName!=='INPUT')return;const all=[...sess.querySelectorAll('input.inp')];const k=all.indexOf(ev.target);if(k>-1&&all[k+1]){ev.preventDefault();all[k+1].focus()}});
@@ -1161,7 +1314,8 @@ function restoreUI(u){try{if(!u||Date.now()-u.at>12*36e5)return;
   if(u.t&&u.t!=='home')navTab(u.t);
   if(u.s&&S.draft)openSession();else if(u.y)setTimeout(()=>window.scrollTo(0,u.y),50)}catch(e){}}
 window.addEventListener('scroll',()=>{clearTimeout(window.__st);window.__st=setTimeout(saveUI,250)},{passive:true});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){saveUI();if(S.draft&&SYNC.on)queueBackup()}});
+window.addEventListener('pagehide',flushSave);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){flushSave();saveUI();if(S.draft&&SYNC.on)queueBackup()}});
 const UI0=readUI();
 boot().then(()=>{applyLang();if(S.impN){const k=S.impN;S.impN=0;save();setTimeout(()=>toast(T().histNote(k)),600)}go('home');restoreUI(UI0);if(pendMig){toast(T().migNote);pendMig=false}});
 </script>
