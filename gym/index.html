@@ -414,6 +414,12 @@ html[data-th=book] #sess{background-image:none!important}
 #sess .tnote .pmsg{margin-top:5px}
 .srow{display:flex;gap:8px;margin-bottom:8px}.srow .inp{flex:1;min-width:0}.srow .btn{flex:none;white-space:nowrap;font-size:13px;padding:0 12px}
 #sess .wrow{padding:3px 10px 3px 4px;gap:4px}#sess .wrow .wi{width:84px}
+
+/* ===== v41: شعار GYM LOG + رقم النسخة ===== */
+html .brand .wm{align-items:center;gap:6px}
+html .brand .wm i,html[data-th] .brand .wm i{font-size:15px;font-weight:300;letter-spacing:.16em;margin:0;color:var(--tx);opacity:1}
+html .brand .wm b,html[data-th] .brand .wm b{font-size:15px;font-weight:800;letter-spacing:.16em;color:var(--ac2);opacity:1}
+.brand .wm .vn{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--mu);border:1px solid var(--bd);border-radius:99px;padding:1px 7px;margin-inline-start:4px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -436,7 +442,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='40';
+const VER='41';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -733,7 +739,7 @@ function applyTheme(){const t=THEMES[S.settings.theme]?S.settings.theme:'dawn';d
 let tab='home';
 function applyLang(){applyTheme();
   const L=T();document.documentElement.lang=LANG;document.documentElement.dir=LANG==='ar'?'rtl':'ltr';document.title=L.title;
-  $('#brand').innerHTML=L.brand;$('#langBtn').textContent=L.langBtn;$('#updBtn').textContent=L.update;
+  $('#brand').innerHTML=L.brand;{const w=$('#brand .wm');if(w)w.insertAdjacentHTML('beforeend',`<em class="vn">v${VER}</em>`)}$('#langBtn').textContent=L.langBtn;$('#updBtn').textContent=L.update;
   document.querySelectorAll('.tabs button').forEach((b,i)=>b.textContent=L.tabs[i]);
 }
 function saveUI(){try{localStorage.setItem('gymlog.ui',JSON.stringify({t:tab,s:!$('#sess').hidden,y:window.scrollY,at:Date.now()}))}catch(e){}}
