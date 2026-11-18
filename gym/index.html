@@ -207,7 +207,7 @@ select.inp{appearance:auto}
 
 <script>
 'use strict';
-const VER='10';
+const VER='11';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -250,7 +250,7 @@ en:{brand:'Gym <b>Log</b>',title:'Gym Log',langBtn:'عربي',tabs:['Home','Log'
  st2:{q1:'qualified 1 of 2',up:'increase earned',stuck:n=>`${n} sessions at this weight without an increase`},
  mdTitle:'Gym Log — Backup',mdExported:'Exported',mdSessions:'Sessions',mdProgram:'Program',mdLog:'Log (newest first)',
  mdCols:['#','Exercise','Weight','Target','Core','Notes'],mdSCols:['Exercise','Weight','Sets','Clean','Note'],mdData:'Data used by “Restore” in the app — do not edit',yes:'✓',
- csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core',themeT:'Theme',histNote:n=>`${n} past session(s) from your earlier log were added.`,todayL:'Today',otherDay:'Start a different day',weekOf:n=>`${n} session(s) in the last 7 days · goal 3`,
+ csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core',themeT:'Theme',histNote:n=>`${n} past session(s) from your earlier log were added.`,todayL:'Today',otherDay:'Start a different day',newInstead:'Start a new session instead',weekOf:n=>`${n} session(s) in the last 7 days · goal 3`,
  syncT:'Encrypted auto-backup (GitHub)',syncHint:'After every session the whole log is encrypted on this phone and uploaded to your repo. Without the passphrase the file is unreadable.',
  syncRepo:'Repository (owner/name)',syncTok:'GitHub token (contents: write, this repo only)',syncP1:'Backup passphrase (8+ characters)',syncP2:'Repeat the passphrase',
  syncWarn:'Lose the passphrase and the backup cannot be opened. There is no recovery. Never send it to anyone.',
@@ -300,7 +300,7 @@ ar:{brand:'سجل <b>الجيم</b>',title:'سجل الجيم',langBtn:'EN',tabs
  st2:{q1:'مؤهل ١ من ٢',up:'استحق زيادة',stuck:n=>`${n} جلسات على نفس الوزن من غير زيادة`},
  mdTitle:'سجل الجيم — نسخة احتياطية',mdExported:'اتعملت',mdSessions:'الجلسات',mdProgram:'البرنامج',mdLog:'السجل (الأحدث الأول)',
  mdCols:['#','التمرين','الوزن','الهدف','أساسي','تعليمات'],mdSCols:['التمرين','الوزن','المجموعات','نضيف','ملاحظة'],mdData:'بيانات بيستخدمها زرار «استرجاع» في التطبيق — ماتعدّلهاش',yes:'✓',
- csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',themeT:'الشكل',histNote:n=>`اتضاف ${n} جلسة من سجلك القديم.`,todayL:'النهارده',otherDay:'ابدأ يوم تاني',weekOf:n=>`${n} جلسة في آخر ٧ أيام · الهدف ٣`,
+ csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',themeT:'الشكل',histNote:n=>`اتضاف ${n} جلسة من سجلك القديم.`,todayL:'النهارده',otherDay:'ابدأ يوم تاني',newInstead:'ابدأ جلسة جديدة بدلها',weekOf:n=>`${n} جلسة في آخر ٧ أيام · الهدف ٣`,
  syncT:'نسخة أوتوماتيك مشفّرة (GitHub)',syncHint:'بعد كل جلسة السجل كله بيتشفّر على الموبايل وبيترفع للريبو بتاعك. من غير العبارة السرية الملف مش بيتفتح.',
  syncRepo:'الريبو (صاحب/اسم)',syncTok:'توكن GitHub (صلاحية contents: write على الريبو ده بس)',syncP1:'العبارة السرية للنسخة (٨ حروف أو أكتر)',syncP2:'أعد كتابة العبارة',
  syncWarn:'لو ضيّعت العبارة، النسخة مش هتتفتح تاني ومفيش استرجاع. وماتبعتهاش لأي حد.',
@@ -499,19 +499,18 @@ function closeModal(){$('#modal').hidden=true}
 /* ================= الرئيسية ================= */
 const statusPill=s=>`<span class="pill ${s.status}">${T().st[s.status]||''}</span>`;
 function renderHome(){
-  const L=T(),nd=nextDayId(),d=day(nd),ds=done();
+  const L=T(),dr=S.draft,nd=dr?(dr.day||nextDayId()):nextDayId(),d=day(nd),ds=done();
   const wk=ds.filter(s=>daysAgo(s.date)<7).length,li=ds[0]?dayIdx(ds[0]):-1,days=S.program.days;
   let h='';
-  if(S.draft)h+=`<div class="card hl"><div class="mu">${S.draft.editing?L.draftEdit:L.draftOpen}</div><div class="big"><bdi>${esc(S.draft.dayName)}</bdi></div><button class="btn pri w" data-a="resume">${L.resume}</button></div>`;
   /* ١) جلسة النهارده: الإجابة الأولى على الشاشة */
-  h+=`<div class="card hero${S.draft?' dim':''}">
+  h+=`<div class="card hero">
     <div class="rot" dir="ltr">${days.map((x,k)=>`<span class="rs${x.id===nd?' nx':''}${k===li?' ld':''}">${k===li?'✓ ':''}${esc(x.name)}</span>`).join('')}</div>
-    <div class="mu">${L.todayL} · <span class="en">Cycle ${calcCycle(nd)}</span></div>
+    <div class="mu">${dr?(dr.editing?L.draftEdit:L.draftOpen):L.todayL} · <span class="en">Cycle ${dr?dr.cycle:calcCycle(nd)}</span></div>
     <div class="big"><bdi>${esc(d.name)}</bdi></div>
     <div class="xl">${d.ex.map((t,i)=>{const l=exHist(t.id)[0];return `<div class="xr${t.core?' c':''}"><span class="xn en">${esc(t.name)}</span>${t.core?'<i class="xs">★</i>':''}<span class="xw en">${t.unit?'':fw(l?l.w:t.w)+' · '}${t.sets}×${t.reps}${t.unit?' '+esc(unitTxt(t.unit)):''}</span></div>`}).join('')}</div>
     <div class="coreline">★ ${L.coreL}: <span class="en">${esc(coreNames(d).join(' + '))}</span></div>
-    <button class="btn pri w mt big2" data-a="start" data-d="${d.id}">${L.start} <bdi>${esc(d.name)}</bdi></button>
-    <details class="alt"><summary>${L.otherDay}</summary><div class="grid3 mt">${days.filter(x=>x.id!==nd).map(x=>`<button class="btn" data-a="start" data-d="${x.id}"><bdi>${esc(x.name)}</bdi></button>`).join('')}</div></details>
+    ${dr?`<button class="btn pri w mt big2" data-a="resume">${L.resume}</button>`:`<button class="btn pri w mt big2" data-a="start" data-d="${d.id}">${L.start} <bdi>${esc(d.name)}</bdi></button>`}
+    <details class="alt"><summary>${dr?L.newInstead:L.otherDay}</summary><div class="grid3 mt">${days.filter(x=>dr||x.id!==nd).map(x=>`<button class="btn" data-a="start" data-d="${x.id}"><bdi>${esc(x.name)}</bdi></button>`).join('')}</div></details>
   </div>`;
   /* ٢) الأسبوع في سطر واحد */
   h+=`<div class="card wkc"><div class="dots">${[0,1,2,3].map(k=>`<i class="${k<wk?'on':''}${k===2?' goal':''}"></i>`).join('')}</div><div class="sp"><div class="wkt">${L.weekOf(wk)}</div><div class="mu">${ds[0]?`${L.lastSess}: <bdi>${esc(ds[0].dayName)}</bdi> · ${fmtD(ds[0].date)}`:L.noData}</div></div></div>`;
