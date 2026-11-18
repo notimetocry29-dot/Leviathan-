@@ -457,7 +457,7 @@ html[data-th=granite] #sess .ex,html[data-th=granite] #sess .ex.dn,html[data-th=
 
 <script>
 'use strict';
-const VER='47';
+const VER='48';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -509,7 +509,9 @@ en:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor"
  syncErr:e=>`Backup failed: ${e}`,syncBadIn:'Fill the token, a matching passphrase (8+ chars) and a valid repo name',
  syncPass:'Wrong passphrase',syncNoFile:'No backup found in the repo',syncConfOff:'Turn off auto-backup? The token is removed from this phone.',
  syncMiss:'Auto-backup has not reached GitHub for 3+ sessions. Open File and check.',storeMiss:'Storage',idbOn:'Stored in the browser database',
- migNote:'Program fixed: Shoulder Press is no longer core, Plank moved to the end of both Lower days.'
+ migNote:'Program fixed: Shoulder Press is no longer core, Plank moved to the end of both Lower days.',
+ undoRestore:'Undo last restore',confUndoRestore:'Go back to the data you had before the last restore?',undoDone:'Back to your data before the restore ✓',
+ restoredSkip:n=>`Restored ✓ (${n} damaged session(s) skipped)`,syncAfterRestore:'Turn on encrypted auto-backup on this phone with the same repo and passphrase?'
 },
 ar:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 11h12"/><rect x="5" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><rect x="25" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><path d="M2 8.5v5M32 8.5v5"/></svg><span class="wm"><i>GYM</i><b>LOG</b></span>',title:'Gym Log',langBtn:'EN',tabs:['الرئيسية','السجل','البرنامج','التمارين','الملف'],update:'فيه تحديث — اضغط',
  next:'الجلسة الجاية',coreL:'الأساسي',start:'ابدأ',draftOpen:'جلسة مفتوحة لسه ماتحفظتش',draftEdit:'تعديل جلسة',resume:'كمّل',
@@ -559,7 +561,9 @@ ar:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor"
  syncErr:e=>`النسخة فشلت: ${e}`,syncBadIn:'اكتب التوكن وعبارة سرية متطابقة (٨ حروف+) واسم ريبو صحيح',
  syncPass:'العبارة غلط',syncNoFile:'مفيش نسخة في الريبو',syncConfOff:'توقف النسخ الأوتوماتيك؟ التوكن هيتشال من الموبايل ده.',
  syncMiss:'النسخ الأوتوماتيك ماوصلش GitHub من ٣ جلسات أو أكتر. افتح «الملف» وراجع.',storeMiss:'التخزين',idbOn:'متخزّن في قاعدة بيانات المتصفح',
- migNote:'البرنامج اتصلّح: Shoulder Press خرج من الأساسي، والبلانك راح آخر يومين الرجل.'
+ migNote:'البرنامج اتصلّح: Shoulder Press خرج من الأساسي، والبلانك راح آخر يومين الرجل.',
+ undoRestore:'تراجع عن آخر استرجاع',confUndoRestore:'ترجع للبيانات اللي كانت عندك قبل آخر استرجاع؟',undoDone:'رجعت لبياناتك اللي قبل الاسترجاع ✓',
+ restoredSkip:n=>`اترجعت ✓ (اتجاهلنا ${n} جلسة بايظة)`,syncAfterRestore:'تشغّل النسخ الأوتوماتيك المشفّر على الموبايل ده بنفس الريبو والعبارة؟'
 }};
 let LANG='en';
 const T=()=>I18N[LANG];
@@ -678,7 +682,7 @@ async function boot(){
   if(S.draft&&!S.draft.editing){
     const dr=S.draft,filled=(dr.ex||[]).some(e=>(e.sets||[]).some(v=>String(v).trim()!==''));
     const saved=S.sessions.some(x=>x.date===dr.date&&(x.day===dr.day||x.dayName===dr.dayName));
-    if(saved||(!filled&&dr.date<today()))S.draft=null;
+    if(!filled&&(saved||dr.date<today()))S.draft=null;
   }
   await loadSync();
   save();await sq;
@@ -1154,8 +1158,10 @@ async function deriveKey(pass,salt,iter){
   return crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt,iterations:iter},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
 }
 async function sealBytes(key,bytes){const iv=crypto.getRandomValues(new Uint8Array(12));return{iv,ct:new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,bytes))}}
+/* كل اللي محتاجينه عشان الاسترجاع يرجّع كل حاجة (نفس الشكل في الملف وGitHub) */
+const snapData=()=>({program:S.program,sessions:S.sessions,settings:S.settings,draft:S.draft||null,sys:S.sys||null,custom:S.custom||[],mig:S.mig||0});
 async function packBackup(){
-  const payload=enc.encode(JSON.stringify({app:'gymlog',v:1,at:Date.now(),data:{program:S.program,sessions:S.sessions,settings:S.settings,draft:S.draft||null,sys:S.sys||null,custom:S.custom||[]}}));
+  const payload=enc.encode(JSON.stringify({app:'gymlog',v:1,at:Date.now(),data:snapData()}));
   let z=null;try{z=await pipe(payload,new CompressionStream('gzip'))}catch(e){}
   const {iv,ct}=await sealBytes(BKEY,z||payload);
   return JSON.stringify({app:'gymlog-enc',v:1,kdf:'PBKDF2-SHA256',iter:SYNC.iter,salt:SYNC.salt,iv:b64(iv),z:z?1:0,ct:b64(ct)});
@@ -1222,6 +1228,9 @@ const syncMsg=e=>({token:'التوكن مرفوض أو منتهي',repo:'الر�
 async function enableSync(){
   const tok=$('#gTok').value.trim(),p1=$('#gP1').value,p2=$('#gP2').value,repo=$('#gRepo').value.trim();
   if(!tok||p1.length<8||p1!==p2||!/^[\w.-]+\/[\w.-]+$/.test(repo)){toast(T().syncBadIn);return}
+  return enableSyncWith(tok,p1,repo);
+}
+async function enableSyncWith(tok,p1,repo){
   toast(T().syncBusy);
   try{
     const salt=crypto.getRandomValues(new Uint8Array(16));
@@ -1244,11 +1253,39 @@ async function restoreRemote(){
   toast(T().syncBusy);
   try{
     SYNC.repo=repo;
-    const o=await openBackup(await readRemote(tok),p1),d=o.data;
-    if(!d||!d.program||!Array.isArray(d.sessions))throw new Error('fmt');
-    if(!confirm(T().confRestore(d.sessions.length)))return;
-    S={v:1,program:d.program,sessions:d.sessions,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:d.draft||null,sys:d.sys||undefined,custom:d.custom||[],mig:2};save();toast(T().restored);go('home');
+    const o=await openBackup(await readRemote(tok),p1);
+    if(!await applyRestore(o.data))return;
+    if(!SYNC.on&&confirm(T().syncAfterRestore))await enableSyncWith(tok,p1,repo);
   }catch(e){toast(T().syncErr(syncMsg(String(e.message||e))))}
+}
+/* ================= الاسترجاع (ملف أو GitHub) ================= */
+const HIST_MIG=4;/* آخر ترحيل بيستورد السجل القديم: بعد الاسترجاع مايتعادش أبدًا */
+function cleanSession(s){
+  if(!s||typeof s!=='object'||typeof s.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s.date)||!Array.isArray(s.ex))return null;
+  const ex=s.ex.filter(e=>e&&typeof e.name==='string'&&Array.isArray(e.sets)).map(e=>Object.assign({},e,{sets:e.sets.map(Number).filter(v=>!isNaN(v)),exId:e.exId||'h:'+e.name,unit:e.unit||'',note:e.note||''}));
+  return Object.assign({},s,{id:s.id||uid(),dayName:String(s.dayName||s.day||'?'),cycle:+s.cycle||1,status:s.status||'part',ts:+s.ts||new Date(s.date+'T12:00:00').getTime(),ex});
+}
+function cleanRestore(d){
+  if(!d||!d.program||!Array.isArray(d.program.days)||!Array.isArray(d.sessions))throw new Error('fmt');
+  const days=d.program.days.filter(x=>x&&x.id&&Array.isArray(x.ex)).map(x=>Object.assign({},x,{name:String(x.name||x.id),ex:x.ex.filter(t=>t&&t.id&&typeof t.name==='string')}));
+  if(!days.length)throw new Error('fmt');
+  const ss=d.sessions.map(cleanSession).filter(Boolean);
+  return{days,ss,bad:d.sessions.length-ss.length};
+}
+async function applyRestore(d){
+  const c=cleanRestore(d);
+  if(!confirm(T().confRestore(c.ss.length)))return false;
+  /* نسخة من اللي على الموبايل قبل الاسترجاع، عشان «تراجع» */
+  try{await idb.set('state.prerestore',{at:Date.now(),data:JSON.parse(JSON.stringify(S))})}catch(e){}
+  S={v:1,program:Object.assign({},d.program,{days:c.days}),sessions:c.ss,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:d.draft||null,sys:d.sys||undefined,custom:Array.isArray(d.custom)?d.custom:[],mig:Math.max(+d.mig||0,HIST_MIG)};
+  if(S.draft&&(!Array.isArray(S.draft.ex)))S.draft=null;
+  save();queueBackup();toast(c.bad?T().restoredSkip(c.bad):T().restored);go('home');return true;
+}
+async function undoRestore(){
+  let p=null;try{p=await idb.get('state.prerestore')}catch(e){}
+  if(!p||!p.data||!confirm(T().confUndoRestore))return;
+  S=p.data;try{await idb.set('state.prerestore',null)}catch(e){}
+  save();queueBackup();toast(T().undoDone);go('home');
 }
 window.addEventListener('online',()=>{if(SYNC.dirty)runBackup()});
 const cellMd=s=>String(s??'').replace(/\|/g,'/').replace(/\r?\n/g,' ');
@@ -1269,7 +1306,7 @@ function backupMD(){
     for(const e of s.ex)o.push(rowMd([e.name+(e.core?' ★':''),fw(e.w),e.sets.join(' / ')+(e.unit?' '+unitTxt(e.unit):''),e.clean?L.yes:'',e.note]));
     o.push('');
   }
-  const data=JSON.stringify({app:'gymlog',v:1,exported:new Date().toISOString(),data:{program:S.program,sessions:S.sessions,settings:S.settings,draft:S.draft}}).replace(/-->/g,'--\\u003e');
+  const data=JSON.stringify({app:'gymlog',v:1,exported:new Date().toISOString(),data:snapData()}).replace(/-->/g,'--\\u003e');
   o.push('---','',`<!-- GYMLOG-DATA · ${L.mdData}`,data,'-->','');
   return o.join('\n');
 }
@@ -1312,17 +1349,16 @@ function exportCSV(){
 }
 function importFile(file){
   const r=new FileReader();
-  r.onload=()=>{try{const d=parseBackup(r.result);
-    if(!d.program||!Array.isArray(d.program.days)||!Array.isArray(d.sessions))throw 0;
-    if(!confirm(T().confRestore(d.sessions.length)))return;
-    S={v:1,program:d.program,sessions:d.sessions,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:d.draft||null,sys:d.sys||undefined,custom:d.custom||[],mig:2};save();queueBackup();toast(T().restored);go('home')}
-    catch(e){toast(T().badFile)}};
+  r.onload=async()=>{let d;try{d=parseBackup(r.result);cleanRestore(d)}catch(e){toast(T().badFile);return}
+    await applyRestore(d)};
   r.readAsText(file);
 }
 function refresh(){if(tab==='data')renderData();if(tab==='home')renderHome()}
 async function renderData(){
   const L=T(),lb=S.settings.lastBackup,n=S.sessions.length;
   let persisted=null;try{persisted=navigator.storage&&navigator.storage.persisted?await navigator.storage.persisted():null}catch(e){}
+  let pre=null;try{pre=await idb.get('state.prerestore')}catch(e){}
+  const canUndo=!!(pre&&pre.data&&Date.now()-pre.at<864e5);
   if(tab!=='data')return;
   $('#view').innerHTML=`<div class="mu" style="text-align:center;margin:0 0 10px">${L.ver}: v${VER}</div>
   <div class="card"><div class="mu">${L.onPhone}</div><div class="big">${n} <span class="mu">${L.sessions}</span></div>
@@ -1344,7 +1380,8 @@ async function renderData(){
   <div class="card"><div style="font-weight:700;margin-bottom:4px">${L.bkT}</div><div class="mu" style="margin-bottom:10px">${L.bkHint}</div>
     <button class="btn pri w" data-a="backup">${L.bkSave}</button>
     <button class="btn w mt" data-a="share">${L.bkShare}</button>
-    <label class="btn w mt" style="cursor:pointer">${L.restore}<input type="file" id="imp" accept=".md,.txt,.json,text/markdown,text/plain,application/json" hidden></label></div>
+    <label class="btn w mt" style="cursor:pointer">${L.restore}<input type="file" id="imp" accept=".md,.txt,.json,text/markdown,text/plain,application/json" hidden></label>
+    ${canUndo?`<button class="btn w mt dan" data-a="undoRestore">${L.undoRestore}</button>`:''}</div>
   <div class="card"><div style="font-weight:700;margin-bottom:4px">${L.csvT}</div><div class="mu" style="margin-bottom:10px">${L.csvHint}</div><button class="btn w" data-a="csv">${L.csvB}</button></div>
   <div class="card"><div style="font-weight:700;margin-bottom:8px">Language · اللغة</div><button class="btn w" data-a="lang">${L.langBtn}</button></div>
   <div class="card"><label class="fld" style="margin:0">${L.cycleL}<input class="inp" id="cyc0" inputmode="numeric" value="${esc(S.settings.cycle)}"></label></div>
@@ -1379,7 +1416,8 @@ document.addEventListener('click',ev=>{
     case 'copyS':copy(cardText(S.sessions.find(x=>x.id===b.dataset.id)));break;
     case 'aiS':{const s=S.sessions.find(x=>x.id===b.dataset.id);if(s)shareText(aiText(s,s.id));break}
     case 'editS':editSession(b.dataset.id);break;
-    case 'delS':if(confirm(L.confDel)){S.sessions=S.sessions.filter(x=>x.id!==b.dataset.id);save();queueBackup();closeModal();go(tab)}break;
+    case 'undoRestore':undoRestore();break;
+    case 'delS':if(confirm(L.confDel)){S.sessions=S.sessions.filter(x=>x.id!==b.dataset.id);if(S.draft&&S.draft.editing===b.dataset.id)S.draft=null;save();queueBackup();closeModal();go(tab)}break;
     case 'closeM':closeModal();break;
     case 'pday':pDay=b.dataset.d;renderProgram();break;
     case 'exInfo':infoModal(i);break;
