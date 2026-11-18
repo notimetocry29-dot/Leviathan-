@@ -128,7 +128,7 @@ select.inp{appearance:auto}
 
 <script>
 'use strict';
-const VER='4';
+const VER='5';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -171,7 +171,16 @@ en:{brand:'Gym <b>Log</b>',title:'Gym Log',langBtn:'عربي',tabs:['Home','Log'
  st2:{q1:'qualified 1 of 2',up:'increase earned',stuck:n=>`${n} sessions at this weight without an increase`},
  mdTitle:'Gym Log — Backup',mdExported:'Exported',mdSessions:'Sessions',mdProgram:'Program',mdLog:'Log (newest first)',
  mdCols:['#','Exercise','Weight','Target','Core','Notes'],mdSCols:['Exercise','Weight','Sets','Clean','Note'],mdData:'Data used by “Restore” in the app — do not edit',yes:'✓',
- csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core'
+ csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core',
+ syncT:'Encrypted auto-backup (GitHub)',syncHint:'After every session the whole log is encrypted on this phone and uploaded to your repo. Without the passphrase the file is unreadable.',
+ syncRepo:'Repository (owner/name)',syncTok:'GitHub token (contents: write, this repo only)',syncP1:'Backup passphrase (8+ characters)',syncP2:'Repeat the passphrase',
+ syncWarn:'Lose the passphrase and the backup cannot be opened. There is no recovery. Never send it to anyone.',
+ syncEnable:'Enable and test now',syncNow:'Back up now',syncOffB:'Turn off',syncRestore:'Restore from GitHub',syncRestoreHint:'On a new phone: fill the repo, token and passphrase above, then tap Restore.',
+ syncBusy:'Working… (encrypting takes a moment)',syncOK:'Backed up and verified ✓',syncOnL:'On',syncLast:'Last upload',syncNever:'Not yet',syncWait:n=>`${n} change(s) waiting for upload`,
+ syncErr:e=>`Backup failed: ${e}`,syncBadIn:'Fill the token, a matching passphrase (8+ chars) and a valid repo name',
+ syncPass:'Wrong passphrase',syncNoFile:'No backup found in the repo',syncConfOff:'Turn off auto-backup? The token is removed from this phone.',
+ syncMiss:'Auto-backup has not reached GitHub for 3+ sessions. Open File and check.',storeMiss:'Storage',idbOn:'Stored in the browser database',
+ migNote:'Program fixed: Shoulder Press is no longer core, Plank moved to the end of both Lower days.'
 },
 ar:{brand:'سجل <b>الجيم</b>',title:'سجل الجيم',langBtn:'EN',tabs:['الرئيسية','السجل','البرنامج','الملف'],update:'فيه تحديث — اضغط',
  next:'الجلسة الجاية',coreL:'الأساسي',start:'ابدأ',draftOpen:'جلسة مفتوحة لسه ماتحفظتش',draftEdit:'تعديل جلسة',resume:'كمّل',
@@ -212,7 +221,16 @@ ar:{brand:'سجل <b>الجيم</b>',title:'سجل الجيم',langBtn:'EN',tabs
  st2:{q1:'مؤهل ١ من ٢',up:'استحق زيادة',stuck:n=>`${n} جلسات على نفس الوزن من غير زيادة`},
  mdTitle:'سجل الجيم — نسخة احتياطية',mdExported:'اتعملت',mdSessions:'الجلسات',mdProgram:'البرنامج',mdLog:'السجل (الأحدث الأول)',
  mdCols:['#','التمرين','الوزن','الهدف','أساسي','تعليمات'],mdSCols:['التمرين','الوزن','المجموعات','نضيف','ملاحظة'],mdData:'بيانات بيستخدمها زرار «استرجاع» في التطبيق — ماتعدّلهاش',yes:'✓',
- csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي'
+ csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',
+ syncT:'نسخة أوتوماتيك مشفّرة (GitHub)',syncHint:'بعد كل جلسة السجل كله بيتشفّر على الموبايل وبيترفع للريبو بتاعك. من غير العبارة السرية الملف مش بيتفتح.',
+ syncRepo:'الريبو (صاحب/اسم)',syncTok:'توكن GitHub (صلاحية contents: write على الريبو ده بس)',syncP1:'العبارة السرية للنسخة (٨ حروف أو أكتر)',syncP2:'أعد كتابة العبارة',
+ syncWarn:'لو ضيّعت العبارة، النسخة مش هتتفتح تاني ومفيش استرجاع. وماتبعتهاش لأي حد.',
+ syncEnable:'فعّل وجرّب دلوقتي',syncNow:'خد نسخة دلوقتي',syncOffB:'إيقاف',syncRestore:'استرجاع من GitHub',syncRestoreHint:'على موبايل جديد: اكتب الريبو والتوكن والعبارة فوق، وبعدين دوس استرجاع.',
+ syncBusy:'جاري الشغل… (التشفير بياخد ثواني)',syncOK:'النسخة اترفعت واتحققنا منها ✓',syncOnL:'شغّال',syncLast:'آخر رفع',syncNever:'لسه',syncWait:n=>`${n} تغيير مستني الرفع`,
+ syncErr:e=>`النسخة فشلت: ${e}`,syncBadIn:'اكتب التوكن وعبارة سرية متطابقة (٨ حروف+) واسم ريبو صحيح',
+ syncPass:'العبارة غلط',syncNoFile:'مفيش نسخة في الريبو',syncConfOff:'توقف النسخ الأوتوماتيك؟ التوكن هيتشال من الموبايل ده.',
+ syncMiss:'النسخ الأوتوماتيك ماوصلش GitHub من ٣ جلسات أو أكتر. افتح «الملف» وراجع.',storeMiss:'التخزين',idbOn:'متخزّن في قاعدة بيانات المتصفح',
+ migNote:'البرنامج اتصلّح: Shoulder Press خرج من الأساسي، والبلانك راح آخر يومين الرجل.'
 }};
 let LANG='en';
 const T=()=>I18N[LANG];
@@ -269,12 +287,36 @@ function seed(){
   ]}};
 }
 function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.program&&Array.isArray(o.sessions))return o}}catch(e){}return null}
-let S=load()||seed();
-S.settings=S.settings||{};
-if(!S.settings.lang)S.settings.lang='en';
-LANG=S.settings.lang;
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast(T().storeFail)}}
-save();
+/* التخزين: IndexedDB هو الأصل، وlocalStorage نسخة مرآة بنقرأ منها لو الأحدث (والرئيسية بتقرأ منها) */
+let S=null,sq=Promise.resolve(),pendMig=false;
+function save(){
+  S.at=Date.now();
+  let snap;try{snap=structuredClone(S)}catch(e){snap=JSON.parse(JSON.stringify(S))}
+  let lsOK=true;try{localStorage.setItem(KEY,JSON.stringify(snap))}catch(e){lsOK=false}
+  sq=sq.then(()=>idb.set('state',snap)).catch(()=>{if(!lsOK)toast(T().storeFail)});
+}
+function migrate(){
+  if((S.mig||0)<2){
+    for(const d of S.program.days){
+      const sp=d.ex.find(e=>e.name==='Shoulder Press');if(sp)sp.core=false;
+      if(d.id==='L1'||d.id==='L2'){const i=d.ex.findIndex(e=>e.name==='Plank');if(i===0&&d.ex.length>1)d.ex.push(d.ex.splice(0,1)[0])}
+    }
+    S.mig=2;pendMig=true;
+  }
+}
+async function boot(){
+  let a=null;try{a=await idb.get('state')}catch(e){}
+  const b=load();
+  if(!a&&b){try{await idb.set('state.legacy',JSON.parse(JSON.stringify(b)))}catch(e){}}
+  S=(a&&b)?((b.at||0)>(a.at||0)?b:a):(a||b||seed());
+  S.settings=S.settings||{};
+  if(!S.settings.lang)S.settings.lang='en';
+  LANG=S.settings.lang;
+  migrate();
+  await loadSync();
+  save();await sq;
+  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+}
 
 const day=id=>S.program.days.find(d=>d.id===id)||S.program.days[0];
 const coreNames=d=>d.ex.filter(e=>e.core).map(e=>e.name);
@@ -370,8 +412,9 @@ function renderHome(){
   h+=`<div class="card"><div class="row"><div><div class="mu">${L.last7}</div><div class="big">${wk} <span class="mu">${L.sessions}</span></div></div><div class="sp"></div>`;
   if(ds[0])h+=`<div style="text-align:end"><div class="mu">${L.lastSess}</div><div style="font-weight:700"><bdi>${esc(ds[0].dayName)}</bdi></div><div class="mu">${fmtD(ds[0].date)}</div></div>`;
   h+=`</div>${ds.length&&wk<3?`<div class="warn">${L.min3}</div>`:''}</div>`;
+  if(SYNC.on&&SYNC.missed>=3)h+=`<div class="card"><div class="warn" style="margin:0">${L.syncMiss}</div></div>`;
   const lb=S.settings.lastBackup;
-  if(ds.length&&(!lb||Date.now()-lb>7*864e5))h+=`<div class="card"><div class="warn" style="margin:0 0 10px">${lb?L.bkAgo(Math.floor((Date.now()-lb)/864e5)):L.bkNone}${L.bkWarn}</div><button class="btn w" data-a="backup">${L.bkNowBtn}</button></div>`;
+  if(ds.length&&!SYNC.on&&(!lb||Date.now()-lb>7*864e5))h+=`<div class="card"><div class="warn" style="margin:0 0 10px">${lb?L.bkAgo(Math.floor((Date.now()-lb)/864e5)):L.bkNone}${L.bkWarn}</div><button class="btn w" data-a="backup">${L.bkNowBtn}</button></div>`;
   if(ds.length){h+=`<h2>${L.recent}</h2><div class="card list">`+ds.slice(0,4).map(s=>`<div class="it" data-a="sess" data-id="${s.id}"><div class="sp"><div style="font-weight:700"><bdi>${esc(s.dayName)}</bdi></div><div class="mu">${fmtD(s.date)} · <span class="en">Cycle ${s.cycle}</span></div></div>${statusPill(s)}</div>`).join('')+'</div>'}
   $('#view').innerHTML=h;
 }
@@ -457,7 +500,7 @@ function commit(){
   if(i>-1){s.ts=S.sessions[i].ts;S.sessions[i]=s}else S.sessions.push(s);
   S.draft=null;openTips.clear();save();closeSession();
   toast(s.status==='full'?T().savedFull:s.status==='core'?T().savedCore:T().saved);
-  autoFile();try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+  autoFile();queueBackup(true);
   go('home');
 }
 function shareDraft(){const s=buildFromDraft();if(!s){toast(T().noSets);return}shareText(aiText(s,S.draft.editing))}
@@ -515,7 +558,7 @@ function saveTpl(i){
   const g=k=>{const v=num($(k).value);return isNaN(v)?'':v};
   const d=day(pDay),t=i>-1?d.ex[i]:{id:uid()};
   Object.assign(t,{name,w:g('#tW'),sets:Math.max(1,g('#tS')||3),reps:g('#tR')||12,goal:g('#tG')||g('#tR')||12,unit:$('#tU').value,core:$('#tC').checked,note:$('#tN').value.trim()});
-  if(i<0)d.ex.push(t);save();closeModal();renderProgram();
+  if(i<0)d.ex.push(t);save();queueBackup();closeModal();renderProgram();
 }
 
 /* ================= النسخة الاحتياطية (.md) ================= */
@@ -523,6 +566,112 @@ const FS='showSaveFilePicker' in window;
 const idb=(()=>{let p;const db=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open('gymlog',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
   return{get:k=>db().then(d=>new Promise((res,rej)=>{const q=d.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})),
          set:(k,v)=>db().then(d=>new Promise((res,rej)=>{const t=d.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=()=>res();t.onerror=()=>rej(t.error)}))}})();
+
+/* ================= نسخة مشفّرة أوتوماتيك على GitHub ================= */
+const enc=new TextEncoder(),dec=new TextDecoder();
+const b64=u=>{let t='';for(let i=0;i<u.length;i+=0x8000)t+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(t)};
+const unb64=t=>Uint8Array.from(atob(t),c=>c.charCodeAt(0));
+const pipe=async(bytes,S2)=>new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(S2)).arrayBuffer());
+let SYNC={on:false,repo:'notimetocry29-dot/leviathan-',branch:'gym-backup',path:'sync/state.bin',salt:'',iter:600000,last:0,n:0,dirty:false,missed:0,err:''};
+let BKEY=null,running=false,chg=0;
+async function loadSync(){try{const c=await idb.get('sync');if(c)Object.assign(SYNC,c)}catch(e){}try{BKEY=(await idb.get('bk.key'))||null}catch(e){}}
+const saveSync=()=>idb.set('sync',Object.assign({},SYNC)).catch(()=>{});
+async function deriveKey(pass,salt,iter){
+  const km=await crypto.subtle.importKey('raw',enc.encode(pass),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt,iterations:iter},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+}
+async function sealBytes(key,bytes){const iv=crypto.getRandomValues(new Uint8Array(12));return{iv,ct:new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,bytes))}}
+async function packBackup(){
+  const payload=enc.encode(JSON.stringify({app:'gymlog',v:1,at:Date.now(),data:{program:S.program,sessions:S.sessions,settings:S.settings,draft:null}}));
+  let z=null;try{z=await pipe(payload,new CompressionStream('gzip'))}catch(e){}
+  const {iv,ct}=await sealBytes(BKEY,z||payload);
+  return JSON.stringify({app:'gymlog-enc',v:1,kdf:'PBKDF2-SHA256',iter:SYNC.iter,salt:SYNC.salt,iv:b64(iv),z:z?1:0,ct:b64(ct)});
+}
+async function openBackup(txt,keyOrPass){
+  const o=JSON.parse(txt);if(o.app!=='gymlog-enc')throw new Error('fmt');
+  const key=typeof keyOrPass==='string'?await deriveKey(keyOrPass,unb64(o.salt),o.iter):keyOrPass;
+  let p;try{p=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(o.iv)},key,unb64(o.ct)))}catch(e){throw new Error('pass')}
+  if(o.z)p=await pipe(p,new DecompressionStream('gzip'));
+  return JSON.parse(dec.decode(p));
+}
+async function getToken(){const t=await idb.get('bk.token');if(!t||!BKEY)throw new Error('notoken');return dec.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:t.iv},BKEY,t.ct))}
+async function gh(method,url,body,accept,tok){
+  tok=tok||await getToken();
+  const r=await fetch('https://api.github.com'+url,{method,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+tok,Accept:accept||'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined});
+  return r;
+}
+const ghErr=r=>new Error(r.status===401||r.status===403?'token':r.status===404?'repo':'http'+r.status);
+async function ensureBranch(tok){
+  const R=SYNC.repo;let r=await gh('GET',`/repos/${R}/git/ref/heads/${SYNC.branch}`,null,null,tok);
+  if(r.ok)return;if(r.status!==404)throw ghErr(r);
+  const rr=await gh('GET',`/repos/${R}`,null,null,tok);if(!rr.ok)throw ghErr(rr);
+  const def=(await rr.json()).default_branch;
+  const br=await gh('GET',`/repos/${R}/git/ref/heads/${def}`,null,null,tok);if(!br.ok)throw ghErr(br);
+  const sha=(await br.json()).object.sha;
+  r=await gh('POST',`/repos/${R}/git/refs`,{ref:'refs/heads/'+SYNC.branch,sha},null,tok);
+  if(!r.ok&&r.status!==422)throw ghErr(r);
+}
+async function putBackup(text){
+  const url=`/repos/${SYNC.repo}/contents/${SYNC.path}`;
+  for(let k=0;k<2;k++){
+    let sha;const g=await gh('GET',`${url}?ref=${SYNC.branch}`);
+    if(g.ok)sha=(await g.json()).sha;else if(g.status!==404)throw ghErr(g);
+    const p=await gh('PUT',url,Object.assign({message:'sync '+new Date().toISOString().slice(0,16),content:b64(enc.encode(text)),branch:SYNC.branch},sha?{sha}:{}));
+    if(p.ok)return;if(p.status!==409&&p.status!==422)throw ghErr(p);
+  }
+  throw new Error('conflict');
+}
+async function readRemote(tok){
+  const r=await gh('GET',`/repos/${SYNC.repo}/contents/${SYNC.path}?ref=${SYNC.branch}`,null,'application/vnd.github.raw+json',tok);
+  if(r.status===404)throw new Error('nofile');if(!r.ok)throw ghErr(r);return r.text();
+}
+async function runBackup(verify){
+  if(!SYNC.on||!BKEY||running||!navigator.onLine)return false;
+  running=true;const my=chg;let ok=false;
+  try{
+    await ensureBranch();
+    await putBackup(await packBackup());
+    if(verify){const back=await openBackup(await readRemote(),BKEY);if(!back.data||back.data.sessions.length!==S.sessions.length)throw new Error('verify')}
+    if(chg===my)SYNC.dirty=false;SYNC.missed=0;SYNC.last=Date.now();SYNC.n=S.sessions.length;SYNC.err='';ok=true;markBackup();
+  }catch(e){SYNC.err=String(e.message||e)}
+  running=false;await saveSync();
+  if(ok&&chg!==my)runBackup();
+  refresh();return ok;
+}
+function queueBackup(session){if(!SYNC.on)return;chg++;SYNC.dirty=true;if(session)SYNC.missed++;saveSync();runBackup()}
+const syncMsg=e=>({token:'التوكن مرفوض أو منتهي',repo:'الريبو مش موجود أو التوكن ملوش صلاحية عليه',conflict:'تعارض في الرفع، هيعيد المحاولة',verify:'الملف اترفع بس التحقق فشل',pass:'العبارة غلط',nofile:'مفيش نسخة في الريبو'}[e]||e);
+async function enableSync(){
+  const tok=$('#gTok').value.trim(),p1=$('#gP1').value,p2=$('#gP2').value,repo=$('#gRepo').value.trim();
+  if(!tok||p1.length<8||p1!==p2||!/^[\w.-]+\/[\w.-]+$/.test(repo)){toast(T().syncBadIn);return}
+  toast(T().syncBusy);
+  try{
+    const salt=crypto.getRandomValues(new Uint8Array(16));
+    SYNC=Object.assign(SYNC,{repo,salt:b64(salt),iter:600000,on:true,dirty:true,missed:0,err:''});chg++;
+    BKEY=await deriveKey(p1,salt,SYNC.iter);
+    const {iv,ct}=await sealBytes(BKEY,enc.encode(tok));
+    await idb.set('bk.token',{iv,ct});await idb.set('bk.key',BKEY);await saveSync();
+    const ok=await runBackup(true);
+    if(!ok){const e=SYNC.err;SYNC.on=false;BKEY=null;await saveSync();try{await idb.set('bk.token',null);await idb.set('bk.key',null)}catch(_){}toast(T().syncErr(syncMsg(e)));renderData();return}
+    toast(T().syncOK);renderData();
+  }catch(e){SYNC.on=false;await saveSync();toast(T().syncErr(syncMsg(String(e.message||e))))}
+}
+async function disableSync(){
+  if(!confirm(T().syncConfOff))return;
+  SYNC.on=false;BKEY=null;await saveSync();try{await idb.set('bk.token',null);await idb.set('bk.key',null)}catch(e){}renderData();
+}
+async function restoreRemote(){
+  const tok=$('#gTok').value.trim(),p1=$('#gP1').value,repo=$('#gRepo').value.trim();
+  if(!tok||!p1||!/^[\w.-]+\/[\w.-]+$/.test(repo)){toast(T().syncBadIn);return}
+  toast(T().syncBusy);
+  try{
+    SYNC.repo=repo;
+    const o=await openBackup(await readRemote(tok),p1),d=o.data;
+    if(!d||!d.program||!Array.isArray(d.sessions))throw new Error('fmt');
+    if(!confirm(T().confRestore(d.sessions.length)))return;
+    S={v:1,program:d.program,sessions:d.sessions,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:null,mig:2};save();toast(T().restored);go('home');
+  }catch(e){toast(T().syncErr(syncMsg(String(e.message||e))))}
+}
+window.addEventListener('online',()=>{if(SYNC.dirty)runBackup()});
 const cellMd=s=>String(s??'').replace(/\|/g,'/').replace(/\r?\n/g,' ');
 const rowMd=a=>'| '+a.map(cellMd).join(' | ')+' |';
 function backupMD(){
@@ -587,7 +736,7 @@ function importFile(file){
   r.onload=()=>{try{const d=parseBackup(r.result);
     if(!d.program||!Array.isArray(d.program.days)||!Array.isArray(d.sessions))throw 0;
     if(!confirm(T().confRestore(d.sessions.length)))return;
-    S={v:1,program:d.program,sessions:d.sessions,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:d.draft||null};save();toast(T().restored);go('home')}
+    S={v:1,program:d.program,sessions:d.sessions,settings:Object.assign({cycle:8},d.settings||{},{lang:LANG}),draft:d.draft||null,mig:2};save();queueBackup();toast(T().restored);go('home')}
     catch(e){toast(T().badFile)}};
   r.readAsText(file);
 }
@@ -599,6 +748,17 @@ async function renderData(){
   $('#view').innerHTML=`<div class="card"><div class="mu">${L.onPhone}</div><div class="big">${n} <span class="mu">${L.sessions}</span></div>
     <div class="mu">${L.lastBk}: ${lb?new Date(lb).toLocaleString(loc(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):L.never}</div>
     ${persisted===true?`<div class="note-ok">${L.persisted}</div>`:''}</div>
+  <div class="card"><div style="font-weight:700;margin-bottom:4px">${L.syncT}</div>
+    ${SYNC.on?`<div class="note-ok" style="margin:0 0 10px">${L.syncOnL} · ${L.syncLast}: ${SYNC.last?new Date(SYNC.last).toLocaleString(loc(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):L.syncNever}${SYNC.dirty?' · '+L.syncWait(Math.max(1,SYNC.missed)):''}</div>${SYNC.err?`<div class="warn" style="margin:0 0 10px">${L.syncErr(esc(syncMsg(SYNC.err)))}</div>`:''}
+      <button class="btn pri w" data-a="syncNow">${L.syncNow}</button><button class="btn dan w mt" data-a="syncOff">${L.syncOffB}</button>`
+    :`<div class="mu" style="margin-bottom:10px">${L.syncHint}</div>
+      <label class="fld">${L.syncRepo}<input class="inp en" id="gRepo" value="${esc(SYNC.repo)}" autocapitalize="off" autocomplete="off" style="text-align:left"></label>
+      <label class="fld">${L.syncTok}<input class="inp en" id="gTok" type="password" autocomplete="off" style="text-align:left"></label>
+      <label class="fld">${L.syncP1}<input class="inp" id="gP1" type="password" autocomplete="new-password"></label>
+      <label class="fld">${L.syncP2}<input class="inp" id="gP2" type="password" autocomplete="new-password"></label>
+      <div class="warn" style="margin:0 0 10px">${L.syncWarn}</div>
+      <button class="btn pri w" data-a="syncOn">${L.syncEnable}</button>
+      <button class="btn w mt" data-a="syncRestore">${L.syncRestore}</button><div class="mu mt">${L.syncRestoreHint}</div>`}</div>
   ${FS?`<div class="card"><div style="font-weight:700;margin-bottom:4px">${L.autoT}</div><div class="mu" style="margin-bottom:10px">${S.settings.linked?L.autoLinked('<span class="en">'+esc(S.settings.linked)+'</span>'):L.autoHint}</div><button class="btn w" data-a="link">${S.settings.linked?L.relinkB:L.linkB}</button></div>`:''}
   <div class="card"><div style="font-weight:700;margin-bottom:4px">${L.bkT}</div><div class="mu" style="margin-bottom:10px">${L.bkHint}</div>
     <button class="btn pri w" data-a="backup">${L.bkSave}</button>
@@ -633,19 +793,23 @@ document.addEventListener('click',ev=>{
     case 'copyS':copy(cardText(S.sessions.find(x=>x.id===b.dataset.id)));break;
     case 'aiS':{const s=S.sessions.find(x=>x.id===b.dataset.id);if(s)shareText(aiText(s,s.id));break}
     case 'editS':editSession(b.dataset.id);break;
-    case 'delS':if(confirm(L.confDel)){S.sessions=S.sessions.filter(x=>x.id!==b.dataset.id);save();closeModal();go(tab)}break;
+    case 'delS':if(confirm(L.confDel)){S.sessions=S.sessions.filter(x=>x.id!==b.dataset.id);save();queueBackup();closeModal();go(tab)}break;
     case 'closeM':closeModal();break;
     case 'pday':pDay=b.dataset.d;renderProgram();break;
-    case 'up':case 'down':{const ex=day(pDay).ex,j=a==='up'?i-1:i+1;if(j>=0&&j<ex.length){[ex[i],ex[j]]=[ex[j],ex[i]];save();renderProgram()}break}
+    case 'up':case 'down':{const ex=day(pDay).ex,j=a==='up'?i-1:i+1;if(j>=0&&j<ex.length){[ex[i],ex[j]]=[ex[j],ex[i]];save();queueBackup();renderProgram()}break}
     case 'editT':tplModal(i);break;
     case 'addT':tplModal(-1);break;
     case 'saveT':saveTpl(i);break;
-    case 'delT':if(confirm(L.confDelEx)){day(pDay).ex.splice(i,1);save();closeModal();renderProgram()}break;
+    case 'delT':if(confirm(L.confDelEx)){day(pDay).ex.splice(i,1);save();queueBackup();closeModal();renderProgram()}break;
     case 'copyT':copy(tplCard(day(pDay)));break;
     case 'backup':backupNow();break;
     case 'share':shareBackup();break;
     case 'link':linkFile();break;
     case 'csv':exportCSV();break;
+    case 'syncOn':enableSync();break;
+    case 'syncNow':{chg++;SYNC.dirty=true;runBackup(true).then(ok=>toast(ok?T().syncOK:T().syncErr(syncMsg(SYNC.err))));break}
+    case 'syncOff':disableSync();break;
+    case 'syncRestore':restoreRemote();break;
   }
 });
 const sess=$('#sess');
@@ -668,7 +832,7 @@ if('serviceWorker' in navigator&&location.protocol!=='file:'){
   }).catch(()=>{});
   let r=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!r){r=true;location.reload()}});
 }
-applyLang();go('home');
+boot().then(()=>{applyLang();go('home');if(pendMig){toast(T().migNote);pendMig=false}});
 </script>
 </body>
 </html>
