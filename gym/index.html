@@ -107,6 +107,33 @@ pre.cardtxt{white-space:pre-wrap;background:var(--bg);border:1px solid var(--bd)
 table.h{width:100%;border-collapse:collapse;font-size:14px}
 table.h td{padding:8px 4px;border-bottom:1px solid var(--bd)}
 select.inp{appearance:auto}
+.hero{border-color:var(--ac);background:linear-gradient(180deg,#1d1810 0,var(--s1) 60%);padding:14px 14px 12px}
+.hero.dim{opacity:.75}
+.rot{display:flex;justify-content:center;gap:5px;margin-bottom:12px}
+.rs{font-size:11px;padding:3px 8px;border-radius:99px;border:1px solid var(--bd);color:var(--mu);white-space:nowrap}
+.rs.ld{color:var(--ok);border-color:#3b5a37}
+.rs.nx{color:#160e05;background:var(--ac);border-color:var(--ac);font-weight:800}
+.hero .big{font-size:30px;margin:0 0 8px}
+.xl{border-top:1px solid var(--bd);margin-top:4px}
+.xr{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid #26262b;font-size:14.5px}
+.xr .xn{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.xr.c .xn{color:var(--ac2)}
+.xr .xs{font-style:normal;color:var(--ac);font-size:12px}
+.xr .xw{color:var(--mu);font-size:13px;white-space:nowrap}
+.coreline{font-size:12.5px;color:var(--mu);margin-top:9px;line-height:1.5}
+.big2{min-height:56px;font-size:17px}
+.alt{margin-top:10px}
+.alt summary{color:var(--mu);font-size:13.5px;padding:8px 2px;cursor:pointer;list-style:none;text-align:center}
+.alt summary::-webkit-details-marker{display:none}
+.alt[open] summary{color:var(--ac2)}
+.wkc{display:flex;align-items:center;gap:14px;padding:11px 14px}
+.dots{display:flex;gap:7px;direction:ltr}
+.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--bd)}
+.dots i.goal{border-color:#5c4d2a}
+.dots i.on{background:var(--ok);border-color:var(--ok)}
+.wkt{font-weight:800;font-size:15px}
+.bkn{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mu);background:var(--s1);border:1px dashed var(--bd);border-radius:12px;padding:8px 10px;margin-bottom:12px}
+.bkn div{flex:1}
 .sl{display:flex;flex-direction:column;gap:6px}
 .sc{display:flex;align-items:center;gap:10px;padding:7px 11px;background:var(--s1);border:1px solid var(--bd);border-inline-start:4px solid var(--mu);border-radius:10px;cursor:pointer;min-height:48px}
 .sc.full{border-inline-start-color:var(--ok)}.sc.core{border-inline-start-color:var(--mid)}.sc.part{border-inline-start-color:var(--bad)}
@@ -137,7 +164,7 @@ select.inp{appearance:auto}
 
 <script>
 'use strict';
-const VER='7';
+const VER='8';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -180,7 +207,7 @@ en:{brand:'Gym <b>Log</b>',title:'Gym Log',langBtn:'عربي',tabs:['Home','Log'
  st2:{q1:'qualified 1 of 2',up:'increase earned',stuck:n=>`${n} sessions at this weight without an increase`},
  mdTitle:'Gym Log — Backup',mdExported:'Exported',mdSessions:'Sessions',mdProgram:'Program',mdLog:'Log (newest first)',
  mdCols:['#','Exercise','Weight','Target','Core','Notes'],mdSCols:['Exercise','Weight','Sets','Clean','Note'],mdData:'Data used by “Restore” in the app — do not edit',yes:'✓',
- csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core',
+ csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core',todayL:'Today',otherDay:'Start a different day',weekOf:n=>`${n} session(s) in the last 7 days · goal 3`,
  syncT:'Encrypted auto-backup (GitHub)',syncHint:'After every session the whole log is encrypted on this phone and uploaded to your repo. Without the passphrase the file is unreadable.',
  syncRepo:'Repository (owner/name)',syncTok:'GitHub token (contents: write, this repo only)',syncP1:'Backup passphrase (8+ characters)',syncP2:'Repeat the passphrase',
  syncWarn:'Lose the passphrase and the backup cannot be opened. There is no recovery. Never send it to anyone.',
@@ -230,7 +257,7 @@ ar:{brand:'سجل <b>الجيم</b>',title:'سجل الجيم',langBtn:'EN',tabs
  st2:{q1:'مؤهل ١ من ٢',up:'استحق زيادة',stuck:n=>`${n} جلسات على نفس الوزن من غير زيادة`},
  mdTitle:'سجل الجيم — نسخة احتياطية',mdExported:'اتعملت',mdSessions:'الجلسات',mdProgram:'البرنامج',mdLog:'السجل (الأحدث الأول)',
  mdCols:['#','التمرين','الوزن','الهدف','أساسي','تعليمات'],mdSCols:['التمرين','الوزن','المجموعات','نضيف','ملاحظة'],mdData:'بيانات بيستخدمها زرار «استرجاع» في التطبيق — ماتعدّلهاش',yes:'✓',
- csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',
+ csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',todayL:'النهارده',otherDay:'ابدأ يوم تاني',weekOf:n=>`${n} جلسة في آخر ٧ أيام · الهدف ٣`,
  syncT:'نسخة أوتوماتيك مشفّرة (GitHub)',syncHint:'بعد كل جلسة السجل كله بيتشفّر على الموبايل وبيترفع للريبو بتاعك. من غير العبارة السرية الملف مش بيتفتح.',
  syncRepo:'الريبو (صاحب/اسم)',syncTok:'توكن GitHub (صلاحية contents: write على الريبو ده بس)',syncP1:'العبارة السرية للنسخة (٨ حروف أو أكتر)',syncP2:'أعد كتابة العبارة',
  syncWarn:'لو ضيّعت العبارة، النسخة مش هتتفتح تاني ومفيش استرجاع. وماتبعتهاش لأي حد.',
@@ -411,21 +438,27 @@ function closeModal(){$('#modal').hidden=true}
 const statusPill=s=>`<span class="pill ${s.status}">${T().st[s.status]||''}</span>`;
 function renderHome(){
   const L=T(),nd=nextDayId(),d=day(nd),ds=done();
-  const wk=ds.filter(s=>daysAgo(s.date)<7).length;
+  const wk=ds.filter(s=>daysAgo(s.date)<7).length,li=ds[0]?dayIdx(ds[0]):-1,days=S.program.days;
   let h='';
   if(S.draft)h+=`<div class="card hl"><div class="mu">${S.draft.editing?L.draftEdit:L.draftOpen}</div><div class="big"><bdi>${esc(S.draft.dayName)}</bdi></div><button class="btn pri w" data-a="resume">${L.resume}</button></div>`;
-  h+=`<div class="card"><div class="mu">${L.next} · <span class="en">Cycle ${calcCycle(nd)}</span></div>
+  /* ١) جلسة النهارده: الإجابة الأولى على الشاشة */
+  h+=`<div class="card hero${S.draft?' dim':''}">
+    <div class="rot" dir="ltr">${days.map((x,k)=>`<span class="rs${x.id===nd?' nx':''}${k===li?' ld':''}">${k===li?'✓ ':''}${esc(x.name)}</span>`).join('')}</div>
+    <div class="mu">${L.todayL} · <span class="en">Cycle ${calcCycle(nd)}</span></div>
     <div class="big"><bdi>${esc(d.name)}</bdi></div>
-    <div class="mu">${L.coreL}: <span class="en">${esc(coreNames(d).join(' + '))}</span></div>
-    <button class="btn pri w mt" data-a="start" data-d="${d.id}">${L.start} <bdi>${esc(d.name)}</bdi></button></div>`;
-  {const li=ds[0]?dayIdx(ds[0]):-1;h+=`<div class="row" style="justify-content:center;gap:6px;margin-bottom:10px;flex-wrap:nowrap;direction:ltr">${S.program.days.map((x,k)=>`<span class="pill${x.id===nd?' full':''}"${x.id===nd?'':''}>${k===li?'✓ ':''}${esc(x.name)}</span>${k<S.program.days.length-1?'<span class="mu">→</span>':''}`).join('')}</div>`}
-  h+=`<div class="grid3">${S.program.days.filter(x=>x.id!==nd).map(x=>`<button class="btn" data-a="start" data-d="${x.id}"><bdi>${esc(x.name)}</bdi></button>`).join('')}</div>`;
-  h+=`<div class="card"><div class="row"><div><div class="mu">${L.last7}</div><div class="big">${wk} <span class="mu">${L.sessions}</span></div></div><div class="sp"></div>`;
-  if(ds[0])h+=`<div style="text-align:end"><div class="mu">${L.lastSess}</div><div style="font-weight:700"><bdi>${esc(ds[0].dayName)}</bdi></div><div class="mu">${fmtD(ds[0].date)}</div></div>`;
-  h+=`</div>${ds.length&&wk<3?`<div class="warn">${L.min3}</div>`:''}</div>`;
-  if(SYNC.on&&SYNC.missed>=3)h+=`<div class="card"><div class="warn" style="margin:0">${L.syncMiss}</div></div>`;
+    <div class="xl">${d.ex.map((t,i)=>{const l=exHist(t.id)[0];return `<div class="xr${t.core?' c':''}"><span class="xn en">${esc(t.name)}</span>${t.core?'<i class="xs">★</i>':''}<span class="xw en">${t.unit?'':fw(l?l.w:t.w)+' · '}${t.sets}×${t.reps}${t.unit?' '+esc(unitTxt(t.unit)):''}</span></div>`}).join('')}</div>
+    <div class="coreline">★ ${L.coreL}: <span class="en">${esc(coreNames(d).join(' + '))}</span></div>
+    <button class="btn pri w mt big2" data-a="start" data-d="${d.id}">${L.start} <bdi>${esc(d.name)}</bdi></button>
+    <details class="alt"><summary>${L.otherDay}</summary><div class="grid3 mt">${days.filter(x=>x.id!==nd).map(x=>`<button class="btn" data-a="start" data-d="${x.id}"><bdi>${esc(x.name)}</bdi></button>`).join('')}</div></details>
+  </div>`;
+  /* ٢) الأسبوع في سطر واحد */
+  h+=`<div class="card wkc"><div class="dots">${[0,1,2,3].map(k=>`<i class="${k<wk?'on':''}${k===2?' goal':''}"></i>`).join('')}</div><div class="sp"><div class="wkt">${L.weekOf(wk)}</div><div class="mu">${ds[0]?`${L.lastSess}: <bdi>${esc(ds[0].dayName)}</bdi> · ${fmtD(ds[0].date)}`:L.noData}</div></div></div>`;
+  if(ds.length&&wk<3)h+=`<div class="warn" style="margin:-4px 0 12px">${L.min3}</div>`;
+  /* ٣) تنبيهات */
+  if(SYNC.on&&SYNC.missed>=3)h+=`<div class="warn" style="margin:0 0 12px">${L.syncMiss}</div>`;
   const lb=S.settings.lastBackup;
-  if(ds.length&&!SYNC.on&&(!lb||Date.now()-lb>7*864e5))h+=`<div class="card"><div class="warn" style="margin:0 0 10px">${lb?L.bkAgo(Math.floor((Date.now()-lb)/864e5)):L.bkNone}${L.bkWarn}</div><button class="btn w" data-a="backup">${L.bkNowBtn}</button></div>`;
+  if(ds.length&&!SYNC.on&&(!lb||Date.now()-lb>7*864e5))h+=`<div class="bkn"><div>${lb?L.bkAgo(Math.floor((Date.now()-lb)/864e5)):L.bkNone}</div><button class="btn sm" data-a="backup">${L.bkNowBtn}</button></div>`;
+  /* ٤) آخر الجلسات */
   if(ds.length){h+=`<h2>${L.recent}</h2><div class="sl">`+ds.slice(0,4).map(s=>`<div class="sc ${s.status}" data-a="sess" data-id="${s.id}"><div class="sp"><div class="n"><bdi>${esc(s.dayName)}</bdi></div><div class="d">${fmtD(s.date)} · <span class="en">C${s.cycle}</span></div></div><span class="st">${T().st[s.status]||''}</span></div>`).join('')+'</div>'}
   $('#view').innerHTML=h;
 }
