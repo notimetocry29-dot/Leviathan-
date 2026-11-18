@@ -442,7 +442,7 @@ html .brand .wm b,html[data-th] .brand .wm b{font-size:15px;font-weight:800;lett
 
 <script>
 'use strict';
-const VER='41';
+const VER='42';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -1004,7 +1004,7 @@ function libRows(){
     <div class="row mt"><button class="btn sm sp" data-a="lbAdd" data-n="${esc(x[0])}">${tr('ضيف لبرنامجي…','Add to my program…')}</button>${x[9]?`<button class="btn sm" data-a="cuEdit" data-n="${esc(x[0])}">${tr('تعديل','Edit')}</button>`:''}</div></details>`).join('')||`<div class="empty">—</div>`;
 }
 function renderLib(){
-  $('#view').innerHTML=`<div class="srow"><input class="inp en" id="lbS" placeholder="${tr('ابحث عن تمرين…','Search exercises…')}" value="${esc(lbQ)}" style="text-align:left"><button class="btn sm" data-a="cuNew">Add ex</button></div>
+  $('#view').innerHTML=`<div class="srow"><input class="inp en" id="lbS" placeholder="${tr('ابحث عن تمرين…','Search exercises…')}" value="${esc(lbQ)}" style="text-align:left"><button class="btn sm" data-a="cuNew">Add</button></div>
   <div class="chips" id="lbC">${lbChips()}</div>
   <div class="mu" style="margin:2px 4px 8px">${tr('دوس على أي تمرين يظهر شرحه الكامل.','Tap an exercise for the full guide.')} · ${allLib().length}</div>
   <div class="card" id="lbL">${libRows()}</div>`;
