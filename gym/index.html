@@ -469,7 +469,7 @@ html[data-th=granite] #sess .ex.wn{background:linear-gradient(180deg,#221e14,#1a
 
 <script>
 'use strict';
-const VER='49';
+const VER='51';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -514,15 +514,15 @@ en:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor"
  mdCols:['#','Exercise','Weight','Target','Core','Notes'],mdSCols:['Exercise','Weight','Sets','Clean','Note'],mdData:'Data used by “Restore” in the app — do not edit',yes:'✓',
  csvH:['Date','Cycle','Day','Exercise','Weight','Sets','Set count','Total reps','Clean','Core','Note'],coreLine:'Core',themeT:'Theme',histNote:n=>`${n} past session(s) from your earlier log were added.`,todayL:'Today',otherDay:'Start a different day',newInstead:'Start a new session instead',weekOf:n=>`${n} session(s) in the last 7 days · goal 3`,
  syncT:'Encrypted auto-backup (GitHub)',syncHint:'After every session the whole log is encrypted on this phone and uploaded to your repo. Without the passphrase the file is unreadable.',
- syncRepo:'Repository (owner/name)',syncTok:'GitHub token (contents: write, this repo only)',syncP1:'Backup passphrase (8+ characters)',syncP2:'Repeat the passphrase',
+ syncRepo:'Repository (owner/name)',syncTok:'GitHub token (contents: write, this repo only)',syncP1:'Backup passphrase (12+ characters)',syncP2:'Repeat the passphrase',
  syncWarn:'Lose the passphrase and the backup cannot be opened. There is no recovery. Never send it to anyone.',
  syncEnable:'Enable and test now',syncNow:'Back up now',syncOffB:'Turn off',syncRestore:'Restore from GitHub',syncRestoreHint:'On a new phone: fill the repo, token and passphrase above, then tap Restore.',
  syncBusy:'Working… (encrypting takes a moment)',syncOK:'Backed up and verified ✓',syncOnL:'On',syncLast:'Last upload',syncNever:'Not yet',syncWait:n=>`${n} change(s) waiting for upload`,
- syncErr:e=>`Backup failed: ${e}`,syncBadIn:'Fill the token, a matching passphrase (8+ chars) and a valid repo name',
+ syncErr:e=>`Backup failed: ${e}`,syncBadIn:'Fill the token, a matching passphrase (12+ chars) and a valid repo name',
  syncPass:'Wrong passphrase',syncNoFile:'No backup found in the repo',syncConfOff:'Turn off auto-backup? The token is removed from this phone.',
  syncMiss:'Auto-backup has not reached GitHub for 3+ sessions. Open File and check.',storeMiss:'Storage',idbOn:'Stored in the browser database',
  migNote:'Program fixed: Shoulder Press is no longer core, Plank moved to the end of both Lower days.',
- undoRestore:'Undo last restore',confUndoRestore:'Go back to the data you had before the last restore?',undoDone:'Back to your data before the restore ✓',
+ syncPub:'Your encrypted backups are going to a PUBLIC repo. Create a private repo, then tap Turn off and enable the backup again with the new repo name.',undoRestore:'Undo last restore',confUndoRestore:'Go back to the data you had before the last restore?',undoDone:'Back to your data before the restore ✓',
  restoredSkip:n=>`Restored ✓ (${n} damaged session(s) skipped)`,syncAfterRestore:'Turn on encrypted auto-backup on this phone with the same repo and passphrase?'
 },
 ar:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 11h12"/><rect x="5" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><rect x="25" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><path d="M2 8.5v5M32 8.5v5"/></svg><span class="wm"><i>GYM</i><b>LOG</b></span>',title:'Gym Log',langBtn:'EN',tabs:['الرئيسية','السجل','البرنامج','التمارين','الملف'],update:'فيه تحديث — اضغط',
@@ -566,15 +566,15 @@ ar:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor"
  mdCols:['#','التمرين','الوزن','الهدف','أساسي','تعليمات'],mdSCols:['التمرين','الوزن','المجموعات','نضيف','ملاحظة'],mdData:'بيانات بيستخدمها زرار «استرجاع» في التطبيق — ماتعدّلهاش',yes:'✓',
  csvH:['التاريخ','Cycle','اليوم','التمرين','الوزن','المجموعات','عدد المجموعات','إجمالي العدّات','نضيف','أساسي','ملاحظة'],coreLine:'الأساسي',themeT:'الشكل',histNote:n=>`اتضاف ${n} جلسة من سجلك القديم.`,todayL:'النهارده',otherDay:'ابدأ يوم تاني',newInstead:'ابدأ جلسة جديدة بدلها',weekOf:n=>`${n} جلسة في آخر ٧ أيام · الهدف ٣`,
  syncT:'نسخة أوتوماتيك مشفّرة (GitHub)',syncHint:'بعد كل جلسة السجل كله بيتشفّر على الموبايل وبيترفع للريبو بتاعك. من غير العبارة السرية الملف مش بيتفتح.',
- syncRepo:'الريبو (صاحب/اسم)',syncTok:'توكن GitHub (صلاحية contents: write على الريبو ده بس)',syncP1:'العبارة السرية للنسخة (٨ حروف أو أكتر)',syncP2:'أعد كتابة العبارة',
+ syncRepo:'الريبو (صاحب/اسم)',syncTok:'توكن GitHub (صلاحية contents: write على الريبو ده بس)',syncP1:'العبارة السرية للنسخة (١٢ حرف أو أكتر)',syncP2:'أعد كتابة العبارة',
  syncWarn:'لو ضيّعت العبارة، النسخة مش هتتفتح تاني ومفيش استرجاع. وماتبعتهاش لأي حد.',
  syncEnable:'فعّل وجرّب دلوقتي',syncNow:'خد نسخة دلوقتي',syncOffB:'إيقاف',syncRestore:'استرجاع من GitHub',syncRestoreHint:'على موبايل جديد: اكتب الريبو والتوكن والعبارة فوق، وبعدين دوس استرجاع.',
  syncBusy:'جاري الشغل… (التشفير بياخد ثواني)',syncOK:'النسخة اترفعت واتحققنا منها ✓',syncOnL:'شغّال',syncLast:'آخر رفع',syncNever:'لسه',syncWait:n=>`${n} تغيير مستني الرفع`,
- syncErr:e=>`النسخة فشلت: ${e}`,syncBadIn:'اكتب التوكن وعبارة سرية متطابقة (٨ حروف+) واسم ريبو صحيح',
+ syncErr:e=>`النسخة فشلت: ${e}`,syncBadIn:'اكتب التوكن وعبارة سرية متطابقة (١٢ حرف+) واسم ريبو صحيح',
  syncPass:'العبارة غلط',syncNoFile:'مفيش نسخة في الريبو',syncConfOff:'توقف النسخ الأوتوماتيك؟ التوكن هيتشال من الموبايل ده.',
  syncMiss:'النسخ الأوتوماتيك ماوصلش GitHub من ٣ جلسات أو أكتر. افتح «الملف» وراجع.',storeMiss:'التخزين',idbOn:'متخزّن في قاعدة بيانات المتصفح',
  migNote:'البرنامج اتصلّح: Shoulder Press خرج من الأساسي، والبلانك راح آخر يومين الرجل.',
- undoRestore:'تراجع عن آخر استرجاع',confUndoRestore:'ترجع للبيانات اللي كانت عندك قبل آخر استرجاع؟',undoDone:'رجعت لبياناتك اللي قبل الاسترجاع ✓',
+ syncPub:'النسخ المشفّرة بتترفع على ريبو عام. اعمل ريبو خاص، وبعدين دوس إيقاف وفعّل النسخ تاني باسم الريبو الجديد.',undoRestore:'تراجع عن آخر استرجاع',confUndoRestore:'ترجع للبيانات اللي كانت عندك قبل آخر استرجاع؟',undoDone:'رجعت لبياناتك اللي قبل الاسترجاع ✓',
  restoredSkip:n=>`اترجعت ✓ (اتجاهلنا ${n} جلسة بايظة)`,syncAfterRestore:'تشغّل النسخ الأوتوماتيك المشفّر على الموبايل ده بنفس الريبو والعبارة؟'
 }};
 let LANG='en';
@@ -644,7 +644,7 @@ function save(){
   let lsOK=true;try{localStorage.setItem(KEY,JSON.stringify(snap))}catch(e){lsOK=false}
   sq=sq.then(()=>idb.set('state',snap)).catch(()=>{if(!lsOK)toast(T().storeFail)});
 }
-const HIST=[{"d":"2026-04-15","dn":"Push","c":1,"id":"","ex":[{"n":"Incline Dumbbell Press","w":15,"s":[12,10,10],"t":"10k ثم 12.5k ثم 15k"},{"n":"Chest Press Machine","w":20,"s":[12,10,8],"t":"12.5k ثم 15k ثم 20k"},{"n":"DB Shoulder Press","w":12.5,"s":[10,10,8],"t":"بوزن مختلف: 10k×10"},{"n":"Lateral Raises","w":5.0,"s":[12,12,12]},{"n":"Triceps Pushdown","w":20.0,"s":[12,10,10]}]},{"d":"2026-05-02","dn":"Legs","c":1,"id":"","ex":[{"n":"Leg Press","w":60.0,"s":[12,12,12]},{"n":"Hack Squat","w":30.0,"s":[10,10,10]},{"n":"Leg Curl","w":25,"s":[10,10,10]},{"n":"Calf Raises","w":25.0,"s":[15,12,10,10]}]},{"d":"2026-05-10","dn":"Push","c":1,"id":"","ex":[{"n":"Incline Dumbbell Press","w":12.5,"s":[12,12,12]},{"n":"Chest Press Machine","w":15.0,"s":[12,12,12]},{"n":"DB Shoulder Press","w":10.0,"s":[10,10,10]},{"n":"Lateral Raises","w":5.0,"s":[12,12,12]},{"n":"Triceps Pushdown","w":20.0,"s":[12,10,9]}]},{"d":"2026-06-01","dn":"Pull","c":1,"id":"","ex":[{"n":"Lat Pulldown","w":32.0,"s":[10,10,10]},{"n":"Seated Row","w":25.0,"s":[10,10,10]},{"n":"Face Pull","w":25.0,"s":[15,15,15]},{"n":"Biceps Curl","w":7.5,"s":[8,8,8]},{"n":"Hammer Curl","w":7.5,"s":[6,6,6]}]},{"d":"2026-06-11","dn":"Legs","c":1,"id":"","ex":[{"n":"Leg Press","w":60,"s":[12,12,12]},{"n":"Hack Squat","w":30.0,"s":[10,10,10]},{"n":"Back Extension","w":0,"s":[10,10,10]},{"n":"Leg Curl","w":25.0,"s":[10,10,10]},{"n":"Calf Raises","w":20.0,"s":[15,15,15]}]},{"d":"2026-06-14","dn":"Push","c":1,"id":"","ex":[{"n":"Incline Dumbbell Press","w":12.5,"s":[10,10,10]},{"n":"Chest Press Machine","w":15.0,"s":[12,12,10]},{"n":"DB Shoulder Press","w":10.0,"s":[8,8,8]},{"n":"Lateral Raises","w":5.0,"s":[12,12,12]},{"n":"Triceps Pushdown","w":25.0,"s":[12,12,10]}]},{"d":"2026-06-17","dn":"Legs","c":2,"id":"","ex":[{"n":"Leg Press","w":70.0,"s":[12,12,12]},{"n":"Hack Squat","w":40.0,"s":[10,10,10]},{"n":"Back Extension","w":0,"s":[12,12,12]},{"n":"Leg Curl","w":25.0,"s":[10,10,10]},{"n":"Calf Raises","w":25.0,"s":[15,15,15,15]}]},{"d":"2026-06-18","dn":"Upper","c":2,"id":"","ex":[{"n":"Chest Press Machine","w":15.0,"s":[12,12,10],"t":"بوزن مختلف: 17.5k×10"},{"n":"Lat Pulldown","w":39.0,"s":[10,10,10]},{"n":"Shoulder Press","w":18.0,"s":[10,10,10]},{"n":"Triceps Pushdown","w":25.0,"s":[12,12,12]},{"n":"Hammer Curl","w":7.5,"s":[10,10,10]}]},{"d":"2026-06-20","dn":"Lower","c":2,"id":"","ex":[{"n":"Leg Press","w":70.0,"s":[12,12,12]},{"n":"Leg Extension","w":25.0,"s":[12,12],"t":"تسخين 18k×12"},{"n":"Leg Curl","w":25.0,"s":[10,10,10],"t":"بوزن مختلف: 32k×10"},{"n":"Calf Raises","w":25.0,"s":[15,15,15,15]}]},{"d":"2026-06-22","dn":"Push","c":2,"id":"","ex":[{"n":"Incline Dumbbell Press","w":15.0,"s":[10,10,10]},{"n":"Chest Press Machine","w":15.0,"s":[12,12,10],"t":"تسخين 5k×15"},{"n":"Shoulder Press","w":18.0,"s":[10,10,10]},{"n":"Lateral Raises","w":5.0,"s":[12,12,12]},{"n":"Triceps Pushdown","w":25.0,"s":[12,15,12]}]},{"d":"2026-06-23","dn":"Pull","c":2,"id":"","ex":[{"n":"Lat Pulldown","w":39.0,"s":[10,12,12]},{"n":"T-Bar Row","w":20.0,"s":[10,10,10]},{"n":"Face Pull","w":25.0,"s":[15,15,15]},{"n":"Biceps Curl","w":7.5,"s":[10,10,10]},{"n":"Hammer Curl","w":7.5,"s":[8,8,8]}]},{"d":"2026-06-25","dn":"Legs","c":2,"id":"","ex":[{"n":"Leg Press","w":75.0,"s":[12,12,12],"t":"بوزن مختلف: 70k×12"},{"n":"Hack Squat","w":60.0,"s":[10,10,10]},{"n":"Back Extension","w":10.0,"s":[10,10,10]},{"n":"Leg Curl","w":25.0,"s":[12,12,12]},{"n":"Calf Raises","w":25.0,"s":[15,15,15,15]}]},{"d":"2026-06-28","dn":"Lower","c":2,"id":"","ex":[{"n":"Leg Press","w":80.0,"s":[12,12,12]},{"n":"Leg Extension","w":25.0,"s":[15,15,15]},{"n":"Leg Curl","w":25.0,"s":[12,15,15]},{"n":"Calf Raises","w":25,"s":[15,15,15,15]}]},{"d":"2026-06-30","dn":"Push","c":3,"id":"","ex":[{"n":"Incline Dumbbell Press","w":15.0,"s":[12,12,8],"t":"بوزن مختلف: 20k×8"},{"n":"Chest Press Machine","w":15.0,"s":[12,12,12]},{"n":"Shoulder Press","w":18.0,"s":[10,10,8],"t":"تسخين 11k×15 — بوزن مختلف: 25k×8"},{"n":"Lateral Raises","w":5.0,"s":[15,15,15]},{"n":"Triceps Pushdown","w":25.0,"s":[15,12,10]}]},{"d":"2026-07-01","dn":"Pull","c":3,"id":"","ex":[{"n":"Lat Pulldown","w":45,"s":[10,10,10],"t":"تسخين 18k×15"},{"n":"T-Bar Row","w":22.5,"s":[10,8,7]},{"n":"Face Pull","w":25.0,"s":[15,15,15]},{"n":"Biceps Curl","w":7.5,"s":[8,8,8]},{"n":"Hammer Curl","w":7.5,"s":[10,8,8]}]},{"d":"2026-07-03","dn":"Legs","c":3,"id":"","ex":[{"n":"Leg Press","w":80.0,"s":[12,12,12]},{"n":"Hack Squat","w":70.0,"s":[8,10,10]},{"n":"Back Extension","w":10.0,"s":[10,10,10]},{"n":"Leg Curl","w":25.0,"s":[12,10,12]},{"n":"Calf Raises","w":25.0,"s":[15,15,15,15]}]},{"d":"2026-07-06","dn":"Lower","c":3,"id":"","ex":[{"n":"Leg Press","w":80.0,"s":[12,12,12]},{"n":"Leg Extension","w":25.0,"s":[15,15,20]},{"n":"Leg Curl","w":32,"s":[15,15,13]},{"n":"Calf Raises","w":27.5,"s":[15,15,15,15],"t":"بوزن مختلف: 25k×15"}]},{"d":"2026-07-09","dn":"Push","c":4,"id":"","ex":[{"n":"Incline Dumbbell Press","w":15.0,"s":[12,12,12],"t":"تسخين 7.5k×10"},{"n":"Chest Press Machine","w":20.0,"s":[12,12,10]},{"n":"DB Shoulder Press","w":10.0,"s":[12,12,12]},{"n":"Lateral Raises","w":5.0,"s":[15,15,15]},{"n":"Triceps Pushdown","w":25.0,"s":[15,15,12]}]},{"d":"2026-07-10","dn":"Pull","c":4,"id":"","ex":[{"n":"Lat Pulldown","w":52.0,"s":[8,8,8]},{"n":"T-Bar Row","w":22.5,"s":[10,10,8],"t":"بوزن مختلف: 20k×10"},{"n":"Face Pull","w":35.0,"s":[15,15,15]},{"n":"Biceps Curl","w":7.5,"s":[8,12,10]},{"n":"Hammer Curl","w":7.5,"s":[10,10,10]}]},{"d":"2026-07-11","dn":"Legs","c":4,"id":"","ex":[{"n":"Leg Press","w":90.0,"s":[12,12,12],"t":"تسخين 40k×20 — بوزن مختلف: 85k×12"},{"n":"Hack Squat","w":70.0,"s":[10,10,10]},{"n":"Back Extension","w":10.0,"s":[10,10,10]},{"n":"Leg Curl","w":32.0,"s":[12,10,8]},{"n":"Calf Raises","w":27.5,"s":[15,15,15,15]}]},{"d":"2026-07-26","dn":"Full Body (closing)","c":4,"id":"","ex":[{"n":"Leg Press","w":70.0,"s":[12,12]},{"n":"Chest Press Machine","w":15.0,"s":[12,12]},{"n":"Lat Pulldown","w":45.0,"s":[10,10]},{"n":"Shoulder Press","w":18.0,"s":[10,10]},{"n":"Leg Curl","w":25.0,"s":[10,10]},{"n":"Triceps Pushdown","w":25.0,"s":[12,12]},{"n":"Hammer Curl","w":7.5,"s":[10,10]}]},{"d":"2026-07-27","dn":"Push","c":5,"id":"","ex":[{"n":"Incline Dumbbell Press","w":15.0,"s":[10,10,10]},{"n":"Chest Press Machine","w":25.0,"s":[12,10,8],"t":"بوزن مختلف: 20k×12"},{"n":"Shoulder Press","w":18.0,"s":[12,12,10]},{"n":"Lateral Raises","w":5.0,"s":[15,15,15]},{"n":"Triceps Pushdown","w":25.0,"s":[12,12,12]}]},{"d":"2026-07-28","dn":"Pull","c":5,"id":"","ex":[{"n":"Lat Pulldown","w":52.0,"s":[9,8,6],"t":"تسخين 18k×15 و39k×5"},{"n":"T-Bar Row","w":22.5,"s":[8,8,9]},{"n":"Face Pull","w":35.0,"s":[15,15,15]},{"n":"Biceps Curl","w":7.5,"s":[10,12,10]},{"n":"Hammer Curl","w":7.5,"s":[12,11,12]}]},{"d":"2026-07-30","dn":"Legs","c":5,"id":"","ex":[{"n":"Leg Press","w":100,"s":[12,12,10],"t":"تسخين 40k×15 و80k×8، أول سيت 90k"},{"n":"Hack Squat","w":70.0,"s":[10,10,10]},{"n":"Back Extension","w":10.0,"s":[12,10,10]},{"n":"Leg Curl","w":32.0,"s":[10,10,8]},{"n":"Calf Raises","w":27.5,"s":[15,15,15,15]}]},{"d":"2026-08-01","dn":"Upper","c":5,"id":"","ex":[{"n":"Chest Press Machine","w":27.5,"s":[10,8,8],"t":"تسخين 15k×20 — بوزن مختلف: 25k×10"},{"n":"Lat Pulldown","w":52.0,"s":[8,8,8],"t":"بوزن مختلف: 45k×8"},{"n":"Shoulder Press","w":18.0,"s":[15,12,12]},{"n":"Overhead Triceps Extension (DB)","w":15.0,"s":[12,12,12]},{"n":"Hammer Curl","w":7.5,"s":[12,12,12]},{"n":"Farmer's Walk","w":20,"s":[25,25,25],"u":"خطوة","t":"سيت ٣ بـ 25k"}]},{"d":"2026-08-05","dn":"Lower","c":5,"id":"","ex":[{"n":"Leg Press","w":100.0,"s":[8,10,10,10],"t":"تسخين 40k×15 — بوزن مختلف: 80k×8"},{"n":"Leg Extension","w":25.0,"s":[12,12,12]},{"n":"Leg Curl","w":32.0,"s":[12,12,12]},{"n":"Calf Raises","w":30.0,"s":[15,15,15,15]}]},{"d":"2026-08-06","dn":"Push","c":6,"id":"","ex":[{"n":"Incline Dumbbell Press","w":15.0,"s":[12,12,12]},{"n":"Chest Press Machine","w":25.0,"s":[10,10,10],"t":"تسخين 15k×15"},{"n":"Shoulder Press","w":25.0,"s":[10,10,10]},{"n":"Lateral Raises","w":7.5,"s":[10,12,10]},{"n":"Triceps Pushdown","w":25,"s":[15,8,12],"t":"سيت ٢ بـ 35k"}]},{"d":"2026-08-11","dn":"Pull (light)","c":6,"id":"","ex":[{"n":"Lat Pulldown","w":39.0,"s":[10,10,10]},{"n":"Seated Row","w":25.0,"s":[12,12,12]},{"n":"Face Pull","w":25.0,"s":[15,15,15]}]},{"d":"2026-08-12","dn":"Legs (light)","c":6,"id":"","ex":[{"n":"Leg Press","w":70.0,"s":[12,12,12]},{"n":"Leg Curl","w":25.0,"s":[12,12,12]},{"n":"Calf Raises","w":25.0,"s":[15,15,15]}]},{"d":"2026-08-20","dn":"Upper","c":6,"id":"","ex":[{"n":"Chest Press Machine","w":20.0,"s":[12,9,8],"t":"تسخين 10k×20"},{"n":"Lat Pulldown","w":45.0,"s":[10,10,10]},{"n":"Shoulder Press","w":18.0,"s":[12,12,12]},{"n":"Overhead Triceps Extension (DB)","w":15.0,"s":[12,12,12]},{"n":"DB Shrugs","w":20.0,"s":[15,12,11]},{"n":"Farmer's Walk","w":20.0,"s":[25,25,25],"u":"خطوة"}]},{"d":"2026-08-31","dn":"Upper (short)","c":6,"id":"","ex":[{"n":"Chest Press Machine","w":20.0,"s":[10,10,10]},{"n":"Lat Pulldown","w":45.0,"s":[10,10,8]},{"n":"Overhead Triceps Extension (DB)","w":15.0,"s":[12,12,12]},{"n":"Farmer's Walk","w":20.0,"s":[25,25,25],"u":"خطوة"}]},{"d":"2026-09-03","dn":"Lower (short)","c":6,"id":"","ex":[{"n":"Leg Press","w":80.0,"s":[12,12,12]},{"n":"Leg Curl","w":32.0,"s":[12,12,10]},{"n":"Calf Raises","w":30.0,"s":[15,15,12,10]},{"n":"Wrist Curl + Reverse","w":5,"s":[15,15,15],"t":"ريفرس 2.5k"}]},{"d":"2026-09-05","dn":"Push","c":7,"id":"","ex":[{"n":"Plank","w":0,"s":[60,60],"u":"ث"},{"n":"Incline Dumbbell Press","w":15.0,"s":[12,12,12]},{"n":"Flat Dumbbell Press","w":12.5,"s":[12,12,12]},{"n":"Lateral Raises","w":7.5,"s":[10,10,10]},{"n":"Triceps Pushdown","w":35.0,"s":[8,8,8]}]},{"d":"2026-09-28","dn":"Full Body","c":7,"id":"","ex":[{"n":"Leg Press","w":70.0,"s":[12,12]},{"n":"Flat Dumbbell Press","w":15.0,"s":[12,12],"t":"بوزن مختلف: 12.5k×12"},{"n":"Lat Pulldown","w":39.0,"s":[10,10]},{"n":"Leg Curl","w":25.0,"s":[12,12]},{"n":"Shoulder Press","w":18.0,"s":[10,10]},{"n":"Triceps Pushdown","w":25.0,"s":[12,12]},{"n":"Hammer Curl","w":7.5,"s":[10,10]}]},{"d":"2026-10-02","dn":"Push","c":7,"id":"","ex":[{"n":"Plank","w":0,"s":[30,30],"u":"ث"},{"n":"Incline Dumbbell Press","w":12.5,"s":[12,12,12]},{"n":"Flat Dumbbell Press","w":12.5,"s":[10,10,10]},{"n":"Shoulder Press","w":18.0,"s":[12,12]},{"n":"Lateral Raises","w":5.0,"s":[15,15,15]},{"n":"Triceps Pushdown","w":35,"s":[12,12,15],"t":"سيت ١ بـ 25k"},{"n":"Wrist Curl + Reverse","w":25,"s":[15,15,15,15],"t":"مجموعتين لكل اتجاه"},{"n":"Treadmill Run","w":0,"s":[600],"u":"ث","t":"٤ كم/س تقريبًا"}]},{"d":"2026-10-17","dn":"Full Body (return)","c":6,"id":"","ex":[{"n":"Leg Press","w":60,"s":[10,10]},{"n":"Flat Dumbbell Press","w":10,"s":[10,10]},{"n":"Lat Pulldown","w":32,"s":[10,10]},{"n":"Leg Curl","w":25,"s":[10,10]},{"n":"Wrist Curl + Reverse","w":0,"s":[15,15,15,15,15,15],"t":"3 أشكال على الكابل"}]},{"d":"2026-11-04","dn":"Upper 1","c":8,"id":"U1","ex":[{"n":"Flat Dumbbell Press","w":12.5,"s":[12,12,10]},{"n":"Lat Pulldown","w":32,"s":[12,12,12]},{"n":"Shoulder Press","w":18,"s":[12,12,12]},{"n":"Overhead Triceps Extension (DB)","w":15,"s":[12,12,10]},{"n":"Biceps Curl","w":7.5,"s":[10,10,10]},{"n":"Farmer's Walk","w":20,"s":[25,25,25],"u":"ث"}]},{"d":"2026-11-05","dn":"Lower 1","c":8,"id":"L1","ex":[{"n":"Plank","w":0,"s":[45,45],"u":"ث"},{"n":"Leg Press","w":60,"s":[12,12,12]},{"n":"Leg Extension","w":25,"s":[12,12,12]},{"n":"Leg Curl","w":25,"s":[12,12,12]},{"n":"Calf Raises","w":25,"s":[15,15]},{"n":"Wrist Curl + Reverse","w":25,"s":[15,15,15,15],"t":"قاعد على رجليّ، الوزن أتقل"}]}];
+const HIST=[];/* السجل القديم اتشال من الكود العام (v50). بياناتك على الموبايل وفي النسخ الاحتياطية */
 function histSess(h,id){
   const dd=h.id?S.program.days.find(d=>d.id===h.id):null;
   const ex=h.ex.map(e=>{
@@ -804,7 +804,7 @@ window.addEventListener('popstate',e=>{
   const st=e.state||{},M=$('#modal'),Sx=$('#sess');
   if(st.modal){if(M.hidden)history.back();return}
   M.hidden=true;
-  if(!st.sess&&!Sx.hidden){Sx.hidden=true;document.body.style.overflow='';if(S.draft)queueBackup()}
+  if(!st.sess&&!Sx.hidden){Sx.hidden=true;document.body.style.overflow='';if(S.draft)queueDraftBackup()}
   if(Sx.hidden)go(st.tab||'home');
 });
 try{history.replaceState({},'')}catch(e){}
@@ -832,6 +832,7 @@ function renderHome(){
   h+=`<div class="card wkc"><div class="dots">${[0,1,2,3].map(k=>`<i class="${k<wk?'on':''}${k===2?' goal':''}"></i>`).join('')}</div><div class="sp"><div class="wkt">${L.weekOf(wk)}</div><div class="mu">${ds[0]?`${L.lastSess}: <bdi>${esc(ds[0].dayName)}</bdi> · ${fmtD(ds[0].date)}`:L.noData}</div></div></div>`;
   if(ds.length&&wk<3)h+=`<div class="warn" style="margin:-4px 0 12px">${L.min3}</div>`;
   /* ٣) تنبيهات */
+  if(syncPublic())h+=`<div class="warn" style="margin:0 0 12px">${L.syncPub}</div>`;
   if(SYNC.on&&SYNC.missed>=3)h+=`<div class="warn" style="margin:0 0 12px">${L.syncMiss}</div>`;
   const lb=S.settings.lastBackup;
   if(ds.length&&!SYNC.on&&(!lb||Date.now()-lb>7*864e5))h+=`<div class="bkn"><div>${lb?L.bkAgo(Math.floor((Date.now()-lb)/864e5)):L.bkNone}</div><button class="btn sm" data-a="backup">${L.bkNowBtn}</button></div>`;
@@ -1161,7 +1162,7 @@ const enc=new TextEncoder(),dec=new TextDecoder();
 const b64=u=>{let t='';for(let i=0;i<u.length;i+=0x8000)t+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(t)};
 const unb64=t=>Uint8Array.from(atob(t),c=>c.charCodeAt(0));
 const pipe=async(bytes,S2)=>new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(S2)).arrayBuffer());
-let SYNC={on:false,repo:'notimetocry29-dot/leviathan-',branch:'gym-backup',path:'sync/state.bin',salt:'',iter:600000,last:0,n:0,dirty:false,missed:0,err:''};
+let SYNC={on:false,repo:'',branch:'gym-backup',path:'sync/state.bin',salt:'',iter:600000,last:0,n:0,dirty:false,missed:0,err:''};
 let BKEY=null,running=false,chg=0;
 async function loadSync(){try{const c=await idb.get('sync');if(c)Object.assign(SYNC,c)}catch(e){}try{BKEY=(await idb.get('bk.key'))||null}catch(e){}}
 const saveSync=()=>idb.set('sync',Object.assign({},SYNC)).catch(()=>{});
@@ -1235,11 +1236,15 @@ async function runBackup(verify){
   if(ok&&chg!==my)runBackup();
   refresh();return ok;
 }
+/* مسودة مفتوحة: ارفع بحد أقصى مرة كل ١٠ دقايق (الحفظ الفعلي بيرفع دايمًا) */
+function queueDraftBackup(){if(SYNC.on&&Date.now()-(SYNC.last||0)>6e5)queueBackup()}
 function queueBackup(session){if(!SYNC.on)return;chg++;SYNC.dirty=true;if(session)SYNC.missed++;saveSync();runBackup()}
+const PUB_REPO='notimetocry29-dot/leviathan-';
+const syncPublic=()=>SYNC.on&&String(SYNC.repo).toLowerCase()===PUB_REPO;
 const syncMsg=e=>({token:'التوكن مرفوض أو منتهي',repo:'الريبو مش موجود أو التوكن ملوش صلاحية عليه',conflict:'تعارض في الرفع، هيعيد المحاولة',verify:'الملف اترفع بس التحقق فشل',pass:'العبارة غلط',nofile:'مفيش نسخة في الريبو'}[e]||e);
 async function enableSync(){
   const tok=$('#gTok').value.trim(),p1=$('#gP1').value,p2=$('#gP2').value,repo=$('#gRepo').value.trim();
-  if(!tok||p1.length<8||p1!==p2||!/^[\w.-]+\/[\w.-]+$/.test(repo)){toast(T().syncBadIn);return}
+  if(!tok||p1.length<12||p1!==p2||!/^[\w.-]+\/[\w.-]+$/.test(repo)){toast(T().syncBadIn);return}
   return enableSyncWith(tok,p1,repo);
 }
 async function enableSyncWith(tok,p1,repo){
@@ -1378,10 +1383,10 @@ async function renderData(){
     ${persisted===true?`<div class="note-ok">${L.persisted}</div>`:''}</div>
   <div class="card"><div style="font-weight:700;margin-bottom:8px">${L.themeT}</div><div class="dd${thmOpen?' open':''}"><button class="dd-cur" data-a="thmTog">${swatch(S.settings.theme||'granite')}<span>${(THEMES[S.settings.theme]||THEMES.granite)[LANG]}</span><span class="ch">▾</span></button>${thmOpen?`<div class="dd-list">${Object.keys(THEMES).map(k=>`<button class="dd-opt${(S.settings.theme||'iron')===k?' on':''}" data-a="theme" data-k="${k}">${swatch(k)}<span>${THEMES[k][LANG]}<small>${THEMES[k][LANG==='ar'?'da':'de']}</small></span></button>`).join('')}</div>`:''}</div></div>
   <div class="card"><div style="font-weight:700;margin-bottom:4px">${L.syncT}</div>
-    ${SYNC.on?`<div class="note-ok" style="margin:0 0 10px">${L.syncOnL} · ${L.syncLast}: ${SYNC.last?new Date(SYNC.last).toLocaleString(loc(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):L.syncNever}${SYNC.dirty?' · '+L.syncWait(Math.max(1,SYNC.missed)):''}</div>${SYNC.err?`<div class="warn" style="margin:0 0 10px">${L.syncErr(esc(syncMsg(SYNC.err)))}</div>`:''}
+    ${SYNC.on?`<div class="note-ok" style="margin:0 0 10px">${L.syncOnL} · ${L.syncLast}: ${SYNC.last?new Date(SYNC.last).toLocaleString(loc(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):L.syncNever}${SYNC.dirty?' · '+L.syncWait(Math.max(1,SYNC.missed)):''}</div>${SYNC.err?`<div class="warn" style="margin:0 0 10px">${L.syncErr(esc(syncMsg(SYNC.err)))}</div>`:''}${syncPublic()?`<div class="warn" style="margin:0 0 10px">${L.syncPub}</div>`:''}
       <button class="btn pri w" data-a="syncNow">${L.syncNow}</button><button class="btn dan w mt" data-a="syncOff">${L.syncOffB}</button>`
     :`<div class="mu" style="margin-bottom:10px">${L.syncHint}</div>
-      <label class="fld">${L.syncRepo}<input class="inp en" id="gRepo" value="${esc(SYNC.repo)}" autocapitalize="off" autocomplete="off" style="text-align:left"></label>
+      <label class="fld">${L.syncRepo}<input class="inp en" id="gRepo" placeholder="owner/gym-data" value="${esc(SYNC.repo)}" autocapitalize="off" autocomplete="off" style="text-align:left"></label>
       <label class="fld">${L.syncTok}<input class="inp en" id="gTok" type="password" autocomplete="off" style="text-align:left"></label>
       <label class="fld">${L.syncP1}<input class="inp" id="gP1" type="password" autocomplete="new-password"></label>
       <label class="fld">${L.syncP2}<input class="inp" id="gP2" type="password" autocomplete="new-password"></label>
@@ -1414,7 +1419,7 @@ document.addEventListener('click',ev=>{
     case 'lang':LANG=LANG==='en'?'ar':'en';S.settings.lang=LANG;save();applyLang();if(!$('#sess').hidden)renderSession();if(!$('#modal').hidden)closeModal();go(tab);break;
     case 'start':startSession(b.dataset.d);break;
     case 'resume':openSession();break;
-    case 'closeS':flushSave();closeSession();if(S.draft)queueBackup();break;
+    case 'closeS':flushSave();closeSession();if(S.draft)queueDraftBackup();break;
     case 'commit':commit();break;
     case 'shareDraft':shareDraft();break;
     case 'discard':if(confirm(d.editing?L.confCancelEdit:L.confDiscard)){S.draft=null;openTips.clear();save();closeSession()}break;
@@ -1480,12 +1485,13 @@ sess.addEventListener('input',onField);sess.addEventListener('change',onField);
 sess.addEventListener('keydown',ev=>{if(ev.key!=='Enter'||ev.target.tagName!=='INPUT')return;const all=[...sess.querySelectorAll('input.inp')];const k=all.indexOf(ev.target);if(k>-1&&all[k+1]){ev.preventDefault();all[k+1].focus()}});
 
 /* ================= التثبيت والتحديث ================= */
+let updating=false,r=false;
 if('serviceWorker' in navigator&&location.protocol!=='file:'){
-  navigator.serviceWorker.register('sw.js').then(reg=>{
-    const show=()=>{if(reg.waiting&&navigator.serviceWorker.controller){const u=$('#updBtn');u.hidden=false;u.onclick=()=>reg.waiting&&reg.waiting.postMessage('skip')}};
+  navigator.serviceWorker.register('sw.js?v='+VER).then(reg=>{
+    const show=()=>{if(reg.waiting&&navigator.serviceWorker.controller){const u=$('#updBtn');u.hidden=false;u.onclick=()=>{updating=true;saveUI();flushSave();reg.waiting&&reg.waiting.postMessage('skip')}}};
     show();reg.addEventListener('updatefound',()=>{const w=reg.installing;w&&w.addEventListener('statechange',()=>{if(w.state==='installed')show()})});
   }).catch(()=>{});
-  let r=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!r){r=true;location.reload()}});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(updating&&!r){r=true;location.reload()}});
 }
 function readUI(){try{return JSON.parse(localStorage.getItem('gymlog.ui')||'null')}catch(e){return null}}
 function restoreUI(u){try{if(!u||Date.now()-u.at>12*36e5)return;
@@ -1493,7 +1499,7 @@ function restoreUI(u){try{if(!u||Date.now()-u.at>12*36e5)return;
   if(u.s&&S.draft)openSession();else if(u.y)setTimeout(()=>window.scrollTo(0,u.y),50)}catch(e){}}
 window.addEventListener('scroll',()=>{clearTimeout(window.__st);window.__st=setTimeout(saveUI,250)},{passive:true});
 window.addEventListener('pagehide',flushSave);
-document.addEventListener('visibilitychange',()=>{if(document.hidden){flushSave();saveUI();if(S.draft&&SYNC.on)queueBackup()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){flushSave();saveUI();if(S.draft)queueDraftBackup()}});
 const UI0=readUI();
 boot().then(()=>{if(!S.settings.thGr){S.settings.thGr=1;S.settings.thDawn=1;S.settings.theme='granite';save()}applyLang();if(S.impN){const k=S.impN;S.impN=0;save();setTimeout(()=>toast(T().histNote(k)),600)}go('home');restoreUI(UI0);if(pendMig){toast(T().migNote);pendMig=false}});
 </script>
