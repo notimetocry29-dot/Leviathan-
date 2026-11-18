@@ -20,8 +20,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .brand{font-weight:800;font-size:18px;flex:1}
 .lang{background:var(--s2);border:1px solid var(--bd);border-radius:99px;padding:5px 12px;font-size:14px;color:var(--ac2);font-weight:700}
 main{padding:14px 14px 28px;max-width:640px;margin:0 auto}
-.tabs{position:fixed;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);background:var(--s1);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom);z-index:6}
-.tabs button{background:none;border:0;color:var(--mu);padding:13px 4px;font-size:14.5px}
+.tabs{position:fixed;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(5,1fr);background:var(--s1);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom);z-index:6}
+.tabs button{background:none;border:0;color:var(--mu);padding:13px 2px;font-size:13px;white-space:nowrap}
 .tabs button.on{color:var(--ac2);font-weight:700;box-shadow:inset 0 2px 0 var(--ac)}
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
 .card.hl{border-color:var(--ac)}
@@ -359,6 +359,8 @@ html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
 .prl .prow{cursor:pointer}
 .prl .prow:active{background:var(--s2)}
 .prow .exno{margin-inline-end:2px}
+.hb{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.cyb{font-size:14px;font-weight:800;letter-spacing:0;text-transform:none;padding:3px 11px;border-radius:99px;background:var(--ac);color:var(--onac);white-space:nowrap}
+.lbx{border-bottom:1px solid var(--bd)}.lbx:last-child{border-bottom:0}.lbx summary{list-style:none;display:flex;align-items:center;gap:8px;padding:12px 0;cursor:pointer}.lbx summary::-webkit-details-marker{display:none}.lbx summary .nm{font-weight:700;flex:1}.lbx .howto{margin:0 0 12px}.lbx .row{margin-bottom:12px}.lbx summary::after{content:'▾';color:var(--mu)}.lbx[open] summary::after{content:'▴'}
 .howto{font-size:16px;line-height:1.8;background:var(--s2);border-radius:var(--rad);padding:12px 14px}
 /* ---- أداء شاشة التمرين: من غير blur ولا ظلال، ورسم الكروت اللي ظاهرة بس ---- */
 #sess .card,#sess .shead,#sess .btn,#sess .inp,#sess .wrow{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:none!important;text-shadow:none!important}
@@ -384,6 +386,7 @@ html[data-th=book] #sess{background-image:none!important}
   <button data-tab="home" class="on"></button>
   <button data-tab="hist"></button>
   <button data-tab="prog"></button>
+  <button data-tab="lib"></button>
   <button data-tab="data"></button>
 </nav>
 <section id="sess" hidden></section>
@@ -392,11 +395,11 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='27';
+const VER='28';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
-en:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 11h12"/><rect x="5" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><rect x="25" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><path d="M2 8.5v5M32 8.5v5"/></svg><span class="wm"><i>GYM</i><b>LOG</b></span>',title:'Gym Log',langBtn:'عربي',tabs:['Home','Log','Program','File'],update:'Update available — tap',
+en:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 11h12"/><rect x="5" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><rect x="25" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><path d="M2 8.5v5M32 8.5v5"/></svg><span class="wm"><i>GYM</i><b>LOG</b></span>',title:'Gym Log',langBtn:'عربي',tabs:['Home','Log','Program','Exercises','File'],update:'Update available — tap',
  next:'Next session',coreL:'Core',start:'Start',draftOpen:'Unsaved session in progress',draftEdit:'Editing a session',resume:'Continue',
  last7:'Last 7 days',sessions:'sessions',lastSess:'Last session',min3:'Weekly minimum is 3 sessions.',
  bkNone:'No backup yet.',bkAgo:n=>`Last backup was ${n} day(s) ago.`,bkWarn:' If Chrome data is cleared, the log goes with it.',bkNowBtn:'Save a backup file now',
@@ -446,7 +449,7 @@ en:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor"
  syncMiss:'Auto-backup has not reached GitHub for 3+ sessions. Open File and check.',storeMiss:'Storage',idbOn:'Stored in the browser database',
  migNote:'Program fixed: Shoulder Press is no longer core, Plank moved to the end of both Lower days.'
 },
-ar:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 11h12"/><rect x="5" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><rect x="25" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><path d="M2 8.5v5M32 8.5v5"/></svg><span class="wm"><i>GYM</i><b>LOG</b></span>',title:'Gym Log',langBtn:'EN',tabs:['الرئيسية','السجل','البرنامج','الملف'],update:'فيه تحديث — اضغط',
+ar:{brand:'<svg class="lg" viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 11h12"/><rect x="5" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><rect x="25" y="5" width="4" height="12" rx="1.2" fill="currentColor"/><path d="M2 8.5v5M32 8.5v5"/></svg><span class="wm"><i>GYM</i><b>LOG</b></span>',title:'Gym Log',langBtn:'EN',tabs:['الرئيسية','السجل','البرنامج','التمارين','الملف'],update:'فيه تحديث — اضغط',
  next:'الجلسة الجاية',coreL:'الأساسي',start:'ابدأ',draftOpen:'جلسة مفتوحة لسه ماتحفظتش',draftEdit:'تعديل جلسة',resume:'كمّل',
  last7:'آخر ٧ أيام',sessions:'جلسات',lastSess:'آخر جلسة',min3:'الحد الأدنى في الأسبوع ٣ جلسات.',
  bkNone:'لسه ماعملتش ولا نسخة احتياطية.',bkAgo:n=>`آخر نسخة احتياطية من ${n} يوم.`,bkWarn:' لو بيانات Chrome اتمسحت، السجل هيضيع معاها.',bkNowBtn:'احفظ نسخة في ملف دلوقتي',
@@ -714,7 +717,7 @@ window.addEventListener('popstate',e=>{
   if(Sx.hidden)go(st.tab||'home');
 });
 try{history.replaceState({},'')}catch(e){}
-function go(t){tab=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));({home:renderHome,hist:renderHistory,prog:renderProgram,data:renderData})[t]();window.scrollTo(0,0);saveUI()}
+function go(t){tab=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));({home:renderHome,hist:renderHistory,prog:renderProgram,lib:renderLib,data:renderData})[t]();window.scrollTo(0,0);saveUI()}
 function modal(h){const m=$('#modal');m.querySelector('.mbox').innerHTML=h;if(m.hidden&&!hs().modal)history.pushState(Object.assign({tab:tab},hs(),{modal:1}),'');m.hidden=false}
 function closeModal(silent){$('#modal').hidden=true;if(!silent&&hs().modal)history.back()}
 
@@ -727,8 +730,8 @@ function renderHome(){
   /* ١) جلسة النهارده: الإجابة الأولى على الشاشة */
   h+=`<div class="card hero">
     <div class="rot" dir="ltr">${days.map((x,k)=>`<span class="rs${x.id===nd?' nx':''}${k===li?' ld':''}">${k===li?'✓ ':''}${esc(x.name)}</span>`).join('')}</div>
-    <div class="mu">${dr?(dr.editing?L.draftEdit:L.draftOpen):L.todayL} · <span class="en">Cycle ${dr?dr.cycle:calcCycle(nd)}</span></div>
-    <div class="big"><bdi>${esc(d.name)}</bdi></div>
+    <div class="mu">${dr?(dr.editing?L.draftEdit:L.draftOpen):L.todayL}</div>
+    <div class="big hb"><bdi>${esc(d.name)}</bdi><span class="cyb en">Cycle ${dr?dr.cycle:calcCycle(nd)}</span></div>
     <div class="xl">${d.ex.map((t,i)=>{const l=exHist(t.id)[0];return `<div class="xr${t.core?' c':''}"><span class="xn en">${esc(t.name)}</span>${t.core?'<i class="xs">★</i>':''}<span class="xw en">${t.unit?'':fw(l?l.w:t.w)+' · '}${t.sets}×${t.reps}${t.unit?' '+esc(unitTxt(t.unit)):''}</span></div>`}).join('')}</div>
     <div class="coreline">★ ${L.coreL}: <span class="en">${esc(coreNames(d).join(' + '))}</span></div>
     ${dr?`<button class="btn pri w mt big2" data-a="resume">${L.resume}</button>`:`<button class="btn pri w mt big2" data-a="start" data-d="${d.id}">${L.start} <bdi>${esc(d.name)}</bdi></button>`}
@@ -923,7 +926,7 @@ const LIB=[
 ["Farmer's Walk",'core',20,3,25,'خطوة','دمبل تقيل في كل إيد. امشي بخطوات ثابتة وكتفك لورا وجذعك مشدود. القبضة هي أول نقطة تلامس، وماتسيبش الوزن لحد ما تخلّص الخطوات.','A heavy dumbbell in each hand. Walk with steady steps, shoulders back, torso tight. Grip is the limiter; do not drop the weights until the steps are done.']
 ];
 const libGet=n=>LIB.find(x=>x[0]===n);
-const libHow=n=>{const x=libGet(n);return x?(LANG==='ar'?x[6]:x[7]):''};
+const libHow=n=>{const x=libGet(n);return x?x[6]:''};
 const lastW=n=>{for(const s of done()){const e=s.ex.find(x=>x.name===n&&+x.w>0);if(e)return +e.w}return null};
 const mk=(n,sets,reps,core)=>{const L=libGet(n)||[n,'',0,3,12,''];const lw=lastW(n);return{id:uid(),name:n,w:lw!=null?lw:L[2],sets:sets||L[3],reps:reps||L[4],goal:reps||L[4],unit:L[5]||'',core:!!core,note:''}};
 const SYSTEMS=[
@@ -948,6 +951,22 @@ function switchSys(id){
   if(!days)days=sp.days.map((d,k)=>({id:'D'+uid()+k,name:d[0],ex:d[1].map(x=>mk(x[0],x[1],x[2],x[3]))}));
   delete S.sys.saved[id];S.program.days=days;S.sys.cur=id;pDay=days[0].id;save();queueBackup();
 }
+/* ================= شاشة التمارين: كل التمارين وشرحها ================= */
+let lbQ='',lbG='all';
+function libRows(){
+  const q=lbQ.trim().toLowerCase(),inP=new Set(S.program.days.flatMap(d=>d.ex.map(t=>t.name)));
+  const r=LIB.filter(x=>(lbG==='all'||x[1]===lbG)&&(!q||x[0].toLowerCase().includes(q)));
+  return r.map(x=>`<details class="lbx"><summary><span class="nm en">${esc(x[0])}</span>${inP.has(x[0])?`<span class="tag">${tr('في برنامجك','In program')}</span>`:''}<span class="mu en">${x[3]}×${x[4]}</span></summary>
+    <div class="mu" style="margin-bottom:6px">${GRP[x[1]][LANG==='ar'?0:1]}</div><div class="howto">${esc(x[6])}</div>
+    <div class="row mt"><button class="btn sm sp" data-a="lbAdd" data-n="${esc(x[0])}">+ ${tr('ضيف لليوم الحالي','Add to current day')}</button></div></details>`).join('')||`<div class="empty">—</div>`;
+}
+function renderLib(){
+  $('#view').innerHTML=`<input class="inp en" id="lbS" placeholder="${tr('ابحث عن تمرين…','Search exercises…')}" value="${esc(lbQ)}" style="text-align:left;margin-bottom:8px">
+  <div class="chips" id="lbC">${lbChips()}</div>
+  <div class="mu" style="margin:2px 4px 8px">${tr('دوس على أي تمرين يظهر شرحه.','Tap an exercise to see how to do it.')} · ${LIB.length}</div>
+  <div class="card" id="lbL">${libRows()}</div>`;
+}
+const lbChips=()=>`<button class="${lbG==='all'?'on':''}" data-a="lbG" data-g="all">${tr('الكل','All')}</button>${Object.keys(GRP).map(g=>`<button class="${lbG===g?'on':''}" data-a="lbG" data-g="${g}">${GRP[g][LANG==='ar'?0:1]}</button>`).join('')}`;
 /* ================= شاشة البرنامج ================= */
 let pDay='U1';
 function renderProgram(){
@@ -1234,7 +1253,7 @@ async function renderData(){
 }
 
 /* ================= الأحداث ================= */
-document.addEventListener('input',ev=>{if(ev.target.id==='libS'){libQ=ev.target.value;libModal()}});
+document.addEventListener('input',ev=>{if(ev.target.id==='libS'){libQ=ev.target.value;libModal()}else if(ev.target.id==='lbS'){lbQ=ev.target.value;const l=$('#lbL');if(l)l.innerHTML=libRows()}});
 document.addEventListener('click',ev=>{
   if(ev.target.closest('.brand .lg')){hardRefresh();return}
   const tb=ev.target.closest('.tabs button');if(tb){navTab(tb.dataset.tab);return}
@@ -1266,6 +1285,8 @@ document.addEventListener('click',ev=>{
     case 'sysPick':if(confirm(tr('هتبدّل النظام. تمارينك الحالية محفوظة وترجعلها. تكمّل؟','Switch system? Your current exercises are kept. Continue?'))){switchSys(b.dataset.id);closeModal();renderProgram();toast(tr('النظام اتغيّر ✓','System changed ✓'))}break;
     case 'libOpen':libQ='';libG='all';libModal();break;
     case 'libG':libG=b.dataset.g;libModal();break;
+    case 'lbG':lbG=b.dataset.g;{const c=$('#lbC'),l=$('#lbL');if(c)c.innerHTML=lbChips();if(l)l.innerHTML=libRows()}break;
+    case 'lbAdd':{const dd=day(pDay)||S.program.days[0];dd.ex.push(mk(b.dataset.n));save();queueBackup();toast(tr('اتضاف لـ ','Added to ')+dd.name+' ✓');{const l=$('#lbL');if(l){const o=[...l.querySelectorAll('details')].map(x=>x.open);l.innerHTML=libRows();l.querySelectorAll('details').forEach((x,k)=>x.open=o[k])}}break}
     case 'libAdd':{const t=mk(b.dataset.n);day(pDay).ex.push(t);save();queueBackup();closeModal();renderProgram();toast(tr('اتضاف ✓','Added ✓'));break}
     case 'dayAdd':{const nd={id:'D'+uid(),name:tr('يوم جديد','New day'),ex:[]};S.program.days.push(nd);pDay=nd.id;save();queueBackup();renderProgram();dayModal();break}
     case 'dayEdit':dayModal();break;
