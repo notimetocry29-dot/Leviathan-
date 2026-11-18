@@ -1,5 +1,5 @@
-const CACHE='maher-v2';
-const FILES=['./','./index.html','./search.json','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png','./leviathan/','./leviathan/index.html'];
+const CACHE='maher-v3';
+const FILES=['./','./index.html','./search.json','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png','./leviathan/','./leviathan/index.html','./assets/maher.css','./assets/maher.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));});
 self.addEventListener('message',e=>{if(e.data==='skip')self.skipWaiting();});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE&&!k.startsWith('gym')).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
