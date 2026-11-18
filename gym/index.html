@@ -341,6 +341,10 @@ html[data-th=obsidian] .brand .wm b{color:var(--ac2)}
 html[data-th] .brand .wm b,html .brand .wm b{font-family:inherit;font-style:normal;font-weight:800;font-size:14px;letter-spacing:.04em;color:var(--tx);opacity:.95;text-shadow:none;background:none;-webkit-background-clip:border-box;background-clip:border-box}
 html[data-th=book] .brand .wm b{font-family:Georgia,serif;font-style:italic}
 html[data-th=cedar] .brand .wm b,html[data-th=sand] .brand .wm b{font-family:Georgia,serif}
+.brand .wm{gap:3px}
+.brand .wm::after{display:none!important}
+html[data-th] .brand .wm b,html .brand .wm b{font-size:12px;letter-spacing:.02em}
+.brand .wm i{margin-inline-end:-.3em}
 </style>
 </head>
 <body>
@@ -362,7 +366,7 @@ html[data-th=cedar] .brand .wm b,html[data-th=sand] .brand .wm b{font-family:Geo
 
 <script>
 'use strict';
-const VER='21';
+const VER='22';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
