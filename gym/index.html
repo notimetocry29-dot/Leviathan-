@@ -128,7 +128,7 @@ select.inp{appearance:auto}
 
 <script>
 'use strict';
-const VER='5';
+const VER='6';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -321,8 +321,9 @@ async function boot(){
 const day=id=>S.program.days.find(d=>d.id===id)||S.program.days[0];
 const coreNames=d=>d.ex.filter(e=>e.core).map(e=>e.name);
 const done=()=>S.sessions.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);
-function nextDayId(){const l=done()[0];const o=S.program.days.map(d=>d.id);if(!l)return o[0];const i=o.indexOf(l.day);return o[(i+1)%o.length]}
-function calcCycle(dayId){const l=done()[0];if(!l)return S.settings.cycle||1;const o=S.program.days.map(d=>d.id);return o.indexOf(dayId)<=o.indexOf(l.day)?l.cycle+1:l.cycle}
+function dayIdx(s){const o=S.program.days;let i=o.findIndex(d=>d.id===s.day);if(i<0)i=o.findIndex(d=>d.name===s.dayName);return i}
+function nextDayId(){const l=done()[0];const o=S.program.days.map(d=>d.id);if(!l)return o[0];const i=dayIdx(l);return i<0?o[0]:o[(i+1)%o.length]}
+function calcCycle(dayId){const l=done()[0];if(!l)return S.settings.cycle||1;const o=S.program.days.map(d=>d.id),i=dayIdx(l);return i<0?l.cycle:(o.indexOf(dayId)<=i?l.cycle+1:l.cycle)}
 function exHist(exId,skip){const out=[];for(const s of done()){if(s.id===skip)continue;const e=s.ex.find(x=>x.exId===exId);if(e)out.push(Object.assign({date:s.date,cycle:s.cycle},e))}return out}
 function setsStr(e){const a=e.sets;const u=e.unit?' '+unitTxt(e.unit):'';if(!a.length)return '';return a.every(r=>r===a[0])?`${a.length}×${a[0]}${u}`:a.join('/')+u}
 
@@ -408,6 +409,7 @@ function renderHome(){
     <div class="big"><bdi>${esc(d.name)}</bdi></div>
     <div class="mu">${L.coreL}: <span class="en">${esc(coreNames(d).join(' + '))}</span></div>
     <button class="btn pri w mt" data-a="start" data-d="${d.id}">${L.start} <bdi>${esc(d.name)}</bdi></button></div>`;
+  {const li=ds[0]?dayIdx(ds[0]):-1;h+=`<div class="row" style="justify-content:center;gap:6px;margin-bottom:10px;flex-wrap:nowrap;direction:ltr">${S.program.days.map((x,k)=>`<span class="pill${x.id===nd?' full':''}"${x.id===nd?'':''}>${k===li?'✓ ':''}${esc(x.name)}</span>${k<S.program.days.length-1?'<span class="mu">→</span>':''}`).join('')}</div>`}
   h+=`<div class="grid3">${S.program.days.filter(x=>x.id!==nd).map(x=>`<button class="btn" data-a="start" data-d="${x.id}"><bdi>${esc(x.name)}</bdi></button>`).join('')}</div>`;
   h+=`<div class="card"><div class="row"><div><div class="mu">${L.last7}</div><div class="big">${wk} <span class="mu">${L.sessions}</span></div></div><div class="sp"></div>`;
   if(ds[0])h+=`<div style="text-align:end"><div class="mu">${L.lastSess}</div><div style="font-weight:700"><bdi>${esc(ds[0].dayName)}</bdi></div><div class="mu">${fmtD(ds[0].date)}</div></div>`;
