@@ -423,7 +423,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='35';
+const VER='36';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -1007,6 +1007,7 @@ function cuModal(n){
   <label class="fld">${tr('العضلة','Muscle group')}<select class="inp" id="cuG">${Object.keys(GRP).map(g=>`<option value="${g}"${t.g===g?' selected':''}>${GRP[g][LANG==='ar'?0:1]}</option>`).join('')}</select></label>
   <div class="fgrid"><label class="fld">${T().weight}<input class="inp" id="cuW" inputmode="decimal" value="${esc(t.w)}"></label><label class="fld">${T().sets}<input class="inp" id="cuS" inputmode="numeric" value="${esc(t.sets)}"></label><label class="fld">${T().reps}<input class="inp" id="cuR" inputmode="numeric" value="${esc(t.reps)}"></label></div>
   <label class="fld">${T().unit}<select class="inp" id="cuU">${['','ث','خطوة'].map(u=>`<option value="${u}"${t.unit===u?' selected':''}>${T().units[u]}</option>`).join('')}</select></label>
+  ${c?'':`<label class="fld">${tr('تضيفه لبرنامجك؟ (اختياري)','Add to your program? (optional)')}<select class="inp" id="cuD"><option value="">${tr('لا، في المكتبة بس','No, library only')}</option>${S.program.days.map(x=>`<option value="${x.id}"${x.id===pDay&&tab==='prog'?'':''}>${tr('ضيفه لـ ','Add to ')}${esc(x.name)}</option>`).join('')}</select></label>`}
   <label class="fld">${tr('الشرح والتعليمات','Instructions')}<textarea class="inp" id="cuH" rows="7" placeholder="${tr('التجهيز، التنفيذ، الأخطاء، نصيحتك…','Setup, execution, mistakes, tips…')}">${esc(t.how)}</textarea></label>
   <div class="row"><button class="btn pri sp" data-a="cuSave" data-n="${esc(t.name)}">${T().saveB}</button>${c?`<button class="btn dan" data-a="cuDel" data-n="${esc(t.name)}">${T().del}</button>`:''}<button class="btn ghost" data-a="closeM">${T().cancel}</button></div>`);
 }
@@ -1017,7 +1018,8 @@ function cuSave(old){
   S.custom=S.custom||[];let c=old&&S.custom.find(x=>x.name===old);if(!c){c={};S.custom.push(c)}
   Object.assign(c,{name,g:$('#cuG').value,w:g('#cuW')||0,sets:Math.max(1,g('#cuS')||3),reps:g('#cuR')||12,unit:$('#cuU').value,how:$('#cuH').value.trim()});
   if(old&&old!==name)S.program.days.forEach(d=>d.ex.forEach(t=>{if(t.name===old)t.name=name}));
-  save();queueBackup();closeModal();renderLib();toast(tr('اتحفظ ✓','Saved ✓'));
+  const dv=$('#cuD')?$('#cuD').value:'',td=dv&&S.program.days.find(x=>x.id===dv);if(td)td.ex.push(mk(name));
+  save();queueBackup();closeModal();if(tab==='prog')renderProgram();else renderLib();toast(td?tr('اتحفظ واتضاف لـ ','Saved and added to ')+td.name+' ✓':tr('اتحفظ في المكتبة ✓','Saved to library ✓'));
 }
 /* ================= شاشة البرنامج ================= */
 let pDay='U1';
@@ -1351,7 +1353,7 @@ document.addEventListener('click',ev=>{
     case 'dayDel':if(confirm(tr('تحذف اليوم ده بتمارينه؟ السجل القديم مش هيتأثر.','Delete this day and its exercises? Your log is not affected.'))){S.program.days=S.program.days.filter(x=>x.id!==pDay);pDay=S.program.days[0].id;save();queueBackup();closeModal();renderProgram()}break;
     case 'up':case 'down':{const ex=day(pDay).ex,j=a==='up'?i-1:i+1;if(j>=0&&j<ex.length){[ex[i],ex[j]]=[ex[j],ex[i]];save();queueBackup();renderProgram()}break}
     case 'editT':tplModal(i);break;
-    case 'addT':tplModal(-1);break;
+    case 'addT':cuModal();break;
     case 'saveT':saveTpl(i);break;
     case 'delT':if(confirm(L.confDelEx)){day(pDay).ex.splice(i,1);save();queueBackup();closeModal();renderProgram()}break;
     case 'copyT':copy(tplCard(day(pDay)));break;
