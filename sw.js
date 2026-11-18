@@ -1,4 +1,4 @@
-const CACHE='maher-v3';
+const CACHE='maher-v4';
 const FILES=['./','./index.html','./search.json','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png','./leviathan/','./leviathan/index.html','./assets/maher.css','./assets/maher.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));});
 self.addEventListener('message',e=>{if(e.data==='skip')self.skipWaiting();});
