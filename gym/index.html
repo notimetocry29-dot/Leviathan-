@@ -374,6 +374,33 @@ html[data-th=pulse] #sess{background-image:none!important}
 html[data-th=book] #sess{background-image:none!important}
 #sess *{transition:none!important}
 #sess .ex{will-change:auto}
+
+/* ===== شاشة الجلسة: تخطيط مضغوط (v35) ===== */
+#sess .ex{padding:9px 10px;margin-bottom:8px;contain-intrinsic-size:auto 175px}
+#sess .exh{gap:6px}
+#sess .exname{flex:1;min-width:0;text-align:start;font-size:16.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sess .exno{width:22px;height:22px;font-size:12px}
+#sess .cstar{color:var(--ac2);font-size:14px}
+#sess .r2{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:5px}
+#sess .r2 .tgt{display:block;margin:0;flex:1;min-width:0;font-size:12px;line-height:1.4}
+#sess .r2 .tgt b{font-size:14px;margin-inline-end:6px}
+#sess .wrow{margin:0;padding:3px;gap:2px;flex:none}
+#sess .wrow .wi{width:56px;flex:none;font-size:20px;min-height:38px}
+#sess .wrow .un{width:auto;font-size:12px}
+#sess .sb2{width:36px;height:38px;font-size:21px;border-radius:10px}
+#sess .pmsg{font-size:12px;padding:3px 8px;margin-top:5px}
+#sess .sets{margin-top:7px;gap:6px;align-items:center;flex-wrap:wrap}
+#sess .scell{flex:1 1 44px;min-width:44px}
+#sess .scell .inp{height:46px;font-size:20px}
+#sess .sadd{flex-direction:column;gap:3px;flex:none}
+#sess .sadd .sb{width:30px;height:21px;font-size:14px}
+#sess .eopt{margin-top:7px;gap:6px;flex-wrap:wrap}
+#sess .mini{font-size:13px;padding:5px 11px;min-height:32px}
+#sess .mini.fill{color:var(--ac2);border-color:var(--acbd)}
+#sess .cl.big{padding:4px 10px 4px 8px;min-height:32px;font-size:13px}
+#sess .cl.big input{width:18px;height:18px}
+#sess .meta2{gap:8px;margin-bottom:8px}
+#sess .meta2 .inp{min-height:38px;font-size:14px}
 </style>
 </head>
 <body>
@@ -396,7 +423,7 @@ html[data-th=book] #sess{background-image:none!important}
 
 <script>
 'use strict';
-const VER='34';
+const VER='35';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -778,20 +805,18 @@ function exBlock(e,i){
   const showNote=e.note||openTips.has('n'+i),showTip=openTips.has('t'+i);
   const wv=(e.w===''||e.w==null||(noW(e.w)&&e.unit))?'':esc(e.w);
   const dn=exSt(e)==='ok';
-  return `<div class="card ex${e.core?' core':''}${stCls(e)}" data-i="${i}">
-  <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?`<span class="tag">★ ${L.coreL}</span>`:''}<span class="chk" id="ok${i}">${stMark(e)}</span></div>
-  <div class="tgt"><b class="en">${e.tsets}×${e.treps}${u}</b><span>${lt}</span></div>
+  return `<div class="card ex cx${e.core?' core':''}${stCls(e)}" data-i="${i}">
+  <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?'<span class="cstar" title="Core">★</span>':''}<span class="chk" id="ok${i}">${stMark(e)}</span></div>
+  <div class="r2"><div class="tgt"><b class="en">${e.tsets}×${e.treps}${u}</b><span>${lt}</span></div>
+    <div class="wrow"><button class="sb2" data-a="wstep" data-i="${i}" data-s="-1" aria-label="−">−</button><input class="inp wi" data-f="w" inputmode="decimal" enterkeyhint="next" value="${wv}" placeholder="—"><span class="un">${L.wt}</span><button class="sb2" data-a="wstep" data-i="${i}" data-s="1" aria-label="+">+</button></div></div>
   ${p?`<div class="pmsg ${p.c}">${p.t}</div>`:''}
-  <div class="wrow"><span class="lb2">${L.wt==='k'?'الوزن':'Weight'}</span>
-    <button class="sb2" data-a="wstep" data-i="${i}" data-s="-1" aria-label="−">−</button>
-    <input class="inp wi" data-f="w" inputmode="decimal" enterkeyhint="next" value="${wv}" placeholder="—"><span class="un">${L.wt}</span>
-    <button class="sb2" data-a="wstep" data-i="${i}" data-s="1" aria-label="+">+</button></div>
-  <div class="sets">${e.sets.map((r,j)=>`<div class="scell"><span class="lb">${j+1}</span><input class="inp" data-f="s" data-j="${j}" inputmode="numeric" enterkeyhint="next" value="${esc(r)}" placeholder="${l&&l.sets[j]!=null?l.sets[j]:e.treps}"></div>`).join('')}
+  <div class="sets">${e.sets.map((r,j)=>`<div class="scell"><input class="inp" data-f="s" data-j="${j}" inputmode="numeric" enterkeyhint="next" value="${esc(r)}" placeholder="${l&&l.sets[j]!=null?l.sets[j]:e.treps}" aria-label="${j+1}"></div>`).join('')}
     <div class="sadd"><button class="sb" data-a="addset" data-i="${i}" aria-label="+">+</button><button class="sb" data-a="rmset" data-i="${i}" aria-label="−">−</button></div></div>
   <div class="eopt">
+    <button class="mini fill" data-a="fill" data-i="${i}">⚡ ${l?tr('زي آخر مرة','Same as last'):tr('زي الهدف','As target')}</button>
     <label class="cl big${e.clean?' on':''}"><input type="checkbox" data-f="c" ${e.clean?'checked':''}>${L.clean}</label>
-    <button class="mini${showNote?' on':''}" data-a="tgl" data-k="n${i}">✎ ${L.note}</button>
-    ${e.note0?`<button class="mini${showTip?' on':''}" data-a="tgl" data-k="t${i}">ⓘ ${L.tips}</button>`:''}
+    <button class="mini${showNote?' on':''}" data-a="tgl" data-k="n${i}">✎</button>
+    ${e.note0?`<button class="mini${showTip?' on':''}" data-a="tgl" data-k="t${i}">ⓘ</button>`:''}
   </div>
   ${showTip&&e.note0?`<div class="tnote">${esc(e.note0)}</div>`:''}
   ${showNote?`<input class="inp noteI" data-f="n" value="${esc(e.note)}" placeholder="${L.notePh}">`:''}
@@ -1296,6 +1321,7 @@ document.addEventListener('click',ev=>{
     case 'shareDraft':shareDraft();break;
     case 'discard':if(confirm(d.editing?L.confCancelEdit:L.confDiscard)){S.draft=null;openTips.clear();save();closeSession()}break;
     case 'wstep':{const e=d.ex[i],v=num(e.w),st=(+b.dataset.s)*2.5,n=Math.max(0,(isNaN(v)?0:v)+st);e.w=String(Math.round(n*100)/100);const inp=document.querySelector(`.ex[data-i="${i}"] .wi`);if(inp)inp.value=e.w;save();break}
+    case 'fill':{const e=d.ex[i],h=exHist(e.exId,d.editing)[0];e.sets=e.sets.map((r,j)=>(r!==''&&r!=null)?r:String(h&&h.sets[j]!=null?h.sets[j]:e.treps));save();document.querySelectorAll(`.ex[data-i="${i}"] input[data-f=s]`).forEach((x,j)=>x.value=e.sets[j]);updCore();break}
     case 'addset':d.ex[i].sets.push('');save();renderSession();break;
     case 'rmset':if(d.ex[i].sets.length>1){d.ex[i].sets.pop();save();renderSession()}break;
     case 'tgl':{const k=b.dataset.k;openTips.has(k)?openTips.delete(k):openTips.add(k);renderSession();if(k[0]==='n'){const inp=document.querySelector(`.ex[data-i="${k.slice(1)}"] .noteI`);inp&&inp.focus()}break}
