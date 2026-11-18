@@ -110,11 +110,6 @@ select.inp{appearance:auto}
 .btn.rec{border:2px solid var(--ok);color:var(--oktx);background:var(--okbg)}
 .btn.rec{white-space:nowrap}
 .btn.rec::after{content:' ✓';color:var(--ok)}
-.thm{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.thm button{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:1px solid var(--bd);border-radius:12px;padding:8px 2px;font-size:12px;color:var(--mu)}
-.thm button.on{border-color:var(--ac);color:var(--tx)}
-.thm i{width:30px;height:30px;border-radius:50%;border:2px solid var(--bd);display:block;position:relative}
-.thm i::after{content:'';position:absolute;inset:7px;border-radius:50%;background:var(--c)}
 #sess .shead{padding-bottom:10px}
 .pbar{height:3px;background:var(--s2);position:sticky;top:calc(52px + env(safe-area-inset-top));z-index:2}
 .pbar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
@@ -250,6 +245,46 @@ html[data-th=dawn] .inp,html[data-th=dawn] .wrow,html[data-th=dawn] .scell .inp{
 html[data-th=dawn] .mbox{background:#2a2147;border-radius:26px 26px 0 0}
 html[data-th=dawn] .big{font-weight:700}
 html[data-th=dawn] .rs.nx{box-shadow:0 4px 14px rgba(255,150,70,.4)}
+html[data-th="x"]{--bg:#000000;--s1:#050505;--s2:#16181c;--bd:#2f3336;--tx:#e7e9ea;--mu:#71767b;--ac:#1d9bf0;--ac2:#6cc0f5;--ok:#00ba7c;--mid:#ffd400;--bad:#f4212e;--onac:#ffffff;--hero:#07121b;--tx2:#c4c9cc;--ph:#3e4144;--okbd:#0a5a40;--okbg:#04201a;--midbd:#665500;--midbg:#1c1800;--badbg:#2a0a0d;--acbd:#0f4a73;--acbg:#071b2b;--oktx:#4ddaa4;--midtx:#ffe566;--badtx:#ff8a92;--font:"TwitterChirp",-apple-system,"Segoe UI",Roboto,"Noto Sans Arabic",system-ui,sans-serif;--fnum:inherit;--rad:16px;--radb:9999px;--radp:9999px;--bw:1px;--sh:none;--ttl:none;--ls:0}
+/* --- إكس: أسود خالص، فواصل رفيعة، أزرار كبسولة، أزرق --- */
+html[data-th=x] .top{background:rgba(0,0,0,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+html[data-th=x] .brand{font-weight:800;font-size:20px}
+html[data-th=x] .brand b{color:var(--ac)}
+html[data-th=x] .lang{background:none;color:var(--tx);font-weight:700}
+html[data-th=x] .card,html[data-th=x] .sc,html[data-th=x] .ex,html[data-th=x] .bkn{background:#000}
+html[data-th=x] .hero{background:#000;border-color:var(--bd)}
+html[data-th=x] .big{font-weight:800}
+html[data-th=x] .btn{background:none;border-color:#536471;color:var(--ac);font-weight:700}
+html[data-th=x] .btn.pri{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:800}
+html[data-th=x] .btn.pri:active{background:#1a8cd8}
+html[data-th=x] .btn.rec{border-color:var(--ok);color:var(--ok);background:none}
+html[data-th=x] .rs{border-color:var(--bd)}
+html[data-th=x] .rs.nx{background:var(--ac);border-color:var(--ac);color:#fff}
+html[data-th=x] .xr{border-bottom-color:var(--bd)}
+html[data-th=x] .xr.c .xn{color:var(--tx)}
+html[data-th=x] .xr .xs{color:var(--ac)}
+html[data-th=x] .tabs{background:rgba(0,0,0,.85);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--bd)}
+html[data-th=x] .tabs button{position:relative;color:var(--tx);font-weight:500}
+html[data-th=x] .tabs button.on{box-shadow:none;color:var(--tx);font-weight:800}
+html[data-th=x] .tabs button.on::after{content:'';position:absolute;left:50%;bottom:6px;width:28px;height:4px;margin-left:-14px;border-radius:99px;background:var(--ac)}
+html[data-th=x] .sc{border-inline-start-width:1px}
+html[data-th=x] .sc.full .st{background:none;border:1px solid var(--okbd)}
+html[data-th=x] .ex.core{border-inline-start:1px solid var(--bd)}
+html[data-th=x] .ex.core .exname::after{content:' ★';color:var(--ac);font-size:13px}
+html[data-th=x] .scell .inp,html[data-th=x] .inp,html[data-th=x] .wrow{background:#000;border-color:var(--bd);border-radius:12px}
+html[data-th=x] .inp:focus{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
+html[data-th=x] .pbar{background:var(--bd)}
+html[data-th=x] .pbar i{background:var(--ac)}
+html[data-th=x] .mbox{background:#000;border:1px solid var(--bd);border-radius:20px 20px 0 0}
+html[data-th=x] .sfoot{background:linear-gradient(180deg,rgba(0,0,0,0),#000 28%)}
+.thm{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.thm button{display:flex;flex-direction:column;gap:8px;background:var(--s2);border:2px solid var(--bd);border-radius:16px;padding:8px;color:var(--tx);font-size:15px;font-weight:700;text-align:start}
+.thm button.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--acbd)}
+.thm .tp{display:flex;align-items:center;justify-content:center;height:92px;border-radius:10px;border:1px solid var(--bd)}
+.thm .tp i{display:flex;flex-direction:column;gap:7px;width:78%;padding:10px;border:1.5px solid;border-radius:8px}
+.thm .tp b{display:block;height:6px;width:80%;border-radius:3px}
+.thm .tp u{display:block;height:14px;width:100%;border-radius:5px;margin-top:2px}
+.thm .tn{padding:0 4px 2px}
 </style>
 </head>
 <body>
@@ -271,7 +306,7 @@ html[data-th=dawn] .rs.nx{box-shadow:0 4px 14px rgba(255,150,70,.4)}
 
 <script>
 'use strict';
-const VER='17';
+const VER='18';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -553,7 +588,7 @@ async function shareText(t){
   try{await navigator.clipboard.writeText(t);toast(T().copiedInstead)}catch(e){copy(t)}
 }
 
-const THEMES={"iron": {"ar": "حديد", "en": "Iron", "bg": "#0e0e0f", "ac": "#c38d4f"}, "plate": {"ar": "ورشة", "en": "Plate", "bg": "#0b0b0a", "ac": "#f2c200"}, "book": {"ar": "دفتر", "en": "Logbook", "bg": "#efe6d0", "ac": "#1f3a8a"}, "pulse": {"ar": "نبض", "en": "Pulse", "bg": "#04080b", "ac": "#19e3c1"}, "dawn": {"ar": "فجر", "en": "Dawn", "bg": "#2a1d4a", "ac": "#ffb86b"}};
+const THEMES={"iron": {"ar": "حديد", "en": "Iron", "bg": "#0e0e0f", "s1": "#17171a", "tx": "#ece8e1", "ac": "#c38d4f"}, "plate": {"ar": "ورشة", "en": "Plate", "bg": "#0b0b0a", "s1": "#151513", "tx": "#f3f1e8", "ac": "#f2c200"}, "book": {"ar": "دفتر", "en": "Logbook", "bg": "#efe6d0", "s1": "#fbf6e8", "tx": "#1f2430", "ac": "#1f3a8a"}, "pulse": {"ar": "نبض", "en": "Pulse", "bg": "#04080b", "s1": "#08121a", "tx": "#dff7f2", "ac": "#19e3c1"}, "dawn": {"ar": "فجر", "en": "Dawn", "bg": "#2a1d4a", "s1": "#3d2d63", "tx": "#fcefe4", "ac": "#ffb86b"}, "x": {"ar": "إكس", "en": "X", "bg": "#000000", "s1": "#16181c", "tx": "#e7e9ea", "ac": "#1d9bf0"}};
 function applyTheme(){const t=THEMES[S.settings.theme]?S.settings.theme:'iron';document.documentElement.dataset.th=t;const m=document.querySelector('meta[name=theme-color]');if(m)m.content=THEMES[t].bg}
 /* ================= التنقل ================= */
 let tab='home';
@@ -562,7 +597,8 @@ function applyLang(){applyTheme();
   $('#brand').innerHTML=L.brand;$('#langBtn').textContent=L.langBtn;$('#updBtn').textContent=L.update;
   document.querySelectorAll('.tabs button').forEach((b,i)=>b.textContent=L.tabs[i]);
 }
-function go(t){tab=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));({home:renderHome,hist:renderHistory,prog:renderProgram,data:renderData})[t]();window.scrollTo(0,0)}
+function saveUI(){try{localStorage.setItem('gymlog.ui',JSON.stringify({t:tab,s:!$('#sess').hidden,y:window.scrollY,at:Date.now()}))}catch(e){}}
+function go(t){tab=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));({home:renderHome,hist:renderHistory,prog:renderProgram,data:renderData})[t]();window.scrollTo(0,0);saveUI()}
 function modal(h){const m=$('#modal');m.querySelector('.mbox').innerHTML=h;m.hidden=false}
 function closeModal(){$('#modal').hidden=true}
 
@@ -612,8 +648,8 @@ function editSession(id){
   if(d)for(const t of d.ex)if(!ex.some(e=>e.exId===t.id))ex.push(draftEx(t));
   S.draft.ex=ex;openTips.clear();save();closeModal();openSession();
 }
-function openSession(){renderSession();$('#sess').hidden=false;$('#sess').scrollTop=0;document.body.style.overflow='hidden'}
-function closeSession(){$('#sess').hidden=true;document.body.style.overflow='';if(tab==='home')renderHome()}
+function openSession(){renderSession();$('#sess').hidden=false;$('#sess').scrollTop=0;document.body.style.overflow='hidden';saveUI()}
+function closeSession(){$('#sess').hidden=true;document.body.style.overflow='';if(tab==='home')renderHome();saveUI()}
 const openTips=new Set();
 function exBlock(e,i){
   const L=T(),h=exHist(e.exId,S.draft.editing),l=h[0],p=progMsg({sets:e.tsets,goal:e.goal},h,e.unit);
@@ -933,7 +969,7 @@ async function renderData(){
   $('#view').innerHTML=`<div class="card"><div class="mu">${L.onPhone}</div><div class="big">${n} <span class="mu">${L.sessions}</span></div>
     <div class="mu">${L.lastBk}: ${lb?new Date(lb).toLocaleString(loc(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):L.never}</div>
     ${persisted===true?`<div class="note-ok">${L.persisted}</div>`:''}</div>
-  <div class="card"><div style="font-weight:700;margin-bottom:8px">${L.themeT}</div><div class="thm">${Object.keys(THEMES).map(k=>`<button data-a="theme" data-k="${k}" class="${(S.settings.theme||'iron')===k?'on':''}"><i style="--c:${THEMES[k].ac};background:${THEMES[k].bg}"></i>${THEMES[k][LANG]}</button>`).join('')}</div></div>
+  <div class="card"><div style="font-weight:700;margin-bottom:8px">${L.themeT}</div><div class="thm">${Object.keys(THEMES).map(k=>{const t=THEMES[k];return `<button data-a="theme" data-k="${k}" class="${(S.settings.theme||'iron')===k?'on':''}"><span class="tp" style="background:${t.bg}"><i style="background:${t.s1};border-color:${t.ac}"><b style="background:${t.tx}"></b><b style="background:${t.tx};width:55%;opacity:.5"></b><u style="background:${t.ac}"></u></i></span><span class="tn">${t[LANG]}</span></button>`}).join('')}</div></div>
   <div class="card"><div style="font-weight:700;margin-bottom:4px">${L.syncT}</div>
     ${SYNC.on?`<div class="note-ok" style="margin:0 0 10px">${L.syncOnL} · ${L.syncLast}: ${SYNC.last?new Date(SYNC.last).toLocaleString(loc(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):L.syncNever}${SYNC.dirty?' · '+L.syncWait(Math.max(1,SYNC.missed)):''}</div>${SYNC.err?`<div class="warn" style="margin:0 0 10px">${L.syncErr(esc(syncMsg(SYNC.err)))}</div>`:''}
       <button class="btn pri w" data-a="syncNow">${L.syncNow}</button><button class="btn dan w mt" data-a="syncOff">${L.syncOffB}</button>`
@@ -1020,7 +1056,14 @@ if('serviceWorker' in navigator&&location.protocol!=='file:'){
   }).catch(()=>{});
   let r=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!r){r=true;location.reload()}});
 }
-boot().then(()=>{applyLang();if(S.impN){const k=S.impN;S.impN=0;save();setTimeout(()=>toast(T().histNote(k)),600)}go('home');if(pendMig){toast(T().migNote);pendMig=false}});
+function readUI(){try{return JSON.parse(localStorage.getItem('gymlog.ui')||'null')}catch(e){return null}}
+function restoreUI(u){try{if(!u||Date.now()-u.at>12*36e5)return;
+  if(u.t&&u.t!=='home')go(u.t);
+  if(u.s&&S.draft)openSession();else if(u.y)setTimeout(()=>window.scrollTo(0,u.y),50)}catch(e){}}
+window.addEventListener('scroll',()=>{clearTimeout(window.__st);window.__st=setTimeout(saveUI,250)},{passive:true});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)saveUI()});
+const UI0=readUI();
+boot().then(()=>{applyLang();if(S.impN){const k=S.impN;S.impN=0;save();setTimeout(()=>toast(T().histNote(k)),600)}go('home');restoreUI(UI0);if(pendMig){toast(T().migNote);pendMig=false}});
 </script>
 </body>
 </html>
