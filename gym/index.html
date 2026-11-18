@@ -371,7 +371,7 @@ html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
 
 <script>
 'use strict';
-const VER='23';
+const VER='24';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -665,6 +665,20 @@ function applyLang(){applyTheme();
   document.querySelectorAll('.tabs button').forEach((b,i)=>b.textContent=L.tabs[i]);
 }
 function saveUI(){try{localStorage.setItem('gymlog.ui',JSON.stringify({t:tab,s:!$('#sess').hidden,y:window.scrollY,at:Date.now()}))}catch(e){}}
+/* زرار الرجوع في الموبايل: يرجّع خطوة جوّه التطبيق بدل ما يخرج */
+const hs=()=>history.state||{};
+function navTab(t){
+  if(t===tab){go(t);return}
+  if(t==='home'){if(hs().tab){history.back();return}go('home');return}
+  if(hs().tab)history.replaceState({tab:t},'');else history.pushState({tab:t},'');
+  go(t);
+}
+window.addEventListener('popstate',e=>{
+  const st=e.state||{};$('#modal').hidden=true;
+  if(!st.sess&&!$('#sess').hidden){$('#sess').hidden=true;document.body.style.overflow='';if(S.draft)queueBackup()}
+  if($('#sess').hidden)go(st.tab||'home');
+});
+try{history.replaceState({},'')}catch(e){}
 function go(t){tab=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));({home:renderHome,hist:renderHistory,prog:renderProgram,data:renderData})[t]();window.scrollTo(0,0);saveUI()}
 function modal(h){const m=$('#modal');m.querySelector('.mbox').innerHTML=h;m.hidden=false}
 function closeModal(){$('#modal').hidden=true}
@@ -715,8 +729,8 @@ function editSession(id){
   if(d)for(const t of d.ex)if(!ex.some(e=>e.exId===t.id))ex.push(draftEx(t));
   S.draft.ex=ex;openTips.clear();save();closeModal();openSession();
 }
-function openSession(){renderSession();$('#sess').hidden=false;$('#sess').scrollTop=0;document.body.style.overflow='hidden';saveUI()}
-function closeSession(){$('#sess').hidden=true;document.body.style.overflow='';if(tab==='home')renderHome();saveUI()}
+function openSession(){renderSession();$('#sess').hidden=false;$('#sess').scrollTop=0;document.body.style.overflow='hidden';if(!hs().sess)history.pushState(Object.assign({},hs(),{sess:1}),'');saveUI()}
+function closeSession(){$('#sess').hidden=true;document.body.style.overflow='';if(tab==='home')renderHome();saveUI();if(hs().sess)history.back()}
 const openTips=new Set();
 function exBlock(e,i){
   const L=T(),h=exHist(e.exId,S.draft.editing),l=h[0],p=progMsg({sets:e.tsets,goal:e.goal},h,e.unit);
@@ -1069,7 +1083,7 @@ async function renderData(){
 
 /* ================= الأحداث ================= */
 document.addEventListener('click',ev=>{
-  const tb=ev.target.closest('.tabs button');if(tb){go(tb.dataset.tab);return}
+  const tb=ev.target.closest('.tabs button');if(tb){navTab(tb.dataset.tab);return}
   if(ev.target.id==='modal'){closeModal();return}
   const b=ev.target.closest('[data-a]');if(!b)return;
   const a=b.dataset.a,i=+b.dataset.i,d=S.draft,L=T();
@@ -1133,7 +1147,7 @@ if('serviceWorker' in navigator&&location.protocol!=='file:'){
 }
 function readUI(){try{return JSON.parse(localStorage.getItem('gymlog.ui')||'null')}catch(e){return null}}
 function restoreUI(u){try{if(!u||Date.now()-u.at>12*36e5)return;
-  if(u.t&&u.t!=='home')go(u.t);
+  if(u.t&&u.t!=='home')navTab(u.t);
   if(u.s&&S.draft)openSession();else if(u.y)setTimeout(()=>window.scrollTo(0,u.y),50)}catch(e){}}
 window.addEventListener('scroll',()=>{clearTimeout(window.__st);window.__st=setTimeout(saveUI,250)},{passive:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){saveUI();if(S.draft&&SYNC.on)queueBackup()}});
