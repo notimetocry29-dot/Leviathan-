@@ -350,6 +350,9 @@ html[data-th] .brand .wm b,html .brand .wm b{font-size:12px;letter-spacing:.02em
 .ex.wn .exno{background:var(--mid);color:var(--onac)}
 .ex.wn .chk{color:var(--mid)}
 html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
+.brand .lg{cursor:pointer;padding:9px 8px;box-sizing:content-box;margin:-9px -8px;-webkit-tap-highlight-color:transparent}
+.brand .lg.spin{animation:lgspin .7s linear infinite}
+@keyframes lgspin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -371,7 +374,7 @@ html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
 
 <script>
 'use strict';
-const VER='24';
+const VER='25';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -665,23 +668,30 @@ function applyLang(){applyTheme();
   document.querySelectorAll('.tabs button').forEach((b,i)=>b.textContent=L.tabs[i]);
 }
 function saveUI(){try{localStorage.setItem('gymlog.ui',JSON.stringify({t:tab,s:!$('#sess').hidden,y:window.scrollY,at:Date.now()}))}catch(e){}}
+async function hardRefresh(){
+  const lg=document.querySelector('.brand .lg');if(lg)lg.classList.add('spin');
+  saveUI();try{await sq}catch(e){}
+  try{if('serviceWorker' in navigator){const reg=await navigator.serviceWorker.getRegistration();if(reg){await reg.update();if(reg.waiting){reg.waiting.postMessage('skip');setTimeout(()=>location.reload(),1800);return}}}}catch(e){}
+  location.reload();
+}
 /* زرار الرجوع في الموبايل: يرجّع خطوة جوّه التطبيق بدل ما يخرج */
 const hs=()=>history.state||{};
 function navTab(t){
   if(t===tab){go(t);return}
-  if(t==='home'){if(hs().tab){history.back();return}go('home');return}
-  if(hs().tab)history.replaceState({tab:t},'');else history.pushState({tab:t},'');
+  history.pushState({tab:t},'');
   go(t);
 }
 window.addEventListener('popstate',e=>{
-  const st=e.state||{};$('#modal').hidden=true;
-  if(!st.sess&&!$('#sess').hidden){$('#sess').hidden=true;document.body.style.overflow='';if(S.draft)queueBackup()}
-  if($('#sess').hidden)go(st.tab||'home');
+  const st=e.state||{},M=$('#modal'),Sx=$('#sess');
+  if(st.modal){if(M.hidden)history.back();return}
+  M.hidden=true;
+  if(!st.sess&&!Sx.hidden){Sx.hidden=true;document.body.style.overflow='';if(S.draft)queueBackup()}
+  if(Sx.hidden)go(st.tab||'home');
 });
 try{history.replaceState({},'')}catch(e){}
 function go(t){tab=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));({home:renderHome,hist:renderHistory,prog:renderProgram,data:renderData})[t]();window.scrollTo(0,0);saveUI()}
-function modal(h){const m=$('#modal');m.querySelector('.mbox').innerHTML=h;m.hidden=false}
-function closeModal(){$('#modal').hidden=true}
+function modal(h){const m=$('#modal');m.querySelector('.mbox').innerHTML=h;if(m.hidden&&!hs().modal)history.pushState(Object.assign({tab:tab},hs(),{modal:1}),'');m.hidden=false}
+function closeModal(silent){$('#modal').hidden=true;if(!silent&&hs().modal)history.back()}
 
 /* ================= الرئيسية ================= */
 const statusPill=s=>`<span class="pill ${s.status}">${T().st[s.status]||''}</span>`;
@@ -727,9 +737,9 @@ function editSession(id){
   S.draft={id:s.id,editing:s.id,date:s.date,day:s.day,dayName:s.dayName,cycle:s.cycle,ex:[]};
   const ex=s.ex.map(e=>{const t=d&&d.ex.find(x=>x.id===e.exId)||{id:e.exId,name:e.name,unit:e.unit,core:e.core,goal:e.goal,sets:e.tsets||e.sets.length,reps:e.treps||e.sets[0],note:''};return draftEx(t,e)});
   if(d)for(const t of d.ex)if(!ex.some(e=>e.exId===t.id))ex.push(draftEx(t));
-  S.draft.ex=ex;openTips.clear();save();closeModal();openSession();
+  S.draft.ex=ex;openTips.clear();save();closeModal(true);openSession();
 }
-function openSession(){renderSession();$('#sess').hidden=false;$('#sess').scrollTop=0;document.body.style.overflow='hidden';if(!hs().sess)history.pushState(Object.assign({},hs(),{sess:1}),'');saveUI()}
+function openSession(){renderSession();$('#sess').hidden=false;$('#sess').scrollTop=0;document.body.style.overflow='hidden';if(!hs().sess){const n=Object.assign({tab:tab},hs(),{sess:1});delete n.modal;if(hs().modal)history.replaceState(n,'');else history.pushState(n,'')}saveUI()}
 function closeSession(){$('#sess').hidden=true;document.body.style.overflow='';if(tab==='home')renderHome();saveUI();if(hs().sess)history.back()}
 const openTips=new Set();
 function exBlock(e,i){
@@ -1083,6 +1093,7 @@ async function renderData(){
 
 /* ================= الأحداث ================= */
 document.addEventListener('click',ev=>{
+  if(ev.target.closest('.brand .lg')){hardRefresh();return}
   const tb=ev.target.closest('.tabs button');if(tb){navTab(tb.dataset.tab);return}
   if(ev.target.id==='modal'){closeModal();return}
   const b=ev.target.closest('[data-a]');if(!b)return;
