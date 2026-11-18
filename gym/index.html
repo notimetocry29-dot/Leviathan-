@@ -345,6 +345,11 @@ html[data-th=cedar] .brand .wm b,html[data-th=sand] .brand .wm b{font-family:Geo
 .brand .wm::after{display:none!important}
 html[data-th] .brand .wm b,html .brand .wm b{font-size:12px;letter-spacing:.02em}
 .brand .wm i{margin-inline-end:-.3em}
+.ex.wn{border-color:var(--midbd);background:var(--midbg)}
+.ex.wn.core{border-inline-start-color:var(--mid)}
+.ex.wn .exno{background:var(--mid);color:var(--onac)}
+.ex.wn .chk{color:var(--mid)}
+html[data-th=dawn] .ex.wn{background:rgba(255,208,112,.14)}
 </style>
 </head>
 <body>
@@ -366,7 +371,7 @@ html[data-th] .brand .wm b,html .brand .wm b{font-size:12px;letter-spacing:.02em
 
 <script>
 'use strict';
-const VER='22';
+const VER='23';
 const KEY='gymlog.v1';
 /* ================= اللغة / Language ================= */
 const I18N={
@@ -719,9 +724,9 @@ function exBlock(e,i){
   const lt=l?`${L.last}: <span class="en">${fw(l.w)} | ${esc(setsStr(l))}</span>${l.clean?' · '+L.clean:''}`:L.first;
   const showNote=e.note||openTips.has('n'+i),showTip=openTips.has('t'+i);
   const wv=(e.w===''||e.w==null||(noW(e.w)&&e.unit))?'':esc(e.w);
-  const dn=logged(e);
-  return `<div class="card ex${e.core?' core':''}${dn?' dn':''}" data-i="${i}">
-  <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?`<span class="tag">★ ${L.coreL}</span>`:''}<span class="chk" id="ok${i}">${dn?'✓':''}</span></div>
+  const dn=exSt(e)==='ok';
+  return `<div class="card ex${e.core?' core':''}${stCls(e)}" data-i="${i}">
+  <div class="exh"><span class="exno">${i+1}</span><button class="exname en" data-a="hist" data-id="${e.exId}">${esc(e.name)}</button>${e.core?`<span class="tag">★ ${L.coreL}</span>`:''}<span class="chk" id="ok${i}">${stMark(e)}</span></div>
   <div class="tgt"><b class="en">${e.tsets}×${e.treps}${u}</b><span>${lt}</span></div>
   ${p?`<div class="pmsg ${p.c}">${p.t}</div>`:''}
   <div class="wrow"><span class="lb2">${L.wt==='k'?'الوزن':'Weight'}</span>
@@ -754,11 +759,18 @@ function renderSession(){
   updCore();
 }
 const logged=e=>e.sets.some(r=>num(r)>0);
+/* حالة التمرين: none | part (ناقص خانات) | low (كل الخانات مليانة بس أقل من الهدف) | ok */
+function exSt(e){const n=e.sets.length;if(!n||!e.sets.some(r=>num(r)>0))return 'none';
+  if(!e.sets.every(r=>num(r)>0))return 'part';
+  const g=+e.goal||0;return g&&e.sets.some(r=>num(r)<g)?'low':'ok'}
+const stCls=e=>({none:'',part:' wn',low:' wn',ok:' dn'})[exSt(e)];
+const stMark=e=>({none:'',part:'…',low:'✓',ok:'✓'})[exSt(e)];
+const fullyIn=e=>{const k=exSt(e);return k==='low'||k==='ok'};
 function updCore(){
-  const d=S.draft;if(!d)return;const c=d.ex.filter(e=>e.core),k=c.filter(logged).length;
+  const d=S.draft;if(!d)return;const c=d.ex.filter(e=>e.core),k=c.filter(fullyIn).length;
   const el=$('#corec');if(el){el.textContent=k===c.length&&c.length?T().coreDone:T().coreN(k,c.length);el.classList.toggle('done',k===c.length&&c.length>0)}
-  d.ex.forEach((e,i)=>{const o=$('#ok'+i);if(o){o.textContent=logged(e)?'✓':'';const c=o.closest('.ex');c&&c.classList.toggle('dn',logged(e))}});
-  const pf=$('#pfill');if(pf)pf.style.width=(d.ex.length?Math.round(d.ex.filter(logged).length/d.ex.length*100):0)+'%';
+  d.ex.forEach((e,i)=>{const o=$('#ok'+i);if(o){o.textContent=stMark(e);const k=exSt(e),c=o.closest('.ex');o.style.color=k==='ok'?'':'var(--mid)';if(c){c.classList.toggle('dn',k==='ok');c.classList.toggle('wn',k==='part'||k==='low')}}});
+  const pf=$('#pfill');if(pf)pf.style.width=(d.ex.length?Math.round(d.ex.filter(fullyIn).length/d.ex.length*100):0)+'%';
 }
 /* تحويل المسودة لجلسة (من غير حفظ) */
 function buildFromDraft(){
