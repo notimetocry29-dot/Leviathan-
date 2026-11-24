@@ -19,7 +19,7 @@ function apply(){
  s.setProperty('--font',FONTS[U.font]||FONTS.naskh);s.setProperty('--hfont',U.hsans?FONTS.sans:'var(--font)');
  var fs=U.fs||baseFs();s.setProperty('--fs',fs+'px');s.setProperty('--z',(fs/baseFs()).toFixed(3));
  s.setProperty('--lh',U.lh);s.setProperty('--mw',U.mw+'px');s.setProperty('--pg',U.pg+'px');s.setProperty('--dim',U.dim);s.setProperty('--al',U.al);
- var T={noeg:!U.eg,egfold:U.egfold,nomap:!U.map,noop:!U.op,nocite:!U.cite,qplain:U.qplain,nobar:!U.bar,autohide:U.autohide,noq:!U.quote,nomo:!U.motion};
+ var T={nodim:U.dim>=0.999,noeg:!U.eg,egfold:U.egfold,nomap:!U.map,noop:!U.op,nocite:!U.cite,qplain:U.qplain,nobar:!U.bar,autohide:U.autohide,noq:!U.quote,nomo:!U.motion};
  for(var c in T)H.classList.toggle(c,!!T[c]);
  var mt=document.querySelector('meta[name=theme-color]'),bg=getComputedStyle(H).getPropertyValue('--bg').trim();if(mt&&bg)mt.setAttribute('content',bg);
  sync();subs.forEach(function(f){try{f(U);}catch(e){}});

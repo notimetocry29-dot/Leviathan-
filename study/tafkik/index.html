@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-page="study" class="site">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f0d0b">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="icon" href="../../icon-192.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<title>ملف التفكيك — مَاهِر</title>
+<script>(function(){try{var u=JSON.parse(localStorage.getItem('maher:ui')||'{}')||{};if(u.style&&u.style!=='copper')document.documentElement.setAttribute('data-style',u.style);}catch(e){}})();</script>
+<link rel="stylesheet" href="../../assets/maher.css">
+<style>
+:root{
+  --font-naskh:"Noto Naskh Arabic","Amiri","Scheherazade New","Traditional Arabic","Times New Roman",serif;
+  --font-sans:"Noto Sans Arabic","Noto Kufi Arabic","Segoe UI","Tahoma",sans-serif;
+  --fs:19px; --lh:1.95; --w:760px; --radius:18px;
+}
+[data-theme="cream"]{--bg:#f5efe3;--paper:#fbf7ee;--ink:#3e372f;--muted:#887d6f;--line:#e7ddcc;--accent:#a8744a;--accent-ink:#8a5d39;--accent-soft:#f0e2d1;--sage:#61806b;--sage-soft:#e2ebe0;--rose:#ad6258;--rose-soft:#f4e2dd;--field:#f2ead9;--shadow:0 6px 24px rgba(120,90,50,.08)}
+[data-theme="sand"]{--bg:#ede4d3;--paper:#f6efe1;--ink:#40382d;--muted:#857866;--line:#dfd2bb;--accent:#9c7a4c;--accent-ink:#7e6036;--accent-soft:#e9dcc3;--sage:#647f62;--sage-soft:#dfe6d6;--rose:#a6614f;--rose-soft:#efdcd2;--field:#ece1cb;--shadow:0 6px 24px rgba(110,85,45,.09)}
+[data-theme="sepia"]{--bg:#e9dec8;--paper:#f3e9d5;--ink:#4b3c2b;--muted:#88765f;--line:#dccdb1;--accent:#94613f;--accent-ink:#7a4d2f;--accent-soft:#ead7bf;--sage:#5f7a5f;--sage-soft:#dce3cf;--rose:#9e5446;--rose-soft:#ecd4c8;--field:#e8dbc2;--shadow:0 6px 24px rgba(100,70,40,.10)}
+[data-theme="night"]{--bg:#1f1d1a;--paper:#282521;--ink:#e2d9ca;--muted:#a39886;--line:#3a352e;--accent:#cf9f77;--accent-ink:#e0b892;--accent-soft:#3a3027;--sage:#9ab49f;--sage-soft:#2c352f;--rose:#d39289;--rose-soft:#3e2c29;--field:#2f2a24;--shadow:0 6px 24px rgba(0,0,0,.25)}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:var(--fs);line-height:var(--lh);transition:background .3s,color .3s}
+body[data-font="naskh"]{--font-body:var(--font-naskh)}
+body[data-font="sans"]{--font-body:var(--font-sans)}
+button,input,textarea,select{font:inherit;color:inherit}
+a{color:var(--accent-ink)}
+.ui{font-family:var(--font-sans);font-size:15px;line-height:1.6}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .in{max-width:calc(var(--w) + 40px);margin:auto;display:flex;align-items:center;gap:10px;padding:10px 16px}
+.brand{font-family:var(--font-naskh);font-weight:700;font-size:20px;color:var(--accent-ink);text-decoration:none;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);font-family:var(--font-sans);font-size:13.5px;white-space:nowrap}
+.iconbtn{border:1px solid var(--line);background:var(--paper);border-radius:12px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+.iconbtn svg{width:20px;height:20px}
+
+main{max-width:calc(var(--w) + 40px);margin:auto;padding:18px 16px 90px}
+
+/* cards */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 20px;margin:0 0 16px}
+.hero h1{font-size:1.45em;line-height:1.5;margin:0 0 4px;color:var(--accent-ink)}
+.hero .sub{color:var(--muted);margin:0 0 14px}
+.bar{height:10px;background:var(--accent-soft);border-radius:999px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--sage));border-radius:999px;transition:width .6s}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.spacer{flex:1}
+.muted{color:var(--muted)}
+.small{font-size:.86em}
+
+.btn{border:0;border-radius:14px;padding:11px 20px;background:var(--accent);color:#fffaf2;cursor:pointer;font-family:var(--font-sans);font-size:15.5px;font-weight:600;transition:transform .15s,opacity .2s}
+[data-theme="night"] .btn{color:#221d18}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--accent-ink);border:1px solid var(--line)}
+.btn.soft{background:var(--accent-soft);color:var(--accent-ink)}
+.btn.sage{background:var(--sage);}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.block{width:100%}
+
+/* campaign map */
+.part{font-family:var(--font-sans);font-size:13px;color:var(--muted);margin:22px 6px 8px;letter-spacing:.3px}
+.node{display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:inherit}
+.node .num{flex:0 0 46px;height:46px;border-radius:14px;display:grid;place-items:center;font-family:var(--font-sans);font-weight:700;background:var(--accent-soft);color:var(--accent-ink)}
+.node.done .num{background:var(--sage-soft);color:var(--sage)}
+.node.locked{opacity:.55}
+.node .t{font-weight:700;line-height:1.5}
+.node .s{color:var(--muted);font-size:.85em;line-height:1.6}
+.badge{font-family:var(--font-sans);font-size:12px;padding:2px 10px;border-radius:999px;background:var(--field);color:var(--muted);white-space:nowrap}
+.badge.ok{background:var(--sage-soft);color:var(--sage)}
+.badge.go{background:var(--accent-soft);color:var(--accent-ink)}
+
+/* stepper */
+.steps{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 10px;margin:0 -4px 8px;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.steps button{flex:0 0 auto;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font-family:var(--font-sans);font-size:13.5px;color:var(--muted);cursor:pointer}
+.steps button.on{background:var(--accent);border-color:var(--accent);color:#fffaf2}
+[data-theme="night"] .steps button.on{color:#221d18}
+.steps button.reached{color:var(--ink)}
+.steps button[disabled]{opacity:.4;cursor:not-allowed}
+.filehead{margin:4px 4px 12px}
+.filehead .k{font-family:var(--font-sans);font-size:13px;color:var(--muted)}
+.filehead h1{margin:2px 0 0;font-size:1.35em;line-height:1.5;color:var(--accent-ink)}
+
+/* reading */
+.read h2{font-size:1.22em;line-height:1.55;margin:6px 0 10px;color:var(--accent-ink)}
+.read h3{font-size:1.06em;margin:18px 0 6px}
+.read p{margin:0 0 14px}
+.read ul,.read ol{margin:0 0 14px;padding-inline-start:26px}
+.read li{margin-bottom:6px}
+.read strong{color:var(--accent-ink);font-weight:700}
+.read em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
+.field{background:var(--field);border-radius:14px;padding:14px 16px;margin:16px 0 4px;border-inline-start:4px solid var(--accent);font-family:var(--font-sans);font-size:.92em;line-height:1.85}
+.field::before{content:"من الميدان";display:block;font-weight:700;color:var(--accent-ink);font-size:13px;margin-bottom:4px}
+.key{background:var(--sage-soft);border-radius:14px;padding:12px 16px;margin:14px 0 0;font-size:.95em}
+.key::before{content:"الخلاصة";display:block;font-family:var(--font-sans);font-weight:700;color:var(--sage);font-size:13px;margin-bottom:2px}
+.toc{font-family:var(--font-sans);font-size:14.5px}
+.toc a{display:block;padding:6px 0;text-decoration:none;color:var(--ink);border-bottom:1px dashed var(--line)}
+.toc a:last-child{border:0}
+blockquote.q{margin:0 0 14px;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-radius:16px;position:relative}
+blockquote.q p{margin:0 0 8px;font-size:1.06em}
+blockquote.q cite{font-style:normal;font-family:var(--font-sans);font-size:13px;color:var(--muted)}
+blockquote.q .why{font-family:var(--font-sans);font-size:14px;color:var(--ink);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+table.t{width:100%;border-collapse:collapse;font-family:var(--font-sans);font-size:14px;margin:6px 0 16px}
+table.t th,table.t td{border:1px solid var(--line);padding:8px 8px;text-align:start;vertical-align:top}
+table.t th{background:var(--accent-soft);color:var(--accent-ink)}
+.tablewrap{overflow-x:auto}
+.ladder{display:grid;gap:8px;margin:8px 0 16px}
+.ladder div{border-radius:14px;padding:10px 14px;font-family:var(--font-sans);font-size:14.5px;line-height:1.7}
+.ladder b{display:block;font-size:15px}
+
+/* questions */
+.qcard .qt{font-weight:700;margin:0 0 12px;line-height:1.8}
+.qtag{font-family:var(--font-sans);font-size:12.5px;color:var(--muted);margin-bottom:4px}
+.opts{display:grid;gap:8px}
+.opt{text-align:start;border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:11px 14px;cursor:pointer;font-family:var(--font-body);font-size:.96em;line-height:1.75;transition:background .2s,border-color .2s}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--sage-soft);border-color:var(--sage)}
+.opt.wrong{background:var(--rose-soft);border-color:var(--rose);opacity:.85}
+.opt[disabled]{cursor:default}
+.feedback{margin-top:12px;border-radius:14px;padding:12px 14px;font-family:var(--font-sans);font-size:14.5px;line-height:1.85}
+.feedback.ok{background:var(--sage-soft)}
+.feedback.no{background:var(--rose-soft)}
+.hints{margin-top:10px}
+.hint{background:var(--field);border-radius:12px;padding:9px 12px;margin-top:6px;font-family:var(--font-sans);font-size:14px}
+.cls-item{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;background:var(--bg)}
+.cls-item .it{margin-bottom:8px;line-height:1.75}
+.cls-item.right{border-color:var(--sage);background:var(--sage-soft)}
+.cls-item.wrong{border-color:var(--rose);background:var(--rose-soft)}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cats button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 12px;font-family:var(--font-sans);font-size:13.5px;cursor:pointer}
+.cats button.sel{background:var(--accent);border-color:var(--accent);color:#fffaf2}
+[data-theme="night"] .cats button.sel{color:#221d18}
+.cls-item .fix{font-family:var(--font-sans);font-size:13px;margin-top:6px;color:var(--muted)}
+.order-pool,.order-ans{display:grid;gap:6px;margin-bottom:10px}
+.order-ans{min-height:40px;border:1px dashed var(--line);border-radius:14px;padding:8px}
+.order-pool button,.order-ans div{text-align:start;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:8px 12px;font-family:var(--font-sans);font-size:14.5px;cursor:pointer}
+.order-ans div{background:var(--accent-soft);cursor:default}
+.order-ans div.right{background:var(--sage-soft)}
+.order-ans div.wrong{background:var(--rose-soft)}
+textarea{width:100%;min-height:170px;border:1px solid var(--line);border-radius:14px;background:var(--bg);padding:12px 14px;line-height:1.9;resize:vertical}
+textarea:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.check{display:flex;gap:10px;align-items:flex-start;padding:9px 4px;border-bottom:1px dashed var(--line);font-family:var(--font-sans);font-size:14.5px;line-height:1.8;cursor:pointer}
+.check input{margin-top:6px;width:18px;height:18px;accent-color:var(--sage)}
+.casebox{background:var(--field);border-radius:16px;padding:16px 18px;margin:0 0 14px;line-height:2}
+.wstep{border-inline-start:3px solid var(--accent);padding:2px 14px 2px 0;margin:0 0 14px}
+.wstep h3{margin:0 0 4px;font-size:1em;color:var(--accent-ink)}
+.done-mark{font-family:var(--font-sans);font-size:13px;color:var(--sage);margin-top:8px}
+
+/* boss */
+.bosshead{text-align:center}
+.bosshead .big{font-size:2.4em;font-family:var(--font-sans);font-weight:800;color:var(--accent-ink)}
+.prog{font-family:var(--font-sans);font-size:13px;color:var(--muted);margin-bottom:8px}
+
+/* settings sheet */
+.sheet{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(30,24,18,.32)}
+.sheet.hidden{display:none}
+.sheet .panel{background:var(--paper);width:100%;max-width:560px;border-radius:22px 22px 0 0;padding:18px 20px 28px;max-height:88vh;overflow:auto;font-family:var(--font-sans);font-size:15px}
+.sheet h3{margin:0 0 12px;font-size:17px}
+.sheet label{display:block;margin:14px 0 6px;color:var(--muted);font-size:13.5px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:7px 14px;cursor:pointer}
+.seg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--accent)}
+
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:60;display:grid;gap:8px;justify-items:center;pointer-events:none}
+#toast div{background:var(--ink);color:var(--bg);padding:8px 18px;border-radius:999px;font-family:var(--font-sans);font-size:14px;box-shadow:var(--shadow);animation:pop .3s ease}
+#toast div.big{background:var(--accent);color:#fffaf2;font-weight:700;padding:10px 22px}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+details.how summary{cursor:pointer;font-family:var(--font-sans);font-weight:700;color:var(--accent-ink)}
+details.how ul{font-family:var(--font-sans);font-size:14.5px;line-height:1.9;padding-inline-start:22px}
+.navrow{display:flex;gap:10px;justify-content:space-between;margin-top:6px}
+@media (max-width:520px){.card{padding:16px 15px}main{padding:14px 10px 90px}}
+
+/* ---- مَاهِر integration: map the course palette onto the site theme ---- */
+html.site{--paper:var(--card);--muted:var(--mute);--accent:var(--acc);--accent-ink:var(--acc2);
+ --accent-soft:color-mix(in srgb,var(--acc) 16%,var(--card));--sage:var(--eglbl);--sage-soft:var(--egbg);
+ --rose:var(--brklbl);--rose-soft:var(--brkbg);--field:var(--opbg);--shadow:none;--font-body:var(--font);--w:var(--mw);--radius:16px}
+html.site body{font-family:var(--font);font-size:var(--fs);line-height:var(--lh)}
+html.site .btn,html.site .steps button.on,html.site .cats button.sel{color:var(--onacc)}
+html.site .btn.ghost{color:var(--acc2)}
+html.site .btn.soft{color:var(--acc2)}
+html.site .card{border-color:var(--line)}
+html.site .opt,html.site .cls-item,html.site textarea,html.site .order-pool button{background:var(--bg)}
+html.site .field{border-inline-start-color:var(--acc)}
+html.site .hero h1,html.site .filehead h1,html.site .read h2{font-family:var(--hfont)}
+html.site .tb .chip{font-size:12px;padding:3px 10px;max-width:42vw;overflow:hidden;text-overflow:ellipsis}
+html.site .tb .t{flex:1}
+html.site .node .num{font-family:var(--latin);font-size:22px;font-weight:500}
+html.site .bar>i{background:var(--acc)}
+html.site .ladder div{color:var(--ink)}
+.node{transition:border-color .2s}
+.node:active{border-color:var(--acc)}
+@media (max-width:480px){html.site .tb .t{display:none}html.site .tb .chip{margin-inline-start:auto}}
+
+</style>
+</head>
+<body>
+<header class="tb"><a class="ib" href="../../" aria-label="المكتبة"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6h-6v6H4z"/></svg></a><a class="ib" href="#/" aria-label="خريطة الحملة"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></a><span class="t">ملف التفكيك</span><span class="chip" id="rankchip"></span><button class="ib" type="button" data-fs="-1" aria-label="تصغير الخط"><b>أ−</b></button><button class="ib" type="button" data-fs="1" aria-label="تكبير الخط"><b>أ+</b></button><button class="ib" type="button" data-act="gear" aria-label="الإعدادات"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></header>
+<main id="app"></main>
+<script src="../../assets/maher.js"></script>
+<script>
+const FILES = [];
+
+/* =====================================================================
+   الملف ٠ — من السيف للميكروفون
+   ===================================================================== */
+FILES.push({
+id:0, ready:true, part:'الجسر', title:'من السيف للميكروفون',
+sub:'هوبز وشميت كانوا عارفين أكتر مما تفتكر · سلّم الخفاء: أربع درجات للسيطرة',
+brief:`<h2>المهمة</h2>
+<p>قرأت هوبز وشميت، وعرفت منهما أن القوة تُحسم عند لحظة القرار وأن السيف هو الضامن الأخير لكل عهد. هذا صحيح، لكنه نصف الصورة. النصف الآخر أن <strong>أغلب معارك السيطرة الحديثة تُحسم قبل أن تُرفع اليد</strong>: في الكلمة التي اختيرت لوصف الواقعة، وفي السؤال الذي لم يُطرح، وفي «البديهي» الذي لا يخطر لأحد أن يناقشه.</p>
+<p>هذا الملف جسر. ستكتشف فيه أن هوبز وشميت نفسيهما لمسا هذه الطبقة الخفية، ثم ستبني الأداة التي سترافقك في المنهج كله: <strong>سلّم الخفاء</strong>. هو أربع درجات للسيطرة، وكل درجة أقل ظهورًا وأقل استثارةً للمقاومة من التي قبلها.</p>
+<p>القاعدة الحاكمة لهذا المنهج كله: <em>نقرأ غرامشي وفوكو قراءة ضابط يفكك سلاح خصمه، لا قراءة مُريد يعتنق عقيدته.</em> نسأل عن الآلية: كيف يعمل السلاح؟ أين أصابني؟ وكيف أصده؟</p>`,
+objectives:[
+ 'تشرح لماذا جعل هوبز «الحكم على المذاهب» من حقوق السيادة، وما علاقته بالسيطرة على الأفعال',
+ 'تكشف «الاسم غير الثابت الدلالة» في أي جملة، وتسأل: لو سمّينا الفعل باسم آخر، هل يتغير الحكم؟',
+ 'تفهم معنى أن كل مفهوم سياسي «سجالي» عند شميت، وتكشف الكلمات التي يستحيل أن تقف ضدها',
+ 'تصنّف أي محاولة سيطرة على درجة من درجات سلّم الخفاء الأربع',
+ 'تميّز أبعاد السلطة الثلاثة عند ستيفن لوكس'
+],
+predict:{
+ q:'حكومتان تريد كل منهما أن تُبعد الناس عن فكرة معينة. الأولى تمنع الكتب التي تتحدث عنها بالقوة. الثانية لا تمنع شيئًا، لكنها تجعل الفكرة تبدو في الإعلام والمدارس والنكت اليومية <b>ساذجة ومضحكة وغير جديرة بالنقاش</b>. أيهما أرسخ في السيطرة على المدى الطويل؟',
+ options:['الأولى، لأن القوة حاسمة والمنع واضح','الثانية، لأن الناس لا يشعرون بوجود شيء يقاومونه','متساويتان في النتيجة، والفرق في الأسلوب فقط','لا يمكن الحكم إلا بمعرفة الفكرة نفسها'],
+ answer:1,
+ reveal:'المنع يصنع هدفًا مرئيًا: الكتاب الممنوع يصبح ثمرة محرّمة، وناشره يصبح شهيدًا، والمنع نفسه دليل على أن الفكرة خطيرة، أي مهمة. أما السخرية فتسحب <b>الدافع</b> للبحث من الأساس. لا أحد يقاوم ما لا يشعر أنه مفروض عليه. هذا السؤال يلخّص المنهج كله: كلما نزلت السيطرة تحت مستوى الوعي، قلّت تكلفتها وطال عمرها.'
+},
+lesson:[
+{h:'حتى صاحب السيف لم يثق بالسيف وحده',
+body:`<p>«اللفياثان» أشهر دفاع في تاريخ الفكر السياسي عن السلطة المطلقة. هوبز هو القائل إن العهود بلا سيف ليست إلا كلمات (الفصل ١٧). فمن يقرأه بسرعة يظن أن نظريته كلها قائمة على الإكراه: الناس يطيعون لأنهم يخافون.</p>
+<p>لكن الفصل الثامن عشر فيه مفاجأة. حين يعدّد هوبز الحقوق التي لا تنفصل عن السيادة، يضع بينها حقًّا لا علاقة له بالسيف مباشرة: أن يكون صاحب السيادة <strong>قاضيًا في الآراء والمذاهب</strong>. هو الذي يحكم أيّها يعادي السلام وأيّها يخدمه، ويقرر من يُسمح له بمخاطبة الجموع، وأي الكتب تُفحص قبل أن تُنشر. ويذكر هوبز العلة بوضوح: <em>أفعال الناس تصدر عن آرائهم، وحسن تدبير الآراء هو حسن تدبير أفعالهم</em>.</p>
+<p>ثم يعود في الفصل الثلاثين، حين يتكلم عن واجبات صاحب السيادة، ليقول إن أسس حقوق السيادة يجب أن تُعلَّم للناس بعناية وصدق. السبب عنده أنها لا يمكن أن تُحفظ بأي قانون مدني، ولا برهبة العقوبة وحدها. وفي كتابه عن الحرب الأهلية الإنجليزية (بهيموث) يتهم الجامعات بأنها كانت لإنجلترا بمنزلة حصان طروادة الخشبي: من داخلها خرجت الآراء التي أشعلت التمرد.</p>
+<p>هوبز لم يكتشف مفهوم «الهيمنة» بالمعنى الذي سنراه عند غرامشي، لكنه وضع يده على الحقيقة التي ستقوم عليها: <strong>الجهاز القمعي مكلف وهش ما لم يسنده اعتقادُ الناس أن الطاعة صواب</strong>. السيف يحرس الباب، لكن الرأي هو الذي يفتحه أو يغلقه من الداخل.</p>`,
+field:`خد بالك من المفارقة دي: أكتر فيلسوف في التاريخ اتعرف إنه بتاع السيف، صرف صفحات على الجامعات والمنابر والكتب. يعني حتى هو كان فاهم إن العصاية لوحدها غالية ومش مضمونة. الضابط اللي محتاج يضرب كل يوم علشان الناس تقف في الطابور ده ضابط فاشل. الناجح هو اللي الناس بتقف في الطابور من غير ما يبص لهم أصلًا.`,
+key:'عند هوبز نفسه: الأفعال تصدر عن الآراء، فمن يدير الآراء يدير الأفعال. السيف ضروري لكنه غير كافٍ.'},
+
+{h:'الكلمة تحمل الحكم قبل الحجة',
+body:`<p>في الفصل الرابع من «اللفياثان»، وهو فصل الكلام، يحذّر هوبز من صنف من الأسماء يسميه الأسماء «غير الثابتة الدلالة». هذه أسماء الأشياء التي تثير فينا ميلًا أو نفورًا. هي لا تصف الشيء فقط، بل تحمل معه <strong>طبيعة المتكلم وأهواءه</strong>. يضرب أمثلة: ما يسميه واحد حكمة يسميه آخر خوفًا، وما يسميه واحد قسوة يسميه آخر عدلًا، وما يراه هذا تبذيرًا يراه ذاك كرمًا.</p>
+<p>الفكرة أخطر مما تبدو. حين يختلف اثنان على «الوقائع» يمكن فحص الوقائع. لكن حين يختار أحدهما <em>الاسم</em> الذي يوصف به الفعل، يكون قد حسم نصف الحكم قبل أن يبدأ النقاش. السامع لا يرى أمامه حجة يمكنه ردها، بل يرى «وصفًا»، والوصف لا يثير الحذر لأنه لا يبدو رأيًا.</p>
+<p>جرّب: «حزم» أم «تسلّط»؟ «مرونة» أم «تفريط»؟ «ترشيد» أم «تقشف»؟ «إعادة هيكلة» أم «فصل موظفين»؟ في كل زوج الفعل واحد والواقعة واحدة، لكن كل اسم يجرّ وراءه حكمًا أخلاقيًا مختلفًا، ونتيجة مختلفة.</p>
+<p>ولهوبز في الفصل نفسه عبارة تصلح شعارًا لهذا المنهج: <em>الكلمات فِيَش العقلاء، يحسبون بها؛ لكنها نقود الحمقى</em>. العاقل يعامل الكلمة كما يعامل اللاعبُ الفيشة: علامة تمثل قيمة وليست هي القيمة، فيسأل دائمًا عمّا تمثّله. أما الأحمق فيأخذ الكلمة على أنها الشيء نفسه، فيدفع بها ويقبضها كأنها ذهب.</p>`,
+field:`في الشغل: لما مديرك يقول على زميل بيعترض إنه «سلبي»، هو ما ناقشش الاعتراض، هو سمّاه. وبعد ما الاسم يلزق، كل كلمة الزميل يقولها بعد كده هتتقري من خلاله. السؤال اللي هتسأله من النهارده: <b>لو سمّيت نفس الفعل باسم تاني، الحكم هيتغير؟</b> لو آه، يبقى فيه حد بيحسب بالفِيَش وعاوزك انت تدفع بالفلوس.`,
+key:'من يختار الاسم يختار نصف النتيجة. اختبار هوبز: بدّل الاسم وانظر هل ينقلب الحكم.'},
+
+{h:'شميت: كل مفهوم سياسي له عدو',
+body:`<p>في «مفهوم السياسي» يضع كارل شميت قاعدة تكمل ما بدأه هوبز. يقول إن كل المفاهيم والصور والمصطلحات السياسية ذات معنى <strong>سجالي</strong>، أي أنها صُنعت لمعركة محددة. كلمات مثل الدولة والجمهورية والمجتمع والطبقة والسيادة والحياد تبقى غير مفهومة ما لم تعرف <em>مَن المقصود بها</em>: من تريد أن تضرب، ومن تريد أن تنفي أو تُقصي.</p>
+<p>ويستعير شميت من برودون عبارة لاذعة: من يقول «الإنسانية» يريد أن يخدع. ومقصده أن الدولة التي تحارب عدوها باسم الإنسانية لا تخوض حربًا إنسانية. هي تستولي على مفهوم كوني لتحرم خصمها منه، فيصبح الخصم «ضد الإنسانية»، أي خارجها، وعندها يُباح فيه كل شيء.</p>
+<p>الدرس العملي: أخطر الكلمات ليست الشتائم، بل <strong>الكلمات التي يستحيل أن تقف ضدها</strong>: الإنسانية، العقل، التقدم، المهنية، الاستقرار، المصلحة العامة، العلم. من يحتكر واحدة منها لا يحتاج أن يهزم خصمه في النقاش. يكفيه أن يضعه خارج المعقول، فيصير الخصم «ضد الاستقرار» بدل أن يكون صاحب رأي آخر في معنى الاستقرار.</p>
+<p>لكن انتبه لحدود شميت. هو ما زال يرى الصراع <em>مكشوفًا</em>: هناك صديق وعدو، ولحظة قرار، ومن يقرر. الخطوة التي سيخطوها غرامشي وفوكو أبعد: سيريانك صراعًا مدفونًا إلى درجة أن أطرافه أنفسهم لا يعرفون أنهم فيه.</p>`,
+field:`جملة «إحنا هنا كلنا عيلة واحدة» في الشركات. مين يقدر يقف ضد العيلة؟ بس اسأل سؤال شميت: <b>الكلمة دي معمولة ضد مين؟</b> هتلاقيها بتحوّل المطالبة بأوفر تايم مدفوع لقلة أصل مع العيلة. العيلة مابتمضيش عقود، فالمفهوم ده عدوه الحقيقي هو فكرة إن علاقتك بالشركة عقد له شروط.`,
+key:'اسأل عن كل مفهوم: ضد من صُنع؟ واحذر الكلمات التي لا يمكن معاداتها؛ فمن يحتكرها يُخرج خصمه من دائرة المعقول.'},
+
+{h:'سلّم الخفاء: أربع درجات للسيطرة',
+body:`<p>اجمع ما سبق في أداة واحدة. أي محاولة لتوجيه سلوك الناس تعمل على درجة من أربع، وكلما صعدت قلّ ظهورها:</p>
+<div class="ladder">
+<div style="background:var(--rose-soft)"><b>الدرجة ١ · السيف</b>إكراه مكشوف. تعرف أنك مُكرَه وتعرف من يُكرهك. تكلفته أعلى شيء، والمقاومة أعلى شيء، والهدف أوضح شيء.</div>
+<div style="background:var(--accent-soft)"><b>الدرجة ٢ · الحجة</b>إقناع معلن (ملعب أرسطو). تعرف أن هناك من يحاول إقناعك، وتستطيع أن ترد. الملعب مكشوف، لكن قواعده قد تكون مغشوشة.</div>
+<div style="background:var(--field)"><b>الدرجة ٣ · البديهة</b>الهيمنة (ملعب غرامشي). الفكرة لم تعد رأي أحد، بل صارت «الطبيعي» و«المعروف» و«اللي الناس كلها عارفاه». لا تشعر أن أحدًا يقنعك، لأن الإقناع حدث قبل أن تدخل المسألة.</div>
+<div style="background:var(--sage-soft)"><b>الدرجة ٤ · حدود الكلام</b>الخطاب (ملعب فوكو). لا يُفرض عليك رأي. تُرسم حدود ما يُعتبر جادًا وعاقلًا و«علميًا» وقابلًا للقول. الرأي المخالف هنا لا يُهزم، بل يُعامل كضوضاء.</div>
+</div>
+<p>هذا السلّم يتقاطع مع واحد من أهم كتب القرن العشرين عن السلطة: «السلطة: رؤية راديكالية» لستيفن لوكس (١٩٧٤). يميز لوكس ثلاثة أبعاد للسلطة:</p>
+<ul>
+<li><strong>البعد الأول:</strong> من يكسب حين يتصارع الناس علنًا على قرار. هذه سلطة مرئية تُقاس بمن انتصر في التصويت أو الاجتماع.</li>
+<li><strong>البعد الثاني:</strong> من يتحكم في <em>جدول الأعمال</em>، فيمنع قضايا بعينها من أن تُطرح أصلًا. لا صراع هنا لأن البند لم يُدرج.</li>
+<li><strong>البعد الثالث:</strong> وهو الأخطر: من يشكّل <em>رغبات الناس وتصوراتهم</em> بحيث لا ينشأ الصراع أبدًا. أنجع سلطة، كما يقول لوكس، هي أن تجعل الناس يريدون ما يخدمك.</li>
+</ul>
+<p><strong>قانون السلّم:</strong> كلما صعدت درجة قلّت الرؤية، وقلّت المقاومة، وقلّت التكلفة، وطال العمر. لكن هناك قانون مكمّل لا يقل أهمية: <em>كل درجة عليا تستند إلى الدنيا عند الأزمة</em>. غرامشي نفسه سيعرّف الدولة بأنها هيمنة محمية بدرع الإكراه. الحداثة لم تُلغِ السيف، بل خبّأته وراء الميكروفون.</p>`,
+field:`القاعدة العملية: الخصم الذكي مش هيكلمك في الدرجة الأولى إلا لما يفشل في التانية والتالتة. لو لقيت حد بيزعق ويهدد، ده غالبًا علامة إنه خسر الحرب على المعنى ونزل درجة. ولو لقيت كل اللي حواليك موافقين على حاجة ومحدش بيسأل عليها خالص، هنا بالظبط لازم تصحى. السكوت الجماعي مش دايمًا اتفاق؛ أحيانًا ده أنجح شكل للسيطرة.`,
+key:'السيف ← الحجة ← البديهة ← حدود الكلام. كلما صعدت قلّت الرؤية والمقاومة وطال العمر، لكن السيف ينتظر تحت عند الأزمة.'},
+
+{h:'لماذا هؤلاء الثلاثة؟ وبأي عين نقرأهم؟',
+body:`<p>المنهج يتحرك من الذرّة إلى الغلاف الجوي:</p>
+<ul>
+<li><strong>أرسطو</strong> (الملفان ١ و٢): الذرّة، أي متكلم وكلام وسامع. ميكانيكا الإقناع وجهًا لوجه، وجذر التأطير في الحجة التي تخفي نصفها.</li>
+<li><strong>غرامشي</strong> (الملفان ٣ و٤): كيف يتحول الإقناع إلى ثقافة، وكيف تحكم طبقةٌ برضا المحكومين لا بإكراههم وحده، ومن هم «الجنود» الذين يصنعون البديهة.</li>
+<li><strong>فوكو</strong> (الملفات ٥ إلى ٧): كيف تتحول الثقافة إلى حدود للتفكير نفسه، وكيف تنتج السلطة «الحقيقة»، وكيف يصير الإنسان رقيبًا على نفسه.</li>
+<li><strong>مهندسو الرضا</strong> (الملف ٨): ليبمان وبيرنيز، أي اللحظة التي تحولت فيها هذه الأفكار إلى صناعة لها مكاتب وميزانيات.</li>
+<li><strong>الميدان والدفاع</strong> (الملفان ٩ و١٠): التطبيق الكامل، ثم نقد الأداة نفسها.</li>
+</ul>
+<p>وبأي عين نقرأ؟ غرامشي كان ماركسيًا أراد بناء «هيمنة مضادة» للطبقة العاملة. وفوكو كثيرًا ما رفض أن يقدم معيارًا أخلاقيًا يُحكم به، ويقرؤه كثيرون قراءة نسبية. لن نناقش صحة الماركسية ولا عدمية ما بعد الحداثة. سنأخذ منهما <strong>الآلية</strong>، كما يأخذ ضابط المخابرات دليل تشغيل سلاح العدو دون أن يغيّر ولاءه.</p>
+<p>وأرسطو نفسه يعطينا المبرر. في الكتاب الأول من «الخطابة» يقول إنه ينبغي أن نقدر على الإقناع بالنقيضين، لا لكي نفعل الأمرين، فلا يجوز أن نقنع الناس بالباطل، بل لكي نرى بوضوح كيف هي الأمور، ولكي نقدر على الرد إن احتجّ غيرنا بغير إنصاف. هذا هو عقد هذا المنهج.</p>`,
+field:`يعني إيه تقرا بعين ضابط؟ تسأل ٣ أسئلة بس: <b>السلاح ده بيشتغل إزاي؟ أنا اتضربت بيه فين قبل كده؟ وإزاي أصدّه؟</b> مش هتسأل «هل غرامشي عنده حق في الماركسية؟». ده سؤال تاني لوقت تاني، ولو دخلت فيه هنا هتلاقي نفسك بتناقش عقيدة الخصم بدل ما تفكك سلاحه.`,
+key:'نأخذ الآلية لا العقيدة. مبررنا من أرسطو: نتعلم الحجة ونقيضها لنرى الحقيقة ونرد التلاعب، لا لنمارسه.'}
+],
+quotes:[
+ {t:'العهود من دون السيف ليست إلا كلمات، ولا قوة فيها لتأمين إنسان على الإطلاق.', src:'هوبز، اللفياثان، الفصل ١٧', why:'نقطة البداية التي يعرفها الجميع عن هوبز. احفظها لتقارنها بالاقتباس التالي.'},
+ {t:'أفعال الناس تصدر عن آرائهم، وفي حسن تدبير الآراء يكون حسن تدبير أفعال الناس.', src:'هوبز، اللفياثان، الفصل ١٨', why:'الرجل نفسه يقرّ بأن السيطرة على الأفعال تمر عبر السيطرة على الآراء. هنا تبدأ الهيمنة الناعمة.'},
+ {t:'فهذا يسمّي حكمةً ما يسمّيه ذاك خوفًا، وهذا يسمّي قسوةً ما يسمّيه ذاك عدلًا.', src:'هوبز، اللفياثان، الفصل ٤', why:'أصل فكرة التأطير بالتسمية: الاسم يحمل حكم المتكلم قبل أي حجة.'},
+ {t:'الكلمات فِيَش العقلاء، يحسبون بها؛ لكنها نقود الحمقى.', src:'هوبز، اللفياثان، الفصل ٤', why:'قاعدة الضابط: كل كلمة فيشة، فاسأل عمّا تمثّله قبل أن تقبضها.'},
+ {t:'كل المفاهيم والصور والمصطلحات السياسية ذات معنى سجالي.', src:'شميت، مفهوم السياسي', why:'كل مصطلح صُنع لمعركة. لا تفهمه حتى تعرف من يستهدف.'},
+ {t:'الدولة = المجتمع السياسي + المجتمع المدني، أي هيمنة محمية بدرع الإكراه.', src:'غرامشي، دفاتر السجن', why:'تمهيد للملف ٣: الرضا في الواجهة، والسيف في الخلف ينتظر.'}
+],
+worked:{
+ title:'حالة محلولة: «إعادة الهيكلة»',
+ case:`رسالة داخلية من إدارة شركة لموظفيها:<br><b>«في إطار خطة التحول ورفع الكفاءة، تقرر إعادة هيكلة إدارة خدمة العملاء بما يضمن رشاقة المؤسسة واستدامتها. ونحن على ثقة بأن فريقنا المحترف يتفهم متطلبات المرحلة.»</b><br>الواقعة الفعلية: الاستغناء عن ٤٠ موظفًا.`,
+ steps:[
+  {h:'ابحث عن الاسم البديل (هوبز، الفصل ٤)', body:'«إعادة هيكلة» بدل «فصل ٤٠ موظفًا»، و«رشاقة» بدل «تقليل العدد». الاسم الأول يصف حركة إدارية مجردة، والثاني يصف ناسًا يفقدون رزقهم. <em>الاسم المختار يمحو الضحايا من الجملة.</em> لا أحد يُفصل في هذه الرسالة؛ «الهيكل» هو الذي يتغير.'},
+  {h:'ابحث عن المفهوم الذي لا يمكن معاداته (شميت)', body:'«الكفاءة»، «الاستدامة»، «التحول». من يعترض يبدو كأنه ضد الاستدامة نفسها. والسؤال الشميتي: <em>هذه المفاهيم مصنوعة ضد من؟</em> ضد كل من سيقول إن للموظفين حقًا في الاستقرار.'},
+  {h:'ابحث عن الاعتراض الذي صار غير قابل للقول (الدرجة ٤)', body:'«لماذا لا تُخفض مكافآت الإدارة العليا بدلًا من الفصل؟» لم يمنع أحد هذا السؤال. لكنه في إطار «متطلبات المرحلة» يبدو ساذجًا وعاطفيًا وخارج الموضوع. لم يُهزم، بل صار ضوضاء.'},
+  {h:'ابحث عن البديهة المسبقة (الدرجة ٣)', body:'الرسالة تفترض دون أن تقول أن الكفاءة تعني تقليل البشر، وأن «المرحلة» قوة طبيعية لها متطلبات، وليست قرارًا اتخذه أشخاص بأسمائهم. حين يبدو القرار كالطقس، لا يبقى أحد يُحاسَب عليه.'},
+  {h:'ابحث عن مصيدة الهوية', body:'«فريقنا المحترف يتفهم». هنا تعريف مسبق: المحترف هو من يتفهم. إذن من يعترض ليس محترفًا. هذه ليست حجة، بل باب ضيق لا يمر منه إلا الموافقون.'},
+  {h:'ابحث عن الدرع (الدرجة ١)', body:'خلف هذا الكلام كله سيف: القرار نُفّذ فعلًا. الخطاب لم يأتِ ليتخذ القرار، بل ليمنع أن يتحول القرار إلى <em>معركة</em>. هذا هو قانون السلّم: الدرجات العليا تستر الدنيا ولا تلغيها.'}
+ ],
+ verdict:'الرسالة لم تكذب في معلومة واحدة. كل التلاعب كان في الأسماء والأطر والبديهيات، وهذا بالضبط موضوع المنهج.'
+},
+yourturn:{
+ title:'دورك: «تطوير تجربة العميل»',
+ case:`إعلان داخلي في مركز اتصال:<br><b>«حرصًا على تطوير تجربة العميل وتقديم خدمة أسرع، تم اعتماد مؤشر أداء جديد: متوسط مدة المكالمة ٣ دقائق كحد أقصى. الموظف المتميز هو من يحل مشكلة العميل من أول مكالمة وفي أقصر وقت.»</b>`,
+ prompt:'فكّك الإعلان بنفس خطوات الحالة المحلولة: الاسم، المفهوم الذي لا يُعادى، الاعتراض الذي صار ضوضاء، البديهة، مصيدة الهوية، والدرع.',
+ points:[
+  'حددت الاسم المختار («تطوير تجربة العميل») واقترحت وصفًا بديلًا للواقعة نفسها (مثل: خفض تكلفة الدقيقة، أو رفع الضغط على الموظف)',
+  'لاحظت التناقض المدفون بين «من أول مكالمة» و«أقصر وقت»، وأن الإعلان حمّل الموظف وحده عبء التوفيق بينهما',
+  'حددت المفهوم الذي لا يُعادى (العميل/التطوير)، وكيف يجعل الاعتراض يبدو اعتراضًا على مصلحة العميل',
+  'كشفت إعادة تعريف «المتميز» كمصيدة هوية: من يأخذ وقتًا أطول يصبح أقل تميزًا بالتعريف',
+  'صغت الاعتراض الذي صار صعب القول (مثل: المشكلات المعقدة تحتاج وقتًا، وتقصيرها يضر العميل نفسه ويزيد المكالمات المتكررة)',
+  'حددت الدرع: التقييم والحوافز والجزاءات المربوطة بالمؤشر'
+ ],
+ model:`<p><b>الاسم:</b> «تطوير تجربة العميل» يصف ما هو في جوهره خفض لتكلفة التشغيل لكل مكالمة. لو كُتب الإعلان «تم تقليل الوقت المسموح لكل عميل» لانقلب الحكم فورًا.</p>
+<p><b>التناقض المدفون:</b> «من أول مكالمة» و«في أقصر وقت» هدفان يتعارضان في الحالات الصعبة. الإعلان لا يحسم التعارض، بل يلقيه على الموظف ليحسمه وحده، ثم يحاسبه على النتيجة.</p>
+<p><b>المفهوم الذي لا يُعادى:</b> العميل. من يعترض يبدو كأنه يدافع عن راحته على حساب العميل، مع أن الاعتراض في الحقيقة دفاع عن العميل صاحب المشكلة المعقدة.</p>
+<p><b>مصيدة الهوية:</b> «المتميز» صار تعريفه رقمًا. الموظف الذي يأخذ ٦ دقائق ليحل مشكلة فعلًا يصبح «غير متميز» بقوة التعريف، لا بعد نقاش.</p>
+<p><b>الضوضاء:</b> الحجة المهنية الحقيقية، أن تقصير المكالمة يرفع معدل المكالمات المتكررة، صارت تبدو تبريرًا للكسل.</p>
+<p><b>الدرع:</b> المؤشر مربوط بالتقييم والحوافز. الخطاب يمهّد، والسيف ينفّذ.</p>`
+},
+challenges:[
+ {type:'mcq', q:'لماذا جعل هوبز «الحكم على الآراء والمذاهب» من حقوق السيادة؟',
+  options:['لأنه كان يكره الفلاسفة ورجال الدين','لأن أفعال الناس تصدر عن آرائهم، فتدبير الآراء تدبير للأفعال','لأن الكنيسة الإنجليزية طلبت ذلك','لأن السيف يكفي، فلا داعي للنقاش العام'],
+  answer:1, hints:['ارجع للعلة التي ذكرها هوبز نفسه، لا لظروفه الشخصية.','العلة تربط بين شيئين: ما في رؤوس الناس وما تفعله أيديهم.','ما الذي يصدر عنه الفعل عند هوبز؟'],
+  explain:'هذه علة هوبز في الفصل ١٨: الأفعال تصدر عن الآراء. ولذلك فإن تدبير الآراء جزء من صلب السيادة، لا ترف ثقافي.'},
+ {type:'classify', q:'صنّف كل محاولة سيطرة على درجتها في سلّم الخفاء.',
+  cats:['السيف','الحجة','البديهة','حدود الكلام'],
+  items:[
+   {t:'غرامة مالية على كل من يتأخر عن الدوام.', c:0},
+   {t:'مدير يعرض أرقامًا في اجتماع ليثبت أن النظام الجديد أوفر.', c:1},
+   {t:'«طبيعي الموظف الجديد يتبهدل، إحنا كلنا اتبهدلنا.»', c:2, why:'ظلم صار «طبيعيًا» ومتوارثًا، فلا أحد يراه قرارًا يمكن تغييره.'},
+   {t:'وصف كل إضراب في كل النشرات بأنه «تعطيل لمصالح المواطنين»، حتى صار من يطالب بالحق في الإضراب يبدو غير جاد.', c:3, why:'الحد هنا على ما يمكن قوله بجدية، لا على رأي بعينه.'},
+   {t:'إعلان يقول: «٩ من كل ١٠ أطباء يوصون بهذا المنتج».', c:1},
+   {t:'شرطة تفض تجمعًا.', c:0}
+  ],
+  hints:['السؤال الحاسم لكل بند: هل يشعر المستهدف أن أحدًا يفرض عليه شيئًا؟','لو شعر وعرف من: سيف. لو عرف أن أحدًا يحاول إقناعه: حجة.','البديهة تحدد ما تصدّقه كأنه طبيعي، وحدود الكلام تحدد ما يمكن أن يقال بجدية أصلًا.']},
+ {type:'mcq', q:'عند شميت، لن تفهم مصطلحًا مثل «الدولة المحايدة» إلا إذا عرفت:',
+  options:['أصله اللغوي في اللاتينية','من يستهدفه المصطلح، ومن يريد أن ينفيه أو يُقصيه','تعريفه في القانون الدستوري','عدد من يستخدمونه في النقاش العام'],
+  answer:1, hints:['تذكّر وصف شميت للمفاهيم السياسية: «سجالية».','السجال يعني معركة، والمعركة لها طرف آخر.','المفهوم صُنع ضد...؟'],
+  explain:'المفهوم السياسي عند شميت أداة في صراع محدد. معناه الحقيقي هو من يستهدفه.'},
+ {type:'mcq', q:'موظفون لا يطالبون بزيادة أبدًا، ولا لأن أحدًا منعهم، ولا لأن البند حُذف من الاجتماع، بل لأنهم مقتنعون فعلًا أن «الشكوى قلة أصل». على أي بُعد من أبعاد لوكس تعمل السلطة هنا؟',
+  options:['البعد الأول: من يكسب القرار العلني','البعد الثاني: التحكم في جدول الأعمال','البعد الثالث: تشكيل الرغبات والتصورات حتى لا ينشأ الصراع','لا توجد سلطة هنا، فهذا اختيار حر'],
+  answer:2, hints:['هل هناك صراع علني؟ هل هناك بند مُنع من الطرح؟','الصراع لم ينشأ أصلًا. لماذا؟','أين تعمل السلطة إن لم يكن في القرار ولا في جدول الأعمال؟'],
+  explain:'لا صراع ولا منع. الرغبة في المطالبة نفسها لم تولد، وهذا هو البعد الثالث، الأخطر عند لوكس.'},
+ {type:'mcq', q:'«الكلمات فِيَش العقلاء ونقود الحمقى». ماذا يفعل الضابط بهذه القاعدة حين يسمع خطابًا؟',
+  options:['يستخدم كلمات أقوى من كلمات خصمه','يعامل كل كلمة كفيشة، ويسأل عمّا تمثله فعلًا قبل أن يقبلها','يرفض الكلام كله ويعتمد على الأفعال فقط','يحفظ تعريفات القاموس ليصحح خصمه'],
+  answer:1, hints:['الفيشة علامة على قيمة، وليست القيمة نفسها.','الأحمق يقبض الكلمة كأنها ذهب. والعاقل؟'],
+  explain:'الفيشة تمثل شيئًا. العاقل يحسب بها ولا ينخدع بها، فيسأل دائمًا: ما الواقعة خلف هذا الاسم؟'},
+ {type:'order', q:'رتّب درجات سلّم الخفاء من الأكثر ظهورًا إلى الأكثر خفاءً.',
+  items:['السيف: إكراه مكشوف','الحجة: إقناع معلن','البديهة: ما يبدو طبيعيًا','حدود الكلام: ما يمكن أن يقال بجدية'],
+  hints:['ابدأ بما تراه وتعرف فاعله.','آخر درجة لا تفرض عليك رأيًا أصلًا.']},
+ {type:'mcq', q:'خصم ظل شهورًا يحاول إقناع فريقك بفكرة، ثم انتقل فجأة إلى التهديد الصريح. وفق قانون السلّم، الأرجح أن:',
+  options:['هو في قمة قوته الآن','فشل في الحرب على المعنى فنزل إلى درجة أدنى وأعلى تكلفة','لا علاقة بين الأمرين','كسب المعركة ويريد إنهاءها بسرعة'],
+  answer:1, hints:['أي الدرجات أرخص وأطول عمرًا؟','لماذا يدفع أحد التكلفة الأعلى إن كانت الأرخص تعمل؟'],
+  explain:'من يملك البديهة لا يحتاج السيف. اللجوء للإكراه بعد الإقناع علامة على أن الإقناع فشل.'}
+],
+critique:[
+ {h:'خطر البارانويا', body:'<p>لو رأيت كل إطار مؤامرة فقدت القدرة على التمييز. كل كلام فيه إطار، ولا يمكن وصف شيء بلا اختيار كلمات. ليست كل بديهة مزروعة؛ بعضها خبرة متراكمة وحق مستقر. فالسؤال الصحيح ليس «هل هذا إطار؟»، لأن الإجابة دائمًا نعم. السؤال الصحيح: <strong>من المستفيد من هذا الإطار؟ وهل يصمد الحكم لو سمّينا الشيء باسم آخر؟</strong></p>'},
+ {h:'السلّم ليس خطًا زمنيًا', body:'<p>من الخطأ الشائع أن «الحداثة» استبدلت الميكروفون بالسيف. الحقيقة أنها خبّأت السيف. من يظن أن العالم صار «ناعمًا» يقع هو نفسه ضحية خطاب. السيطرة الناعمة تعمل في ظل الصلبة، وتنهار إليها حين تفشل.</p>'},
+ {h:'هوبز وشميت ليسا ساذجين', body:'<p>لا تقرأ هذا الملف على أنه «غرامشي وفوكو أذكى من هوبز وشميت». هوبز فهم سلطة الأسماء وحذّر منها، وشميت فهم أن المفاهيم أسلحة. الفرق في <em>زاوية النظر</em>: هما يريان الصراع لحظة القرار، والآخران يريانه مذابًا في الحياة اليومية. ستحتاج الزاويتين معًا.</p>'},
+ {h:'مشكلة «المصالح الحقيقية»', body:'<p>البعد الثالث عند لوكس يواجه اعتراضًا قويًا: كيف تعرف أن شخصًا «مخدوع» في رغباته، وليس فقط يرى الأمور بشكل مختلف عنك؟ من يدّعي أنه يعرف مصالح الناس الحقيقية أكثر منهم يقترب من أن يصير هو نفسه مهيمنًا جديدًا. هذا سؤال سيلاحقك في المنهج كله. احتفظ به، ولا تستعجل الحكم على الناس بأنهم «مبرمَجون».</p>'}
+],
+explain:{
+ prompt:'اشرح بكلامك: لماذا لم يكتفِ هوبز بالسيف؟ وما الفرق بين الدرجة الثالثة (البديهة) والرابعة (حدود الكلام) في سلّم الخفاء؟ أعط مثالًا من حياتك أو شغلك على كل منهما.',
+ points:[
+  'ذكرت علة هوبز: الأفعال تصدر عن الآراء، فتدبير الآراء تدبير للأفعال',
+  'ذكرت أن السيف وحده مكلف وهش، ولا يحفظ حقوق السيادة إن لم يقتنع الناس بأسسها',
+  'عرّفت البديهة بأنها فكرة صارت «طبيعية» ولم تعد تبدو رأي أحد',
+  'عرّفت حدود الكلام بأنها رسم لما يعتبر جادًا ومعقولًا وقابلًا للقول، بحيث يصير المخالف ضوضاء',
+  'ميّزت بينهما: الثالثة تحدد ما تصدقه، والرابعة تحدد ما يمكن أن يُطرح أصلًا للنقاش',
+  'أعطيت مثالين صحيحين ومختلفين من الواقع'
+ ],
+ model:`<p>هوبز رأى أن الناس يتصرفون بناءً على ما يعتقدونه، فمن يملك آراءهم يملك أفعالهم. السيف يستطيع أن يعاقب من يخالف، لكنه لا يستطيع أن يراقب كل الناس كل الوقت، ولا أن يجعلهم يطيعون حين يغيب. لذلك جعل الحكم على المذاهب وتعليم الناس أسس الطاعة جزءًا من السيادة.</p>
+<p><b>البديهة</b> فكرة صارت «طبيعية»: مثل «الموظف الجديد لازم يتبهدل». أنت تصدّقها دون أن تتذكر أن أحدًا أقنعك بها. <b>حدود الكلام</b> أعمق: لا تحدد ما تصدقه، بل ما يمكن أن يُطرح بجدية. مثلًا، في بيئة عمل ما قد يكون اقتراح «نقابة للموظفين» شيئًا لا يُرفض بحجة، بل يُقابل بابتسامة كأنه نكتة. الأولى تشكّل إجاباتك، والثانية تشكّل الأسئلة المسموح بها.</p>`
+},
+bossTitle:'ملف الجسر',
+boss:[
+ {type:'mcq', q:'هوبز قال إن العهود بلا سيف مجرد كلمات، وقال أيضًا إن تدبير الآراء من حقوق السيادة. ماذا يعني الجمع بين القولين؟',
+  options:['هوبز متناقض','السيف ضروري لكنه غير كافٍ؛ والطاعة المستقرة تحتاج اعتقادًا يسندها','هوبز تراجع عن نظرية السيف في آخر حياته','الآراء أهم من السيف، فلا حاجة له'],
+  answer:1, explain:'لا تناقض: السيف هو الضامن الأخير، والرأي هو ما يجعل استخدام السيف نادرًا.'},
+ {type:'mcq', q:'قناة تصف مظاهرة بأنها «شغب»، وأخرى تصف المظاهرة نفسها بأنها «احتجاج سلمي». أي أداة من هذا الملف تفسر ما يحدث بدقة؟',
+  options:['البعد الثاني عند لوكس','الأسماء غير الثابتة الدلالة عند هوبز','درع الإكراه عند غرامشي','مفهوم السيادة عند شميت'],
+  answer:1, explain:'الواقعة واحدة، والاسم يحمل حكم المتكلم: هذا مثال هوبز بعينه في الفصل ٤.'},
+ {type:'mcq', q:'«من يقول الإنسانية يريد أن يخدع». ما المقصود؟',
+  options:['أن مفهوم الإنسانية لا معنى له','أن من يحتكر مفهومًا كونيًا يُخرج خصمه منه، فيصير الخصم «ضد الإنسانية» ويُباح فيه كل شيء','أن السياسيين يكذبون دائمًا','أن الحرب لا تكون إنسانية أبدًا'],
+  answer:1, explain:'الاستيلاء على المفهوم الذي لا يمكن معاداته يحوّل الخلاف إلى إقصاء.'},
+ {type:'mcq', q:'اجتماع سنوي لمجلس إدارة لا يُدرج فيه بند الأجور أبدًا، رغم أن الموظفين يتذمرون في الممرات. هذا مثال على:',
+  options:['البعد الأول عند لوكس','البعد الثاني: التحكم في جدول الأعمال','البعد الثالث: تشكيل الرغبات','غياب السلطة'],
+  answer:1, explain:'الرغبة موجودة (التذمر)، لكن الصراع لا يصل إلى الطاولة لأن البند لا يُدرج. هذا هو البعد الثاني.'},
+ {type:'classify', q:'صنّف على سلّم الخفاء.', cats:['السيف','الحجة','البديهة','حدود الكلام'],
+  items:[
+   {t:'خصم من المرتب لمن يرفض العمل الإضافي.', c:0},
+   {t:'مقال يناقش بالأرقام جدوى مشروع.', c:1},
+   {t:'«الراجل مايعيطش» تقال لطفل في كل بيت.', c:2},
+   {t:'سؤال معين يُقابل في كل مكان بالضحك لا بالرد، حتى صار طرحه محرجًا.', c:3}
+  ]},
+ {type:'mcq', q:'غرامشي يعرّف الدولة بأنها «هيمنة محمية بدرع الإكراه». ماذا يضيف ذلك لقانون سلّم الخفاء؟',
+  options:['أن الهيمنة تلغي الحاجة للإكراه نهائيًا','أن الدرجات العليا تستند إلى السيف عند الأزمة، فالسيف مختبئ لا غائب','أن الإكراه أهم من الهيمنة','أن الدولة لا تستعمل الإقناع'],
+  answer:1, explain:'الرضا في الواجهة، والسيف ينتظر خلفه.'},
+ {type:'mcq', q:'أي سؤال من هذه <b>لا</b> ينتمي إلى «قراءة الضابط» كما حددها المنهج؟',
+  options:['كيف يعمل هذا السلاح الخطابي؟','أين أصابني هذا السلاح من قبل؟','هل فلسفة فوكو صحيحة في مجملها وينبغي اعتناقها؟','كيف أصد هذا السلاح؟'],
+  answer:2, explain:'نأخذ الآلية لا العقيدة. سؤال الاعتناق خارج مهمة الضابط.'},
+ {type:'mcq', q:'في رسالة «إعادة الهيكلة»، أين كان التلاعب أساسًا؟',
+  options:['في معلومات كاذبة عن الأرباح','في الأسماء والأطر والبديهيات، لا في معلومة كاذبة','في التهديد الصريح للموظفين','لم يكن هناك تلاعب'],
+  answer:1, explain:'الرسالة لم تكذب في معلومة، وهذا بالضبط ما يجعلها فعالة.'},
+ {type:'mcq', q:'ما مبرر أرسطو لتعلم الحجة ونقيضها؟',
+  options:['لكي تكسب أي نقاش بأي ثمن','لكي ترى الأمور بوضوح وتقدر على الرد إن احتج غيرك بغير إنصاف','لأن الحق نسبي','لكي تصبح خطيبًا محترفًا'],
+  answer:1, explain:'هذا نص «الخطابة» في الكتاب الأول، وهو عقد المنهج كله.'},
+ {type:'mcq', q:'وفق قانون السلّم، كلما صعدت السيطرة درجة:',
+  options:['زادت تكلفتها ومقاومتها','قلّت رؤيتها ومقاومتها وتكلفتها وطال عمرها','صارت أضعف لأنها أقل وضوحًا','صارت قانونية أكثر'],
+  answer:1, explain:'الخفاء هو مصدر قوتها.'}
+]
+});
+
+/* =====================================================================
+   الملف ١ — تشريح الخطابة (أرسطو)
+   ===================================================================== */
+FILES.push({
+id:1, ready:true, part:'أرسطو: ميكانيكا الإقناع', title:'تشريح الخطابة',
+sub:'الإيثوس والباثوس واللوغوس · الأجناس الثلاثة · ومن يجلس على كرسي القاضي',
+brief:`<h2>المهمة</h2>
+<p>قبل أن تفكك إمبراطوريات الثقافة، ابدأ من الذرّة: <strong>متكلم، وكلام، وسامع</strong>. كتب أرسطو في القرن الرابع قبل الميلاد أول دليل تشغيل منهجي لسلاح الإقناع، ولا يزال هيكله الأساسي قائمًا. كل ما سيأتي عند غرامشي وفوكو وبيرنيز مبني فوق هذه الذرّة، حتى حين يختفي المتكلم ويذوب في المؤسسة.</p>
+<p>في هذا الملف ستأخذ: تعريف الخطابة ولماذا هو تعريف «رؤية» لا «كلام»، وخريطة الأدلة، وتشريح الثقة (الإيثوس) إلى مكوّناته الثلاثة، ومنطق الانفعال (الباثوس)، ولمحة عن الحجة (اللوغوس)، ثم أخطر فكرة في الملف: <strong>الأجناس الثلاثة للخطابة، ومن يجلس على كرسي القاضي</strong>.</p>
+<p>ستخرج من الملف ببروتوكول تشريح من ست خطوات، تطبقه على أي خطاب: خطبة، أو إعلان، أو رسالة مدير، أو منشور.</p>`,
+objectives:[
+ 'تشرح تعريف أرسطو للخطابة ولماذا هو تعريف قدرة على «النظر» في وسائل الإقناع',
+ 'تفرّق بين الأدلة الصناعية (التي يصنعها المتكلم) وغير الصناعية (الموجودة قبله)',
+ 'تفكك أي ثقة مصنوعة إلى مكوّناتها: الحكمة العملية، والفضيلة، وحسن النية',
+ 'تكشف الانفعال المصنوع وتختبر: هل هو متناسب مع وقائع القضية أم مستورد من خارجها؟',
+ 'تحدد جنس الخطاب (مشاوري/قضائي/احتفالي) وتلتقط لحظة «نقل الجنس»',
+ 'تطبق بروتوكول التشريح السداسي على خطاب حقيقي'
+],
+predict:{
+ q:'خطيبان يقولان الحجة نفسها بالضبط. الأول مشهور عند الناس بالنزاهة، لكنه في هذه الخطبة تلعثم وبدا متعاليًا ومستعجلًا. الثاني مجهول تمامًا، لكنه أظهر في كلامه فهمًا للمسألة وحرصًا واضحًا على مصلحة السامعين. <b>عند أرسطو</b>، أيهما يملك «الإيثوس» (الثقة بشخص المتكلم) في هذه الخطبة؟',
+ options:['الأول، لأن سمعته سابقة وثابتة','الثاني، لأن الإيثوس الصناعي يُبنى بالكلام نفسه لا بالسمعة السابقة','كلاهما بالتساوي لأن الحجة واحدة','لا أحد، لأن الإيثوس لا علاقة له بالحجة'],
+ answer:1,
+ reveal:'أرسطو صريح في هذا: الثقة التي تدخل في فن الخطابة يجب أن تتحقق <b>بالكلام نفسه</b>، لا بما يظنه الناس في المتكلم قبل أن يبدأ. هذا يعني أن الثقة <em>صناعة</em> تُبنى داخل النص، ويمكن تشريحها داخل النص. وهذا أيضًا يعني أنها يمكن أن تُزيَّف. احفظ هذه الفكرة، فسيُبنى عليها نصف الملف.'
+},
+lesson:[
+{h:'أرسطو في مواجهة أفلاطون: هل الخطابة فن أم تملّق؟',
+body:`<p>لكي تفهم ما فعله أرسطو، اعرف خصمه أولًا. في محاورة «جورجياس» يهاجم سقراطُ أفلاطون الخطابةَ هجومًا قاسيًا. يقول إنها ليست فنًا (تِخنة) قائمًا على معرفة، بل مجرد <strong>دُربة وتملّق</strong>: هي للنفس كالطبخ للجسد. الطبخ يقدّم ما يلذّ ولا يعرف ما ينفع، والطب يعرف ما ينفع حتى لو كان مرًّا. كذلك الخطيب يرضي الجمهور ولا يعرف الحق.</p>
+<p>أرسطو، تلميذ أفلاطون، لم ينكر الخطر، لكنه غيّر السؤال. يفتتح كتابه «الخطابة» بقوله إن الخطابة <em>نظير الجدل</em>. كلاهما يتعامل مع أمور يعرفها الناس جميعًا دون علم متخصص، وكل الناس يمارسونهما بدرجة ما، بعضهم بالصدفة وبعضهم بالعادة. وما دام بعضهم ينجح وبعضهم يفشل، فيمكن دراسة <strong>سبب</strong> النجاح، وما يمكن دراسة سببه يمكن أن يصير فنًا.</p>
+<p>ثم يضع التعريف المركزي (الكتاب الأول، الفصل الثاني): الخطابة هي <strong>القدرة على النظر، في كل حالة، في الوسائل المتاحة للإقناع</strong>. وينبّه إلى أن وظيفتها ليست أن تُقنع دائمًا، كما أن وظيفة الطب ليست أن يشفي دائمًا، بل أن يرى ما يمكن فعله في كل حالة.</p>
+<p>ويذكر أرسطو منافع الخطابة: الحق والعدل بطبعهما أقوى من نقيضهما، فإذا خسرا فالعيب في المتكلم. وبعض الجماهير لا ينفع معها البرهان العلمي الدقيق، فلا بد من الكلام بما يعرفه الناس. ونتعلم الحجة ونقيضها لنرى الحقيقة ونرد التلاعب. ثم يضيف حجة تلمس شيئًا فيك: إن كان عارًا أن يعجز المرء عن الدفاع عن نفسه بجسده، فمن السخف ألا يكون عارًا عجزُه عن الدفاع عن نفسه بالكلام، والكلام أخصّ بالإنسان من الجسد.</p>`,
+field:`ركّز في التعريف: أرسطو ما قالش «القدرة على الإقناع». قال «القدرة على <b>النظر</b> في الوسائل المتاحة». يعني الخطابة عنده علم رؤية قبل ما تبقى فن كلام. وده بالظبط اللي انت جاي تاخده: مش إنك تبقى خطيب، إنك تبقى الراجل اللي بيشوف الأدوات وهي بتتحط على الطرابيزة. وبالمناسبة، جملة «العار إنك ماتعرفش تدافع عن نفسك بالكلام زي ما هو عار بالجسم» دي من أرسطو، مش من مدرب كاراتيه.`,
+key:'الخطابة عند أرسطو: القدرة على رؤية وسائل الإقناع المتاحة في كل حالة. هي فن يمكن دراسته لأن للنجاح فيه أسبابًا.'},
+
+{h:'خريطة الأدلة: ما يُصنع وما يُوجد',
+body:`<p>يقسّم أرسطو أدوات الإقناع إلى صنفين:</p>
+<ul>
+<li><strong>أدلة غير صناعية:</strong> موجودة قبل المتكلم، وهو لا يخترعها بل يستخدمها. في عصره كانت: الشهود، والاعترافات (ومنها ما يُنتزع تحت التعذيب، وكان معمولًا به في محاكم أثينا مع العبيد)، والعقود، والقوانين.</li>
+<li><strong>أدلة صناعية:</strong> يصنعها المتكلم بالمنهج، وهي ثلاثة لا غير:
+ <ol>
+ <li><strong>الإيثوس</strong>: ما يكمن في <em>شخص المتكلم</em>، حين يُقال الكلام بطريقة تجعله جديرًا بالتصديق.</li>
+ <li><strong>الباثوس</strong>: ما يكمن في <em>حال السامع</em>، حين يوضع في حالة نفسية معينة.</li>
+ <li><strong>اللوغوس</strong>: ما يكمن في <em>الكلام نفسه</em>، أي البرهان، <em>أو ما يبدو برهانًا</em>.</li>
+ </ol>
+</li>
+</ul>
+<p>توقّف عند العبارة الأخيرة: «أو ما يبدو برهانًا». أرسطو لا يكتب كتاب أخلاق هنا، بل يجرد ما <strong>يعمل فعلًا</strong> في عقول الناس، والبرهان الظاهري يعمل. والمحلل الذي لا يعرف ما «يبدو» برهانًا لن يعرف لماذا ينخدع الناس ببراهين فاسدة.</p>
+<p>وهنا ملاحظة الضابط المعاصر: الحد بين الصنفين صار رخوًا جدًا. الإحصائية والوثيقة وشهادة الخبير تبدو أدلة «غير صناعية» موجودة قبل المتكلم. لكن <strong>اختيار</strong> هذه الإحصائية دون غيرها، وتوقيت عرضها، والخبير الذي استُدعي دون سواه، كلها أفعال صناعية خالصة.</p>`,
+field:`لما حد يقولك «الأرقام بتتكلم لوحدها»، اعرف إن الأرقام عمرها ما بتتكلم لوحدها. فيه حد اختار الرقم ده، وساب رقم تاني، وحطه في الشريحة رقم ٣ مش رقم ١٢. الرقم نفسه دليل «موجود»، بس اختياره دليل «متصنّع». اسأل دايمًا: إيه الرقم اللي <b>ما</b>اتعرضش؟`,
+key:'ثلاثة أدلة صناعية: شخص المتكلم (إيثوس)، وحال السامع (باثوس)، والكلام نفسه (لوغوس، برهانًا أو ما يبدو برهانًا). واختيار الدليل «الموجود» فعل صناعي.'},
+
+{h:'الإيثوس: لماذا نصدّق من نصدّقه',
+body:`<p>عند أرسطو حقيقتان صادمتان عن الثقة.</p>
+<p><strong>الأولى:</strong> الإيثوس الذي يدخل في فن الخطابة يُبنى <em>بالكلام نفسه</em>، لا بالسمعة السابقة. هذا ما رأيته في سؤال التوقّع. معناه أن الثقة شيء يُصنع في النص ويمكن تشريحه في النص.</p>
+<p><strong>الثانية:</strong> يقول أرسطو إن شخصية المتكلم تكاد تكون <strong>أقوى وسائل الإقناع</strong> جميعًا. ويرد على كُتّاب الخطابة الذين ظنوا أن نزاهة المتكلم لا تضيف شيئًا إلى قوة الإقناع.</p>
+<p>ثم في بداية الكتاب الثاني يشرّح الثقة إلى مكوّناتها. هناك ثلاثة أشياء تجعلنا نصدّق المتكلم بصرف النظر عن البراهين:</p>
+<ul>
+<li><strong>الحكمة العملية (فرونيسيس):</strong> أنه يفهم ويعرف كيف تُدار المسألة.</li>
+<li><strong>الفضيلة (أريتي):</strong> أنه صادق ونزيه ولن يقول غير ما يراه.</li>
+<li><strong>حسن النية (إيونويا):</strong> أنه يريد لنا الخير وفي صفّنا.</li>
+</ul>
+<p>ومنطق أرسطو في ذلك دقيق جدًا: المتكلمون يُضِلّون لواحد من ثلاثة أسباب. إما أنهم يفتقرون إلى الحكمة فيخطئون الرأي. أو يملكون الرأي الصحيح لكن خُلقهم الفاسد يجعلهم لا يقولون ما يرونه. أو يملكون الحكمة والخلق لكن تنقصهم النية الحسنة نحونا، <em>فلا يقدمون لنا أفضل نصيحة مع أنهم يعرفونها</em>. فمن بدا أنه يملك الثلاثة معًا صدّقه السامعون بالضرورة.</p>
+<p>وهذه أداة تحليل كاملة. <strong>كل ثقة مصنوعة تبني واحدًا من الثلاثة، وكل هجوم على مصداقية شخص يضرب واحدًا منها:</strong></p>
+<div class="tablewrap"><table class="t">
+<tr><th>المكوّن</th><th>جملة تبنيه</th><th>هجوم يضربه</th></tr>
+<tr><td>الحكمة العملية</td><td>«عندي ٢٠ سنة في المجال ده»</td><td>«ده ما يفهمش في الشغل الحقيقي»</td></tr>
+<tr><td>الفضيلة</td><td>«أنا ماليش أي مصلحة في الموضوع»</td><td>«ده بيقول كده علشان المكافأة»</td></tr>
+<tr><td>حسن النية</td><td>«أنا كنت قاعد مكانكم بالظبط»</td><td>«ده مش مننا، ولا يهمه أمرنا»</td></tr>
+</table></div>`,
+field:`في شغل خدمة العملاء، خصوصًا مع عملاء الفئات العليا: العميل مش محتاج يتأكد إنك فاهم بس (حكمة عملية). محتاج يحس إنك في صفه (حسن نية). أغلب الموظفين بيخسروا العميل في المكوّن التالت مش الأول: فاهمين وأمناء، بس صوتهم بيقول «انت عبء عليّا». وده بالظبط تشخيص أرسطو: حكمة وفضيلة من غير حسن نية، فالعميل مابيصدقش إنك بتديله أحسن حل.`,
+key:'الثقة صناعة داخل النص، وهي أقوى أدوات الإقناع. مكوّناتها: حكمة عملية، وفضيلة، وحسن نية. كل جملة ثقة تبني واحدًا منها، وكل هجوم يضرب واحدًا.'},
+
+{h:'الباثوس: القاضي الذي يغيّر حكمه بمزاجه',
+body:`<p>لماذا يعتبر أرسطو الانفعال دليلًا من أدلة الإقناع؟ لأننا، كما يقول، <strong>لا نصدر الأحكام نفسها ونحن حزانى وفرحون، أو ونحن محبون ومبغضون</strong>. الانفعال يغيّر الحكم، إذن هو أداة في يد من يريد أن يغيّر الحكم.</p>
+<p>لكن هنا مفارقة مهمة. في الفصل الأول من الكتاب نفسه يهاجم أرسطو مؤلفي كتيّبات الخطابة في عصره، لأنهم يهتمون بإثارة الضغينة والشفقة والغضب، وكلها أمور خارج موضوع القضية. ويقول إن إثارة الغضب أو الحسد أو الشفقة في القاضي <em>أشبه بمن يعوّج المسطرة قبل أن يقيس بها</em>. ثم يأتي هو نفسه في الكتاب الثاني فيكتب كتالوجًا مفصلًا للانفعالات: الغضب، والهدوء، والصداقة، والعداوة، والخوف، والجرأة، والخجل، والشفقة، والسخط، والحسد، والمنافسة.</p>
+<p>كيف يستقيم ذلك؟ الحل أن هناك فرقًا بين انفعال <strong>نابع من وقائع القضية</strong> (خوف متناسب مع خطر حقيقي، وغضب من ظلم وقع فعلًا) وانفعال <strong>مستورد من خارجها</strong> لتعويج المسطرة. ومن هنا اختبار الضابط: <em>هل حجم الانفعال متناسب مع حجم الوقائع؟ وهل مصدره في القضية أم خارجها؟</em></p>
+<p>ولأرسطو منهج لتشريح أي انفعال بثلاثة أسئلة. يقول إنك لا تستطيع إثارة انفعال إن عرفت واحدًا أو اثنين فقط من هذه الثلاثة:</p>
+<ol>
+<li>في أي <strong>حال</strong> يكون الناس حين يشعرون به؟</li>
+<li><strong>تجاه من</strong> يشعرون به عادة؟</li>
+<li>و<strong>لأي أسباب</strong>؟</li>
+</ol>
+<p>خذ الخوف مثلًا. يعرّفه أرسطو بأنه ألم أو اضطراب ينشأ عن تخيّل شر وشيك مهلك أو مؤلم. ويلاحظ أن الناس لا يخافون من الشرور البعيدة جدًا، فكلنا نعرف أننا سنموت لكن الموت البعيد لا يشغلنا. ثم يعطي الوصفة صريحة: حين يريد الخطيب أن يخيف جمهوره، عليه أن يجعلهم يشعرون أنهم معرّضون للخطر فعلًا، وأن يذكّرهم بأن من هم <em>أقوى منهم</em> أصابهم مثله.</p>`,
+field:`الإعلانات اللي بتقولك «ناس كتير زيك خسرت فلوسها علشان ما أمّنتش...» دي حرفيًا وصفة أرسطو للخوف من ٢٣ قرن: قرّب الخطر، وخليك تحس إنك من النوع اللي ممكن يحصله، ووريك حد أقوى منك وقع. وأول ما تشوف الوصفة متركبة قدامك، الخوف بيخف لوحده. مش لأن الخطر راح، لكن لأنك بقيت شايف إيد اللي بيحركه.`,
+key:'الانفعال يغيّر الحكم، فهو أداة. الاختبار: هل هو متناسب مع وقائع القضية أم مستورد لتعويج المسطرة؟ ولتشريحه: الحال، وتجاه من، ولأي سبب.'},
+
+{h:'اللوغوس: المثال والحجة المبتورة',
+body:`<p>للحجة الخطابية عند أرسطو أداتان، تقابلان أداتَي المنطق:</p>
+<ul>
+<li><strong>المثال</strong> (ويقابل الاستقراء): تذكر حالة أو حالتين وتستنتج منها قاعدة. «فلان استقال وندم، إذن الاستقالة غلط».</li>
+<li><strong>القياس الإضماري (الإنثيميم)</strong> (ويقابل القياس المنطقي): حجة تنطلق من المحتمل والعلامات، لا من اليقين. وكثيرًا ما <strong>تحذف إحدى مقدماتها</strong> لأن الجمهور يعرفها ويكمّلها بنفسه.</li>
+</ul>
+<p>هذا الحذف هو القنبلة. حين يُكمل السامع المقدمة المحذوفة بنفسه، يشعر أن النتيجة نتيجته هو، لا شيئًا فُرض عليه. والمقدمة المحذوفة، لأنها لم تُقل، لا يمكن مناقشتها. هذا جذر التأطير كله، وسيكون موضوع الملف ٢ بكامله. يكفيك الآن أن تتعود على سؤال واحد: <em>ما الذي يجب أن أصدقه مسبقًا حتى تبدو هذه النتيجة منطقية؟</em></p>`,
+field:`«ده حتى مش خريج جامعة كويسة.» الجملة دي ناقصة مقدمة: «اللي مش خريج جامعة كويسة مايتسمعلوش.» لو حد قالها بصوت عالي هيتضحك عليه. بس محدش بيقولها، كلنا بنكمّلها في دماغنا. وده سر قوتها.`,
+key:'اللوغوس: مثال يُعامل كقاعدة، أو قياس يحذف مقدمته فيكملها السامع. السؤال الثابت: ما المقدمة التي يجب أن أصدقها حتى تصح هذه النتيجة؟'},
+
+{h:'الأجناس الثلاثة: اختيار ساحة المعركة',
+body:`<p>يقول أرسطو إن كل خطاب يتكون من ثلاثة: متكلم، وموضوع، وسامع، وإن <strong>غاية الخطاب تتعلق بالسامع</strong>. والسامع إما متفرج، وإما قاضٍ. والقاضي إما يقضي في أمر مستقبل، كعضو الجمعية الذي يصوّت على قرار، وإما في أمر ماضٍ، كالمحلّف في المحكمة. ومن هنا ثلاثة أجناس:</p>
+<div class="tablewrap"><table class="t">
+<tr><th>الجنس</th><th>الزمن</th><th>الغاية</th><th>الفعل</th><th>دور الجمهور</th></tr>
+<tr><td><b>مشاوري</b> (سياسي)</td><td>المستقبل</td><td>النافع والضار</td><td>حث أو نهي</td><td>قاضٍ يقرر ما سيحدث</td></tr>
+<tr><td><b>قضائي</b> (محكمة)</td><td>الماضي</td><td>العادل والظالم</td><td>اتهام أو دفاع</td><td>قاضٍ يحكم فيما حدث</td></tr>
+<tr><td><b>احتفالي</b> (استعراضي)</td><td>الحاضر</td><td>الشريف والمخزي</td><td>مدح أو ذم</td><td>متفرج يصفق أو يستهجن</td></tr>
+</table></div>
+<p>إلى هنا هذا تصنيف أرسطو. ما يلي قراءة تحليلية مبنية عليه، وليست نصًا عنده: <strong>من يختار الجنس يختار ساحة المعركة.</strong> لكل جنس سؤاله الخاص، ولكل جنس دور مختلف للجمهور. فإذا نجح أحد في <em>نقل</em> النقاش من جنس إلى آخر، فقد غيّر السؤال المطروح ودور الناس معًا، دون أن يلاحظ أحد.</p>
+<ul>
+<li><strong>من المشاوري إلى القضائي:</strong> السؤال «هل نتبنى هذه السياسة؟» يصبح «هل صاحب الاقتراح مذنب؟». لم يعد أحد يزن النفع والضرر؛ صار الجميع يحاكم شخصًا.</li>
+<li><strong>من المشاوري إلى الاحتفالي:</strong> السؤال «هل هذا القرار نافع؟» يصبح «من المخلص ومن الخائن؟». والأخطر هنا أن الجمهور يتحول من <em>قاضٍ</em> إلى <em>متفرج</em>. والمتفرجون لا يقررون، بل يصفقون.</li>
+</ul>
+<p>هذه أول خطوة على الطريق إلى غرامشي. الجمهور الذي اعتاد أن يكون متفرجًا في المسائل الكبرى لم يعد طرفًا في القرار، بل جمهورًا في احتفال.</p>`,
+field:`في اجتماع فريق: السؤال «نغيّر نظام الشيفتات ولا لأ؟» ده مشاوري. فجأة حد يقول «طب ما انت اللي اتأخرت ٣ مرات الشهر اللي فات». كده اتنقلنا لمحكمة، وانت بقيت متهم. أو حد يقول «الفريق المحترم مابيشتكيش». كده اتنقلنا لحفلة تكريم، وانت بقيت متفرج لازم يصقف أو يتفضح. الرد في الحالتين واحد: <b>ارجع للسؤال الأصلي. «إحنا هنا بنقرر إيه؟»</b> اللي بيقعد على كرسي القاضي هو اللي بيحدد القضية.`,
+key:'مشاوري = مستقبل/نافع. قضائي = ماضٍ/عادل. احتفالي = حاضر/شريف، والجمهور فيه متفرج. نقل الجنس يغيّر السؤال ودور الجمهور معًا. والدفاع: ارجع للسؤال الأصلي.'},
+
+{h:'بروتوكول التشريح السداسي',
+body:`<p>اجمع الملف كله في بروتوكول تطبقه على أي خطاب، بالترتيب:</p>
+<ol>
+<li><strong>الجنس وكرسي القاضي:</strong> ما جنس الخطاب؟ ما السؤال المطروح؟ ومن المفترض أن يحكم: قاضٍ أم متفرج؟</li>
+<li><strong>نقل الجنس:</strong> هل انتقل الخطاب في منتصفه إلى جنس آخر؟ متى، وبأي جملة؟</li>
+<li><strong>الإيثوس:</strong> أي مكوّن من الثلاثة يُبنى (حكمة، فضيلة، حسن نية)؟ وأيها يُهاجم عند الخصم؟</li>
+<li><strong>الباثوس:</strong> أي انفعال يُثار؟ وهل هو متناسب مع الوقائع أم مستورد؟</li>
+<li><strong>اللوغوس:</strong> أي مثال يُعامل كقاعدة؟ وأي مقدمة محذوفة يُطلب منك أن تكملها؟</li>
+<li><strong>الأدلة «الموجودة»:</strong> ما الأرقام والوثائق والشهادات المعروضة؟ من اختارها؟ وما الذي <em>لم</em> يُعرض؟</li>
+</ol>
+<p>لن تحتاج دائمًا للخطوات الست. لكن تطبيقها كاملة في البداية هو ما سيجعلها لاحقًا ردّ فعل سريعًا لا تفكر فيه، تمامًا كما تتحول التقنية في التدريب البدني إلى حركة تلقائية بعد التكرار الصحيح.</p>`,
+key:'الجنس ← نقل الجنس ← الإيثوس ← الباثوس ← اللوغوس ← الأدلة الموجودة. ستة أسئلة، وبعد التكرار تصير ردّ فعل.'}
+],
+quotes:[
+ {t:'لنعرّف الخطابة بأنها القدرة على النظر، في كل حالة، في الوسائل المتاحة للإقناع.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ٢', why:'تعريف قائم على الرؤية لا على الكلام. الخطيب الحقيقي محلل قبل أن يكون متكلمًا.'},
+ {t:'إثارة الغضب أو الحسد أو الشفقة في القاضي أشبه بمن يعوّج المسطرة قبل أن يقيس بها.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ١', why:'الانفعال المستورد من خارج القضية يفسد أداة الحكم نفسها.'},
+ {t:'ينبغي أن نقدر على الإقناع بالنقيضين، لا لنفعل الأمرين، فلا يجوز أن نقنع الناس بالباطل، بل لنرى بوضوح كيف هي الأمور، ولنقدر على الرد إن احتج غيرنا بغير إنصاف.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ١', why:'عقد هذا المنهج كله.'},
+ {t:'إن كان عارًا أن يعجز المرء عن الدفاع عن نفسه بجسده، فمن السخف ألا يكون عارًا عجزُه عن الدفاع عن نفسه بالكلام، والكلام أخصّ بالإنسان من الجسد.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ١', why:'الكلام ساحة قتال مثل الجسد، والعجز فيها هزيمة.'},
+ {t:'ينبغي أن تتحقق هذه الثقة بالكلام نفسه، لا بما يظنه الناس في المتكلم قبل أن يبدأ.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ٢', why:'الإيثوس صناعة داخل النص، فيمكن تشريحه وتزييفه وكشفه.'},
+ {t:'لا نصدر الأحكام نفسها ونحن حزانى وفرحون، أو ونحن محبون ومبغضون.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ٢', why:'لهذا يُعد الانفعال دليلًا: هو يحرّك الحكم.'},
+ {t:'هناك ثلاثة أشياء تجعل المتكلم جديرًا بالثقة بصرف النظر عن البراهين: الحكمة العملية، والفضيلة، وحسن النية.', src:'أرسطو، الخطابة، الكتاب الثاني، الفصل ١', why:'خريطة الثقة الكاملة في سطر.'}
+],
+worked:{
+ title:'حالة محلولة: خطبة المدير',
+ case:`مدير يخاطب فريقه:<br><b>«يا جماعة، أنا قبل ما أبقى مدير قعدت على نفس الكرسي ده ٦ سنين، وعارف يعني إيه شيفت ليلي. الإدارة طالبة نغطي شيفتات إضافية الشهر ده. البنوك اللي حوالينا قفلت فروع كاملة السنة دي، وأرقامنا الربع ده تحت التارجت بـ١٢٪. أنا مش هجبر حد. بس اللي هيعتذر... خلّوني أقول إن الفريق ده طول عمره اتعرف إنه ما بيسيبش بعضه.»</b>`,
+ steps:[
+  {h:'الجنس وكرسي القاضي', body:'الخطاب في ظاهره <strong>مشاوري</strong>: هل نغطي الشيفتات أم لا؟ سؤال عن المستقبل والنافع. لكن جملة «الإدارة طالبة» تكشف أن القرار متخذ. الجمهور يُعامَل كقاضٍ، وهو في الحقيقة ليس قاضيًا.'},
+  {h:'نقل الجنس', body:'الجملة الأخيرة تنقل الخطاب إلى <strong>الاحتفالي</strong>: مدح «الفريق اللي ما بيسيبش بعضه» هو ذم ضمني لكل من سيعتذر. المعتذر الآن لا يرفض شيفتًا إضافيًا؛ إنه <em>يخون هوية</em>. وتحوّل الجمهور من قاضٍ يزن النفع إلى متفرج يراقب من سيُفضح.'},
+  {h:'الإيثوس', body:'<strong>حسن النية</strong> بالهوية المشتركة («قعدت على نفس الكرسي»)، و<strong>الحكمة العملية</strong> بالخبرة («عارف يعني إيه شيفت ليلي»). أما <strong>الفضيلة</strong> فتُبنى بجملة «أنا مش هجبر حد»، وهي صورة النزاهة والاحترام لحرية الآخرين.'},
+  {h:'الباثوس', body:'<strong>خوف</strong> بوصفة أرسطو الحرفية: الخطر قريب («البنوك اللي حوالينا»)، ومن هم أقوى منا أصابهم («قفلت فروع كاملة»). ثم <strong>خجل</strong> في الجملة الأخيرة. والاختبار: هل تعطيل فرع واحد مرتبط فعلًا بتغطية شيفتات هذا الشهر؟ الخوف هنا أكبر من الوقائع المعروضة.'},
+  {h:'اللوغوس', body:'مثال (البنوك المجاورة) ورقم (١٢٪). والمقدمة المحذوفة: <em>«تغطية الشيفتات بجهد الموظفين الإضافي هي الحل الوحيد لسد الفجوة»</em>. لم تُقل لأنها لو قيلت لسُئل عنها: لماذا لا يُعيَّن موظفون؟ ولماذا لا يُدفع أجر إضافي واضح؟'},
+  {h:'الأدلة «الموجودة»', body:'رقم ١٢٪ قد يكون حقيقيًا. لكن اختياره هو، دون أرقام أخرى (مثل أجر الساعة الإضافية، أو عدد الشواغر غير المعيّنة)، فعل صناعي خالص. ما لم يُعرض يقول بقدر ما عُرض.'}
+ ],
+ verdict:'أخطر جملة في الخطبة هي «أنا مش هجبر حد». هي تنفي السيف بصوت عالٍ، ثم تضع مكانه مباشرة سيفًا آخر اسمه العار. في جملتين، انتقل المدير من الدرجة الأولى في سلّم الخفاء إلى الدرجة الثالثة.'
+},
+yourturn:{
+ title:'دورك: إعلان الكورس',
+ case:`إعلان ممول على وسائل التواصل:<br><b>«أنا كنت موظف زيك بالظبط، مرتبي بيخلص يوم ١٠ ومديري ما بيشوفنيش. النهارده دخلي ٥ أضعاف. ٩٠٪ من طلابنا غيّروا حياتهم. الناس اللي مستنية "الوقت المناسب" هي نفس الناس اللي هتفضل مكانها بعد ٥ سنين. الحجز بيقفل الليلة الساعة ١٢.»</b>`,
+ prompt:'طبّق بروتوكول التشريح السداسي كاملًا على الإعلان.',
+ points:[
+  'حددت الجنس الظاهر (مشاوري: اشترك أو لا) ولاحظت النقل إلى الاحتفالي: تقسيم الناس إلى ناجحين ومنتظرين، أي مدح وذم',
+  'حددت الإيثوس: حسن نية عبر الهوية المشتركة («كنت زيك»)، وحكمة عملية عبر النتيجة («دخلي ٥ أضعاف»)',
+  'حددت الباثوس: خوف من البقاء في المكان (خطر مُقرَّب بـ«٥ سنين»)، وخجل، وإلحاح مصطنع («الليلة الساعة ١٢»)',
+  'لاحظت أن مثالًا واحدًا (المتكلم نفسه) يُعامل كقاعدة، وأن «٩٠٪» بلا مصدر ولا تعريف لمعنى «غيّروا حياتهم»',
+  'استخرجت المقدمة المحذوفة: أن الكورس هو سبب التحول، وأن ما نجح معه سينجح معك',
+  'حددت السؤال الأصلي الذي ضاع: هل محتوى الكورس يستحق ثمنه؟ وما الذي لم يُعرض: السعر، والمحتوى، ونسبة من لم ينجح'
+ ],
+ model:`<p><b>الجنس:</b> السؤال الحقيقي مشاوري: «هل هذا الكورس نافع لي بهذا السعر؟». لكن الإعلان ينقله إلى احتفالي: هناك صنفان من البشر، ناجحون يحجزون الليلة، و«منتظرون» سيبقون مكانهم. المشاهد لم يعد يزن، بل يختار في أي صنف سيُصنَّف.</p>
+<p><b>الإيثوس:</b> «كنت موظف زيك» تبني حسن النية والانتماء. «دخلي ٥ أضعاف» تبني الحكمة العملية بالنتيجة. لا شيء يبني الفضيلة، ولا شيء يقول إن المتكلم بلا مصلحة، مع أنه البائع.</p>
+<p><b>الباثوس:</b> وصفة الخوف كاملة: الخطر قريب وشخصي (بعد ٥ سنين ستكون مكانك)، ومعه خجل من صورة «المنتظر»، وإلحاح زمني يمنع التفكير. والإلحاح مستورد من خارج القضية، فقيمة الكورس لن تتغير بعد منتصف الليل.</p>
+<p><b>اللوغوس:</b> مثال واحد يُعامل كقاعدة. و«٩٠٪» رقم بلا مصدر، و«غيّروا حياتهم» عبارة لا يمكن قياسها. المقدمة المحذوفة: نجاحي سببه الكورس، ونجاحي قابل للتكرار عندك.</p>
+<p><b>ما لم يُعرض:</b> السعر، والمنهج الفعلي، ونسبة من لم يستفد، وما كان دخل المتكلم يعتمد عليه فعلًا (ربما يعتمد على بيع الكورس نفسه).</p>`
+},
+challenges:[
+ {type:'classify', q:'صنّف كل جملة حسب الدليل الصناعي الأساسي الذي تعمل به.', cats:['إيثوس','باثوس','لوغوس'],
+  items:[
+   {t:'«بصفتي طبيبًا عالج آلاف الحالات المشابهة...»', c:0, why:'حكمة عملية.'},
+   {t:'«تخيل ابنك وهو مستنيك ترجع البيت الليلة...»', c:1},
+   {t:'«التكلفة ٣٠٠ جنيه والتوفير الشهري ٨٠، يعني بتسترد فلوسك في ٤ شهور.»', c:2},
+   {t:'«أنا مش هكسب ولا قرش من إنك تشتري.»', c:0, why:'فضيلة/نزاهة: نفي المصلحة.'},
+   {t:'«بيتي زي بيتك، وهمّك همّي.»', c:0, why:'حسن النية.'},
+   {t:'«الشركات اللي طبّقت النظام ده قلّت الشكاوى ٤٠٪.»', c:2},
+   {t:'«مش هتسامح نفسك لو الفرصة ضاعت.»', c:1}
+  ],
+  hints:['اسأل: هل الجملة تتكلم عن المتكلم، أم عن حال السامع، أم عن الموضوع نفسه؟','جمل «أنا» غالبًا إيثوس. جمل «تخيّل/هتحس» غالبًا باثوس.']},
+ {type:'classify', q:'صنّف كل خطاب حسب جنسه عند أرسطو.', cats:['مشاوري','قضائي','احتفالي'],
+  items:[
+   {t:'«يجب أن نرفع سعر الاشتراك العام القادم لأنه أنفع للشركة.»', c:0},
+   {t:'«الموظف خالف اللائحة يوم ٣ مايو ويستحق الجزاء.»', c:1},
+   {t:'«في حفل التكريم: فلان رمز العطاء والإخلاص.»', c:2},
+   {t:'«المتهم لم يكن في مكان الحادث تلك الليلة.»', c:1},
+   {t:'«لو بنينا الجسر هنا سيختصر الطريق ساعة كاملة.»', c:0},
+   {t:'«عار على من يتخلى عن زملائه وقت الشدة.»', c:2}
+  ],
+  hints:['حدد الزمن أولًا: مستقبل، أم ماضٍ، أم حاضر؟','ثم الغاية: نافع، أم عادل، أم شريف؟']},
+ {type:'mcq', q:'ما المكوّنات الثلاثة التي تجعل المتكلم جديرًا بالثقة عند أرسطو؟',
+  options:['الشهرة، والمنصب، والفصاحة','الحكمة العملية، والفضيلة، وحسن النية','المنطق، والعاطفة، والشخصية','الشهود، والعقود، والقوانين'],
+  answer:1, hints:['ليست هي الأدلة الثلاثة نفسها (إيثوس/باثوس/لوغوس)؛ هذه مكوّنات الإيثوس وحده.','واحد يتعلق بالفهم، وواحد بالخُلق، وواحد بموقفه منك.'],
+  explain:'هذه بداية الكتاب الثاني: فرونيسيس، وأريتي، وإيونويا.'},
+ {type:'mcq', q:'متكلم يملك الحكمة العملية والفضيلة، لكن تنقصه النية الحسنة نحو جمهوره. ماذا يحدث وفق تحليل أرسطو؟',
+  options:['سيكذب على جمهوره','سيخطئ في الرأي','قد لا يقدم أفضل نصيحة رغم أنه يعرفها','لا يحدث شيء، لأن الحكمة والفضيلة تكفيان'],
+  answer:2, hints:['كل نقص في مكوّن يسبب نوعًا محددًا من الضلال.','نقص الحكمة: خطأ في الرأي. نقص الفضيلة: لا يقول ما يراه. ونقص حسن النية؟'],
+  explain:'يعرف الأفضل ويقول ما يراه صادقًا، لكنه لا يهتم بأن يعطيك الأفضل لك.'},
+ {type:'mcq', q:'في اجتماع لمناقشة نظام عمل جديد، قال أحدهم: «صاحب الاقتراح ده هو نفسه اللي فشل مشروعه السنة اللي فاتت.» ما الحركة الخطابية؟',
+  options:['حجة منطقية سليمة ضد الاقتراح','نقل الجنس من المشاوري إلى القضائي، بمحاكمة الشخص بدل وزن الاقتراح','بناء إيثوس للمتكلم','إثارة الخوف من النظام الجديد'],
+  answer:1, hints:['ما السؤال الأصلي، وما زمنه؟','الجملة الجديدة تتكلم عن الماضي وعن شخص. أي جنس هذا؟'],
+  explain:'السؤال كان «هل النظام نافع؟» (مستقبل)، فصار «هل صاحبه مذنب؟» (ماضٍ). القاعة تحولت إلى محكمة.'},
+ {type:'mcq', q:'ما الكلمة المفتاحية في تعريف أرسطو للخطابة؟',
+  options:['الإقناع دائمًا','النظر/الرؤية في الوسائل المتاحة','التأثير في الجماهير','الفصاحة والبلاغة'],
+  answer:1, hints:['هل وظيفة الطب أن يشفي دائمًا؟'],
+  explain:'القدرة على النظر في الوسائل المتاحة، لا ضمان الإقناع.'},
+ {type:'order', q:'رتّب بروتوكول التشريح السداسي.',
+  items:['الجنس وكرسي القاضي','نقل الجنس','الإيثوس','الباثوس','اللوغوس','الأدلة الموجودة: من اختارها وما الذي لم يُعرض'],
+  hints:['تبدأ بالساحة قبل الأسلحة.','الأدلة الثلاثة بترتيب أرسطو نفسه: متكلم، فسامع، فكلام.']},
+ {type:'mcq', q:'وفق وصفة أرسطو، كيف يخيف الخطيب جمهوره؟',
+  options:['يصف خطرًا بعيدًا وكبيرًا جدًا','يجعلهم يشعرون أن الخطر قريب ويصيب أمثالهم، ويذكّرهم بمن هم أقوى منهم أصابهم مثله','يصرخ ويرفع صوته','يعرض إحصاءات دقيقة عن المخاطر'],
+  answer:1, hints:['أرسطو لاحظ أن الناس لا يخافون من الموت البعيد.','الخوف يحتاج قُربًا، ويحتاج أن تشعر أنك من النوع المعرّض.'],
+  explain:'القرب، والشعور بأنك معرّض، ومثال من هو أقوى. هذه وصفة الكتاب الثاني.'}
+],
+critique:[
+ {h:'أرسطو يفترض مدينة صغيرة وقاضيًا حاضرًا', body:'<p>نموذج أرسطو مبني على أثينا: جمهور من المواطنين يجلسون أمام متكلم يرونه، ثم يصوّتون. أما اليوم فالجمهور مشتت، والمتكلم كثيرًا ما يكون غير مرئي: مؤسسة بلا وجه، أو حساب مجهول، أو خوارزمية تقرر ماذا ترى قبل أن يتكلم أحد. <strong>حين يختفي المتكلم يختفي الإيثوس كشيء يمكن فحصه</strong>، وينتقل ثقل السيطرة من الخطبة إلى <em>البنية</em>. ولهذا لا يكفي أرسطو، ولهذا يأتي بعده غرامشي وفوكو.</p>'},
+ {h:'تفاؤل أرسطو بأن الحق أقوى بطبعه', body:'<p>أرسطو يقول إن الحق والعدل أقوى بطبعهما من نقيضهما، وإن خسرا فالعيب في المتكلم. هذا تفاؤل سيتحداه والتر ليبمان (الملف ٨). عند ليبمان الناس لا يرون العالم مباشرة، بل يرون «صورًا في رؤوسهم» صنعها غيرهم. فإن كان الحق لا يصل إلى الناس أصلًا، فلن تنفعه قوته الطبيعية.</p>'},
+ {h:'البراهين الثلاثة عدسات لا خانات', body:'<p>الفصل بين الإيثوس والباثوس واللوغوس فصل تحليلي. في الواقع تحمل الجملة الواحدة الثلاثة معًا: «أنا كنت زيك» إيثوس، لكنها تثير أيضًا انفعال الانتماء. لا تضيّع وقتك في الجدل حول «الخانة الصحيحة». استعمل الثلاثة كعدسات تنظر بها إلى الجملة نفسها من زوايا مختلفة.</p>'},
+ {h:'اعتراض أفلاطون لم يمت', body:'<p>ألا يصنع تعليمُ الخطابة مخادعين؟ يرد أرسطو بأن هذا يصدق على كل الخيرات إلا الفضيلة نفسها: القوة والصحة والثروة والقيادة العسكرية كلها يمكن أن يُساء استخدامها. معنى هذا أن الحصن الحقيقي ليس الجهل بالسلاح، بل <strong>الخُلق</strong> الذي يحمله، وأرسطو نفسه وضع الخُلق خارج فن الخطابة. المنهج يعطيك السلاح؛ أما الحصن فمسؤوليتك.</p>'}
+],
+explain:{
+ prompt:'اشرح بكلامك: لماذا يُعد «نقل الجنس» من أخطر الحركات الخطابية؟ استخدم فكرة كرسي القاضي، وأعطِ مثالًا من شغلك أو حياتك، واذكر كيف تصده.',
+ points:[
+  'عرّفت الأجناس الثلاثة بزمنها وغايتها (مستقبل/نافع، ماضٍ/عادل، حاضر/شريف)',
+  'شرحت أن النقل يغيّر السؤال المطروح دون أن يُعلن ذلك',
+  'شرحت أن النقل يغيّر دور الجمهور (من قاضٍ يقرر إلى قاضٍ يحاكم شخصًا، أو إلى متفرج يصفق)',
+  'أعطيت مثالًا صحيحًا من الواقع، حددت فيه الجنس الأصلي والجنس المنقول إليه',
+  'ذكرت الدفاع: العودة الصريحة للسؤال الأصلي («إحنا هنا بنقرر إيه؟»)'
+ ],
+ model:`<p>لكل جنس سؤاله ودور جمهوره. المشاوري يسأل «ما الأنفع؟» والجمهور يقرر المستقبل. القضائي يسأل «من المذنب؟» والجمهور يحكم في الماضي. الاحتفالي يسأل «من الشريف؟» والجمهور يتفرج ويصفق.</p>
+<p>نقل الجنس خطير لأنه يغيّر السؤال دون أن يعلن ذلك. لا أحد يقول «دعونا نترك سؤال النفع ونحاكم فلانًا»؛ الانتقال يحدث بجملة واحدة، فيجد الناس أنفسهم يجيبون سؤالًا لم يُطرح عليهم. والأخطر أنه يغيّر موقعهم: من يجلس على كرسي القاضي ليقرر يصبح فجأة متفرجًا في احتفال ولاء.</p>
+<p>مثال: نقاش حول «هل نطالب بزيادة بدل المواصلات؟» (مشاوري)، فيقول أحدهم «الموظف المحترم ما بيبصش للفلوس» (احتفالي). صار السؤال عن الاحترام لا عن النفع، وصار كل من يؤيد المطالبة «غير محترم».</p>
+<p>الدفاع: إعادة السؤال الأصلي بصوت هادئ: «سيبك من مين محترم. السؤال: البدل الحالي يغطي المواصلات ولا لأ؟»</p>`
+},
+bossTitle:'ملف أرسطو الأول',
+boss:[
+ {type:'mcq', q:'خطيب مشهور بالأمانة، لكنه في خطبته بدا جاهلًا بالموضوع ومتعاليًا. عند أرسطو، هل يملك الإيثوس الصناعي في هذه الخطبة؟',
+  options:['نعم، فسمعته تكفي','لا، فالإيثوس الصناعي يُبنى بالكلام نفسه','نعم، إن كانت حجته قوية','لا يمكن الحكم'],
+  answer:1, explain:'الثقة التي تدخل في الفن تتحقق بالكلام، لا بالظن السابق.'},
+ {type:'mcq', q:'أي هذه دليل «غير صناعي» عند أرسطو؟',
+  options:['قصة مؤثرة يرويها المتكلم','عقد موقّع بين الطرفين','تذكير المتكلم بخبرته الطويلة','قياس منطقي يبنيه المتكلم'],
+  answer:1, explain:'العقد موجود قبل المتكلم، وهو يستخدمه فقط. لكن تذكّر: اختياره وتوقيت عرضه فعل صناعي.'},
+ {type:'mcq', q:'«كمن يعوّج المسطرة قبل أن يقيس بها». ماذا يقصد أرسطو؟',
+  options:['أن المنطق أهم من العاطفة دائمًا','أن إثارة انفعال لا علاقة له بالقضية تفسد أداة الحكم نفسها','أن القضاة فاسدون','أن القياس الدقيق مستحيل في الخطابة'],
+  answer:1, explain:'الانفعال المستورد يعوّج «مسطرة» القاضي، فيصير كل حكم بعدها معوجًّا.'},
+ {type:'mcq', q:'ما دور الجمهور في الخطاب الاحتفالي؟',
+  options:['قاضٍ يقرر المستقبل','قاضٍ يحكم في الماضي','متفرج يمدح أو يذم','لا دور له'],
+  answer:2, explain:'المتفرج لا يقرر. ولهذا فتحويل الجمهور إلى متفرج خطوة نحو الهيمنة.'},
+ {type:'mcq', q:'ما غاية الخطاب المشاوري؟',
+  options:['العادل والظالم','الشريف والمخزي','النافع والضار','الصادق والكاذب'],
+  answer:2, explain:'المشاوري عن المستقبل، وغايته النافع والضار.'},
+ {type:'classify', q:'صنّف حسب الدليل الأساسي.', cats:['إيثوس','باثوس','لوغوس'],
+  items:[
+   {t:'«أنا اشتغلت في المكان ده ١٥ سنة.»', c:0},
+   {t:'«المشروع وفّر ٢٠٪ من التكلفة في ٣ فروع.»', c:2},
+   {t:'«فكّر في وش أمك لما تعرف.»', c:1},
+   {t:'«أنا هنا علشانكم، مش علشان الكرسي.»', c:0}
+  ]},
+ {type:'mcq', q:'«أنا مش هجبر حد. بس الفريق ده عمره ما ساب بعضه.» ما الحركة هنا؟',
+  options:['احترام حقيقي لحرية الاختيار','نفي السيف علنًا ثم استبداله بالعار عبر النقل إلى الجنس الاحتفالي','حجة منطقية عن مصلحة الفريق','بناء الحكمة العملية'],
+  answer:1, explain:'نفي الإكراه الصريح ثم إقامة إكراه اجتماعي مكانه: من الدرجة الأولى إلى الثالثة.'},
+ {type:'mcq', q:'بماذا شبّه أفلاطون (في جورجياس) الخطابة؟',
+  options:['بالطب: تعالج النفس','بالطبخ: تقدم ما يلذّ لا ما ينفع، فهي تملّق','بالرياضيات: علم دقيق','بالحرب: صراع بين خصمين'],
+  answer:1, explain:'الطبخ يقابل الطب كما تقابل الخطابةُ العدالة: إرضاء بلا معرفة. وأرسطو رد بأنها فن يمكن دراسة أسبابه.'},
+ {type:'mcq', q:'ما الأسئلة الثلاثة التي يحتاجها من يريد تشريح انفعال أو إثارته عند أرسطو؟',
+  options:['من، ومتى، وأين','حال الشخص حين يشعر به، وتجاه من، ولأي أسباب','شدة الانفعال، ومدته، ونتيجته','الإيثوس، والباثوس، واللوغوس'],
+  answer:1, explain:'من يعرف واحدًا أو اثنين فقط لا يستطيع إثارة الانفعال.'},
+ {type:'mcq', q:'بماذا رد أرسطو على اعتراض أن الخطابة قد تُستعمل في الأذى؟',
+  options:['بأنها لا تُستعمل في الأذى أبدًا','بأن هذا يصدق على كل الخيرات إلا الفضيلة: القوة والصحة والثروة والقيادة','بأن الأذى مبرَّر أحيانًا','بأنه لا يهتم بالأخلاق'],
+  answer:1, explain:'الحصن هو الخُلق، لا الجهل بالسلاح.'}
+]
+});
+
+
+/* =====================================================================
+   الملف ٢ — الحجة المبتورة (أرسطو)
+   ===================================================================== */
+FILES.push({
+id:2, ready:true, part:'أرسطو: ميكانيكا الإقناع', title:'الحجة المبتورة',
+sub:'القياس الإضماري والعلامات والمواضع وكتالوج الانفعالات: جذر التأطير',
+brief:`<h2>المهمة</h2>
+<p>في الملف السابق رأيت الأسلحة الثلاثة. في هذا الملف ستنزل إلى السلاح الأخطر بينها، وهو الذي سيقودك مباشرة إلى غرامشي: <strong>الحجة التي تحذف نصفها</strong>.</p>
+<p>حين يقول لك أحدهم «ده لسه جاي من ست شهور»، لم يقل حجة كاملة. قال نصف حجة، وترك لك أن تكمل النصف الآخر في رأسك: «ومن جاء حديثًا لا يُسمع رأيه». أنت من أكمل الحجة، فصارت النتيجة نتيجتك. والنصف الذي أكملته لم يُقل، فلا يمكن مناقشته.</p>
+<p>في هذا الملف: القياس الإضماري عند أرسطو ولماذا يحذف مقدماته، والفرق بين العلامة القاطعة والعلامة الظنية، و«المواضع»، وهي مخازن الحجج الجاهزة، ثم كتالوج الانفعالات الذي كتبه أرسطو في الكتاب الثاني. وفي آخر الملف ستكتشف أن المقدمات المحذوفة لا تأتي من فراغ؛ إنها تأتي من مخزون مشترك اسمه «الحس المشترك». ومن يملك هذا المخزون يملك الإقناع كله. وهذا بالضبط باب غرامشي.</p>`,
+objectives:[
+ 'تستخرج المقدمة المحذوفة من أي حجة وتكتبها صريحة',
+ 'تفرّق بين العلامة القاطعة والعلامة الظنية، وتكشف الظنية حين تُقدَّم كأنها قاطعة',
+ 'تتعرف على ستة مواضع (مخازن حجج) وتعرف أي موضع يحكم النقاش',
+ 'تشرّح أي انفعال بإحداثياته الثلاثة: الحال، وتجاه من، ولأي سبب',
+ 'تميّز بين الغضب والسخط والحسد والمنافسة، وبين الشفقة والخوف',
+ 'تشرح كيف تمهّد المقدمة المحذوفة لفكرة «الحس المشترك» عند غرامشي'
+],
+predict:{
+ q:'زميل يعترض على اقتراح قدمه موظف جديد. أي الصيغتين أقوى في إسقاط الاقتراح أمام الفريق؟<br>(أ) «الموظف ده لسه جاي من ست شهور، والجديد مايتسمعلوش رأي.»<br>(ب) «الموظف ده لسه جاي من ست شهور.»',
+ options:['(أ)، لأنها أوضح وأكمل منطقيًا','(ب)، لأن السامع يكمل المقدمة بنفسه، والمقدمة التي لم تُقل لا يمكن مناقشتها','متساويتان، لأن المعنى واحد','لا هذه ولا تلك، فالأرقام وحدها تقنع'],
+ answer:1,
+ reveal:'الصيغة (أ) تضع المقدمة على الطاولة: «الجديد مايتسمعلوش رأي». وحين توضع على الطاولة يمكن لأي أحد أن يرد عليها: «من إمتى الصح بيتقاس بالأقدمية؟». أما (ب) فتترك المقدمة في رؤوس السامعين. كل واحد يكملها بنفسه، فيشعر أن الاستنتاج استنتاجه، ولا أحد يستطيع أن يرد على جملة لم تُقل. <b>الحذف هنا ليس نقصًا في الحجة، بل هو مصدر قوتها.</b>'
+},
+lesson:[
+{h:'القياس الإضماري: قياس الجمهور',
+body:`<p>يقول أرسطو إن للحجة الخطابية أداتين تقابلان أداتي المنطق: <strong>المثال</strong> يقابل الاستقراء، و<strong>القياس الإضماري</strong> (الإنثيميم) يقابل القياس المنطقي. ويسمّي الإنثيميم «قياسًا خطابيًا»، ويقول إنه «جسم الإقناع» نفسه.</p>
+<p>ما الفرق بينه وبين القياس المنطقي؟ القياس المنطقي يبدأ من مقدمات يقينية ويسير خطوة خطوة إلى نتيجة ضرورية. أما القياس الإضماري فيُقال <em>لجمهور</em>، والجمهور عند أرسطو لا يستطيع أن يحيط بحجة معقدة بنظرة واحدة، ولا أن يتابع سلسلة طويلة من الاستدلال. لذلك يختصر الخطيب، ويبدأ من أشياء يعرفها الجمهور ويقبلها، ولا يذكر ما هو معروف.</p>
+<p>ومثال أرسطو نفسه بسيط: إن أردت أن تثبت أن دوريوس فاز في مسابقة جائزتها إكليل، يكفي أن تقول إنه فاز في الألعاب الأولمبية. لا داعي لأن تضيف أن جائزة الأولمبياد إكليل، فالجميع يعرف ذلك، والسامع يضيفه بنفسه.</p>
+<p>توقف هنا عند ملاحظة دقيقة. الشائع في كتب المنطق أن الإنثيميم هو «القياس الذي حُذفت إحدى مقدماته». باحثون معاصرون نبّهوا إلى أن هذا ليس تعريف أرسطو بالضبط؛ فالجوهر عنده أن الإنثيميم يستدل من <em>المحتمل والعلامات</em> أمام جمهور عام. أما الحذف فسمة شائعة فيه، لا تعريف له. لكن هذه السمة الشائعة هي بالضبط ما يهمنا، لأنها المكان الذي يحدث فيه التلاعب.</p>`,
+field:`الحذف في الكلام العادي مش جريمة. لو قلت «الجو حر، هاخد مية»، ماحدش هيطلب منك تقول «والإنسان في الحر بيعطش». الكلام كله قائم على إننا بنحذف المعروف. المشكلة بتبدأ لما اللي اتحذف <b>مش معروف ولا مسلّم بيه</b>، بس اتحط في مكان المعروف علشان يعدّي من غير تفتيش.`,
+key:'الإنثيميم قياس خطابي يستدل من المحتمل والعلامات أمام جمهور، وكثيرًا ما يحذف مقدمة يكملها السامع بنفسه. والحذف هو المكان الذي يحدث فيه التلاعب.'},
+
+{h:'المحتمل والعلامة: القاطعة والظنية',
+body:`<p>من أين يأتي الإنثيميم بمقدماته؟ يقول أرسطو: من <strong>المحتمل</strong>، ومن <strong>العلامات</strong>.</p>
+<p>المحتمل هو ما يحدث في الغالب: «الآباء يحبون أبناءهم»، «الحسود يكره من يحسده». ليس يقينًا، لكنه يصدق في أكثر الحالات، ولذلك يقبله الجمهور.</p>
+<p>أما العلامة فهي شيء يدل على شيء آخر. وأرسطو يقسم العلامات إلى صنفين، وهذا التقسيم من أنفع ما في الملف:</p>
+<ul>
+<li><strong>العلامة القاطعة</strong> (تِكميريون): لا يمكن أن توجد دون ما تدل عليه. مثال أرسطو: «هي ولدت، لأن عندها لبنًا»، و«هو مريض، لأن عنده حمّى». هذه لا تُرد.</li>
+<li><strong>العلامة الظنية</strong>: قد توجد دون ما تدل عليه. مثال أرسطو: «هو مصاب بالحمّى، لأنه يتنفس بسرعة»، فقد يتنفس بسرعة لأنه كان يجري. ومثاله الآخر: «الحكماء عادلون، لأن سقراط كان حكيمًا وعادلًا»، وهو استدلال من حالة واحدة.</li>
+</ul>
+<p>وهنا القاعدة الذهبية للضابط: <em>أغلب التلاعب يقدّم علامة ظنية كأنها علامة قاطعة.</em> «اتأخر عن الاجتماع، يبقى مش مهتم». «ساب ٣ شركات في ٤ سنين، يبقى مش ملتزم». «لابس غالي، يبقى ناجح». كل واحدة منها علامة يمكن أن توجد دون ما تدل عليه. والسؤال الذي يكسرها واحد: <strong>هل يمكن أن توجد هذه العلامة لسبب آخر؟</strong></p>`,
+field:`في شغلك مع العملاء: عميل بيتكلم بعصبية، فالموظف يقول في سره «ده عميل مشاكل». دي علامة ظنية. ممكن يكون اتحوّل على ٤ أقسام قبلك وكل واحد قاله «مش عندنا». اللي بيتعامل مع العلامة الظنية كأنها قاطعة بيخسر العميل قبل ما يفهمه، وبيخسر النقاش قبل ما يبدأ.`,
+key:'العلامة القاطعة لا توجد دون مدلولها، والظنية قد توجد. أغلب التلاعب يبيع الظنية بسعر القاطعة. والسؤال الكاسر: هل لهذه العلامة سبب آخر محتمل؟'},
+
+{h:'لماذا المقدمة المحذوفة أقوى من المعلنة؟',
+body:`<p>لنجمع ما رأيناه في قانون واحد. المقدمة المحذوفة أقوى من المعلنة لثلاثة أسباب:</p>
+<ol>
+<li><strong>الملكية:</strong> السامع هو من يكمل الحجة، فيشعر أن النتيجة نتيجته. والناس يدافعون عن استنتاجاتهم بشراسة أكبر بكثير مما يدافعون عن استنتاجات غيرهم.</li>
+<li><strong>الحصانة:</strong> ما لم يُقل لا يمكن الرد عليه. من يريد أن يعترض عليه أن يقول المقدمة أولًا، فيبدو كأنه هو من اخترعها، أو كأنه يتهم المتكلم بما لم يقل.</li>
+<li><strong>العضوية:</strong> الحذف يفترض أن «كلنا عارفين». ومن يعترض يُخرج نفسه من هذه الـ«كلنا». فيصير المعترض غريبًا عن الجماعة، لا مجرد مخالف في الرأي.</li>
+</ol>
+<p>ومن هنا أداة الدفاع الأولى في المنهج كله: <strong>اكتب المقدمة المحذوفة بصوت عالٍ.</strong> حين تقول «يعني انت شايف إن اللي جاي من ست شهور رأيه مالوش قيمة؟»، تكون قد سحبت المقدمة من الظل إلى الطاولة. كثير من المقدمات لا تصمد لحظة واحدة في الضوء. وانتبه للصيغة: سؤال، لا اتهام. السؤال يجبر المتكلم إما أن يتبنى المقدمة علنًا، وإما أن يتراجع عنها.</p>
+<p>والآن السؤال الذي يفتح باب الملفات القادمة: <em>إذا كانت الحجة لا تعمل إلا لأن السامع يكمل المقدمة بنفسه، فمن أين يأتي السامع بها؟</em> يأتي بها من مخزون من الأفكار المسلّم بها، الذي يحمله كل الناس دون أن يتذكروا من أين جاءهم. هذا المخزون هو ما سيسميه غرامشي «الحس المشترك». ومن يملك ملء هذا المخزون يملك كل الحجج التي ستُبنى عليه.</p>`,
+field:`فكّر فيها كده: الإنثيميم سلاح، بس الذخيرة بتاعته مش في إيد اللي بيتكلم. الذخيرة في دماغ السامع. اللي بيقول «ده لسه جاي من ست شهور» بيستعمل ذخيرة اتحطت في دماغك من زمان: «الأقدمية = فهم». واللي حط الذخيرة دي في دماغ الناس هو اللاعب الحقيقي، مش اللي ضغط على الزناد.`,
+key:'المحذوف أقوى لأنه ملك السامع، ومحصّن من الرد، ويصنع عضوية «كلنا عارفين». والدفاع: اسحبه للطاولة بسؤال. وذخيرة الحذف تأتي من «الحس المشترك».'},
+
+{h:'المواضع: مخازن الحجج الجاهزة',
+body:`<p>الكلمة اليونانية «توبوس» تعني «مكان». والمواضع عند أرسطو أماكن يذهب إليها الخطيب ليجد الحجج، كما يذهب المحارب إلى مخزن السلاح. في الفصل الثالث والعشرين من الكتاب الثاني يعدد أرسطو ثمانية وعشرين موضعًا. هذه ستة منها، وهي الأكثر استعمالًا اليوم:</p>
+<div class="tablewrap"><table class="t">
+<tr><th>الموضع</th><th>منطقه</th><th>مثال</th></tr>
+<tr><td><b>الأضداد</b></td><td>ما يصدق على الشيء يصدق عكسه على ضده</td><td>مثال أرسطو: «الاعتدال نافع، لأن الإفراط ضار»</td></tr>
+<tr><td><b>الأكثر والأقل</b></td><td>إن لم يصدق على الأقوى فهو أولى ألا يصدق على الأضعف، والعكس</td><td>مثال أرسطو: «إن لم تكن الآلهة تعلم كل شيء، فالبشر أولى ألا يعلموا»، و«من يضرب أباه يضرب جاره»</td></tr>
+<tr><td><b>التعريف</b></td><td>من يعرّف المصطلح يحسم الحكم</td><td>«ده مش احتجاج، ده تعطيل»</td></tr>
+<tr><td><b>النتائج</b></td><td>احكم على الشيء بعواقبه الحسنة أو السيئة</td><td>مثال أرسطو: التعليم يجلب الحسد (سيئ) والحكمة (حسن)</td></tr>
+<tr><td><b>الحكم السابق</b></td><td>ما حكم به من قبل، أو حكم به أصحاب المكانة</td><td>«المحكمة حكمت في قضية زي دي قبل كده»</td></tr>
+<tr><td><b>الدوافع</b></td><td>الناس يفعلون ما فيه نفع لهم ويتركون ما فيه ضرر</td><td>«مستحيل يكون عمل كده، ماكانش له مصلحة»</td></tr>
+</table></div>
+<p>لماذا يهمك هذا؟ لأن <strong>اختيار الموضع اختيار للإطار</strong>. خذ أي قرار: يمكن أن يُناقش بموضع <em>النتائج</em> (هل ينفع؟)، أو بموضع <em>التعريف</em> (هل هو «إصلاح» أم «تقشف»؟)، أو بموضع <em>الحكم السابق</em> (هل جُرّب قبل ذلك؟). الطرف الذي يفرض الموضع يفرض نوع الأدلة المقبولة. وإذا نجح أحدهم في جعل النقاش يدور حول «التعريف»، فلن يعود أحد يسأل عن «النتائج».</p>
+<p>ولاحظ أن موضع النتائج نفسه فيه فخ: أرسطو يقول إن لكل شيء تقريبًا نتائج حسنة وأخرى سيئة، فتستطيع أن تحث أو تنهى بحسب ما تختار ذكره. من يعرض النتائج الحسنة وحدها لم يكذب في شيء؛ هو فقط ترك نصف القائمة في الظل.</p>`,
+field:`في أي اجتماع، اسأل نفسك سؤال واحد: «إحنا بنتخانق في أنهي مخزن؟». لو انت جاي بأرقام (نتائج) والتاني بيرد بـ«ده مش شغلنا أصلًا» (تعريف)، انتوا مش بتتناقشوا، انتوا كل واحد في مخزن. ومين اللي هيكسب؟ اللي يقدر يجرّ التاني لمخزنه.`,
+key:'المواضع مخازن حجج. والطرف الذي يفرض الموضع يفرض نوع الأدلة. ومن يعرض نصف النتائج لم يكذب؛ ترك النصف الآخر في الظل.'},
+
+{h:'كتالوج الانفعالات: ثلاث إحداثيات لكل انفعال',
+body:`<p>في الملف السابق رأيت قاعدة أرسطو: لكي تفهم انفعالًا أو تثيره، لا بد أن تعرف ثلاثة أشياء: <strong>حال</strong> من يشعر به، و<strong>تجاه من</strong> يشعر به، و<strong>لأي سبب</strong>. في الكتاب الثاني يطبّق أرسطو هذه القاعدة على قائمة طويلة من الانفعالات. هذه أهمها لعملك:</p>
+<div class="tablewrap"><table class="t">
+<tr><th>الانفعال</th><th>تعريفه عند أرسطو</th><th>رافعة التلاعب</th></tr>
+<tr><td><b>الغضب</b></td><td>رغبة مصحوبة بألم في انتقام ظاهر، لاستخفاف ظاهر غير مستحق بنا أو بأحد منا</td><td>اصنع «استخفافًا» حيث لا يوجد: «ده بيستهين بيكم»</td></tr>
+<tr><td><b>الهدوء</b></td><td>نقيض الغضب: نهدأ تجاه من يعترف بخطئه ويتواضع أمامنا، أو حين يمر الوقت، أو حين نكون قد أفرغنا غضبنا في غيره</td><td>اعتذار محسوب في التوقيت المناسب يطفئ غضبًا مستحقًا</td></tr>
+<tr><td><b>الخجل</b></td><td>ألم أو اضطراب بشأن عيوب تبدو جالبة للعار، أمام من نقدّر رأيهم</td><td>استحضر جمهورًا يحترمه المستهدف: «الناس هتقول إيه؟»</td></tr>
+<tr><td><b>الشفقة</b></td><td>ألم لشر يصيب من لا يستحقه، يمكن أن يصيبنا أو أحد أحبائنا، ويبدو قريبًا</td><td>اجعل الضحية بريئة، وشبيهة بالجمهور، وقريبة، لكن ليس أقرب من اللازم</td></tr>
+<tr><td><b>السخط</b></td><td>ألم لحظ حسن يناله من لا يستحقه</td><td>«شوف مين اللي بياخد الفلوس دي وهو قاعد»</td></tr>
+<tr><td><b>الحسد</b></td><td>ألم لحظ حسن يناله نظراؤنا، لا لأننا نريده بل لأنهم نالوه</td><td>قارن المستهدف بمن هم مثله تمامًا</td></tr>
+<tr><td><b>المنافسة</b></td><td>ألم لأن غيرنا نال خيرًا يمكننا نيله، فنسعى إليه. يسميه أرسطو انفعالًا شريفًا</td><td>«هو وصل، وانت مش أقل منه»</td></tr>
+</table></div>
+<p>لاحظ ملاحظتين يذكرهما أرسطو تفيدانك كثيرًا:</p>
+<p><strong>الأولى عن الشفقة:</strong> الشفقة تحتاج مسافة. يروي أرسطو أن أماسيس، ملك مصر، لم يبكِ حين رأى ابنه يُساق إلى الموت، لكنه بكى حين رأى صديقه يتسول. لأن ما يصيب القريب جدًا لا يثير الشفقة، بل يثير الرعب. ولذلك من يريد شفقتك يقرّب الضحية منك، لكن لا يجعلها <em>أنت</em>.</p>
+<p><strong>الثانية عن الحسد والمنافسة:</strong> كلاهما ألم بسبب خير عند غيرك. الفرق في الاتجاه: الحسد يريد أن يُنزع الخير من صاحبه، والمنافسة تريد أن تناله هي. من يحرّك الحسد يصنع أتباعًا يكرهون، ومن يحرّك المنافسة يصنع أتباعًا يعملون. وأغلب الإعلانات الناجحة تلعب على المنافسة لأنها تجعلك تشتري لكي «تلحق».</p>`,
+field:`الغضب عند أرسطو مربوط بـ«الاستخفاف» مش بالضرر. يعني الناس مش بتغضب لما تتأذى بس، بتغضب لما تحس إن حد استصغرها. وده بالظبط سبب إن جملة «ده مستهين بيكم» أقوى من أي رقم. لو حد عايز يقلب فريق على مدير، مش هيقولهم «المدير قراره غلط»، هيقولهم «المدير شايفكم ولا حاجة». خد بالك إن ده منطق الكرامة اللي في ثقافتنا بالظبط، فالسلاح ده بيشتغل عندنا أقوى.`,
+key:'لكل انفعال ثلاث إحداثيات: الحال، وتجاه من، ولأي سبب. والتلاعب يعدّل واحدة منها: يصنع استخفافًا، أو يقرّب ضحية، أو يقارنك بنظيرك.'},
+
+{h:'من الإنثيميم إلى التأطير',
+body:`<p>اجمع الملف في جملة واحدة: <strong>التأطير هو التحكم فيما يُحذف، وفي المخزن الذي تُؤخذ منه الحجج، وفي الانفعال المصاحب.</strong></p>
+<p>خذ خبرًا واحدًا وثلاث صياغات له:</p>
+<ul>
+<li>«تخفيض عدد العاملين بالشركة ٢٠٪». هنا موضع <em>النتائج</em>، ومقدمة محذوفة: هذا رقم محايد.</li>
+<li>«الشركة تنقذ ٨٠٪ من الوظائف». هنا موضع <em>الأضداد</em>: ما لم يُفقد هو المكسب. والانفعال المطلوب امتنان.</li>
+<li>«الشركة تلقي بـ٢٠٠ أسرة في الشارع». هنا الشفقة: ضحايا أبرياء، قريبون، يشبهوننا.</li>
+</ul>
+<p>الواقعة واحدة. لم يكذب أحد. والفرق كله في ثلاثة أشياء: ما الذي حُذف، وأي مخزن استُعمل، وأي انفعال استُدعي.</p>
+<p>وهنا ينتهي ما يستطيع أرسطو أن يعطيك. أرسطو يرى الخطيب وهو يختار. لكنه لا يسأل السؤال الذي سيطرحه غرامشي: <em>لماذا يقبل الجمهور هذه المقدمات المحذوفة دون أن يفتش فيها؟ ومن ملأ مخزنهم بها أصلًا؟</em> حين تنتقل من خطيب واحد إلى مجتمع كامل، يتحول سؤال «كيف يقنع المتكلم؟» إلى سؤال «من صنع ما يعتبره الناس بديهيًا؟». وهذا هو الملف القادم.</p>`,
+key:'التأطير = التحكم في المحذوف، والمخزن، والانفعال. وأرسطو يرى الخطيب يختار، أما غرامشي فسيسأل: من ملأ مخزن الجمهور أصلًا؟'}
+],
+quotes:[
+ {t:'أسمّي القياس الإضماري قياسًا خطابيًا، والمثال استقراءً خطابيًا.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ٢', why:'الإنثيميم هو منطق الجمهور، لا منطق المختبر.'},
+ {t:'لكي تبيّن أن دوريوس فاز في مسابقة جائزتها إكليل، يكفي أن تقول إنه فاز في الألعاب الأولمبية؛ ولا حاجة لإضافة أن جائزتها إكليل، فالجميع يعرف ذلك.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ٢', why:'الحذف البريء. وكل حذف خبيث يتنكر في هيئة هذا الحذف البريء.'},
+ {t:'السامع لا يستطيع أن يحيط بنظرة واحدة بحجة معقدة، ولا أن يتتبع سلسلة طويلة من الاستدلال.', src:'أرسطو، الخطابة، الكتاب الأول، الفصل ٢', why:'لهذا يختصر الخطيب. ولهذا أيضًا يمكنه أن يخفي.'},
+ {t:'الغضب رغبة مصحوبة بألم في انتقام ظاهر، لاستخفاف ظاهر غير مستحق بالمرء أو بأحد من أهله.', src:'أرسطو، الخطابة، الكتاب الثاني، الفصل ٢', why:'الغضب يُشعَل بصناعة «استخفاف»، لا بإثبات ضرر.'},
+ {t:'الشفقة ألم لشرٍّ مهلك أو مؤلم يصيب من لا يستحقه، يمكن أن نتوقع أن يصيبنا نحن أو أحد أحبائنا، وحين يبدو قريبًا.', src:'أرسطو، الخطابة، الكتاب الثاني، الفصل ٨', why:'البراءة، والشبه، والقرب: ثلاث روافع لصناعة الشفقة.'},
+ {t:'إن لم تكن الآلهة تعلم كل شيء، فالبشر أولى ألا يعلموا.', src:'أرسطو، الخطابة، الكتاب الثاني، الفصل ٢٣', why:'موضع «الأكثر والأقل» في سطر واحد.'}
+],
+worked:{
+ title:'حالة محلولة: الزميل القديم والاقتراح الجديد',
+ case:`في اجتماع فريق، يرد زميل قديم على اقتراح قدمه موظف جديد:<br><b>«الكلام ده اتقال قبل كده سنة ٢٠١٩، وشفنا النتيجة. وبعدين هو لسه جاي من ست شهور. لو الإدارة نفسها مش متحمسة للتغيير، هنعرف إحنا أكتر منها؟ وأنا شخصيًا مش هقبل إن حد يستخف بالشغل اللي إحنا بنيناه في عشر سنين.»</b>`,
+ steps:[
+  {h:'الإنثيميم الأول: «اتقال قبل كده وشفنا النتيجة»', body:'موضع <strong>الحكم السابق</strong>. المقدمة المحذوفة: <em>«الاقتراح مطابق لما جُرّب سنة ٢٠١٩، والظروف لم تتغير، والفشل وقتها كان بسبب الفكرة نفسها لا بسبب طريقة تنفيذها»</em>. ثلاث مقدمات في جملة واحدة، ولا واحدة منها قيلت.'},
+  {h:'الإنثيميم الثاني: «لسه جاي من ست شهور»', body:'<strong>علامة ظنية</strong> تُقدَّم كأنها قاطعة. المقدمة المحذوفة: «مدة الخدمة شرط لصحة الرأي». وهل يمكن أن يأتي رأي صحيح ممن خدم ست شهور؟ نعم، فالعلامة ليست قاطعة.'},
+  {h:'الإنثيميم الثالث: «لو الإدارة نفسها...»', body:'موضع <strong>الأكثر والأقل</strong>: إن لم يقتنع الأعلى فالأدنى أولى ألا يقتنع. وفيه مقدمتان محذوفتان: أن الإدارة «غير متحمسة» فعلًا، وهو ادعاء لم يُثبت، وأن موقع الإدارة يجعلها أقدر على الحكم في هذه المسألة بالذات.'},
+  {h:'الانفعال: صناعة الاستخفاف', body:'الجملة الأخيرة تطبق تعريف أرسطو للغضب حرفيًا. لم يستخف أحد بشيء؛ الاقتراح كان عن طريقة عمل. لكن المتكلم <em>سمّاه</em> استخفافًا بعشر سنين. صار الحال: فريق يشعر أن تعبه مُستصغر. وصار الهدف: الموظف الجديد. والسبب: «استخفاف» مصنوع.'},
+  {h:'الإطار: أي مخزن ساد؟', body:'الاقتراح كان سؤالًا عن <strong>النتائج</strong>: هل الطريقة الجديدة أفضل؟ لكن الرد نقل النقاش إلى ثلاثة مخازن أخرى: الحكم السابق، والأقدمية، والكرامة. ولم يذكر أحد كلمة واحدة عن النتائج المتوقعة للاقتراح نفسه.'},
+  {h:'الدفاع: سحب المقدمات للطاولة', body:'بأسئلة لا باتهامات: «هو الاقتراح ده زي بتاع ٢٠١٩ بالظبط؟ إيه اللي اختلف؟»، و«هل الإدارة قالت إنها مش موافقة، ولا ده تقديرنا؟»، و«أنا شايف إن الاقتراح عن طريقة الشغل مش عن قيمته. نتكلم في النتايج المتوقعة؟». ثلاثة أسئلة تُعيد النقاش إلى مخزن النتائج.'}
+ ],
+ verdict:'الزميل لم يقدم حجة واحدة ضد الاقتراح نفسه. قدم أربعة إنثيميمات كل مقدماتها محذوفة، وغضبًا مصنوعًا. وكان يمكن أن تنجح كلها، لأن الفريق كان سيكمل المقدمات بنفسه.'
+},
+yourturn:{
+ title:'دورك: منشور «القطر»',
+ case:`منشور منتشر على وسائل التواصل:<br><b>«المستثمرين الكبار كلهم دخلوا العملة دي. انت هتفضل تتفرج؟ البنوك نفسها بتحاربها علشان خايفة منها. واللي بيحذرك منها هو نفسه اللي فاته القطر وعايزك تفضل زيه.»</b>`,
+ prompt:'فكّك المنشور: استخرج كل مقدمة محذوفة، وصنّف العلامات، وحدد المواضع والانفعالات، واكتب أسئلة الدفاع.',
+ points:[
+  'استخرجت مقدمة الجملة الأولى: «ما يفعله المستثمرون الكبار مناسب لي ولوضعي»، ولاحظت أن «كلهم» تعميم غير مثبت',
+  'كشفت أن «البنوك بتحاربها» علامة ظنية قُدمت كقاطعة: المحذوف «ما يخيف البنوك مفيد لي»، والحرب قد تكون لأسباب أخرى (المخاطرة، التنظيم)',
+  'حددت موضع «الدوافع» في الهجوم على المحذّر: بدل الرد على تحذيره، طُعن في دافعه (الحسد)',
+  'حددت الانفعالات: المنافسة أو الخوف من الفوات («هتفضل تتفرج»)، والخجل من صورة المتفرج، والسخط على «اللي فاته القطر»',
+  'لاحظت نقل الجنس: من مشاوري (هل الاستثمار نافع لي؟) إلى احتفالي (من الجريء ومن المتفرج؟)',
+  'كتبت أسئلة دفاع تسحب المقدمات للطاولة (مثل: «المستثمرين دول دخلوا بنسبة كام من فلوسهم؟»، «إيه أسباب البنوك المعلنة؟»، «التحذير نفسه صح ولا غلط، بعيدًا عن صاحبه؟»)'
+ ],
+ model:`<p><b>الإنثيميم الأول:</b> «المستثمرين الكبار دخلوا». المحذوف: ما يناسبهم يناسبك. وهو مقدمة ضعيفة جدًا، فالمستثمر الكبير يدخل بنسبة صغيرة من ثروته ويتحمل خسارة لا تتحملها أنت. و«كلهم» تعميم لا دليل عليه.</p>
+<p><b>الإنثيميم الثاني:</b> «البنوك بتحاربها». علامة ظنية: الحرب قد تكون لأن الشيء خطر على المودعين، لا لأنه خطر على البنوك. والمحذوف: عدو عدوي صديقي، وما يخيف المؤسسة نافع لي.</p>
+<p><b>الإنثيميم الثالث:</b> «اللي بيحذرك فاته القطر». موضع الدوافع مستعمل للهجوم على الشخص بدل الرد على التحذير. والمحذوف: من له دافع للتحذير فتحذيره كاذب. لكن صحة التحذير لا علاقة لها بدافع صاحبه.</p>
+<p><b>الانفعالات:</b> منافسة وخوف من الفوات، وخجل من صورة «المتفرج»، وتحويل المحذر إلى حاسد.</p>
+<p><b>الإطار:</b> السؤال الحقيقي مشاوري: «هل هذا الاستثمار مناسب لي؟». المنشور حوّله إلى احتفالي: «هل أنت من الجريئين أم من المتفرجين؟». ولم يُذكر رقم واحد عن العائد أو المخاطرة.</p>
+<p><b>أسئلة الدفاع:</b> «دخلوا بكام في المية من فلوسهم؟»، «البنوك قالت إيه بالظبط عن السبب؟»، «سيبك من صاحب التحذير: التحذير نفسه صح ولا غلط؟».</p>`
+},
+challenges:[
+ {type:'mcq', q:'«ده مش من عيلة معروفة، مايتعينش في منصب زي ده.» ما المقدمة المحذوفة؟',
+  options:['أن المنصب صعب','أن الانتماء لعائلة معروفة شرط للكفاءة في هذا المنصب','أن المتكلم يعرف المرشح شخصيًا','أن العائلات المعروفة أغنى'],
+  answer:1, hints:['اسأل: ما الذي يجب أن أصدقه حتى يكون «ليس من عائلة معروفة» سببًا كافيًا للرفض؟','الحجة تربط بين صفة (النسب) وحكم (لا يصلح للمنصب).','ما القاعدة العامة التي تجعل النسب سببًا للرفض؟'],
+  explain:'المحذوف قاعدة تربط النسب بالكفاءة. ولو قيلت صريحة لما قبلها كثيرون، ولهذا حُذفت.'},
+ {type:'classify', q:'صنّف كل علامة: قاطعة أم ظنية؟', cats:['قاطعة','ظنية'],
+  items:[
+   {t:'«عندها لبن، إذن ولدت.» (مثال أرسطو)', c:0},
+   {t:'«عنده حمّى، إذن هو مريض.» (مثال أرسطو)', c:0},
+   {t:'«بيتنفس بسرعة، إذن عنده حمّى.» (مثال أرسطو)', c:1, why:'قد يكون كان يجري.'},
+   {t:'«لابس بدلة غالية، إذن ناجح.»', c:1},
+   {t:'«اتأخر عن الاجتماع، إذن مش مهتم.»', c:1},
+   {t:'«الأرض مبلولة، إذن المطر نزل.»', c:1, why:'ممكن حد رش الأرض أو ماسورة انفجرت.'}
+  ],
+  hints:['اسأل عن كل بند: هل يمكن أن توجد العلامة دون ما تدل عليه؟','لو قدرت تتخيل سببًا آخر للعلامة، فهي ظنية.']},
+ {type:'classify', q:'صنّف كل حجة حسب الموضع الذي أُخذت منه.', cats:['الأضداد','الأكثر والأقل','التعريف','النتائج','الحكم السابق'],
+  items:[
+   {t:'«لو الحرب جابت الخراب، يبقى السلام هيجيب العمار.»', c:0},
+   {t:'«اللي يضرب أبوه، يضرب جاره.»', c:1},
+   {t:'«الإضراب مش احتجاج، الإضراب تعطيل.»', c:2},
+   {t:'«القرار هيوفر ٢٠٪، بس هيزود ضغط الشغل على الموظفين.»', c:3},
+   {t:'«المحكمة حكمت في قضية زي دي قبل كده لصالح الشركة.»', c:4},
+   {t:'«لو الخبرا نفسهم مختلفين، انت هتجزم إزاي؟»', c:1}
+  ],
+  hints:['«الأكثر والأقل»: إن لم يصدق على الأقوى فالأضعف أولى.','«التعريف»: الحجة كلها في إعادة تسمية الشيء.']},
+ {type:'mcq', q:'لماذا المقدمة المحذوفة أقوى من المعلنة؟',
+  options:['لأنها أقصر فقط','لأن السامع يكملها فيشعر بملكيتها، ولأن ما لم يُقل لا يمكن الرد عليه، ولأنها تصنع «كلنا عارفين»','لأنها دائمًا صحيحة','لأن أرسطو اشترط الحذف في كل قياس'],
+  answer:1, hints:['تذكّر الأسباب الثلاثة: الملكية والحصانة والعضوية.'],
+  explain:'الملكية والحصانة والعضوية. والحذف ليس شرطًا عند أرسطو، بل سمة شائعة.'},
+ {type:'mcq', q:'أي هذه هو تعريف أرسطو للغضب؟',
+  options:['ألم بسبب ضرر مادي وقع علينا','رغبة مصحوبة بألم في انتقام ظاهر، لاستخفاف ظاهر غير مستحق','كراهية دائمة لشخص معين','ألم لأن غيرنا نال خيرًا'],
+  answer:1, hints:['الغضب عند أرسطو مربوط بشيء غير الضرر.','الكلمة المفتاحية: استخفاف.'],
+  explain:'الغضب يُشعَل بالإهانة المتصورة، لا بالضرر وحده. ولذلك يصنع المتلاعب «استخفافًا».'},
+ {type:'mcq', q:'أماسيس ملك مصر لم يبكِ حين رأى ابنه يُساق إلى الموت، لكنه بكى لصديقه المتسول. ماذا يستنتج أرسطو؟',
+  options:['أن أماسيس كان قاسيًا','أن الشر الذي يصيب القريب جدًا لا يثير الشفقة بل الرعب، فالشفقة تحتاج مسافة','أن الصداقة أقوى من الأبوة','أن الملوك لا يشفقون'],
+  answer:1, hints:['الشفقة عند أرسطو تحتاج قربًا، لكن ليس أي قرب.','ما الذي يحدث حين يصبح الخطر علينا نحن تقريبًا؟'],
+  explain:'القريب جدًا يُشعرك بالخطر على نفسك، فيتحول الانفعال من شفقة إلى رعب.'},
+ {type:'classify', q:'سمِّ الانفعال في كل موقف.', cats:['غضب','خجل','شفقة','حسد','منافسة','سخط'],
+  items:[
+   {t:'زميلك في نفس مستواك اترقّى، وحاسس بوجع مش عايز تعترف بيه، ومش لأنك عايز الترقية نفسها.', c:3},
+   {t:'شفت حد وصل لمكان انت تقدر توصله، فقررت تشتغل علشان توصل زيه.', c:4},
+   {t:'واحد اغتنى من غير أي تعب ولا استحقاق، وانت متضايق إنه مايستاهلش.', c:5},
+   {t:'حد قلّل منك قدام الناس، وعايز ترد.', c:0},
+   {t:'عرفت إن ناس بتحترم رأيها شافتك وانت بتغلط.', c:1},
+   {t:'شفت ست كبيرة اتظلمت في معاملة ومالهاش أي ذنب.', c:2}
+  ],
+  hints:['الحسد والمنافسة والسخط كلها ألم بسبب خير عند غيرك. افرق بالاتجاه والاستحقاق.','السخط: الخير عند من لا يستحق. الحسد: عند نظيرك. المنافسة: تريد أن تناله أنت.']},
+ {type:'order', q:'رتّب خطوات الدفاع ضد حجة مبتورة.',
+  items:['اكتب الحجة كما قيلت','استخرج المقدمة المحذوفة واكتبها صريحة','اختبرها: علامة قاطعة أم ظنية؟ وهل تصمد في الضوء؟','حدد الموضع المستخدم، واسأل عن الموضع الغائب','اسحب المقدمة للطاولة بسؤال لا باتهام'],
+  hints:['تبدأ بالنص كما هو، وتنتهي بالفعل في الاجتماع.']}
+],
+critique:[
+ {h:'الحذف ليس جريمة', body:'<p>كل كلام بشري يحذف. لو اضطر كل متكلم إلى ذكر كل مقدماته لاستحال الحوار. فلا تتعامل مع كل حذف كأنه تلاعب، وإلا ستصبح محاورًا مرهقًا لا يُطاق. الاختبار ليس «هل هناك حذف؟» بل: <strong>هل المقدمة المحذوفة مسلّم بها فعلًا، أم أنها خلافية تنكرت في هيئة المسلّم به؟</strong></p>'},
+ {h:'«الحجة المبتورة» تبسيط مدرسي', body:'<p>كما رأيت في الشرح، تعريف الإنثيميم بأنه «القياس المحذوف المقدمة» جاء من تقليد لاحق أكثر منه من أرسطو، وقد نبّه باحثون معاصرون إلى ذلك. نحن نستعمل هذا التعريف لأنه نافع في التحليل، لا لأنه الأدق تاريخيًا. والفرق مهم إن ناقشت أحدًا متخصصًا.</p>'},
+ {h:'كتالوج يوناني', body:'<p>انفعالات أرسطو مرسومة على مقاس مدينة يونانية قائمة على الشرف والمكانة. الغضب عنده مربوط بالاستخفاف، والخجل بالسمعة. هذا قريب جدًا من ثقافتنا، ولذلك ينفعك. لكنه لا يغطي كل شيء: انفعالات مثل الذنب الداخلي أمام الله، أو القلق الوجودي، ليست في مركز كتالوجه. لا تفترض أنه خريطة كاملة للنفس.</p>'},
+ {h:'سحب المقدمات قد يرتد عليك', body:'<p>من يكشف المقدمات المحذوفة بأسلوب هجومي يبدو متحذلقًا أو عدائيًا، فيخسر الجمهور مع أنه محق. ولهذا كانت القاعدة «سؤال لا اتهام». والضابط يختار أيضًا <em>أي</em> مقدمة يسحب: الأضعف والأخطر، لا كل المقدمات. ومن يحاول أن يكشف كل شيء في نقاش واحد لا يكشف شيئًا.</p>'}
+],
+explain:{
+ prompt:'اشرح بكلامك: ليه المقدمة المحذوفة أقوى من المعلنة؟ وإزاي ده بيمهّد لفكرة غرامشي عن «الحس المشترك»؟ هات مثال من حياتك لحجة مبتورة اتقالت قدامك.',
+ points:[
+  'شرحت الملكية: السامع يكمل المقدمة فيشعر أن النتيجة نتيجته',
+  'شرحت الحصانة: ما لم يُقل لا يمكن الرد عليه دون أن تبدو مخترعه أو متهمًا',
+  'شرحت العضوية: الحذف يصنع «كلنا عارفين» ويجعل المعترض غريبًا',
+  'ربطت بغرامشي: المقدمات المحذوفة تؤخذ من مخزون مسلّمات مشترك، ومن يملأ هذا المخزون يتحكم في الحجج',
+  'أعطيت مثالًا حقيقيًا واستخرجت مقدمته المحذوفة صريحة',
+  'ذكرت طريقة الدفاع: سحب المقدمة للطاولة بسؤال'
+ ],
+ model:`<p>المقدمة المحذوفة أقوى لأن السامع هو من يكملها، فيشعر أن النتيجة جاءت من عقله هو. ولأنها لم تُقل، فمن يعترض عليها مضطر أن يقولها أولًا، فيبدو كأنه هو من اخترعها. ولأن الحذف يفترض أن «كلنا عارفين»، فالمعترض يُخرج نفسه من الجماعة.</p>
+<p>لكن السامع لا يكمل المقدمة من فراغ. يكملها من مخزون مسلّمات يحمله دون أن يتذكر من أين جاءه. هذا المخزون هو «الحس المشترك» عند غرامشي. والإنثيميم لا يعمل إلا إذا كان المخزون مملوءًا بالمقدمة المطلوبة. فمن يملأ المخزون، عبر المدرسة والإعلام والأمثال الشعبية، يجهّز الذخيرة لكل حجة ستُقال بعد ذلك.</p>
+<p>مثال: «ده لسه صغير». المحذوف: «الصغير رأيه أقل قيمة». والدفاع: «انت شايف إن السن هو اللي بيحدد صح الرأي؟»</p>`
+},
+bossTitle:'ملف الحجة المبتورة',
+boss:[
+ {type:'mcq', q:'ما الذي يقابل القياس الإضماري في المنطق عند أرسطو؟',
+  options:['الاستقراء','القياس المنطقي','التعريف','الجدل'],
+  answer:1, explain:'الإنثيميم قياس خطابي، والمثال استقراء خطابي.'},
+ {type:'mcq', q:'في مثال دوريوس، لماذا لا يحتاج الخطيب أن يقول إن جائزة الأولمبياد إكليل؟',
+  options:['لأنها معلومة خاطئة','لأن الجميع يعرفها، فيضيفها السامع بنفسه','لأنها تضعف الحجة','لأن أرسطو يحرّم ذكر المقدمات'],
+  answer:1, explain:'هذا هو الحذف البريء: حذف المعروف. والتلاعب يقلّده بحذف ما ليس معروفًا ولا مسلّمًا.'},
+ {type:'mcq', q:'«ساب ٣ شركات في ٤ سنين، يبقى مش ملتزم.» هذه علامة:',
+  options:['قاطعة، لأن ترك العمل دليل واضح','ظنية، لأنها قد توجد لأسباب أخرى كعروض أفضل أو بيئة عمل سيئة','ليست علامة أصلًا','قاطعة إن كانت المدة قصيرة'],
+  answer:1, explain:'يمكن أن توجد العلامة دون عدم الالتزام، فهي ظنية.'},
+ {type:'mcq', q:'ما أداة الدفاع الأولى ضد الحجة المبتورة؟',
+  options:['تجاهلها','رفع الصوت','سحب المقدمة المحذوفة إلى الطاولة بسؤال','مهاجمة المتكلم'],
+  answer:2, explain:'كثير من المقدمات لا تصمد في الضوء. والسؤال يجبر المتكلم أن يتبناها علنًا أو يتراجع.'},
+ {type:'classify', q:'صنّف حسب الموضع.', cats:['الأضداد','الأكثر والأقل','التعريف','الحكم السابق'],
+  items:[
+   {t:'«ده مش تأخير، ده إهمال.»', c:2},
+   {t:'«لو المدير نفسه غلط فيها، يبقى الجديد أكيد هيغلط.»', c:1},
+   {t:'«لو الكسل بيضيّع، يبقى الاجتهاد بيوصّل.»', c:0},
+   {t:'«الشركة رفضت طلب زي ده السنة اللي فاتت.»', c:3}
+  ]},
+ {type:'mcq', q:'متى تتحول الشفقة إلى رعب عند أرسطو؟',
+  options:['حين يكون المصاب غريبًا تمامًا','حين يكون الشر قريبًا جدًا منا، كأنه يصيبنا نحن','حين يكون المصاب مستحقًا','لا تتحول أبدًا'],
+  answer:1, explain:'مثال أماسيس: ابنه أقرب من أن يُشفق عليه.'},
+ {type:'mcq', q:'ما الفرق بين الحسد والمنافسة عند أرسطو؟',
+  options:['لا فرق بينهما','الحسد يريد أن يُنزع الخير من صاحبه، والمنافسة تريد أن تنال هي الخير، ويسميها أرسطو شريفة','المنافسة أسوأ من الحسد','الحسد خاص بالأغنياء'],
+  answer:1, explain:'الاتجاه هو الفرق: هدم ما عند الآخر، أو بناء ما عندك.'},
+ {type:'mcq', q:'متلاعب يريد أن يقلب فريقًا على مديره. وفق تعريف أرسطو للغضب، أي جملة أقوى؟',
+  options:['«المدير قراراته الاقتصادية غير دقيقة»','«المدير شايفكم ولا حاجة»','«المدير متأخر في تسليم التقارير»','«المدير محتاج تدريب»'],
+  answer:1, explain:'الغضب يُشعَل بالاستخفاف الظاهر، لا بالأخطاء التقنية.'},
+ {type:'mcq', q:'خبر واحد يُكتب: «الشركة تنقذ ٨٠٪ من الوظائف». أي موضع استُعمل؟',
+  options:['التعريف','الأضداد: ما لم يُفقد يُعرض كمكسب','الحكم السابق','الدوافع'],
+  answer:1, explain:'قلب الخسارة (٢٠٪) إلى ضدها (إنقاذ ٨٠٪). الواقعة واحدة والإطار معكوس.'},
+ {type:'mcq', q:'ما السؤال الذي سيطرحه غرامشي ولا يطرحه أرسطو؟',
+  options:['كيف يختار الخطيب حججه؟','من ملأ مخزن الجمهور بالمقدمات التي يقبلها دون تفتيش؟','ما أنواع الخطابة؟','كيف نثير الغضب؟'],
+  answer:1, explain:'أرسطو يرى الخطيب يختار. غرامشي يسأل عن صانع البديهيات نفسها.'}
+]
+});
+
+/* =====================================================================
+   الملفات القادمة (قيد الإعداد)
+   ===================================================================== */
+[
+ ['غرامشي: حرب المواقع','الهيمنة','الإكراه والرضا، والدولة كخط أمامي وخنادق المجتمع المدني'],
+ ['غرامشي: حرب المواقع','صناعة البديهة','الحس المشترك والمثقف العضوي والكتلة التاريخية · ملحق بورديو: الدوكسا'],
+ ['فوكو: الخطاب والسلطة','نظام الخطاب','من يحق له الكلام، وما الذي يمكن قوله أصلًا، وقواعد الإقصاء الخفية'],
+ ['فوكو: الخطاب والسلطة','السلطة/المعرفة','السلطة التي تُنتج «الحقيقة»: البانوبتيكون والتطبيع والفحص'],
+ ['فوكو: الخطاب والسلطة','الحاكمية وتقنيات الذات','حين يراقب الإنسان نفسه ويظن أنه حر'],
+ ['التركيب والميدان','مهندسو الرضا','ليبمان وبيرنيز: من النظرية إلى المصنع · والتأطير المعرفي عند لايكوف'],
+ ['التركيب والميدان','الميدان','عمليات تفكيك كاملة: إعلام وإعلانات وبيئة عمل'],
+ ['التركيب والميدان','الدفاع ونقد الأداة','التحصين وإعادة التأطير، وأين تنهار هذه النظريات']
+].forEach(([part, title, sub]) => FILES.push({id:FILES.length, ready:false, part, title, sub}));
+
+</script>
+<script>
+'use strict';
+/* ========== state ========== */
+const SITE = !!window.MAHER;
+const KEY = SITE ? 'maher:tafkik' : 'tafkik_v1';
+const DEF = {xp:0, done:{}, maxStep:{}, ans:{}, awarded:{}, review:{}, boss:{}, last:null,
+  settings:{theme:'cream', font:'naskh', size:19, lh:1.95, width:760}};
+const clone = o => JSON.parse(JSON.stringify(o));
+let S = clone(DEF);
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) { const p = JSON.parse(raw); S = Object.assign(clone(DEF), p); S.settings = Object.assign(clone(DEF.settings), p.settings || {}); }
+} catch (e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+/* ========== helpers ========== */
+function h(tag, props, ...kids){
+  const e = document.createElement(tag);
+  if (props) for (const k in props){
+    const v = props[k];
+    if (k === 'class') e.className = v;
+    else if (k === 'html') e.innerHTML = v;
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) e.setAttribute(k, v);
+  }
+  for (const c of kids.flat()){ if (c == null || c === false) continue; e.append(c.nodeType ? c : document.createTextNode(c)); }
+  return e;
+}
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const AR = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+function toast(msg, cls){ if (SITE) { MAHER.toast(msg); return; } const t = h('div', {class: cls || ''}, msg); document.getElementById('toast').append(t); setTimeout(() => t.remove(), cls === 'big' ? 3200 : 1900); }
+
+/* ========== ranks / xp ========== */
+const RANKS = [[0,'مُجنَّد'],[150,'محلل ميداني'],[400,'ضابط تحليل'],[800,'رائد'],[1300,'رئيس قسم'],[2000,'مدير عمليات'],[3000,'رئيس الجهاز']];
+function rankOf(xp){ let i = 0; for (let k = 0; k < RANKS.length; k++) if (xp >= RANKS[k][0]) i = k; return {name:RANKS[i][1], min:RANKS[i][0], next:RANKS[i+1] || null}; }
+function award(key, n, label){
+  if (S.awarded[key] || n <= 0) return;
+  S.awarded[key] = 1;
+  const before = rankOf(S.xp).name; S.xp += Math.round(n); save();
+  toast('+' + AR(Math.round(n)) + ' XP' + (label ? ' — ' + label : ''));
+  const after = rankOf(S.xp).name;
+  if (after !== before) setTimeout(() => toast('ترقية: ' + after, 'big'), 700);
+  updateTop();
+}
+
+/* ========== question registry & review ========== */
+const QREG = {};
+FILES.forEach(f => {
+  if (!f.ready) return;
+  (f.challenges || []).forEach((q, i) => { q.id = f.id + '-c' + i; q.file = f.id; QREG[q.id] = q; });
+  (f.boss || []).forEach((q, i) => { q.id = f.id + '-b' + i; q.file = f.id; QREG[q.id] = q; });
+});
+const BOX_DAYS = [1, 3, 7, 14, 30];
+function enqueue(id){ if (!S.review[id]) { S.review[id] = {box:0, due:Date.now() + 864e5}; } }
+function enqueueWrong(id){ S.review[id] = {box:0, due:Date.now() + 6 * 3600e3}; }
+function schedule(id, ok){
+  const r = S.review[id] || {box:0, due:0};
+  if (ok){ r.box = Math.min(r.box + 1, BOX_DAYS.length - 1); r.due = Date.now() + BOX_DAYS[r.box] * 864e5; }
+  else { r.box = 0; r.due = Date.now() + 6 * 3600e3; }
+  S.review[id] = r; save();
+}
+function dueList(){ const now = Date.now(); return Object.keys(S.review).filter(id => QREG[id] && S.review[id].due <= now); }
+
+/* ========== question renderers ==========
+   mode: practice | boss | review ; onDone(score 0..1) called once per attempt */
+function renderQ(q, mode, onDone){
+  const wrap = h('div', {class:'card qcard'});
+  if (q.tag) wrap.append(h('div', {class:'qtag'}, q.tag));
+  wrap.append(h('div', {class:'qt', html:q.q}));
+  const body = h('div'); wrap.append(body);
+  const fb = h('div');
+  let hintsUsed = 0, reported = false;
+  const report = s => { if (reported) return; reported = true; const hb = wrap.querySelector('.hintbtn'); if (hb) hb.remove(); onDone && onDone(s, hintsUsed); };
+
+  if (q.type === 'mcq'){
+    let opts = q.options.map((t, i) => ({t, i}));
+    if (mode !== 'practice') opts = shuffle(opts);
+    const box = h('div', {class:'opts'});
+    let first = true;
+    opts.forEach(o => {
+      const b = h('button', {class:'opt', html:o.t, onclick:() => {
+        if (b.disabled) return;
+        const ok = o.i === q.answer;
+        if (mode === 'practice'){
+          if (ok){
+            b.classList.add('right'); box.querySelectorAll('.opt').forEach(x => x.disabled = true);
+            fb.replaceChildren(h('div', {class:'feedback ok', html:'<b>صح.</b> ' + (q.explain || '')}));
+            report(first ? 1 : 0);
+          } else {
+            b.classList.add('wrong'); b.disabled = true;
+            fb.replaceChildren(h('div', {class:'feedback no', html:'<b>مش دي.</b> ' + (q.wrongNote || 'فكّر تاني، أو خد تلميح.')}));
+            if (first && q.id) { enqueueWrong(q.id); save(); }
+          }
+          first = false;
+        } else {
+          box.querySelectorAll('.opt').forEach(x => x.disabled = true);
+          const rightBtn = [...box.children][opts.findIndex(z => z.i === q.answer)];
+          rightBtn.classList.add('right'); if (!ok) b.classList.add('wrong');
+          fb.replaceChildren(h('div', {class:'feedback ' + (ok ? 'ok' : 'no'), html:(ok ? '<b>صح.</b> ' : '<b>غلط.</b> ') + (q.explain || '')}));
+          report(ok ? 1 : 0);
+        }
+      }});
+      box.append(b);
+    });
+    body.append(box);
+  }
+
+  else if (q.type === 'classify'){
+    const items = mode === 'practice' ? q.items : shuffle(q.items);
+    const sel = new Array(items.length).fill(null);
+    const rows = items.map((it, k) => {
+      const cats = h('div', {class:'cats'});
+      q.cats.forEach((c, ci) => cats.append(h('button', {onclick:(ev) => {
+        if (row.dataset.locked) return;
+        sel[k] = ci; cats.querySelectorAll('button').forEach(x => x.classList.remove('sel')); ev.currentTarget.classList.add('sel');
+      }}, c)));
+      const row = h('div', {class:'cls-item'}, h('div', {class:'it', html:it.t}), cats);
+      return row;
+    });
+    rows.forEach(r => body.append(r));
+    const btn = h('button', {class:'btn', onclick:() => {
+      if (sel.some(x => x === null)){ toast('صنّف كل البنود الأول'); return; }
+      let right = 0;
+      rows.forEach((r, k) => {
+        r.dataset.locked = 1; r.querySelectorAll('.fix').forEach(x => x.remove());
+        const ok = sel[k] === items[k].c; if (ok) right++;
+        r.classList.toggle('right', ok); r.classList.toggle('wrong', !ok);
+        if (!ok || items[k].why) r.append(h('div', {class:'fix', html:(ok ? '' : 'الصح: <b>' + q.cats[items[k].c] + '</b>. ') + (items[k].why || '')}));
+      });
+      const s = right / items.length;
+      fb.replaceChildren(h('div', {class:'feedback ' + (s === 1 ? 'ok' : 'no'), html:'النتيجة: ' + AR(right) + ' من ' + AR(items.length) + (q.explain ? '<br>' + q.explain : '')}));
+      if (s < 1 && q.id && mode === 'practice') { enqueueWrong(q.id); save(); }
+      btn.remove(); report(s);
+      if (mode === 'practice' && s < 1) fb.append(h('button', {class:'btn ghost', style:'margin-top:10px', onclick:() => wrap.replaceWith(renderQ(q, 'practice', null))}, 'جرّب تاني (من غير نقاط)'));
+    }}, 'تحقّق');
+    body.append(btn);
+  }
+
+  else if (q.type === 'order'){
+    const pool = h('div', {class:'order-pool'}), ans = h('div', {class:'order-ans'});
+    const picked = [];
+    const draw = () => {
+      ans.replaceChildren(...picked.map((i, n) => h('div', null, AR(n + 1) + '. ' + q.items[i])));
+      if (!picked.length) ans.append(h('div', {class:'muted small', style:'background:none;border:0'}, 'اضغط البنود بالترتيب الصح...'));
+    };
+    shuffle(q.items.map((t, i) => i)).forEach(i => pool.append(h('button', {onclick:(ev) => { picked.push(i); ev.currentTarget.remove(); draw(); }}, q.items[i])));
+    draw();
+    body.append(h('div', {class:'small muted ui'}, 'ترتيبك:'), ans, pool);
+    const reset = h('button', {class:'btn ghost', onclick:() => wrap.replaceWith(renderQ(q, mode, onDone))}, 'ابدأ من الأول');
+    const btn = h('button', {class:'btn', onclick:() => {
+      if (picked.length < q.items.length){ toast('رتّب كل البنود الأول'); return; }
+      let right = 0;
+      [...ans.children].forEach((d, n) => { const ok = picked[n] === n; if (ok) right++; d.classList.add(ok ? 'right' : 'wrong'); });
+      const s = right / q.items.length;
+      fb.replaceChildren(h('div', {class:'feedback ' + (s === 1 ? 'ok' : 'no'), html:'النتيجة: ' + AR(right) + ' من ' + AR(q.items.length) + '<br>الترتيب الصح: ' + q.items.map((t, n) => AR(n + 1) + '. ' + t).join(' ← ') + (q.explain ? '<br>' + q.explain : '')}));
+      if (s < 1 && q.id && mode === 'practice') { enqueueWrong(q.id); save(); }
+      btn.remove(); reset.remove(); report(s);
+    }}, 'تحقّق');
+    body.append(h('div', {class:'row'}, btn, reset));
+  }
+
+  if (mode === 'practice' && q.hints && q.hints.length){
+    const hbox = h('div', {class:'hints'});
+    const hb = h('button', {class:'btn ghost hintbtn', style:'margin-top:10px', onclick:() => {
+      if (reported) return;
+      hbox.append(h('div', {class:'hint', html:q.hints[hintsUsed]})); hintsUsed++;
+      if (hintsUsed >= q.hints.length) hb.remove(); else hb.textContent = 'تلميح (' + AR(hintsUsed + 1) + '/' + AR(q.hints.length) + ')';
+    }}, 'تلميح (١/' + AR(q.hints.length) + ')');
+    wrap.append(hb, hbox);
+  }
+  wrap.append(fb);
+  return wrap;
+}
+
+/* free-text with checklist self-grading */
+function renderFree(key, spec, xpMax, label){
+  const st = S.ans[key] || (S.ans[key] = {text:'', submitted:false, checks:[]});
+  const card = h('div', {class:'card'});
+  if (spec.title) card.append(h('h2', {class:'read', style:'margin-top:0'}, spec.title));
+  if (spec.case) card.append(h('div', {class:'casebox read', html:spec.case}));
+  card.append(h('p', {class:'read', html:'<b>' + spec.prompt + '</b>'}));
+  const ta = h('textarea', {placeholder:'اكتب تحليلك هنا... (بيتحفظ تلقائي)'}); ta.value = st.text || '';
+  ta.addEventListener('input', () => { st.text = ta.value; save(); });
+  card.append(ta);
+  const after = h('div');
+  const showCheck = () => {
+    after.replaceChildren();
+    after.append(h('p', {class:'ui muted', style:'margin:14px 0 6px'}, 'علّم على كل نقطة إجابتك غطّتها فعلًا. خليك صارم مع نفسك؛ دي نقاط إلزامية، مش ديكور.'));
+    spec.points.forEach((p, i) => {
+      const cb = h('input', {type:'checkbox'}); cb.checked = !!st.checks[i];
+      cb.addEventListener('change', () => { st.checks[i] = cb.checked; save(); });
+      after.append(h('label', {class:'check'}, cb, h('span', {html:p})));
+    });
+    const res = h('div');
+    after.append(h('button', {class:'btn sage', style:'margin-top:12px', onclick:() => {
+      const n = spec.points.filter((_, i) => st.checks[i]).length, r = n / spec.points.length;
+      st.score = r; save();
+      res.replaceChildren(h('div', {class:'feedback ' + (r >= .8 ? 'ok' : 'no'), html:'غطّيت ' + AR(n) + ' من ' + AR(spec.points.length) + ' (' + AR(Math.round(r * 100)) + '٪). ' + (r >= .8 ? 'شغل ضابط.' : 'ارجع للنقاط اللي فاتتك واقرا الإجابة النموذجية تحت.')}));
+      award(key, Math.max(5, xpMax * r), label);
+      if (spec.model && !after.querySelector('.model')) after.append(h('div', {class:'card model read', style:'margin-top:14px;background:var(--bg)'}, h('h3', {style:'margin-top:0'}, 'إجابة نموذجية'), h('div', {html:spec.model})));
+      card.dispatchEvent(new CustomEvent('graded'));
+    }}, 'احسب النتيجة'), res);
+  };
+  const sub = h('button', {class:'btn', style:'margin-top:10px', onclick:() => {
+    if ((ta.value || '').trim().length < 40){ toast('اكتب تحليل حقيقي الأول (سطرين على الأقل)'); return; }
+    st.submitted = true; save(); sub.remove(); showCheck();
+  }}, 'سلّم وقارن');
+  if (st.submitted) showCheck(); else card.append(sub);
+  card.append(after);
+  return card;
+}
+
+/* ========== top bar & settings ========== */
+function updateTop(){
+  const r = rankOf(S.xp);
+  document.getElementById('rankchip').textContent = r.name + ' — ' + AR(S.xp) + ' XP';
+}
+function applySettings(){
+  if (SITE) return;
+  const s = S.settings;
+  document.documentElement.setAttribute('data-theme', s.theme);
+  document.body.setAttribute('data-font', s.font);
+  document.documentElement.style.setProperty('--fs', s.size + 'px');
+  document.documentElement.style.setProperty('--lh', s.lh);
+  document.documentElement.style.setProperty('--w', s.width + 'px');
+  const meta = document.querySelector('meta[name=theme-color]');
+  if (meta) meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+}
+function openSettings(){
+  const s = S.settings, sh = document.getElementById('settings');
+  const seg = (opts, key) => h('div', {class:'seg'}, opts.map(([v, t]) => h('button', {class:s[key] === v ? 'on' : '', onclick:() => { s[key] = v; save(); applySettings(); openSettings(); }}, t)));
+  const rng = (key, min, max, step, fmt) => {
+    const out = h('span', null, fmt(s[key]));
+    const r = h('input', {type:'range', min, max, step, value:s[key]});
+    r.addEventListener('input', () => { s[key] = +r.value; out.textContent = fmt(s[key]); save(); applySettings(); });
+    return [out, r];
+  };
+  const [o1, r1] = rng('size', 15, 26, 1, v => AR(v) + 'px');
+  const [o2, r2] = rng('lh', 1.6, 2.4, .05, v => AR(v.toFixed(2)));
+  const [o3, r3] = rng('width', 560, 960, 20, v => AR(v) + 'px');
+  let armed = false;
+  const resetBtn = h('button', {class:'btn ghost', style:'margin-top:18px;color:var(--rose)', onclick:() => {
+    if (!armed){ armed = true; resetBtn.textContent = 'متأكد؟ اضغط تاني لمسح كل التقدم'; return; }
+    const keep = S.settings; S = clone(DEF); S.settings = keep; save(); sh.classList.add('hidden'); updateTop(); route();
+  }}, 'مسح التقدم');
+  const panel = h('div', {class:'panel'},
+    h('div', {class:'row'}, h('h3', null, 'إعدادات القراءة'), h('span', {class:'spacer'}), h('button', {class:'btn soft', onclick:() => sh.classList.add('hidden')}, 'تم')),
+    h('label', null, 'الثيم'), seg([['cream','كريمي'],['sand','رملي'],['sepia','سيبيا'],['night','ليلي ناعم']], 'theme'),
+    h('label', null, 'الخط'), seg([['naskh','نسخ (كلاسيكي)'],['sans','حديث']], 'font'),
+    h('label', null, 'حجم الخط ', o1), r1,
+    h('label', null, 'تباعد السطور ', o2), r2,
+    h('label', null, 'عرض عمود القراءة ', o3), r3,
+    resetBtn
+  );
+  sh.replaceChildren(panel); sh.classList.remove('hidden');
+  sh.onclick = e => { if (e.target === sh) sh.classList.add('hidden'); };
+}
+
+/* ========== routing ========== */
+const STEPS = [
+  {k:'brief', t:'الإحاطة'}, {k:'predict', t:'توقّع'}, {k:'lesson', t:'الشرح'}, {k:'quotes', t:'من النص'},
+  {k:'worked', t:'حالة محلولة'}, {k:'yourturn', t:'دورك'}, {k:'challenges', t:'التحديات'},
+  {k:'critique', t:'ورقة النقد'}, {k:'explain', t:'اشرحها بكلامك'}, {k:'boss', t:'الزعيم'}
+];
+const app = () => document.getElementById('app');
+function go(hash){ if (location.hash === hash) route(); else location.hash = hash; }
+function route(){
+  const p = (location.hash || '#/').slice(2).split('/');
+  window.scrollTo(0, 0);
+  if (p[0] === 'f' && FILES[+p[1]] && isOpen(+p[1])) return viewFile(+p[1], +(p[2] || 0));
+  if (p[0] === 'review') return viewReview();
+  viewHome();
+}
+window.addEventListener('hashchange', route);
+const isOpen = i => FILES[i].ready && (i === 0 || !!S.done[i - 1]);
+
+/* ========== home ========== */
+function viewHome(){
+  const r = rankOf(S.xp);
+  const pct = r.next ? Math.round((S.xp - r.min) / (r.next[0] - r.min) * 100) : 100;
+  const doneN = Object.keys(S.done).length;
+  const due = dueList().length;
+  const cont = S.last && FILES[S.last.f] && isOpen(S.last.f) ? S.last : (isOpen(0) ? {f:0, s:0} : null);
+  const hero = h('div', {class:'card hero'},
+    h('div', {class:'qtag'}, 'المادة'),
+    h('h1', null, 'فلسفة الخطاب والهيمنة الناعمة'),
+    h('p', {class:'sub'}, 'تشريح التلاعب غير المرئي: أرسطو، غرامشي، فوكو، ومهندسو الرضا'),
+    h('div', {class:'row ui', style:'margin-bottom:8px'}, h('b', null, 'رتبتك: ' + r.name), h('span', {class:'spacer'}), h('span', {class:'muted'}, r.next ? AR(S.xp) + ' / ' + AR(r.next[0]) + ' للترقية لـ' + r.next[1] : 'أعلى رتبة')),
+    h('div', {class:'bar'}, h('i', {style:'width:' + pct + '%'})),
+    h('div', {class:'row ui muted', style:'margin:10px 0 14px'}, h('span', null, 'ملفات مكتملة: ' + AR(doneN) + ' / ' + AR(FILES.length))),
+    h('div', {class:'row'},
+      cont ? h('button', {class:'btn', onclick:() => go('#/f/' + cont.f + '/' + cont.s)}, doneN || S.last ? 'كمّل من مكانك' : 'ابدأ الملف الأول') : null,
+      h('button', {class:'btn soft', onclick:() => go('#/review')}, 'خزنة المراجعة' + (due ? ' (' + AR(due) + ')' : '')))
+  );
+  const how = h('details', {class:'card how'}, h('summary', null, 'إزاي تلعب'),
+    h('ul', null,
+      h('li', null, 'كل ملف فيه ١٠ خطوات: إحاطة ← توقّع ← شرح ← نصوص ← حالة محلولة ← دورك ← تحديات ← ورقة نقد ← اشرحها بكلامك ← الزعيم.'),
+      h('li', null, 'التلميحات على ٣ درجات، وكل تلميح بيقلل نقاط السؤال. الإجابة ماتظهرش إلا بعد ما تحاول.'),
+      h('li', null, 'الزعيم: لازم ٨٠٪ علشان الملف اللي بعده يتفتح. لو وقعت، المحاولة الجاية بتتلخبط أسئلتها.'),
+      h('li', null, 'أي سؤال تغلط فيه بيتحط في خزنة المراجعة ويرجعلك بعد كام ساعة. واللي تجاوبه صح بيبعد أكتر (١، ٣، ٧، ١٤، ٣٠ يوم).'),
+      h('li', null, 'الإجابات المكتوبة بتصححها انت بقائمة نقاط إلزامية. الأمانة هنا بتاعتك.'),
+      h('li', null, 'التقدم محفوظ على الجهاز ده والمتصفح ده.')));
+  const map = h('div');
+  let lastPart = '';
+  FILES.forEach((f, i) => {
+    if (f.part !== lastPart){ map.append(h('div', {class:'part'}, f.part)); lastPart = f.part; }
+    const open = isOpen(i), done = !!S.done[i];
+    const status = done ? h('span', {class:'badge ok'}, 'مكتمل') : open ? h('span', {class:'badge go'}, 'مفتوح') : !f.ready ? h('span', {class:'badge'}, 'قيد الإعداد') : h('span', {class:'badge'}, 'مقفول');
+    const node = h(open ? 'a' : 'div', {class:'card node' + (done ? ' done' : '') + (open ? '' : ' locked'), href:open ? '#/f/' + i + '/' + Math.min(S.maxStep[i] || 0, 9) : null, style:'margin-bottom:10px'},
+      h('div', {class:'num'}, AR(i)),
+      h('div', {style:'flex:1'}, h('div', {class:'t'}, f.title), h('div', {class:'s'}, f.sub)),
+      status);
+    map.append(node);
+  });
+  let armed = false;
+  const reset = SITE ? h('div', {style:'text-align:center;margin:26px 0 6px'}, h('button', {class:'btn ghost', style:'font-size:13.5px;color:var(--muted)', onclick:(ev) => {
+    if (!armed){ armed = true; ev.currentTarget.textContent = 'متأكد؟ اضغط تاني لمسح كل تقدم الدراسة'; return; }
+    S = clone(DEF); save(); updateTop(); route();
+  }}, 'مسح تقدم الدراسة')) : null;
+  app().replaceChildren(hero, how, map, reset || '');
+}
+
+/* ========== file view ========== */
+function viewFile(fid, si){
+  const f = FILES[fid];
+  const max = S.maxStep[fid] || 0;
+  if (si > max) si = max;
+  S.last = {f:fid, s:si}; save();
+  const nav = h('div', {class:'steps'}, STEPS.map((s, i) => h('button', {class:(i === si ? 'on ' : '') + (i <= max ? 'reached' : ''), disabled:i > max, onclick:() => go('#/f/' + fid + '/' + i)}, AR(i + 1) + '. ' + s.t)));
+  const head = h('div', {class:'filehead'}, h('div', {class:'k'}, 'الملف ' + AR(fid) + ' — ' + f.part), h('h1', null, f.title));
+  const content = h('div');
+  const next = (enabled, label) => {
+    const b = h('button', {class:'btn', disabled:!enabled, onclick:() => {
+      if (b.disabled) return;
+      S.maxStep[fid] = Math.max(S.maxStep[fid] || 0, si + 1); save();
+      go('#/f/' + fid + '/' + (si + 1));
+    }}, label || 'التالي ←');
+    return b;
+  };
+  const step = STEPS[si].k;
+  let nb;
+
+  if (step === 'brief'){
+    content.append(h('div', {class:'card read', html:f.brief}),
+      h('div', {class:'card read'}, h('h2', null, 'هتخرج من الملف ده وانت قادر:'), h('ul', null, f.objectives.map(o => h('li', {html:o})))));
+    nb = next(true, 'استلمت المهمة ←'); nb.addEventListener('click', () => award(fid + ':brief', 10, 'إحاطة'), {capture:true});
+  }
+
+  else if (step === 'predict'){
+    const p = f.predict, st = S.ans[fid + ':predict'];
+    const card = h('div', {class:'card qcard'}, h('div', {class:'qtag'}, 'قبل ما تقرا أي شرح: توقّع'), h('div', {class:'qt', html:p.q}));
+    const opts = h('div', {class:'opts'}), rv = h('div');
+    nb = next(!!st);
+    const reveal = (pick) => {
+      opts.querySelectorAll('.opt').forEach((b, i) => { b.disabled = true; if (i === p.answer) b.classList.add('right'); else if (i === pick) b.classList.add('wrong'); });
+      rv.replaceChildren(h('div', {class:'feedback ' + (pick === p.answer ? 'ok' : 'no'), html:(pick === p.answer ? '<b>توقّعك صح.</b> ' : '<b>توقّع مختلف، وده طبيعي. خلي الإجابة دي في دماغك وانت بتقرا.</b> ') + p.reveal}));
+    };
+    p.options.forEach((t, i) => opts.append(h('button', {class:'opt', html:t, onclick:() => {
+      if (S.ans[fid + ':predict']) return;
+      S.ans[fid + ':predict'] = {pick:i}; save(); reveal(i);
+      award(fid + ':predict', i === p.answer ? 15 : 10, 'توقّع'); nb.disabled = false;
+    }})));
+    card.append(opts, rv); content.append(card);
+    if (st) reveal(st.pick);
+  }
+
+  else if (step === 'lesson'){
+    const toc = h('div', {class:'card toc'}, h('div', {class:'qtag'}, 'فهرس الشرح'), f.lesson.map((s, i) => h('a', {href:'javascript:void 0', onclick:() => document.getElementById('sec' + i).scrollIntoView({behavior:'smooth'})}, AR(i + 1) + '. ' + s.h)));
+    content.append(toc);
+    f.lesson.forEach((s, i) => {
+      const c = h('article', {class:'card read', id:'sec' + i}, h('h2', null, AR(i + 1) + '. ' + s.h), h('div', {html:s.body}));
+      if (s.field) c.append(h('div', {class:'field', html:s.field}));
+      if (s.key) c.append(h('div', {class:'key', html:s.key}));
+      content.append(c);
+    });
+    nb = next(true, 'خلّصت القراءة ←'); nb.addEventListener('click', () => award(fid + ':lesson', 40, 'الشرح'), {capture:true});
+  }
+
+  else if (step === 'quotes'){
+    content.append(h('p', {class:'ui muted', style:'margin:0 4px 10px'}, 'اقتباسات قصيرة بترجمة عربية من المنهج. اقرا كل واحد، وبعدين اقرا سطر «ليه ده مهم».'));
+    f.quotes.forEach(q => content.append(h('blockquote', {class:'q'}, h('p', {html:'«' + q.t + '»'}), h('cite', null, q.src), q.why ? h('div', {class:'why', html:q.why}) : null)));
+    nb = next(true); nb.addEventListener('click', () => award(fid + ':quotes', 10, 'النصوص'), {capture:true});
+  }
+
+  else if (step === 'worked'){
+    const w = f.worked;
+    content.append(h('div', {class:'card read'}, h('h2', {style:'margin-top:0'}, w.title), h('div', {class:'casebox', html:w.case}), h('p', {class:'ui muted'}, 'قبل ما تفتح كل خطوة، حاول تتوقعها في دماغك.')));
+    const stepsBox = h('div', {class:'card read'});
+    content.append(stepsBox);
+    let k = S.ans[fid + ':worked'] || 0;
+    nb = next(k >= w.steps.length);
+    const more = h('button', {class:'btn soft'}, 'افتح الخطوة الجاية');
+    const draw = () => {
+      stepsBox.replaceChildren(...w.steps.slice(0, k).map((s, i) => h('div', {class:'wstep'}, h('h3', null, 'الخطوة ' + AR(i + 1) + ': ' + s.h), h('div', {html:s.body}))));
+      if (k < w.steps.length) stepsBox.append(more);
+      else { if (w.verdict) stepsBox.append(h('div', {class:'key', html:w.verdict})); nb.disabled = false; award(fid + ':worked', 20, 'الحالة المحلولة'); }
+    };
+    more.onclick = () => { k++; S.ans[fid + ':worked'] = k; save(); draw(); };
+    draw();
+  }
+
+  else if (step === 'yourturn'){
+    const card = renderFree(fid + ':yourturn', f.yourturn, 40, 'دورك');
+    content.append(card);
+    nb = next(!!(S.ans[fid + ':yourturn'] || {}).score || (S.ans[fid + ':yourturn'] || {}).score === 0);
+    card.addEventListener('graded', () => nb.disabled = false);
+  }
+
+  else if (step === 'challenges'){
+    const list = f.challenges;
+    const doneCount = () => list.filter(q => S.ans[q.id]).length;
+    const prog = h('div', {class:'prog'});
+    const upd = () => { prog.textContent = 'اتحل ' + AR(doneCount()) + ' من ' + AR(list.length); nb && (nb.disabled = doneCount() < list.length); };
+    content.append(prog);
+    list.forEach((q, i) => {
+      const st = S.ans[q.id];
+      const card = renderQ(Object.assign({}, q, {tag:'تحدي ' + AR(i + 1)}), 'practice', (s, hints) => {
+        if (!S.ans[q.id]){ S.ans[q.id] = {score:s, hints}; save(); award(q.id, s >= 1 ? Math.max(8, 20 - 5 * hints) : 20 * s * .5, 'تحدي'); }
+        upd();
+      });
+      if (st) card.append(h('div', {class:'done-mark'}, 'اتحل قبل كده — أول محاولة: ' + AR(Math.round(st.score * 100)) + '٪'));
+      content.append(card);
+    });
+    nb = next(false); upd();
+  }
+
+  else if (step === 'critique'){
+    content.append(h('p', {class:'ui muted', style:'margin:0 4px 10px'}, 'هنا بنقلب السلاح على نفسه: فين الأداة دي بتغلط، وفين ممكن تضرك لو استعملتها غلط.'));
+    f.critique.forEach((c, i) => content.append(h('div', {class:'card read'}, h('h2', null, AR(i + 1) + '. ' + c.h), h('div', {html:c.body}))));
+    nb = next(true); nb.addEventListener('click', () => award(fid + ':critique', 15, 'ورقة النقد'), {capture:true});
+  }
+
+  else if (step === 'explain'){
+    const card = renderFree(fid + ':explain', Object.assign({title:'اشرحها بكلامك'}, f.explain), 40, 'الشرح بكلامك');
+    content.append(card);
+    const st = S.ans[fid + ':explain'] || {};
+    nb = next(st.score != null);
+    card.addEventListener('graded', () => nb.disabled = false);
+  }
+
+  else if (step === 'boss'){
+    viewBoss(fid, content);
+  }
+
+  const navRow = h('div', {class:'navrow'},
+    si > 0 ? h('button', {class:'btn ghost', onclick:() => go('#/f/' + fid + '/' + (si - 1))}, '→ السابق') : h('button', {class:'btn ghost', onclick:() => go('#/')}, '→ الخريطة'),
+    nb || h('span'));
+  app().replaceChildren(head, nav, content, navRow);
+  const on = nav.querySelector('.on'); if (on) requestAnimationFrame(() => { nav.scrollLeft = on.offsetLeft - nav.clientWidth / 2 + on.offsetWidth / 2; window.scrollTo(0, 0); });
+}
+
+/* ========== boss ========== */
+function viewBoss(fid, content){
+  const f = FILES[fid], best = S.boss[fid];
+  const intro = h('div', {class:'card bosshead'},
+    h('div', {class:'qtag'}, 'الزعيم'),
+    h('h2', {style:'margin:4px 0'}, f.bossTitle || 'ملف التفكيك الشامل'),
+    h('p', {class:'muted ui'}, AR(f.boss.length) + ' سؤال — من غير تلميحات — لازم ٨٠٪ علشان تعدّي'),
+    best != null ? h('p', {class:'ui'}, 'أحسن نتيجة: ' + AR(Math.round(best * 100)) + '٪' + (S.done[fid] ? ' — عدّيت' : '')) : null,
+    h('button', {class:'btn', onclick:() => run()}, best != null ? 'محاولة جديدة' : 'ابدأ المواجهة'));
+  content.replaceChildren(intro);
+  function run(){
+    const qs = shuffle(f.boss);
+    let i = 0, total = 0; const wrong = [];
+    const stage = h('div');
+    content.replaceChildren(stage);
+    const show = () => {
+      window.scrollTo(0, 0);
+      const q = qs[i];
+      const nextB = h('button', {class:'btn', disabled:true}, i < qs.length - 1 ? 'السؤال الجاي ←' : 'شوف النتيجة');
+      const card = renderQ(q, 'boss', s => { total += s; if (s < 1) wrong.push(q.id); nextB.disabled = false; });
+      nextB.onclick = () => { if (nextB.disabled) return; i++; if (i < qs.length) show(); else finish(); };
+      stage.replaceChildren(h('div', {class:'prog'}, 'سؤال ' + AR(i + 1) + ' من ' + AR(qs.length)), card, nextB);
+    };
+    const finish = () => {
+      const score = total / qs.length, pass = score >= .8;
+      S.boss[fid] = Math.max(S.boss[fid] || 0, score);
+      wrong.forEach(enqueueWrong);
+      if (pass){
+        const first = !S.done[fid];
+        S.done[fid] = true;
+        S.maxStep[fid] = 9;
+        [...f.challenges, ...f.boss].forEach(q => enqueue(q.id));
+        save();
+        if (first) award(fid + ':boss', 100, 'الزعيم');
+      } else save();
+      const nextFile = FILES[fid + 1];
+      stage.replaceChildren(h('div', {class:'card bosshead'},
+        h('div', {class:'big'}, AR(Math.round(score * 100)) + '٪'),
+        h('h2', null, pass ? 'الملف اتقفل لصالحك' : 'لسه'),
+        h('p', {class:'ui'}, pass ? 'أسئلة الملف اتحطت في خزنة المراجعة علشان ترجعلك على فترات.' : 'محتاج ٨٠٪. الأسئلة اللي غلطت فيها راحت الخزنة. ارجع للشرح أو التحديات وبعدين حاول تاني؛ المرة الجاية الترتيب هيتغير.'),
+        pass && nextFile ? (nextFile.ready ? h('button', {class:'btn', onclick:() => go('#/f/' + (fid + 1) + '/0')}, 'افتح الملف ' + AR(fid + 1) + ' ←') : h('p', {class:'muted ui'}, 'الملف ' + AR(fid + 1) + ' قيد الإعداد، وهيتضاف في التحديث الجاي.')) : null,
+        h('div', {class:'row', style:'justify-content:center;margin-top:10px'},
+          h('button', {class:'btn ghost', onclick:() => run()}, 'محاولة تانية'),
+          h('button', {class:'btn ghost', onclick:() => go('#/')}, 'الخريطة'))));
+      window.scrollTo(0, 0);
+    };
+    show();
+  }
+}
+
+/* ========== review vault ========== */
+function viewReview(){
+  const ids = shuffle(dueList());
+  const head = h('div', {class:'filehead'}, h('div', {class:'k'}, 'التكرار المتباعد'), h('h1', null, 'خزنة المراجعة'));
+  if (!ids.length){
+    const all = Object.values(S.review).map(r => r.due).sort((a, b) => a - b);
+    const msg = all.length ? 'مفيش أسئلة مستحقة دلوقتي. أقرب سؤال هيرجع ' + new Date(all[0]).toLocaleString('ar-EG', {weekday:'long', hour:'numeric', minute:'2-digit'}) + '.' : 'الخزنة فاضية. الأسئلة بتدخلها لما تغلط في تحدي، أو لما تعدّي زعيم ملف.';
+    app().replaceChildren(head, h('div', {class:'card read'}, h('p', null, msg), h('button', {class:'btn ghost', onclick:() => go('#/')}, 'الخريطة')));
+    return;
+  }
+  let i = 0, right = 0;
+  const stage = h('div');
+  app().replaceChildren(head, stage);
+  const show = () => {
+    const q = QREG[ids[i]];
+    const nb = h('button', {class:'btn', disabled:true}, i < ids.length - 1 ? 'التالي ←' : 'خلصت');
+    const card = renderQ(Object.assign({}, q, {tag:'من الملف ' + AR(q.file)}), 'review', s => {
+      const ok = s >= 1; if (ok) right++;
+      schedule(q.id, ok);
+      if (ok) award('rv:' + q.id + ':' + new Date().toDateString(), 5, 'مراجعة');
+      nb.disabled = false;
+    });
+    nb.onclick = () => { if (nb.disabled) return; i++; window.scrollTo(0, 0); if (i < ids.length) show(); else stage.replaceChildren(h('div', {class:'card bosshead'}, h('div', {class:'big'}, AR(right) + '/' + AR(ids.length)), h('p', {class:'ui'}, 'اللي جاوبته صح هيبعد، واللي غلطت فيه هيرجعلك قريب.'), h('button', {class:'btn', onclick:() => go('#/')}, 'الخريطة'))); };
+    stage.replaceChildren(h('div', {class:'prog'}, AR(i + 1) + ' من ' + AR(ids.length)), card, nb);
+  };
+  show();
+}
+
+/* ========== boot ========== */
+applySettings(); updateTop();
+if (!SITE) document.getElementById('setbtn').onclick = openSettings;
+route();
+
+</script>
+</body>
+</html>
