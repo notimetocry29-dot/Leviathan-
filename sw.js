@@ -1,4 +1,4 @@
-const CACHE='maher-v17';
+const CACHE='maher-v18';
 const FILES=['./','./index.html','./search.json','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png',
  './leviathan/','./leviathan/index.html','./schmitt/','./schmitt/index.html',
  './study/tafkik/','./study/tafkik/index.html',
